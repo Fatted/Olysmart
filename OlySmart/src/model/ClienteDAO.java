@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -61,6 +63,42 @@ public class ClienteDAO {
 		return false;
 
 	}
+	
+	
+	public List<Cliente> getUtentiRegistrati() {
+		List<Cliente> lista=new ArrayList<Cliente>();
+
+		try {
+			Connection connection = null;
+			PreparedStatement preparedStatement = null;
+			String sql = "SELECT * FROM `cliente`";
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(sql);
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			while(rs.next()) {
+				Cliente clientelista=new Cliente();
+				clientelista.setNome(rs.getString("nome.cliente"));
+				clientelista.setCognome(rs.getString("cognome.cliente"));
+				clientelista.setUsername(rs.getString("username.cliente"));
+				clientelista.setEmail(rs.getString("email.cliente"));
+				clientelista.setCap(rs.getString("cap.cliente"));
+				clientelista.setVia(rs.getString("via.cliente"));
+				clientelista.setCittà(rs.getString("città.cliente"));
+				clientelista.setTelefono(rs.getString("telefono.cliente"));
+				
+				lista.add(clientelista);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("Errore");
+
+		}
+		return lista;
+
+	}
+	
+	
 		
 	
 

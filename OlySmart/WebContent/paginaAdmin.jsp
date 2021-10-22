@@ -20,12 +20,20 @@
       		<%
       		CategoriaDAO cat=new CategoriaDAO();
       		List<Categoria> categorialista=cat.getCategorie();     		
+      		
+      		ProdottoDAO prod= new ProdottoDAO();
+      		List<Prodotto> prodotti=prod.getAllProducts();
+      		
+      		ClienteDAO clientelista=new ClienteDAO();
+      		List<Cliente> listaclienti=clientelista.getUtentiRegistrati();
+      		
       		%>
 
 
 
 <!DOCTYPE html>
 <html lang="eng">
+
 
 <head>
 <meta charset="utf-8">
@@ -64,8 +72,9 @@
     <%@include file="CSS/messaggioRegistrazione.jsp" %>
         <tr>
             <td class="utenti"><img src="Immagini/users.png">
-                <br>
-                Utenti
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalutenti">
+  					Visualizza Utenti
+				</button>
             </td>
             
             <td class="categorie"><img src="Immagini/categorie.jpeg">
@@ -75,8 +84,9 @@
             </td>
             
             <td class="prodotti"><img src="Immagini/prodotti.jpeg">
-                <br>
-                Prodotti
+              
+  					<a href="PaginaAdminProdotti.jsp" class="btn btn-primary">Prodotti presenti</a>
+			
             </td>
         </tr>
         </table>
@@ -173,12 +183,6 @@
       		
       		<br><input type="text" class="form-control" name="offertaProdotto" placeholder="indicare se il prodotto è in offerta (si o no)" required><br>
       		Immagine:<input type="file" name="immagineProdotto" required>
-      		
-      		
-      		
-      		
-      		
-      			
       		</div>
       	
       		<div class="container text-center">
@@ -191,12 +195,13 @@
   </div>
 </div>
 
+
 <!-- Modal gestione categorie -->
 <div class="modal fade" id="modalcategorie" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Categorie</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Categorie Presenti</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -207,14 +212,78 @@
   
       		<div class="form-group">
       		
-      		<p>Categorie Presenti</p>
+      		<h1 style="text-align:center">Categorie Presenti</h1>
+      		<table>
+      		<tr>
+				<th style="border:1px solid">Nome</th>
+				<th style="border:1px solid">Numero</th>
+			</tr>
+      		
 			<%	 
 			for(Categoria categoria:categorialista){%>
-				<p>Nome:<%=categoria.getNome() %> Numero:<%=categoria.getNumero() %></p>
+			<tr style="border:1px solid">
+				<td style="border:1px solid"><%=categoria.getNome() %></td>
+				<td style="border:1px solid"><%=categoria.getNumero() %></td>
+			</tr>
 
 			<%
 			}
 			%>
+      		</table>
+      		</div>
+      	
+      		<div class="container text-center">
+      			<button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+      		</div>     	
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal visualizzazione clienti -->
+<div class="modal fade" id="modalutenti" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Utenti Presenti</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <!-- inserisco il form che servirà per gestire le varie scelte da parte dell'admin -->
+        <form action="ProdottiOperazioneServlet" method="post">
+  
+      		<div class="form-group">
+      		
+      		<h1 style="text-align:center">Utenti Presenti</h1>
+      		<table>
+      		
+      		<tr>
+				<th style="border:1px solid">Nome</th>
+				<th style="border:1px solid">Cognome</th>
+				<th style="border:1px solid">Username</th>
+				<th style="border:1px solid">email</th>
+				<th style="border:1px solid">Telefono</th>
+				<th style="border:1px solid">Indirizzo</th>
+			</tr>
+			<%	 
+			for(Cliente clienti:listaclienti){%>
+				<tr style="border:1px solid">
+				<td style="border:1px solid"><%=clienti.getNome() %></td>
+				<td style="border:1px solid"><%=clienti.getCognome() %></td>
+				<td style="border:1px solid"><%=clienti.getUsername() %></td>
+				<td style="border:1px solid"><%=clienti.getEmail() %></td>
+				<td style="border:1px solid"><%=clienti.getTelefono() %></td>
+				<td style="border:1px solid">Via:<%=clienti.getVia() %>, CAP:<%=clienti.getCap() %>, Città:<%=clienti.getCittà() %></td>
+				</tr>
+
+			<%
+			}
+			%>
+			</table>
       			
       		</div>
       	
@@ -226,6 +295,9 @@
     </div>
   </div>
 </div>
+
+
+
 
 
 

@@ -28,6 +28,9 @@ public class Cliente {
 	
 	private static final String TABLE_NAME = "cliente";
 
+	public Cliente() {
+		
+	}
 
 	public Cliente(String nome, String cognome, String datadinascita, String codicefiscale, String email, String password, String username, String telefono, 
 			String cap, String via, String città, String tipo) {
@@ -185,41 +188,7 @@ public class Cliente {
 			
 		}
 	
-	
 
-/*	public void UtentiPresenti(){
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		
-		try {
-			
-			String sql = "SELECT COUNT(*) FROM"+TABLE_NAME;
-			connection = ds.getConnection();
-			preparedStatement = connection.prepareStatement(sql);
-			ResultSet rs = preparedStatement.executeQuery();
-			
-			
-			this.setUtentiPresenti(rs.getInt(1));
-			
-		} catch(SQLException e) {
-			e.printStackTrace();
-		}
-		
-	}
-	
-	public  void setUtentiPresenti(int utentiAttivi) {
-		this.utentiAttivi=utentiAttivi;
-	}
-	
-	public int getUtentiPresenti() {
-		return utentiAttivi;
-	}
-*/
-	
-	
-	
-	
-	
 	public static DataSource getDs() {
 		return ds;
 	}
@@ -389,6 +358,5 @@ public class Cliente {
 	private String città;
 	private String tipo;
 	private boolean valido;
-	//private int utentiAttivi;
 
 }
