@@ -2,6 +2,10 @@ package model;
 
 
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -312,6 +316,57 @@ public class Prodotto {
 	public void setImmagine(String immagine) {
 		this.immagine = immagine;
 	}
+	
+	public void setProdotto() {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		try {
+			String sql="INSERT INTO `olysmart_database`.`prodotto` (`codice.prodotto`, `nome.prodotto`, `descrizione.prodotto`, `prezzo_acquisto.prodotto`, `disponibilità.prodotto`, `iva.prodotto`, `prezzo_vendita.prodotto`, `marca.prodotto`, `numero_pezzi_disponibili.prodotto`, `sconto.prodotto`, `specifiche.prodotto`, `tipo.prodotto`, `offerta.prodotto`, `immagine.prodotto`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			connection=ds.getConnection();
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, codice);
+			preparedStatement.setString(2,nome);
+			preparedStatement.setString(3, descrizione);
+			preparedStatement.setDouble(4, prezzo_acquisto);
+			preparedStatement.setString(5, descrizione);
+			preparedStatement.setInt(6,iva);
+			preparedStatement.setDouble(7, prezzo_vendita);
+			preparedStatement.setString(8, marca);
+			preparedStatement.setInt(9, numero_pezzi_disponibili);
+			preparedStatement.setInt(10, sconto);
+			preparedStatement.setString(11, specifiche);
+			preparedStatement.setString(12, tipo);
+			preparedStatement.setString(13, offerta);
+			preparedStatement.setString(14, immagine);
+			preparedStatement.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if (preparedStatement != null)
+					try {
+						preparedStatement.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			} finally {
+
+				if (connection != null)
+					try {
+						connection.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			}
+		}
+	}
+	
+	
 }
 
 

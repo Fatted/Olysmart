@@ -154,7 +154,7 @@
       </div>
       <div class="modal-body">
       <!-- inserisco il form che servirà per gestire le varie scelte da parte dell'admin -->
-        <form action="ProdottiOperazioneServlet" method="post">
+        <form action="ProdottiOperazioneServlet" method="post" enctype='multipart/form-data' >
         
         <input type="hidden" name="operation" value="addProdotto">
         
