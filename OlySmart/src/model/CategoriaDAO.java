@@ -40,8 +40,8 @@ public class CategoriaDAO {
 			ResultSet rs = preparedStatement.executeQuery();
 			while(rs.next()) {
 				Categoria categoria=new Categoria();
-				categoria.setNumero(rs.getInt("numero_prodotto.categoria"));
-				categoria.setNome(rs.getString("tipo.categoria"));
+				categoria.setNumero(rs.getInt("numero_prodotto"));
+				categoria.setNome(rs.getString("tipo"));
 				
 				lista.add(categoria);
 			}

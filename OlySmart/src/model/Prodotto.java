@@ -322,7 +322,7 @@ public class Prodotto {
 		PreparedStatement preparedStatement = null;
 		
 		try {
-			String sql="INSERT INTO `olysmart_database`.`prodotto` (`codice.prodotto`, `nome.prodotto`, `descrizione.prodotto`, `prezzo_acquisto.prodotto`, `disponibilità.prodotto`, `iva.prodotto`, `prezzo_vendita.prodotto`, `marca.prodotto`, `numero_pezzi_disponibili.prodotto`, `sconto.prodotto`, `specifiche.prodotto`, `tipo.prodotto`, `offerta.prodotto`, `immagine.prodotto`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql="INSERT INTO prodotto (codice, nome, descrizione, prezzo_acquisto, disponibilità, iva, prezzo_vendita, marca, numero_pezzi_disponibili, sconto, specifiche, tipo, offerta, immagine) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			connection=ds.getConnection();
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, codice);

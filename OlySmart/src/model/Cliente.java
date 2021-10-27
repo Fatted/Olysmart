@@ -59,7 +59,7 @@ public class Cliente {
 			PreparedStatement preparedStatement = null;
 			username = this.getUsername();
 
-			String sql = "SELECT * FROM cliente WHERE `username.cliente`='" + username + "'";
+			String sql = "SELECT * FROM cliente WHERE username='"+ username +"'";
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(sql);
 			ResultSet rs = preparedStatement.executeQuery();
@@ -88,7 +88,7 @@ public class Cliente {
 
 		try {
 
-			String sql = "INSERT INTO cliente (`nome.cliente`, `cognome.cliente`, `data_di_nascita.cliente`, `codice_fiscale.cliente`, `email.cliente`, `password.cliente`, `username.cliente`, `telefono.cliente`,"+ " `cap.cliente`, `via.cliente`, `città.cliente`, `tipo.cliente`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO cliente (nome, cognome, data_di_nascita, codice_fiscale, email, password, username, telefono, cap, via, città, tipo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, nome);
@@ -138,7 +138,7 @@ public class Cliente {
 			PreparedStatement preparedStatement = null;
 
 			try {
-				String sql = "SELECT * FROM "+ TABLE_NAME+ " WHERE `username.cliente`='" + username + "'";
+				String sql = "SELECT * FROM "+ TABLE_NAME+ " WHERE username='"+ username + "'";
 
 				connection = ds.getConnection();
 				preparedStatement = connection.prepareStatement(sql);

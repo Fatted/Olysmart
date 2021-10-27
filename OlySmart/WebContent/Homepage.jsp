@@ -1,5 +1,16 @@
 <%@page import="model.*" %>
 <%@page import="control.*" %>
+<%@page import="java.util.*" %>
+
+<% 
+
+ProdottoDAO prod= new ProdottoDAO();
+List<Prodotto> prodotti=prod.getAllProducts();
+
+CategoriaDAO cat=new CategoriaDAO();
+List<Categoria> categorialista=cat.getCategorie();
+
+%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -98,135 +109,8 @@
     </div>
 </section>
      
-    <section id="menu">
-         <div class="sidebar close">
-             <ul class="nav-links">
-             <li> <a href="#">
-                <i class="fas fa-home"></i>
-            <span class="link_name">Home</span>
-        </a>
-        </li>
-        <li> <a href="catalogo.jsp">
-            <i class="fas fa-list"></i>
-         <span class="link_name">Catalogo</span>
-          </a>
-        </li>
-         <li>
-            <div class="icon-link">
-             <a class="link_name" href="#">
-             <i class="fas fa-laptop"></i>
-              <span class="link_name">Notebook</span>
-              </a>
-              <i class="fas fa-chevron-right arrow"></i>
-           </div>
-           <ul class="sub-menu">
-            <li><a href="#">HP</a></li>
-           </ul>
-        </li>
-        <li>
-            <div class="icon-link">
-             <a  class="link_name" href="#">
-                <i class="fas fa-gamepad"></i>
-              <span class="link_name">Gaming</span>
-              </a>
-              <i class="fas fa-chevron-right arrow"></i>
-           </div>
-           <ul class="sub-menu">
-            <li><a href="#">Console</a></li>
-            <li><a href="#">Giochi</a></li>
-            <li><a href="#">Controller</a></li>
-           </ul>
-        </li>
-        <li>
-            <div class="icon-link">
-             <a class="link_name" href="#">
-                <i class="fas fa-tablet"></i>
-              <span class="link_name">Tablet</span>
-              </a>
-              <i class="fas fa-chevron-right arrow"></i>
-           </div>
-           <ul class="sub-menu">
-            <li><a href="#">Apple</a></li>
-            <li><a href="#">Samsung</a></li>
-            <li><a href="#">Huawei</a></li>
-           </ul>
-        </li>
-        <li>
-            <div class="icon-link">
-             <a class="link_name" href="#">
-                <i class="fas fa-mobile-alt"></i>
-              <span class="link_name">Smartphone</span>
-              </a>
-              <i class="fas fa-chevron-right arrow"></i>
-           </div>
-           <ul class="sub-menu">
-            <li><a href="#">Apple</a></li>
-            <li><a href="#">Samsung</a></li>
-            <li><a href="#">Huawei</a></li>
-            <li><a href="#">Xiaomi</a></li>
-            <li><a href="#">Oppo</a></li>
-           </ul>
-        </li>
-        <li>
-            <div class="icon-link">
-             <a class="link_name" href="#">
-                <i class="fas fa-tv"></i>
-              <span class="link_name">Tv</span>
-              </a>
-              <i class="fas fa-chevron-right arrow"></i>
-           </div>
-           <ul class="sub-menu">
-            <li><a href="#">Lg</a></li>
-            <li><a href="#">Samsung</a></li>
-           </ul>
-        </li>
-        <li>
-            <div class="icon-link">
-             <a class="link_name" href="#">
-                <i class="fas fa-headset"></i>
-              <span class="link_name">Cuffie</span>
-              </a>
-              <i class="fas fa-chevron-right arrow"></i>
-           </div>
-           <ul class="sub-menu">
-            <li><a  href="#">Gaming</a></li>
-            <li><a  href="#">Wireless</a></li>
-            <li><a  href="#">Apple</a></li>
-           </ul>
-        </li>
-        <li>
-            <div class="icon-link">
-             <a class="link_name" href="#">
-                <i class="fab fa-usb"></i>
-              <span class="link_name">Accessori</span>
-              </a>
-              <i class="fas fa-chevron-right arrow"></i>
-           </div>
-           <ul class="sub-menu">
-            <li><a href="#">Cover</a></li>
-            <li><a href="#">Smartwatch</a></li>
-            <li><a href="#">Casse bluetooth</a></li>
-            <li><a href="#">Caricatori</a></li>
-            <li><a href="#">Smartwatch case</a></li>
-           </ul>
-        </li>
-        <li>
-            <div class="icon-link">
-             <a class="link_name" href="#">
-                <i class="fas fa-wrench"></i>
-              <span class="link_name">Servizi</span>
-              </a>
-              <i class="fas fa-chevron-right arrow"></i>
-           </div>
-           <ul class="sub-menu">
-            <li><a href="#">Riparazioni</a></li>
-            <li><a href="#">Assistenza</a></li>
-            <li><a href="#">Promozioni telefoniche</a></li>
-            <li><a href="#">Pellicole</a></li>
-           </ul>
-        </li>
-        </ul>
-        </div>
+<!-- Barra laterale -->     
+<%@include file="include/BarraLaterale.jsp" %>
 
         <div class="slider">
                 <div class="content">
@@ -292,8 +176,7 @@
             </a>   
          </div>
      </div>
-    
-     </section>
+</section>
 
      
 

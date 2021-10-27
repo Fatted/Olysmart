@@ -34,27 +34,27 @@ public class ProdottoDAO {
 		try {
 			Connection connection = null;
 			PreparedStatement preparedStatement = null;
-			String sql = "SELECT * FROM prodotto";
+			String sql = "SELECT * FROM `prodotto`";
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(sql);
 			ResultSet rs = preparedStatement.executeQuery();
 
 			while(rs.next()) {
 				Prodotto prodotto=new Prodotto();
-				prodotto.setCodice(rs.getInt("codice.prodotto"));
-				prodotto.setNome(rs.getString("nome.prodotto"));
-				prodotto.setDescrizione(rs.getString("descrizione.prodotto"));
-				prodotto.setPrezzo_acquisto(rs.getDouble("prezzo_acquisto.prodotto"));
-				prodotto.setDisponibilità(rs.getString("disponibilità.prodotto"));
-				prodotto.setIva(rs.getInt("iva.prodotto"));
-				prodotto.setPrezzo_vendita(rs.getDouble("prezzo_vendita.prodotto"));
-				prodotto.setMarca(rs.getString("marca.prodotto"));
-				prodotto.setNumero_pezzi_disponibili(rs.getInt("numero_pezzi_disponibili.prodotto"));
-				prodotto.setSconto(rs.getInt("sconto.prodotto"));
-				prodotto.setSpecifiche(rs.getString("specifiche.prodotto"));
-				prodotto.setTipo(rs.getString("tipo.prodotto"));
-				prodotto.setOfferta(rs.getString("offerta.prodotto"));
-				prodotto.setImmagine(rs.getString("immagine.prodotto"));
+				prodotto.setCodice(rs.getInt("codice"));
+				prodotto.setNome(rs.getString("nome"));
+				prodotto.setDescrizione(rs.getString("descrizione"));
+				prodotto.setPrezzo_acquisto(rs.getDouble("prezzo_acquisto"));
+				prodotto.setDisponibilità(rs.getString("disponibilità"));
+				prodotto.setIva(rs.getInt("iva"));
+				prodotto.setPrezzo_vendita(rs.getDouble("prezzo_vendita"));
+				prodotto.setMarca(rs.getString("marca"));
+				prodotto.setNumero_pezzi_disponibili(rs.getInt("numero_pezzi_disponibili"));
+				prodotto.setSconto(rs.getInt("sconto"));
+				prodotto.setSpecifiche(rs.getString("specifiche"));
+				prodotto.setTipo(rs.getString("tipo"));
+				prodotto.setOfferta(rs.getString("offerta"));
+				prodotto.setImmagine(rs.getString("immagine"));
 				
 				prodotti.add(prodotto);
 				
@@ -65,6 +65,48 @@ public class ProdottoDAO {
 
 		}
 		return prodotti;
+	}
+	
+	
+	public int getAllProductsNumber(){
+		List<Prodotto> prodotti=new ArrayList<Prodotto>();
+		int numero=0;
+		
+		try {
+			Connection connection = null;
+			PreparedStatement preparedStatement = null;
+			String sql = "SELECT * FROM prodotto";
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(sql);
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while(rs.next()) {
+				Prodotto prodotto=new Prodotto();
+				prodotto.setCodice(rs.getInt("codice"));
+				prodotto.setNome(rs.getString("nome"));
+				prodotto.setDescrizione(rs.getString("descrizione"));
+				prodotto.setPrezzo_acquisto(rs.getDouble("prezzo_acquisto"));
+				prodotto.setDisponibilità(rs.getString("disponibilità"));
+				prodotto.setIva(rs.getInt("iva.prodotto"));
+				prodotto.setPrezzo_vendita(rs.getDouble("prezzo_vendita"));
+				prodotto.setMarca(rs.getString("marca.prodotto"));
+				prodotto.setNumero_pezzi_disponibili(rs.getInt("numero_pezzi_disponibili"));
+				prodotto.setSconto(rs.getInt("sconto.prodotto"));
+				prodotto.setSpecifiche(rs.getString("specifiche"));
+				prodotto.setTipo(rs.getString("tipo"));
+				prodotto.setOfferta(rs.getString("offerta"));
+				prodotto.setImmagine(rs.getString("immagine"));
+				
+				prodotti.add(prodotto);
+				numero++;
+				
+			}
+		
+		} catch (SQLException e) {
+			System.out.println("Errore");
+
+		}
+		return numero;
 	}
 	
 	
@@ -82,7 +124,7 @@ public class ProdottoDAO {
 				for(Carrello prodotto:listacarrello) {
 					Connection connection = null;
 					PreparedStatement preparedStatement = null;
-					String sql = "SELECT * FROM prodotto WHERE 'codice.prodotto'=?";
+					String sql = "SELECT * FROM prodotto WHERE codice=?";
 					connection = ds.getConnection();
 					preparedStatement = connection.prepareStatement(sql);
 					preparedStatement.setInt(1, prodotto.getCodice());
@@ -90,20 +132,20 @@ public class ProdottoDAO {
 					
 					while(rs.next()) {
 						Carrello prodottoRiga=new Carrello();				//sarebbe il prodotti visto in carrello.jsp ovvero il prodotto con il suo id,quantità e prezzo
-						prodottoRiga.setCodice(rs.getInt("codice.prodotto"));
-						prodottoRiga.setNome(rs.getString("nome.prodotto"));
-						prodottoRiga.setDescrizione(rs.getString("descrizione.prodotto"));
-						prodottoRiga.setPrezzo_acquisto(rs.getDouble("prezzo_acquisto.prodotto"));
-						prodottoRiga.setDisponibilità(rs.getString("disponibilità.prodotto"));
-						prodottoRiga.setIva(rs.getInt("iva.prodotto"));
-						prodottoRiga.setPrezzo_vendita(rs.getDouble("prezzo_vendita.prodotto"));
-						prodottoRiga.setMarca(rs.getString("marca.prodotto"));
-						prodottoRiga.setNumero_pezzi_disponibili(rs.getInt("numero_pezzi_disponibili.prodotto"));
-						prodottoRiga.setSconto(rs.getInt("sconto.prodotto"));
-						prodottoRiga.setSpecifiche(rs.getString("specifiche.prodotto"));
-						prodottoRiga.setTipo(rs.getString("tipo.prodotto"));
-						prodottoRiga.setOfferta(rs.getString("offerta.prodotto"));
-						prodottoRiga.setImmagine(rs.getString("immagine.prodotto"));
+						prodottoRiga.setCodice(rs.getInt("codice"));
+						prodottoRiga.setNome(rs.getString("nome"));
+						prodottoRiga.setDescrizione(rs.getString("descrizione"));
+						prodottoRiga.setPrezzo_acquisto(rs.getDouble("prezzo_acquisto"));
+						prodottoRiga.setDisponibilità(rs.getString("disponibilità"));
+						prodottoRiga.setIva(rs.getInt("iva"));
+						prodottoRiga.setPrezzo_vendita(rs.getDouble("prezzo_vendita"));
+						prodottoRiga.setMarca(rs.getString("marca"));
+						prodottoRiga.setNumero_pezzi_disponibili(rs.getInt("numero_pezzi_disponibili"));
+						prodottoRiga.setSconto(rs.getInt("sconto"));
+						prodottoRiga.setSpecifiche(rs.getString("specifiche"));
+						prodottoRiga.setTipo(rs.getString("tipo"));
+						prodottoRiga.setOfferta(rs.getString("offerta"));
+						prodottoRiga.setImmagine(rs.getString("immagine"));
 						
 						prodotticarrello.add(prodottoRiga);
 					}
@@ -118,6 +160,86 @@ public class ProdottoDAO {
 		}
 		
 		return prodotticarrello;
+	}
+	
+	
+	
+	
+	public List<Prodotto> getAllProductsForCategory(String categoria){
+		List<Prodotto> prodotti=new ArrayList<Prodotto>();
+		
+		try {
+			Connection connection = null;
+			PreparedStatement preparedStatement = null;
+			String sql = "SELECT * FROM prodotto WHERE tipo='"+categoria+"'";	
+			
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(sql);
+			ResultSet rs = preparedStatement.executeQuery();
+			while(rs.next()) {
+				Prodotto prodotto=new Prodotto();
+				prodotto.setCodice(rs.getInt("codice"));
+				prodotto.setNome(rs.getString("nome"));
+				prodotto.setDescrizione(rs.getString("descrizione"));
+				prodotto.setPrezzo_acquisto(rs.getDouble("prezzo_acquisto"));
+				prodotto.setDisponibilità(rs.getString("disponibilità"));
+				prodotto.setIva(rs.getInt("iva"));
+				prodotto.setPrezzo_vendita(rs.getDouble("prezzo_vendita"));
+				prodotto.setMarca(rs.getString("marca"));
+				prodotto.setNumero_pezzi_disponibili(rs.getInt("numero_pezzi_disponibili"));
+				prodotto.setSconto(rs.getInt("sconto"));
+				prodotto.setSpecifiche(rs.getString("specifiche"));
+				prodotto.setTipo(rs.getString("tipo"));
+				prodotto.setOfferta(rs.getString("offerta"));
+				prodotto.setImmagine(rs.getString("immagine"));
+				
+				prodotti.add(prodotto);
+				
+			}
+		
+		} catch (SQLException e) {
+			System.out.println("Errore");
+
+		}
+		return prodotti;
+	}
+	
+	public List<Prodotto> getAllProductsForCategoryAndMarca(String categoria,String marca){
+		List<Prodotto> prodotti=new ArrayList<Prodotto>();
+		
+		try {
+			Connection connection = null;
+			PreparedStatement preparedStatement = null;
+			String sql = "SELECT * FROM prodotto WHERE tipo='"+categoria+"'"+"AND marca='"+marca+"'";	
+			
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(sql);
+			ResultSet rs = preparedStatement.executeQuery();
+			while(rs.next()) {
+				Prodotto prodotto=new Prodotto();
+				prodotto.setCodice(rs.getInt("codice"));
+				prodotto.setNome(rs.getString("nome"));
+				prodotto.setDescrizione(rs.getString("descrizione"));
+				prodotto.setPrezzo_acquisto(rs.getDouble("prezzo_acquisto"));
+				prodotto.setDisponibilità(rs.getString("disponibilità"));
+				prodotto.setIva(rs.getInt("iva"));
+				prodotto.setPrezzo_vendita(rs.getDouble("prezzo_vendita"));
+				prodotto.setMarca(rs.getString("marca"));
+				prodotto.setNumero_pezzi_disponibili(rs.getInt("numero_pezzi_disponibili"));
+				prodotto.setSconto(rs.getInt("sconto"));
+				prodotto.setSpecifiche(rs.getString("specifiche"));
+				prodotto.setTipo(rs.getString("tipo"));
+				prodotto.setOfferta(rs.getString("offerta"));
+				prodotto.setImmagine(rs.getString("immagine"));
+				
+				prodotti.add(prodotto);			
+			}
+		
+		} catch (SQLException e) {
+			System.out.println("Errore");
+
+		}
+		return prodotti;
 	}
 
 }

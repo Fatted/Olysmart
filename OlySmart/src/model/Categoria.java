@@ -76,7 +76,7 @@ public Categoria(int numero,String nome) {
 
 		try {
 
-			String sql = "INSERT INTO categoria (`numero_prodotto.categoria`, `tipo.categoria`) VALUES (?, ?)";
+			String sql = "INSERT INTO categoria (numero_prodotto, tipo) VALUES (?, ?)";
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, numero);

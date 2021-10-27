@@ -44,7 +44,7 @@ public class ClienteDAO {
 			PreparedStatement preparedStatement = null;
 			username = cliente.getUsername();
 			password = cliente.getPassword();
-			String sql = "SELECT * FROM `cliente` WHERE `username.cliente`='" + username + "' AND `password.cliente`='" + password + "'";
+			String sql = "SELECT * FROM cliente WHERE username='"+username+"'"+"And password='"+password+"'";
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(sql);
 			ResultSet rs = preparedStatement.executeQuery();
@@ -71,21 +71,21 @@ public class ClienteDAO {
 		try {
 			Connection connection = null;
 			PreparedStatement preparedStatement = null;
-			String sql = "SELECT * FROM `cliente`";
+			String sql = "SELECT * FROM cliente";
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(sql);
 			ResultSet rs = preparedStatement.executeQuery();
 			
 			while(rs.next()) {
 				Cliente clientelista=new Cliente();
-				clientelista.setNome(rs.getString("nome.cliente"));
-				clientelista.setCognome(rs.getString("cognome.cliente"));
-				clientelista.setUsername(rs.getString("username.cliente"));
-				clientelista.setEmail(rs.getString("email.cliente"));
-				clientelista.setCap(rs.getString("cap.cliente"));
-				clientelista.setVia(rs.getString("via.cliente"));
-				clientelista.setCittà(rs.getString("città.cliente"));
-				clientelista.setTelefono(rs.getString("telefono.cliente"));
+				clientelista.setNome(rs.getString("nome"));
+				clientelista.setCognome(rs.getString("cognome"));
+				clientelista.setUsername(rs.getString("username"));
+				clientelista.setEmail(rs.getString("email"));
+				clientelista.setCap(rs.getString("cap"));
+				clientelista.setVia(rs.getString("via"));
+				clientelista.setCittà(rs.getString("città"));
+				clientelista.setTelefono(rs.getString("telefono"));
 				
 				lista.add(clientelista);
 			}
