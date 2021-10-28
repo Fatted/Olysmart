@@ -241,5 +241,44 @@ public class ProdottoDAO {
 		}
 		return prodotti;
 	}
+	
+	
+	public List<Prodotto> getAllProductsForNome(String nome){
+		List<Prodotto> prodotti=new ArrayList<Prodotto>();
+		
+		try {
+			Connection connection = null;
+			PreparedStatement preparedStatement = null;
+			String sql = "SELECT * FROM prodotto WHERE nome LIKE '%"+nome+"%' OR marca LIKE"+"'%"+nome+"%'";	
+			
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(sql);
+			ResultSet rs = preparedStatement.executeQuery();
+			while(rs.next()) {
+				Prodotto prodotto=new Prodotto();
+				prodotto.setCodice(rs.getInt("codice"));
+				prodotto.setNome(rs.getString("nome"));
+				prodotto.setDescrizione(rs.getString("descrizione"));
+				prodotto.setPrezzo_acquisto(rs.getDouble("prezzo_acquisto"));
+				prodotto.setDisponibilità(rs.getString("disponibilità"));
+				prodotto.setIva(rs.getInt("iva"));
+				prodotto.setPrezzo_vendita(rs.getDouble("prezzo_vendita"));
+				prodotto.setMarca(rs.getString("marca"));
+				prodotto.setNumero_pezzi_disponibili(rs.getInt("numero_pezzi_disponibili"));
+				prodotto.setSconto(rs.getInt("sconto"));
+				prodotto.setSpecifiche(rs.getString("specifiche"));
+				prodotto.setTipo(rs.getString("tipo"));
+				prodotto.setOfferta(rs.getString("offerta"));
+				prodotto.setImmagine(rs.getString("immagine"));
+				
+				prodotti.add(prodotto);			
+			}
+		
+		} catch (SQLException e) {
+			System.out.println("Errore");
+
+		}
+		return prodotti;
+	}
 
 }

@@ -10,6 +10,14 @@ List<Prodotto> prodotti=prod.getAllProducts();
 CategoriaDAO cat=new CategoriaDAO();
 List<Categoria> categorialista=cat.getCategorie();
 
+
+
+Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente");
+     if(cliente!=null){
+     	request.setAttribute("cliente-corrente", cliente);
+     }
+
+
 %>
 
 <!DOCTYPE html>
@@ -63,39 +71,37 @@ List<Categoria> categorialista=cat.getCategorie();
         <div class="testo"><h1>OlySmart</h1>
             <script src="https://use.fontawesome.com/d8805b6d62.js"></script>
             <script src="https://use.fontawesome.com/relases/v5.0.6/js/all.js"></script>
-            <div class="bottone-ricerca">  
-              <div class="search-box-avanzato">
-                  <input type="text" class="search-txt" placeholder="Trova...">
-                  <a class="search-btn" href="#">
+            
+            <!-- barra di ricerca -->
+            <form action="Ricerca" method="post">
+            <div class="bottone-ricerca">                           
+              <div class="search-box-avanzato">        
+                  <input type="text" class="search-txt" name="search" placeholder="Cerca prodotto">
+                  <button class="search-btn"  type="submit">
                     <i class="fa fa-search" aria-hidden="true"></i>
-                  </a>
-             </div>
-            </div>
-        </div>
+                  </button>
+                  </div>
+           		 </div>           		
+               </form>
+</div>
+
     <div class="ultimo">
      <div class="accesso">
-     
-     <%
-          
-          Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente");
-               if(cliente!=null){
-               	request.setAttribute("cliente-corrente", cliente);
-               }
-          %>
      
         <%if(cliente == null){%>
         	<div class="registra"> <a href="register.jsp">Registrati</a> </div>
             <div class="accedi"> <a href="login.jsp">Accedi</a> </div>
         <%}else{%>
-       
+        	<p>Utente:<%=cliente.getUsername() %></p>      
         	 <div class="logout"> <a href="ServletLogout">Logout</a></div><br>
+        	 <div class="My order"> <a href="#mieiordini">Miei ordini</a></div><br>
+        	 <div class="image"><a href="carrello.jsp"><img src="carella.png"></a></div><br>
+        	 <div class="My account"> <a href="#mioaccount">il mio account</a></div><br>
+
         	 <%if(cliente.getTipo().equals("admin")){%>
         		<br><div> <a href="paginaAdmin.jsp">Pagina Gestione</a></div>
         <%}%>	 
-        	 
-             <div class="image"><a href="carrello.jsp"><img src="carella.png"></a></div><br>
-             <p>Utente:<%=cliente.getUsername() %></p>
-             
+        	              
       <%}%>
         
 

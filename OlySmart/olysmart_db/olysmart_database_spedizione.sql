@@ -23,16 +23,17 @@ DROP TABLE IF EXISTS `spedizione`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `spedizione` (
-  `codice.spedizione` int NOT NULL,
-  `destinatario.spedizione` varchar(100) NOT NULL,
-  `data.spedizione` varchar(100) NOT NULL,
-  `numero.spedizione` int NOT NULL,
-  `costo.spedizione` int NOT NULL,
-  `data_arrivo.spedizione` varchar(100) NOT NULL,
-  `tipo.spedizione` varchar(100) NOT NULL,
-  PRIMARY KEY (`codice.spedizione`),
-  KEY `chiave_esterna.spedizione->cliente_idx` (`destinatario.spedizione`),
-  CONSTRAINT `chiave_esterna.spedizione->cliente` FOREIGN KEY (`destinatario.spedizione`) REFERENCES `cliente` (`username.cliente`)
+  `codice` int NOT NULL,
+  `destinatario` varchar(100) NOT NULL,
+  `data` varchar(100) NOT NULL,
+  `numero` int NOT NULL,
+  `costo` int NOT NULL,
+  `data_arrivo` varchar(100) NOT NULL,
+  `tipo` varchar(100) NOT NULL,
+  `stato` varchar(100) NOT NULL,
+  PRIMARY KEY (`codice`),
+  KEY `chiave_esterna.spedizione->cliente_idx` (`destinatario`),
+  CONSTRAINT `chiave_esterna.spedizione->cliente` FOREIGN KEY (`destinatario`) REFERENCES `cliente` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -54,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-21 22:21:00
+-- Dump completed on 2021-10-28 19:37:58

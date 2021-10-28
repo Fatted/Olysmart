@@ -23,14 +23,14 @@ DROP TABLE IF EXISTS `recensione`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `recensione` (
-  `username_cliente.recensione` varchar(100) NOT NULL,
-  `codice_prodotto.recensione` int NOT NULL,
-  `commento.recensione` varchar(100) DEFAULT NULL,
-  `voto.recensione` int DEFAULT NULL,
-  KEY `chiave_esterna.recensione->cliente_idx` (`username_cliente.recensione`),
-  KEY `chiave_esterna.recensione->prodotto_idx` (`codice_prodotto.recensione`),
-  CONSTRAINT `chiave_esterna.recensione->cliente` FOREIGN KEY (`username_cliente.recensione`) REFERENCES `cliente` (`username.cliente`),
-  CONSTRAINT `chiave_esterna.recensione->prodotto` FOREIGN KEY (`codice_prodotto.recensione`) REFERENCES `prodotto` (`codice.prodotto`)
+  `username_cliente` varchar(100) NOT NULL,
+  `codice_prodotto` int NOT NULL,
+  `commento` varchar(100) DEFAULT NULL,
+  `voto` int DEFAULT NULL,
+  KEY `chiave_esterna.recensione->cliente_idx` (`username_cliente`),
+  KEY `chiave_esterna.recensione->prodotto_idx` (`codice_prodotto`),
+  CONSTRAINT `chiave_esterna.recensione->cliente` FOREIGN KEY (`username_cliente`) REFERENCES `cliente` (`username`),
+  CONSTRAINT `chiave_esterna.recensione->prodotto` FOREIGN KEY (`codice_prodotto`) REFERENCES `prodotto` (`codice`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-21 22:21:00
+-- Dump completed on 2021-10-28 19:37:58

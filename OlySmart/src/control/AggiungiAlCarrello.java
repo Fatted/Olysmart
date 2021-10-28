@@ -49,7 +49,7 @@ public class AggiungiAlCarrello extends HttpServlet {
 			if(listacarrello==null) {
 				carrello.add(cart);
 				session.setAttribute("listacarrello",carrello);
-				response.sendRedirect("catalogo.jsp");
+				response.sendRedirect("carrello.jsp");
 			}
 			else {
 				carrello=listacarrello;
@@ -65,7 +65,7 @@ public class AggiungiAlCarrello extends HttpServlet {
 				
 				if(!esiste) {
 						listacarrello.add(cart);
-						response.sendRedirect("catalogo.jsp");
+						response.sendRedirect("carrello.jsp");
 					}
 			}
 

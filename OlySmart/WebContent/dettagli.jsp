@@ -1,6 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@page import="model.*" %>
+<%@page import="control.*" %>
+<%@page import="java.util.*" %>
 
+<%
+Cliente cliente= (Cliente) request.getSession().getAttribute("cliente");
+if(cliente!=null){
+	request.setAttribute("cliente-corrente", cliente);
+}
+
+%>
 
 
 <!DOCTYPE html>

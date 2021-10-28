@@ -23,9 +23,9 @@ DROP TABLE IF EXISTS `categoria`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `categoria` (
-  `numero_prodotto.categoria` varchar(100) NOT NULL COMMENT 'quanti prodotti ci sono dello stesso tipo (esempio: 10tv,5notebook....)',
-  `tipo.categoria` varchar(50) NOT NULL COMMENT 'ci permette di identificare una determinata categoria di prodotti',
-  PRIMARY KEY (`tipo.categoria`)
+  `numero_prodotto` int NOT NULL,
+  `tipo` varchar(50) NOT NULL COMMENT 'ci permette di identificare una determinata categoria di prodotti',
+  PRIMARY KEY (`tipo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -35,7 +35,7 @@ CREATE TABLE `categoria` (
 
 LOCK TABLES `categoria` WRITE;
 /*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
-INSERT INTO `categoria` VALUES ('7','accessori'),('6','cuffie'),('2','gaming'),('1','notebook'),('8','servizi'),('3','tablet'),('4','telefono'),('5','tv');
+INSERT INTO `categoria` VALUES (7,'accessori'),(6,'cuffie'),(2,'gaming'),(1,'notebook'),(8,'servizi'),(3,'tablet'),(4,'telefono'),(5,'tv');
 /*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -48,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-21 22:21:00
+-- Dump completed on 2021-10-28 19:37:58

@@ -51,7 +51,7 @@ public class ProdottiOperazioneServlet extends HttpServlet {
 			
 			if(operazione.equals("addCategory")) {//se l'operazione scelta è addcategory
 			
-				int numero=Integer.parseInt(request.getParameter("numeroCategoria")); //prendo il numero inserito nel form
+			int numero=Integer.parseInt(request.getParameter("numeroCategoria")); //prendo il numero inserito nel form
 			String titolo=request.getParameter("TitoloCategoria");				//prendo la stringa inserito nel form
 			
 			Categoria categoria=new Categoria(numero,titolo);	//creo il nuovo oggetto categoria con i valori inseriti nel form

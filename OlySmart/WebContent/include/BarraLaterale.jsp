@@ -5,7 +5,7 @@
 <section id="menu">
          <div class="sidebar close">
              <ul class="nav-links">
-             <li> <a href="#">
+             <li> <a href="Homepage.jsp">
                 <i class="fas fa-home"></i>
             <span class="link_name">Home</span>
         </a>
@@ -45,7 +45,7 @@
         		   for(String stampa:listanonduplicata){
 			%>
 					
-            <li><a href="catalogo.jsp?Categoria=<%=categoria.getNome() %>&ProdottoMarca=<%=stampa %>"><%=stampa %></a></li>
+            <li><a href="catalogo.jsp?Categoria=<%=categoria.getNome()%>&ProdottoMarca=<%=stampa %>"><%=stampa %></a></li>
             <% 		   
         		  } %>
            </ul>

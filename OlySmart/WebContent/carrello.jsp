@@ -4,24 +4,19 @@
      
       <%
            
-                      Cliente cliente= (Cliente) request.getSession().getAttribute("cliente");
-                           if(cliente!=null){
-                           	request.setAttribute("cliente", cliente);
-                           }
+      Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente");
+      if(cliente!=null){
+      	request.setAttribute("cliente-corrente", cliente);
+      }
                            
-                           ArrayList<Carrello> prodotti_carrello=(ArrayList<Carrello>)session.getAttribute("listacarrello");
-                           List<Carrello> prodottocarrello=null;
-                           if(prodotti_carrello!=null){
-                          	 ProdottoDAO prodotto=new ProdottoDAO();
-                          	 prodottocarrello=prodotto.getProdottiCarrello(prodotti_carrello);
-                          	 request.setAttribute("prodotti_carrello",prodotti_carrello);
-                           }
+      ArrayList<Carrello> prodotti_carrello=(ArrayList<Carrello>)session.getAttribute("listacarrello");
+      List<Carrello> prodottocarrello=null;
+      if(prodotti_carrello!=null){
+    	 ProdottoDAO prodotto=new ProdottoDAO();
+      	 prodottocarrello=prodotto.getProdottiCarrello(prodotti_carrello);
+      	 request.setAttribute("prodotti_carrello",prodotti_carrello);
+       }
            %>
-
-
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -37,7 +32,7 @@
 </head>
 
 <body>
-    
+    <p>Carrello di:<%=cliente.getUsername() %></p>
     <div class="small-container cart-page">
         <table>
              <tr>
@@ -52,12 +47,19 @@
                 <tr>
                 <td>
                     <p>Nome:<%=carrello.getNome()%></p>
-                    <small>Prezzo:<%=carrello.getPrezzo_vendita()%></small> <br>
-                    <a href="">Remove</a>
                 </td>
                 
-                <form action="" method="post">
+                <td>
+                    <small>Prezzo:<%=carrello.getPrezzo_vendita()%></small><br>
+                </td>  
+                
+                <td>
+                    <small>Quantità:<%=carrello.getNumero_pezzi_disponibili()%></small><br>               
+                    <a href="#rimozione">Remove</a>
+                </td> 
+                <form action="AggiungiAlCarrello.java" method="post">
        	 		<input type="hidden" value="<%=carrello.getCodice() %>">
+       	 		
         		</form> 
               
             </tr>
@@ -65,7 +67,7 @@
         	
         }
         else{
-        	System.out.print("non va");
+        	System.out.print("non va il carrello");
         }
         %>
            
@@ -82,13 +84,7 @@
             </tr>
         </table>
     </div>
-    
-    
-    
-    
-    
-    
-    
+
     <footer id="footer">
         <p>Olysmart &copy; 2021, All rights reserved<p>
         <p>Via napoli 310 81058 Vairano Patenora, Campania</p>
