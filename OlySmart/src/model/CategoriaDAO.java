@@ -45,7 +45,7 @@ public class CategoriaDAO {
 				
 				lista.add(categoria);
 			}
-			
+			connection.close();
 		}catch (SQLException e) {
 			System.out.println("Errore");
 

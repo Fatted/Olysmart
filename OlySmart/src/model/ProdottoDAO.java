@@ -59,7 +59,7 @@ public class ProdottoDAO {
 				prodotti.add(prodotto);
 				
 			}
-		
+		connection.close();
 		} catch (SQLException e) {
 			System.out.println("Errore");
 
@@ -101,7 +101,7 @@ public class ProdottoDAO {
 				numero++;
 				
 			}
-		
+			connection.close();
 		} catch (SQLException e) {
 			System.out.println("Errore");
 
@@ -149,11 +149,9 @@ public class ProdottoDAO {
 						
 						prodotticarrello.add(prodottoRiga);
 					}
+					connection.close();
 				}
-			}
-			
-			
-			
+			}					
 		}catch(SQLException e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
@@ -196,7 +194,7 @@ public class ProdottoDAO {
 				prodotti.add(prodotto);
 				
 			}
-		
+			connection.close();
 		} catch (SQLException e) {
 			System.out.println("Errore");
 
@@ -205,8 +203,7 @@ public class ProdottoDAO {
 	}
 	
 	public List<Prodotto> getAllProductsForCategoryAndMarca(String categoria,String marca){
-		List<Prodotto> prodotti=new ArrayList<Prodotto>();
-		
+		List<Prodotto> prodotti=new ArrayList<Prodotto>();	
 		try {
 			Connection connection = null;
 			PreparedStatement preparedStatement = null;
@@ -234,7 +231,7 @@ public class ProdottoDAO {
 				
 				prodotti.add(prodotto);			
 			}
-		
+			connection.close();
 		} catch (SQLException e) {
 			System.out.println("Errore");
 
@@ -273,7 +270,7 @@ public class ProdottoDAO {
 				
 				prodotti.add(prodotto);			
 			}
-		
+			connection.close();
 		} catch (SQLException e) {
 			System.out.println("Errore");
 

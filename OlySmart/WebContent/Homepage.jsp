@@ -24,7 +24,7 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="https://kit.fontawesome.com/12aebee45b.js"></script>
@@ -115,8 +115,56 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
     </div>
 </section>
      
-<!-- Barra laterale -->     
-<%@include file="include/BarraLaterale.jsp" %>
+<section id="menu">
+         <div class="sidebar close">
+             <ul class="nav-links">
+             <li> <a href="Homepage.jsp">
+                <i class="fas fa-home"></i>
+            <span class="link_name">Home</span>
+        </a>
+        </li>
+        <li> <a href="catalogo.jsp?Categoria=all">
+            <i class="fas fa-list"></i>
+         <span class="link_name">Catalogo</span>
+          </a>
+        </li>
+        
+     <%
+		for(Categoria categoria:categorialista){
+		%>
+         <li>
+            <div class="icon-link">
+             <a class="link_name" href="catalogo.jsp?Categoria=<%=categoria.getNome() %>">
+             <i class="fas fa-laptop"></i>
+              <span class="link_name"><%=categoria.getNome() %></span>
+              </a>
+              <i class="fas fa-chevron-right arrow"></i>
+           </div>
+            <ul class="sub-menu">
+           <% 
+           List<String> listanonduplicata=new ArrayList<>();
+           List<String> lista=new ArrayList<>();
+           
+           for(Prodotto p:prodotti){
+        	   if(p.getTipo().equalsIgnoreCase(categoria.getNome())){
+        		   lista.add(p.getMarca());
+        	   }
+           }
+           
+        		   for(String parola:lista){
+        			   if(!listanonduplicata.contains(parola)){listanonduplicata.add(parola); }    
+        		   }
+        		   
+        		   for(String stampa:listanonduplicata){
+			%>
+					
+            <li><a href="catalogo.jsp?Categoria=<%=categoria.getNome()%>&ProdottoMarca=<%=stampa %>"><%=stampa %></a></li>
+            <% 		   
+        		  } %>
+           </ul>
+       <%}%>
+        </li>
+        </div>
 
         <div class="slider">
                 <div class="content">

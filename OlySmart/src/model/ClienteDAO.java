@@ -55,7 +55,9 @@ public class ClienteDAO {
 			} else {
 				System.out.println("Utente è autentificato");
 			}
+			connection.close();
 			return controllo;
+			
 		} catch (SQLException e) {
 			System.out.println("Errore");
 
@@ -89,7 +91,7 @@ public class ClienteDAO {
 				
 				lista.add(clientelista);
 			}
-			
+			connection.close();
 		} catch (SQLException e) {
 			System.out.println("Errore");
 
