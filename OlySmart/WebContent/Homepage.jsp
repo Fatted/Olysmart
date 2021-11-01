@@ -107,7 +107,7 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
         	 <div class="logout"> <a href="ServletLogout">Logout</a></div><br>
         	 <div class="My order"> <a href="#mieiordini">Miei ordini</a></div><br>
         	 <div class="image"><a href="carrello.jsp"><img src="carella.png"></a></div><br>
-        	 <div class="My account"> <a href="#mioaccount">il mio account</a></div><br>
+        	 <div class="My account"> <a href="MyAccount.jsp">il mio account</a></div><br>
 
         	 <%if(cliente.getTipo().equals("admin")){%>
         		<br><div> <a href="paginaAdmin.jsp">Pagina Gestione</a></div>

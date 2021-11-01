@@ -278,7 +278,7 @@
 				<td style="border:1px solid"><%=clienti.getUsername() %></td>
 				<td style="border:1px solid"><%=clienti.getEmail() %></td>
 				<td style="border:1px solid"><%=clienti.getTelefono() %></td>
-				<td style="border:1px solid">Via:<%=clienti.getVia() %>, CAP:<%=clienti.getCap() %>, Città:<%=clienti.getCittà() %></td>
+				<td style="border:1px solid">Via:<%=clienti.getVia() %>, CAP:<%=clienti.getCap() %>, Città:<%=clienti.getCitta() %></td>
 				</tr>
 
 			<%

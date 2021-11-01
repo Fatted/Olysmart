@@ -59,7 +59,7 @@
                 <tr>
                 <td>
                     <p>Nome:<%=carrello.getNome()%></p>
-                    <a href="#rimozione">Remove</a>
+                    <a href="RimozioneProdottiCarrello?id=<%=carrello.getCodice() %>">Rimuovi</a>
                 </td>
                 
                 <td>
@@ -77,19 +77,14 @@
                 </td>  
                 
                 <td>
-                    <small><%=carrello.getPrezzo_vendita()%></small><br>                                                  
+                    <small><%=carrello.getPrezzo_vendita()%></small><br> 
+                                                                     
                 </td>            
-            </tr>
-           
-                       
-        	<%}
-        	
-        }
-      
-        %>
-           
+            </tr>                                 
+        	<%}        	
+        }      
+        %>         
         </table>
-
     </div>
     <div class="total-price">
         <table>
@@ -103,12 +98,6 @@
     <form action="#procediOrdine" method="post">
    <button name="#procediAll'ordine" type="submit">Procedi all'ordine</button>
 	</form>
-    <footer id="footer">
-        <p>Olysmart &copy; 2021, All rights reserved<p>
-        <p>Via napoli 310 81058 Vairano Patenora, Campania</p>
-        <p>0823 988020</p>
-        <p>olysmartvairano@gmail.com</p>
-        <p>Powered by D'Amato Antonio, D'Amato Ludovica, Dello Buono Piero</p>
-        </footer>
+
 </body>
 </html>

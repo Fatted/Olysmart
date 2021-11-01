@@ -156,7 +156,7 @@ public class Cliente {
 					this.setTelefono(rs.getString(8));
 					this.setCap(rs.getString(9));
 					this.setVia(rs.getString(10));
-					this.setCittà(rs.getString(11));
+					this.setCitta(rs.getString(11));
 					this.setTipo(rs.getString(12));
 					
 				}
@@ -313,13 +313,13 @@ public class Cliente {
 
 
 	
-	public String getCittà() {
+	public String getCitta() {
 		return città;
 	}
 
 
 	
-	public void setCittà(String città) {
+	public void setCitta(String città) {
 		this.città = città;
 	}
 
@@ -357,6 +357,69 @@ public class Cliente {
 	private String via;
 	private String città;
 	private String tipo;
+	private String numero_carta;
+	private String data_scadenza_carta;
+	private String CVV;
+	private String Intestatario_carta;
+	
+	/**
+	 * @return the numero_carta
+	 */
+	public String getNumero_carta() {
+		return numero_carta;
+	}
+
+	/**
+	 * @param numero_carta the numero_carta to set
+	 */
+	public void setNumero_carta(String numero_carta) {
+		this.numero_carta = numero_carta;
+	}
+
+	/**
+	 * @return the data_scadenza_carta
+	 */
+	public String getData_scadenza_carta() {
+		return data_scadenza_carta;
+	}
+
+	/**
+	 * @param data_scadenza_carta the data_scadenza_carta to set
+	 */
+	public void setData_scadenza_carta(String data_scadenza_carta) {
+		this.data_scadenza_carta = data_scadenza_carta;
+	}
+
+	/**
+	 * @return the cVV
+	 */
+	public String getCVV() {
+		return CVV;
+	}
+
+	/**
+	 * @param cVV the cVV to set
+	 */
+	public void setCVV(String cVV) {
+		CVV = cVV;
+	}
+
+	/**
+	 * @return the intestatario_carta
+	 */
+	public String getIntestatario_carta() {
+		return Intestatario_carta;
+	}
+
+	/**
+	 * @param intestatario_carta the intestatario_carta to set
+	 */
+	public void setIntestatario_carta(String intestatario_carta) {
+		Intestatario_carta = intestatario_carta;
+	}
+
+
+	
 	private boolean valido;
 
 }

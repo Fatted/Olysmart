@@ -86,7 +86,7 @@ public class ClienteDAO {
 				clientelista.setEmail(rs.getString("email"));
 				clientelista.setCap(rs.getString("cap"));
 				clientelista.setVia(rs.getString("via"));
-				clientelista.setCittà(rs.getString("città"));
+				clientelista.setCitta(rs.getString("città"));
 				clientelista.setTelefono(rs.getString("telefono"));
 				
 				lista.add(clientelista);
@@ -101,7 +101,27 @@ public class ClienteDAO {
 	}
 	
 	
+	public void UpdateData(Cliente cliente) {
 		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		try {
+			String sql = "UPDATE cliente SET data_di_nascita=? WHERE username=?";
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(3, cliente.getDatadinascita());
+			
+			preparedStatement.executeQuery();
+		
+			connection.close();
+		} catch (SQLException e) {
+			System.out.println("Errore inserimento data");
+
+		}
+
+	}
+
+
 	
 
 	private String username;

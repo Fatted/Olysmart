@@ -16,10 +16,10 @@
                     <h1>Register Here</h1>
                      <%@include file="CSS/messaggioRegistrazione.jsp" %>
                     <form action="ServletRegister" method="post">
-                        <p>Nome</p>
-                        <input type ="text" name="nome"  placeholder="Enter Nome" >
-                        <p>Cognome</p>
-                        <input type ="text" name="cognome"  placeholder="Enter Cognome">
+                        <p>Nome*</p>
+                        <input type ="text" name="nome"  placeholder="Enter Nome" required>
+                        <p>Cognome*</p>
+                        <input type ="text" name="cognome"  placeholder="Enter Cognome" required>
                         <p>Data Di Nascita</p>
                         <input type ="date" name="data" placeholder="Enter Data">
                         <p>Codice Fiscale</p>
