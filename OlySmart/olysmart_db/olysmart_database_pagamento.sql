@@ -23,19 +23,12 @@ DROP TABLE IF EXISTS `pagamento`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pagamento` (
-  `intestatario` varchar(100) NOT NULL,
-  `numero_carta` varchar(100) NOT NULL,
-  `data_scadenza_carta` varchar(100) NOT NULL,
-  `cvv` int NOT NULL,
-  `importo` int NOT NULL,
-  `tipo` varchar(100) NOT NULL,
-  `numero_fattura` int NOT NULL,
-  `data_pagamento` varchar(100) NOT NULL,
-  `codice_ordine` int NOT NULL,
-  PRIMARY KEY (`numero_carta`),
-  KEY `Chiavedata.pagamento` (`data_pagamento`) /*!80000 INVISIBLE */,
-  KEY `chiave_esterna.pagamento->ordine_idx` (`codice_ordine`),
-  CONSTRAINT `chiave_esterna.pagamento->ordine` FOREIGN KEY (`codice_ordine`) REFERENCES `ordine` (`codice`)
+  `idpagamento` int NOT NULL,
+  `idordine` int NOT NULL,
+  `data` varchar(45) DEFAULT NULL,
+  `utente` varchar(45) DEFAULT NULL,
+  `totale` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`idpagamento`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -57,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-28 19:37:58
+-- Dump completed on 2021-11-02  0:05:26

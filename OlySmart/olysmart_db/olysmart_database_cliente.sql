@@ -35,6 +35,10 @@ CREATE TABLE `cliente` (
   `via` char(45) DEFAULT NULL COMMENT 'via della città di residenza dell''utente;servirà anche per la spedizione',
   `città` char(45) DEFAULT NULL COMMENT 'città di residenza dell''utente;servirà anche per la spedizione',
   `tipo` char(45) DEFAULT 'utente' COMMENT 'in base al tipo(admin o user),potrà accedere alle varie pagini del sito,nel caso dell''user userà il sito come cliente mentre nel caso dell''admin potrà accedere al sito anche in modalità "configurazione" dove potrà effettuare tutte le operazione di un proprietario del sito. ',
+  `numero_carta` char(50) DEFAULT NULL,
+  `data_scadenza_carta` char(45) DEFAULT NULL,
+  `CVV` char(45) DEFAULT NULL,
+  `Intestatario_carta` char(45) DEFAULT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='L''utente può essere admin,e quindi accedere al sito anche in modalità sviluppatore per inserire prodotti,cancellarli,modificarli e fare tutte le operazioni di gestione,inoltre può modificare qualsiasi dato nel database.\nNel caso in cui l''utente sia un user potrà navigare sul sito come un semplice compratore.';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -45,7 +49,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES ('Olindo','Acciardo',NULL,NULL,'olindo@gmail.com','olismart','olindo','3290200344','81055','via del monte','vairano','admin'),('UtenteProva','prova','','','prova@gmail.com','prova','prova','32987744566','11233','via dlle luna','vairano','utente');
+INSERT INTO `cliente` VALUES ('Olindo','Acciardo',NULL,NULL,'olindo@gmail.com','olismart','olindo','3290200344','81055','via del monte','vairano','admin',NULL,NULL,NULL,NULL),('UtenteProva','prova','','','prova@gmail.com','prova','prova','32987744566','11233','via dlle luna','vairano','utente',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -58,4 +62,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-28 19:37:59
+-- Dump completed on 2021-11-02  0:05:26

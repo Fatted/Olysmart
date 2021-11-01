@@ -25,13 +25,8 @@ DROP TABLE IF EXISTS `carrello`;
 CREATE TABLE `carrello` (
   `codice_ordine` int NOT NULL COMMENT 'codice ordine del carrello che cobacia con il codice cell''ordine (chiave esterna)',
   `codice_prodotto` int NOT NULL COMMENT 'codice prodotto carrello che coincide con il codice del prodotto',
-  `prezzo_unitario_prodotto` double NOT NULL COMMENT 'coincide con il prezzo singolo del prodotto',
-  `iva` int NOT NULL COMMENT 'iva del singolo prodotto nel carrello',
-  `prezzo_totale` double NOT NULL COMMENT 'prezzo totale da pagare non compreso di spedizione',
-  `numero_prodotto_singolo` int NOT NULL,
-  `numero_prodotti_totali` int NOT NULL,
-  KEY `Chiave.esterna.carrello->ordine_idx` (`codice_ordine`),
   KEY `Chiaveprodotto.carrello_idx` (`codice_prodotto`),
+  KEY `chiave_esterna.carrello->ordine_idx` (`codice_ordine`),
   CONSTRAINT `chiave_esterna.carrello->ordine` FOREIGN KEY (`codice_ordine`) REFERENCES `ordine` (`codice`),
   CONSTRAINT `chiave_esterna.carrello->prodotto` FOREIGN KEY (`codice_prodotto`) REFERENCES `prodotto` (`codice`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -55,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-28 19:37:58
+-- Dump completed on 2021-11-02  0:05:25

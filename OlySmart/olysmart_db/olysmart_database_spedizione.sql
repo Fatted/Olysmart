@@ -23,18 +23,12 @@ DROP TABLE IF EXISTS `spedizione`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `spedizione` (
-  `codice` int NOT NULL,
-  `destinatario` varchar(100) NOT NULL,
-  `data` varchar(100) NOT NULL,
-  `numero` int NOT NULL,
-  `costo` int NOT NULL,
-  `data_arrivo` varchar(100) NOT NULL,
-  `tipo` varchar(100) NOT NULL,
-  `stato` varchar(100) NOT NULL,
-  PRIMARY KEY (`codice`),
-  KEY `chiave_esterna.spedizione->cliente_idx` (`destinatario`),
-  CONSTRAINT `chiave_esterna.spedizione->cliente` FOREIGN KEY (`destinatario`) REFERENCES `cliente` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `codice` int NOT NULL AUTO_INCREMENT,
+  `Tipo` varchar(45) NOT NULL,
+  `Costo` int DEFAULT NULL,
+  `Tempo` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`codice`,`Tipo`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,6 +37,7 @@ CREATE TABLE `spedizione` (
 
 LOCK TABLES `spedizione` WRITE;
 /*!40000 ALTER TABLE `spedizione` DISABLE KEYS */;
+INSERT INTO `spedizione` VALUES (1,'Basic',5,'5-7 giorni'),(2,'Express',10,'2-3 giorni'),(3,'Contrassegno',NULL,NULL);
 /*!40000 ALTER TABLE `spedizione` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-28 19:37:58
+-- Dump completed on 2021-11-02  0:05:25
