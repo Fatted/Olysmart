@@ -71,19 +71,19 @@
     <table class="primo">
     <%@include file="CSS/messaggioRegistrazione.jsp" %>
         <tr>
-            <td class="utenti"><img src="Immagini/users.png">
+            <td class="utenti"><img src="Immagini/Admin/user.png">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalutenti">
   					Visualizza Utenti
 				</button>
             </td>
             
-            <td class="categorie"><img src="Immagini/categorie.jpeg">
+            <td class="categorie"><img src="Immagini/Admin/categorie.jpeg">
 				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalcategorie">
   					Visualizza Categorie
 				</button>	
             </td>
             
-            <td class="prodotti"><img src="Immagini/prodotti.jpeg">
+            <td class="prodotti"><img src="Immagini/Admin/prodotti.jpeg">
               
   					<a href="PaginaAdminProdotti.jsp" class="btn btn-primary">Prodotti presenti</a>
 			
@@ -92,12 +92,12 @@
         </table>
         <table class="secondo">
         <tr >
-            <td class="addcate"><img src="Immagini/addCategoria.jpeg">
+            <td class="addcate"><img src="Immagini/Admin/addCategoria.jpeg">
                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalcategoria">
   					Inserisci categoria
 				</button>
             </td>
-            <td class="addprod"><img src="Immagini/addProdotti.jpeg">
+            <td class="addprod"><img src="Immagini/Admin/addProdotti.jpeg">
                 <br>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalprodotto">
   					Inserisci Prodotto
@@ -122,13 +122,14 @@
       </div>
       <div class="modal-body">
       <!-- inserisco il form che servirà per gestire le varie scelte da parte dell'admin -->
-        <form action="ProdottiOperazioneServlet" method="post">
+        <form action="ProdottiOperazioneServlet" method="post" enctype='multipart/form-data'>
         
         <input type="hidden" name="operation" value="addCategory">
         
       		<div class="form-group">
       			<input type="number" class="form-control" name="numeroCategoria" placeholder="inserisci il numero della categoria" required><br>
-      			<input type="text" class="form-control" name="TitoloCategoria" placeholder="inserisci il tipo della categoria" required>
+      			<input type="text" class="form-control" name="TitoloCategoria" placeholder="inserisci il tipo della categoria" required><br>
+      			Immagine:<input type="file" name="immagineCategoria" required>
       			
       		</div>
       	      	

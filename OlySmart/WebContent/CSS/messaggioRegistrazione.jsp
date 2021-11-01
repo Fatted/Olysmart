@@ -9,6 +9,8 @@
 }
 
 .alert.success {background-color: #04AA6D;}
+
+.alert.error {background-color: red;}
 </style>
 
 <%
@@ -25,8 +27,24 @@ if(messaggio!=null){
 </div>
 
 <%	
-	session.removeAttribute("messaggio");
-	
+	session.removeAttribute("messaggio");	
+}
+%>
+
+<%
+
+String messaggio2=(String)session.getAttribute("messaggio-errore");
+if(messaggio2!=null){
+%>
+
+
+<div class="alert error">
+  <span class="closebtn">&times;</span>  
+  <strong><%=messaggio2 %></strong> 
+</div>
+
+<%	
+	session.removeAttribute("messaggio-errore");	
 }
 
 %>

@@ -11,11 +11,22 @@
                            
       ArrayList<Carrello> prodotti_carrello=(ArrayList<Carrello>)session.getAttribute("listacarrello");
       List<Carrello> prodottocarrello=null;
+      
+      double totale=0;
+      
       if(prodotti_carrello!=null){
     	 ProdottoDAO prodotto=new ProdottoDAO();
+    	 
+    	 totale=prodotto.getTotaleCarrello(prodotti_carrello);
+    	 
       	 prodottocarrello=prodotto.getProdottiCarrello(prodotti_carrello);
+      	 
       	 request.setAttribute("prodotti_carrello",prodotti_carrello);
+      	 
+      	request.setAttribute("totale",totale);
        }
+      
+      
            %>
 
 <!DOCTYPE html>
@@ -28,11 +39,12 @@
 
     
     <link rel="stylesheet" href="CSS/cart.css">
-<title>Prova Cart</title>
+<title>Carrello</title>
 </head>
 
 <body>
     <p>Carrello di:<%=cliente.getUsername() %></p>
+    <%@include file="CSS/messaggioRegistrazione.jsp" %>
     <div class="small-container cart-page">
         <table>
              <tr>
@@ -47,44 +59,50 @@
                 <tr>
                 <td>
                     <p>Nome:<%=carrello.getNome()%></p>
+                    <a href="#rimozione">Remove</a>
                 </td>
                 
                 <td>
-                    <small>Prezzo:<%=carrello.getPrezzo_vendita()%></small><br>
+                      <%if(carrello.getQuantità()<carrello.getNumero_pezzi_disponibili()){%>
+                			  <form action="" method="post">
+                <a href="AumentaDiminuisciQuantitàCarrello?action=diminuisci&id=<%=carrello.getCodice()%>">-</a>
+                <input type="number" value="<%=carrello.getQuantità()%>" readonly>
+               	<a href="AumentaDiminuisciQuantitàCarrello?action=aumenta&id=<%=carrello.getCodice()%>">+</a>   
+                  </form> 
+                		<%} else{%>
+                <a href="AumentaDiminuisciQuantitàCarrello?action=diminuisci&id=<%=carrello.getCodice()%>">-</a>
+                <input type="text" value="MAX" readonly>   
+                		<%} %>
+ 
                 </td>  
                 
                 <td>
-                    <small>Quantità:<%=carrello.getNumero_pezzi_disponibili()%></small><br>               
-                    <a href="#rimozione">Remove</a>
-                </td> 
-                <form action="AggiungiAlCarrello.java" method="post">
-       	 		<input type="hidden" value="<%=carrello.getCodice() %>">
-       	 		
-        		</form> 
-              
+                    <small><%=carrello.getPrezzo_vendita()%></small><br>                                                  
+                </td>            
             </tr>
+           
+                       
         	<%}
         	
         }
-        else{
-        	System.out.print("non va il carrello");
-        }
+      
         %>
            
         </table>
 
     </div>
-
     <div class="total-price">
-
         <table>
             <tr>
-                <td>Totale</td>
+                <td>Totale:<%=totale %></td>
                 <td>$$</td>
             </tr>
-        </table>
-    </div>
-
+        </table> 
+   </div>
+   
+    <form action="#procediOrdine" method="post">
+   <button name="#procediAll'ordine" type="submit">Procedi all'ordine</button>
+	</form>
     <footer id="footer">
         <p>Olysmart &copy; 2021, All rights reserved<p>
         <p>Via napoli 310 81058 Vairano Patenora, Campania</p>

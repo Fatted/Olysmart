@@ -34,7 +34,7 @@ public class ProdottoDAO {
 		try {
 			Connection connection = null;
 			PreparedStatement preparedStatement = null;
-			String sql = "SELECT * FROM `prodotto`";
+			String sql = "SELECT * FROM `prodotto` WHERE disponibilità='si' ";
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(sql);
 			ResultSet rs = preparedStatement.executeQuery();
@@ -75,7 +75,7 @@ public class ProdottoDAO {
 		try {
 			Connection connection = null;
 			PreparedStatement preparedStatement = null;
-			String sql = "SELECT * FROM prodotto";
+			String sql = "SELECT * FROM `prodotto` WHERE disponibilità='si' ";
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(sql);
 			ResultSet rs = preparedStatement.executeQuery();
@@ -124,14 +124,14 @@ public class ProdottoDAO {
 				for(Carrello prodotto:listacarrello) {
 					Connection connection = null;
 					PreparedStatement preparedStatement = null;
-					String sql = "SELECT * FROM prodotto WHERE codice=?";
+					String sql = "SELECT * FROM prodotto WHERE codice=? and disponibilità='si'";
 					connection = ds.getConnection();
 					preparedStatement = connection.prepareStatement(sql);
 					preparedStatement.setInt(1, prodotto.getCodice());
 					ResultSet rs = preparedStatement.executeQuery();
 					
 					while(rs.next()) {
-						Carrello prodottoRiga=new Carrello();				//sarebbe il prodotti visto in carrello.jsp ovvero il prodotto con il suo id,quantità e prezzo
+						Carrello prodottoRiga=new Carrello();//sarebbe il prodotti visto in carrello.jsp ovvero il prodotto con il suo id,quantità e prezzo
 						prodottoRiga.setCodice(rs.getInt("codice"));
 						prodottoRiga.setNome(rs.getString("nome"));
 						prodottoRiga.setDescrizione(rs.getString("descrizione"));
@@ -146,12 +146,16 @@ public class ProdottoDAO {
 						prodottoRiga.setTipo(rs.getString("tipo"));
 						prodottoRiga.setOfferta(rs.getString("offerta"));
 						prodottoRiga.setImmagine(rs.getString("immagine"));
+						prodottoRiga.setQuantità(prodotto.getQuantità());
 						
 						prodotticarrello.add(prodottoRiga);
 					}
 					connection.close();
 				}
-			}					
+			}
+			
+			
+			
 		}catch(SQLException e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
@@ -169,7 +173,7 @@ public class ProdottoDAO {
 		try {
 			Connection connection = null;
 			PreparedStatement preparedStatement = null;
-			String sql = "SELECT * FROM prodotto WHERE tipo='"+categoria+"'";	
+			String sql = "SELECT * FROM prodotto WHERE tipo='"+categoria+"' AND disponibilità='si'";	
 			
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(sql);
@@ -207,7 +211,7 @@ public class ProdottoDAO {
 		try {
 			Connection connection = null;
 			PreparedStatement preparedStatement = null;
-			String sql = "SELECT * FROM prodotto WHERE tipo='"+categoria+"'"+"AND marca='"+marca+"'";	
+			String sql = "SELECT * FROM prodotto WHERE tipo='"+categoria+"'"+"AND marca='"+marca+"' AND disponibilità='si'";	
 			
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(sql);
@@ -246,7 +250,7 @@ public class ProdottoDAO {
 		try {
 			Connection connection = null;
 			PreparedStatement preparedStatement = null;
-			String sql = "SELECT * FROM prodotto WHERE nome LIKE '%"+nome+"%' OR marca LIKE"+"'%"+nome+"%'";	
+			String sql = "SELECT * FROM prodotto WHERE nome LIKE '%"+nome+"%' OR marca LIKE"+"'%"+nome+"%' AND disponibilità='si'";	
 			
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(sql);
@@ -277,5 +281,77 @@ public class ProdottoDAO {
 		}
 		return prodotti;
 	}
+	
+	
+	public List<Prodotto> getAllProductsForSconto(){
+		List<Prodotto> prodotti=new ArrayList<Prodotto>();
+		
+		try {
+			Connection connection = null;
+			PreparedStatement preparedStatement = null;
+			String sql = "SELECT * FROM prodotto WHERE offerta='si' AND disponibilità='si'";	
+			
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(sql);
+			ResultSet rs = preparedStatement.executeQuery();
+			while(rs.next()) {
+				Prodotto prodotto=new Prodotto();
+				prodotto.setCodice(rs.getInt("codice"));
+				prodotto.setNome(rs.getString("nome"));
+				prodotto.setDescrizione(rs.getString("descrizione"));
+				prodotto.setPrezzo_acquisto(rs.getDouble("prezzo_acquisto"));
+				prodotto.setDisponibilità(rs.getString("disponibilità"));
+				prodotto.setIva(rs.getInt("iva"));
+				prodotto.setPrezzo_vendita(rs.getDouble("prezzo_vendita"));
+				prodotto.setMarca(rs.getString("marca"));
+				prodotto.setNumero_pezzi_disponibili(rs.getInt("numero_pezzi_disponibili"));
+				prodotto.setSconto(rs.getInt("sconto"));
+				prodotto.setSpecifiche(rs.getString("specifiche"));
+				prodotto.setTipo(rs.getString("tipo"));
+				prodotto.setOfferta(rs.getString("offerta"));
+				prodotto.setImmagine(rs.getString("immagine"));
+				
+				prodotti.add(prodotto);			
+			}
+			connection.close();
+		} catch (SQLException e) {
+			System.out.println("Errore");
+
+		}
+		return prodotti;
+	}
+	
+	
+	
+	public double getTotaleCarrello(ArrayList<Carrello> listacarrello) {
+		double totale=0;
+		
+try {					
+			if(listacarrello.size()>0) {
+				for(Carrello prodotto:listacarrello) {
+					Connection connection = null;
+					PreparedStatement preparedStatement = null;
+					String sql = "SELECT * FROM prodotto WHERE codice=?";
+					connection = ds.getConnection();
+					preparedStatement = connection.prepareStatement(sql);
+					preparedStatement.setInt(1, prodotto.getCodice());
+					ResultSet rs = preparedStatement.executeQuery();
+					
+					while(rs.next()) {
+						totale+=rs.getDouble("prezzo_vendita")*prodotto.getQuantità();
+					}
+					connection.close();
+		} 
+	}
+}catch (SQLException e) {
+			System.out.println("Errore");
+
+		}
+return totale;
+	}
+	
+	
+	
+
 
 }

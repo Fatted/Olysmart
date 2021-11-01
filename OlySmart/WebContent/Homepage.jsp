@@ -7,8 +7,11 @@
 ProdottoDAO prod= new ProdottoDAO();
 List<Prodotto> prodotti=prod.getAllProducts();
 
+List<Prodotto> prodottiSaldo=prod.getAllProductsForSconto();
+
 CategoriaDAO cat=new CategoriaDAO();
 List<Categoria> categorialista=cat.getCategorie();
+
 
 
 
@@ -17,6 +20,14 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
      	request.setAttribute("cliente-corrente", cliente);
      }
 
+     
+     ArrayList<Carrello> prodotti_carrello=(ArrayList<Carrello>)session.getAttribute("listacarrello");
+     List<Carrello> prodottocarrello=null;
+     if(prodotti_carrello!=null){
+   	 ProdottoDAO prodotto=new ProdottoDAO();
+     	 prodottocarrello=prodotto.getProdottiCarrello(prodotti_carrello);
+     	 request.setAttribute("prodotti_carrello",prodotti_carrello);
+      }
 
 %>
 
@@ -135,7 +146,7 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
          <li>
             <div class="icon-link">
              <a class="link_name" href="catalogo.jsp?Categoria=<%=categoria.getNome() %>">
-             <i class="fas fa-laptop"></i>
+             <i><img src="Immagini/Categorie/<%=categoria.getNome() %>.svg" width="20" height="21"></i>
               <span class="link_name"><%=categoria.getNome() %></span>
               </a>
               <i class="fas fa-chevron-right arrow"></i>
@@ -235,47 +246,101 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
      
 
 <section id="piuvenduti">
-    <p>Prodotti più  acquistati </p>
+    <p>Prodotti in offerta</p>
 <table>
     <div class="prodpiuvend">
-    <tr>
-        <td>
-             <div class="container">
-           <img src="pv1.jpeg" height="250px" width="250px" class="image">
-           <div class="overlay">
-            <div class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus vero ea ad iure, perferendis blanditiis?</div> 
-           </div>
-        </div>
-        <h1>Nome Prodotto</h1>
-        </td>
-        <td>
-         <div class="container">
-            <img src="pv1.jpeg" height="250px" width="250px" class="image">
-            <div class="overlay">
-                <div class="text"> Descrizione del Prodotto</div>
-            </div>
-         </div>
-         <h1>Nome Prodotto</h1>
-        </td>
-        <td>
-            <div class="container">
-           <img src="pv1.jpeg" height="250px" width="250px" class="image">
-           <div class="overlay">
-        <div class="text"> Descrizione del Prodotto</div>
-            </div>  
-          </div>
-          <h1>Nome Prodotto</h1>
-        </td>
-        <td>
-            <div class="container">
-            <img src="pv1.jpeg" height="250px" width="250px" class="image">
-            <div class="overlay">
-                <div class="text">Descrizione del Prodotto</div>
-               </div>
-        </div>
-        <h1>Nome Prodotto</h1>
-        </td>
-    </tr>
+ <%		
+	    Iterator<Prodotto> iteratore=prodottiSaldo.iterator();
+	    Prodotto p1;
+	    Prodotto p2;
+	    Prodotto p3;
+	    Prodotto p4;
+	    
+	    while(iteratore.hasNext()){	    	
+	    	p1=iteratore.next();	    		    		    
+	    %>
+		    <tr>
+		        <td>
+		             <div class="container">
+		           <img src="Immagini/Prodotti/<%=p1.getImmagine() %>" height="250px" width="250px" class="image">
+		           <div class="overlay">
+		            <div class="text"><%=p1.getSpecifiche() %></div> 
+		           </div>
+		        </div>
+		        <h1><%=p1.getNome() %></h1>
+		        <h2>Prezzo:<%=p1.getPrezzo_vendita()%>&#8364</h2>
+		        <%if(cliente!=null){%>
+		        <a href="AggiungiAlCarrello?id=<%=p1.getCodice() %>">add cart</a>
+		        <%}else{%>
+		        <a href="login.jsp">Accedi per inserire nel carrello</a>
+		        <%}%>
+		        <a href="dettagli.jsp">dettagli</a>
+		        </td>
+
+		        <td>
+		        
+		        <% if(iteratore.hasNext()){
+		    		p2=iteratore.next(); %>
+		             <div class="container">
+		           <img src="Immagini/Prodotti/<%=p2.getImmagine() %>" height="250px" width="250px" class="image">
+		           <div class="overlay">
+		            <div class="text"><%=p2.getSpecifiche() %></div> 
+		           </div>
+		        </div>
+		        <h1><%=p2.getNome() %></h1>
+		        <h2>Prezzo:<%=p2.getPrezzo_vendita()%>&#8364</h2>
+		        <%if(cliente!=null){%>
+		        <a href="AggiungiAlCarrello?id=<%=p2.getCodice() %>">add cart</a>
+		        <%}else{%>
+		        <a href="login.jsp">Accedi per inserire nel carrello</a>
+		        <%}%>
+		        <a href="dettagli.jsp">dettagli</a>
+		        </td>
+				
+				<%if(iteratore.hasNext()){
+		    		p3=iteratore.next(); %>
+		        <td>
+		             <div class="container">
+		           <img src="Immagini/Prodotti/<%=p3.getImmagine() %>" height="250px" width="250px" class="image">
+		           <div class="overlay">
+		            <div class="text"><%=p3.getSpecifiche() %></div> 
+		           </div>
+		        </div>
+		        <h1><%=p3.getNome() %></h1>
+		        <h2>Prezzo:<%=p3.getPrezzo_vendita()%>&#8364</h2>
+		        <%if(cliente!=null){%>
+		        <a href="AggiungiAlCarrello?id=<%=p3.getCodice() %>">add cart</a>
+		        <%}else{%>
+		        <a href="login.jsp">Accedi per inserire nel carrello</a>
+		        <%}%>
+		        <a href="dettagli.jsp">dettagli</a>
+		        </td>
+		    
+		    <%if(iteratore.hasNext()){
+		    		p4=iteratore.next(); %>
+		        <td>
+		             <div class="container">
+		           <img src="Immagini/Prodotti/<%=p4.getImmagine() %>" height="250px" width="250px" class="image">
+		           <div class="overlay">
+		            <div class="text"><%=p4.getSpecifiche() %></div> 
+		           </div>
+		        </div>
+		        <h1><%=p4.getNome() %></h1>
+		        <h2>Prezzo:<%=p4.getPrezzo_vendita()%>&#8364</h2>
+		        <%if(cliente!=null){%>
+		        <a href="AggiungiAlCarrello?id=<%=p4.getCodice() %>">add cart</a>
+		        <%}else{%>
+		        <a href="login.jsp">Accedi per inserire nel carrello</a>
+		        <%}%>
+		        <a href="dettagli.jsp">dettagli</a>
+		        </td>
+		    </tr>
+		<%	
+		    		}
+		    	}
+			}		    	
+	    }			
+%>
 </div>
 </table>
 </section>

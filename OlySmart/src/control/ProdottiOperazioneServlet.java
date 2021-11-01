@@ -54,6 +54,22 @@ public class ProdottiOperazioneServlet extends HttpServlet {
 			int numero=Integer.parseInt(request.getParameter("numeroCategoria")); //prendo il numero inserito nel form
 			String titolo=request.getParameter("TitoloCategoria");				//prendo la stringa inserito nel form
 			
+			Part file=request.getPart("immagineCategoria");
+			String imageFileName=file.getSubmittedFileName();
+			String uploadpath="C:\\Users\\fatte\\git\\Olysmart_TSW2021\\OlySmart\\WebContent\\Immagini\\Categorie\\"+imageFileName;
+			
+			try {
+			FileOutputStream fos=new FileOutputStream(uploadpath);
+			InputStream is=file.getInputStream();
+			
+			byte[] data=new byte[is.available()];
+			is.read(data);
+			fos.write(data);
+			fos.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
 			Categoria categoria=new Categoria(numero,titolo);	//creo il nuovo oggetto categoria con i valori inseriti nel form
 			
 			//categoria database salvataggio

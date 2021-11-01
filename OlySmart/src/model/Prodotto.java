@@ -316,6 +316,7 @@ public class Prodotto {
 	public void setImmagine(String immagine) {
 		this.immagine = immagine;
 	}
+
 	
 	public void setProdotto() {
 		Connection connection = null;

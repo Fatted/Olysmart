@@ -42,7 +42,7 @@ public class AggiungiAlCarrello extends HttpServlet {
 			int id=Integer.parseInt(request.getParameter("id"));
 			Carrello cart=new Carrello();
 			cart.setCodice(id);
-			cart.setNumero_pezzi_disponibili(1);
+			cart.setQuantità(1);
 			
 			HttpSession session=request.getSession();
 			ArrayList<Carrello> listacarrello=(ArrayList<Carrello>)session.getAttribute("listacarrello");
@@ -60,8 +60,9 @@ public class AggiungiAlCarrello extends HttpServlet {
 				for(Carrello c:listacarrello) {
 					if(c.getCodice()==id) {
 						esiste=true;
-						out.println("<h3>Prodotto già presente nel carrello</h3><a href='carrello.jsp'>Vai al carrello");
-				}
+						session.setAttribute("messaggio-errore", "Prodotto già presente,aumenta la quantità!");
+						response.sendRedirect("carrello.jsp");					
+						}
 			}	
 				
 				if(!esiste) {
