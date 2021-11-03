@@ -35,7 +35,7 @@ public class ServletLogin extends HttpServlet {
 		//prendo i valori inseriti dal form per controllarli 
 		String username=request.getParameter("username"); //prendo l'username
 		String password=request.getParameter("password"); //prendo la password	
-		cliente = new Cliente(null, null, null, null, null, password, username, null, null, null, null, null); //creo un oggetto cliente(di tipo clientbean) e gli assegno solo username e pass
+		cliente = new Cliente(null, null, null, null, null, password, username, null, null, null, null, null,null,null,null,null,null); //creo un oggetto cliente(di tipo clientbean) e gli assegno solo username e pass
 
 		// VEDENDO SE L'UTENTE è VALIDO SE LO è LO PASSIAMO ALLA JSP
 		ClienteDAO controllo = new ClienteDAO();

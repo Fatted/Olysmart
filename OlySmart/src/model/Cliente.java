@@ -33,7 +33,7 @@ public class Cliente {
 	}
 
 	public Cliente(String nome, String cognome, String datadinascita, String codicefiscale, String email, String password, String username, String telefono, 
-			String cap, String via, String città, String tipo) {
+			String cap, String via, String città, String tipo,String numero_carta,String data_scadenza_carta,String CVV,String Intestatario_carta,String circuito_carta) {
 	super();
 	this.nome=nome;
 	this.cognome=cognome;
@@ -47,6 +47,11 @@ public class Cliente {
 	this.via=via;
 	this.città=città;
 	this.tipo=tipo;
+	this.numero_carta=numero_carta;
+	this.data_scadenza_carta=data_scadenza_carta;
+	this.CVV=CVV;
+	this.Intestatario_carta=Intestatario_carta;
+	this.circuito_carta=circuito_carta;
 	
 	
 	}
@@ -88,7 +93,7 @@ public class Cliente {
 
 		try {
 
-			String sql = "INSERT INTO cliente (nome, cognome, data_di_nascita, codice_fiscale, email, password, username, telefono, cap, via, città, tipo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO cliente (nome, cognome, data_di_nascita, codice_fiscale, email, password, username, telefono, cap, via, città, tipo,numero_carta,data_scadenza_carta,CVV,Intestatario_carta,circuito_carta) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, nome);
@@ -103,33 +108,26 @@ public class Cliente {
 			preparedStatement.setString(10, via);
 			preparedStatement.setString(11, città);
 			preparedStatement.setString(12, tipo);
+			preparedStatement.setString(13, numero_carta);
+			preparedStatement.setString(14, data_scadenza_carta);
+			preparedStatement.setString(15, CVV);
+			preparedStatement.setString(16, Intestatario_carta);
+			preparedStatement.setString(17, circuito_carta);
 
 			preparedStatement.executeUpdate();
 
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			try {
-				if (preparedStatement != null)
-					try {
-						preparedStatement.close();
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-			} finally {
-
+		} catch (SQLException e) {			
+			System.out.println(e);		
 				if (connection != null)
 					try {
 						connection.close();
-					} catch (SQLException e) {
+					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+						e1.printStackTrace();
 					}
 			}
-		}
-	}
+}
+	
 	
 	
 	//metodo per restituire il cliente registrato
@@ -158,6 +156,12 @@ public class Cliente {
 					this.setVia(rs.getString(10));
 					this.setCitta(rs.getString(11));
 					this.setTipo(rs.getString(12));
+					this.setNumero_carta(rs.getString(13));
+					this.setData_scadenza_carta(rs.getString(14));
+					this.setCVV(rs.getString(15));
+					this.setIntestatario_carta(rs.getString(16));
+					this.setCircuito_carta(rs.getString(17));
+					
 					
 				}
 				
@@ -344,24 +348,21 @@ public class Cliente {
 	}
 
 
-
-	private String nome;
-	private String cognome;
-	private String datadinascita;
-	private String codicefiscale;
-	private String email;
-	private String password;
-	private String username;
-	private String telefono;
-	private String cap;
-	private String via;
-	private String città;
-	private String tipo;
-	private String numero_carta;
-	private String data_scadenza_carta;
-	private String CVV;
-	private String Intestatario_carta;
 	
+	/**
+	 * @return the circuito_carta
+	 */
+	public String getCircuito_carta() {
+		return circuito_carta;
+	}
+
+	/**
+	 * @param circuito_carta the circuito_carta to set
+	 */
+	public void setCircuito_carta(String circuito_carta) {
+		this.circuito_carta = circuito_carta;
+	}
+
 	/**
 	 * @return the numero_carta
 	 */
@@ -418,7 +419,23 @@ public class Cliente {
 		Intestatario_carta = intestatario_carta;
 	}
 
-
+	private String nome;
+	private String cognome;
+	private String datadinascita;
+	private String codicefiscale;
+	private String email;
+	private String password;
+	private String username;
+	private String telefono;
+	private String cap;
+	private String via;
+	private String città;
+	private String tipo;
+	private String numero_carta;
+	private String data_scadenza_carta;
+	private String CVV;
+	private String Intestatario_carta;
+	private String circuito_carta;
 	
 	private boolean valido;
 

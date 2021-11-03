@@ -59,7 +59,7 @@ public class ServletRegister extends HttpServlet {
 		String tipo="utente";
 		
 		//creo il nuovo cliente
-		Cliente nuovoCliente = new Cliente(nome,cognome,data,cf,email,password,username,telefono,cap,via,citta,tipo);
+		Cliente nuovoCliente = new Cliente(nome,cognome,data,cf,email,password,username,telefono,cap,via,citta,tipo,null,null,null,null,null);
 		request.setAttribute("cliente", nuovoCliente);
 		
 		boolean ok = nuovoCliente.controllocliente();

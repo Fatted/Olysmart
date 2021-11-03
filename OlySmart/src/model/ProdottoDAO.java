@@ -348,7 +348,7 @@ try {
 
 		}
 return totale;
-	}
+}
 	
 	
 	

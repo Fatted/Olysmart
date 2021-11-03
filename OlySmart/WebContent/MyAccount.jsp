@@ -7,6 +7,8 @@
 Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente");
      if(cliente!=null){
      	request.setAttribute("cliente-corrente", cliente);
+     	
+     	
      }%>
      
      
@@ -15,7 +17,7 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=devide-width, initial-scale=1">
-<title>Pagina di gestione admin</title>
+<title>Il mio account</title>
 
 <!-- Pagina CSS -->
 <link rel="stylesheet" href="CSS/styleadmin.css">
@@ -34,34 +36,35 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
 <body>
 <%@include file="CSS/messaggioRegistrazione.jsp" %>
 <div style="float: left; margin-right:4px">
-<img src="#" width="500px" height="600px"></div> 
+<img src="#" width="700px" height="800px"></div> 
 <h1><%=cliente.getNome() %> <%=cliente.getCognome() %></h1><br>
 <p>
 
-Data:<%if(cliente.getDatadinascita().equals("")){%><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentodata">Inserisci Data</button>
-	<%}else{%><%=cliente.getDatadinascita() %> <a href="#ModificaData">Modifica</a><%}%><br><br>
+Data:<%if(cliente.getDatadinascita().equals("")){%>Mancante<br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentodata">Inserisci Data</button>
+	<%}else{%><%=cliente.getDatadinascita() %><br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentodata">Modifica Data</button><%}%><br><br>
 
-Codice Fiscale:<%if(cliente.getCodicefiscale().equals("")){%><a href="#inseriscicf">Inserisci</a><%}else{%><%=cliente.getCodicefiscale() %> <a href="#ModificaCF">Modifica</a><%}%><br><br>
+Codice Fiscale:<%if(cliente.getCodicefiscale().equals("")){%>Mancante<br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentoCF">Inserisci CF</button><%}
+	else{%><%=cliente.getCodicefiscale() %><br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentoCF">Modifica</button><%}%><br><br>
 
-Email:<%if(cliente.getEmail().equals("")){%><a href="#inserisciemail">Inserisci</a><%}
-		else{%><%=cliente.getEmail() %> <a href="#ModificaEmail">Modifica</a><%}%><br><br>
+Email:<%if(cliente.getEmail().equals("")){%>Mancante<br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentoemail">Inserisci Email</button><%}
+		else{%><%=cliente.getEmail() %><br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentoemail">Modifica</button><%}%><br><br>
 
 Username:<%=cliente.getUsername()%><br><br>
 
-Telefono:<%if(cliente.getTelefono().equals("")){%><a href="#inseriscitelefono">Inserisci</a><%}
-		else{%><%=cliente.getTelefono() %> <a href="#ModificaTelefono">Modifica</a><%}%><br><br>
+Telefono:<%if(cliente.getTelefono().equals("")){%>Mancante<br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentotelefono">Inserisci Telefono</button><%}
+		else{%><%=cliente.getTelefono() %><br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentotelefono">Modifica</button><%}%><br><br>
 
-Indirizzo: Città:<%=cliente.getCitta() %><br> Via:<%=cliente.getVia() %><br>  CAP:<%=cliente.getCap() %><br><a href="#ModificaIndirizzo">Modifica</a><br><br>
+Indirizzo:<%=cliente.getVia() %>,<%=cliente.getCitta() %>(<%=cliente.getCap() %>)<br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentoindirizzo">Modifica</button><br><br>
 
 
 
-Metodo di pagamento:<%if(cliente.getNumero_carta()==null){%> <a href="#inseriscicarta">Inserisci</a> <%}else{%>	
+Metodo di pagamento:<%if(cliente.getIntestatario_carta()==null){%>Mancante<br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentocarta">Inserisci Carta</button> <%}else{%>							Carta<br>	
 								
-								Numero carta:<%=cliente.getNumero_carta() %> 
-								Data Scadenza:<%=cliente.getData_scadenza_carta() %>
-								CVV:<%=cliente.getCVV() %>
-								Intestatario:<%=cliente.getIntestatario_carta() %>
-								<a href="#ModificaUsername">Modifica</a><br><br>								
+								Numero carta:<%=cliente.getNumero_carta() %><br> 
+								Data Scadenza:<%=cliente.getData_scadenza_carta() %><br>
+								CVV:<%=cliente.getCVV() %><br>
+								Intestatario:<%=cliente.getIntestatario_carta() %><br>
+								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentocarta">Modifica</button>																
 							<%}%>
 </p>
 
@@ -69,8 +72,7 @@ Metodo di pagamento:<%if(cliente.getNumero_carta()==null){%> <a href="#inserisci
 
 
 
-
-<!-- Modal gestione add/update data -->
+<!-- ------------------------------------------------------Modal gestione add/update data----------------------------------------------------------------- -->
 <div class="modal fade" id="modalinserimentodata" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -87,7 +89,7 @@ Metodo di pagamento:<%if(cliente.getNumero_carta()==null){%> <a href="#inserisci
         <input type="hidden" name="operation" value="addData">
         
       		<div class="form-group">
-      			<input type="date" class="form-control" name="data"><br>     			     		
+      			<input type="date" class="form-control" name="data" required><br>     			     		
       		</div>
       	      	
       		<div class="container text-center">
@@ -99,6 +101,182 @@ Metodo di pagamento:<%if(cliente.getNumero_carta()==null){%> <a href="#inserisci
     </div>
   </div>
 </div>
+
+<!-- ------------------------------------------------------Modal gestione add/update CF----------------------------------------------------------------- -->
+<div class="modal fade" id="modalinserimentoCF" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Aggiungi cofice fiscale</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <!-- inserisco il form che servirà per gestire le varie scelte da parte del utente -->
+        <form action="ProfiloUtenteServlet" method="post">
+        
+        <input type="hidden" name="operation" value="addCF">
+        
+      		<div class="form-group">
+      			<input type="text" class="form-control" name="CF"  placeholder="Enter CF" required><br>     			     		
+      		</div>
+      	      	
+      		<div class="container text-center">
+      			<button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+        		<button type="submit" class="btn btn-primary" value="addCF">Aggiungi</button>
+      		</div>     	
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ------------------------------------------------------Modal gestione add/update email----------------------------------------------------------------- -->
+<div class="modal fade" id="modalinserimentoemail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Aggiungi email</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <!-- inserisco il form che servirà per gestire le varie scelte da parte del utente -->
+        <form action="ProfiloUtenteServlet" method="post">
+        
+        <input type="hidden" name="operation" value="addEmail">
+        
+      		<div class="form-group">
+      			<input type="email" class="form-control" name="email" placeholder="Enter Email" required><br>     			     		
+      		</div>
+      	      	
+      		<div class="container text-center">
+      			<button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+        		<button type="submit" class="btn btn-primary" value="addEmail">Aggiungi</button>
+      		</div>     	
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ------------------------------------------------------Modal gestione add/update telefono----------------------------------------------------------------- -->
+<div class="modal fade" id="modalinserimentotelefono" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Aggiungi telefono</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <!-- inserisco il form che servirà per gestire le varie scelte da parte del utente -->
+        <form action="ProfiloUtenteServlet" method="post">
+        
+        <input type="hidden" name="operation" value="addTelefono">
+        
+      		<div class="form-group">
+      			<input type="tel"  class="form-control" name="telefono" maxlength="10" placeholder="Enter Telefono" required><br>     			     		
+      		</div>
+      	      	
+      		<div class="container text-center">
+      			<button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+        		<button type="submit" class="btn btn-primary" value="addTelefono">Aggiungi</button>
+      		</div>     	
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ------------------------------------------------------Modal gestione add/update indirizzo----------------------------------------------------------------- -->
+<div class="modal fade" id="modalinserimentoindirizzo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Aggiungi Indirizzo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <!-- inserisco il form che servirà per gestire le varie scelte da parte del utente -->
+        <form action="ProfiloUtenteServlet" method="post">
+        
+        <input type="hidden" name="operation" value="addIndirizzo">
+        
+      		<div class="form-group">
+      			via:<input type="text"  class="form-control" name="via" placeholder="Enter Via"  required><br>
+      			cap:<input type="number"  class="form-control" name="cap" max="99999" placeholder="Enter CAP" required><br> 
+      			citt&agrave:<input type="text"  class="form-control" 	placeholder="Enter Citt&agrave" name="citta" required><br>      			     		
+      		</div>
+      	      	
+      		<div class="container text-center">
+      			<button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+        		<button type="submit" class="btn btn-primary" value="addIndirizzo">Aggiungi</button>
+      		</div>     	
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ------------------------------------------------------Modal gestione add/update carta----------------------------------------------------------------- -->
+<div class="modal fade" id="modalinserimentocarta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Aggiungi Carta di credito</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <!-- inserisco il form che servirà per gestire le varie scelte da parte del utente -->
+        <form action="ProfiloUtenteServlet" method="post">
+        
+        <input type="hidden" name="operation" value="addCarta">
+        
+      		<div class="form-group">
+      		
+      			<img src="Immagini/cartadicredito.png" width="300px" height="350px"><br>
+      		
+      			Intestatario Carta:
+      			<input type="text"  class="form-control" name="intestatariocarta" placeholder="Enter numero carta"  required><br>
+      			
+      			Numero Carta:
+      			<input type="text"  class="form-control" name="numerocarta" placeholder="Enter numero carta"  required><br>
+      			
+      			Data Scadenza
+      			<input type="date"  class="form-control" name="datascadenza" required><br>
+
+      			CVV:
+      			<input type="number"  class="form-control" 	placeholder="Enter CVV" name="CVV" min="000" max="999" required><br>
+      			
+      			Circuito:
+      			<select name="circuito">
+      			<option value="VISA">VISA</option>
+  				<option value="Maestro">Maestro</option>
+  				<option value="Bancomat">Bancomat</option>
+ 			
+      			</select>   
+      			   			     		
+      		</div>
+      	      	
+      		<div class="container text-center">
+      			<button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+        		<button type="submit" class="btn btn-primary" value="addCarta">Aggiungi</button>
+      		</div>     	
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 
 </body>

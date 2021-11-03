@@ -101,21 +101,41 @@ public class ClienteDAO {
 	}
 	
 	
-	public void UpdateData(Cliente cliente) {
+	public void UpdateCliente(Cliente cliente) {
+
 		
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
 		try {
-			String sql = "UPDATE cliente SET data_di_nascita=? WHERE username=?";
+			Connection connection = null;
+			PreparedStatement preparedStatement = null;
+			String sql = "UPDATE cliente SET nome=?,cognome=?,data_di_nascita=?,codice_fiscale=?,email=?,password=?,username=?,telefono=?,cap=?,via=?,città=?,tipo=?,numero_carta=?,data_scadenza_carta=?,CVV=?,Intestatario_carta=?,circuito_carta=? WHERE username=?";
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, cliente.getNome());
+			preparedStatement.setString(2, cliente.getCognome());
 			preparedStatement.setString(3, cliente.getDatadinascita());
+			preparedStatement.setString(4, cliente.getCodicefiscale());
+			preparedStatement.setString(5, cliente.getEmail());
+			preparedStatement.setString(6, cliente.getPassword());
+			preparedStatement.setString(7,	cliente.getUsername());
+			preparedStatement.setString(8, cliente.getTelefono());
+			preparedStatement.setString(9, cliente.getCap());
+			preparedStatement.setString(10, cliente.getVia());
+			preparedStatement.setString(11, cliente.getCitta());
+			preparedStatement.setString(12, cliente.getTipo());
+			preparedStatement.setString(13, cliente.getNumero_carta());
+			preparedStatement.setString(14, cliente.getData_scadenza_carta());
+			preparedStatement.setString(15, cliente.getCVV());
+			preparedStatement.setString(16, cliente.getIntestatario_carta());
+			preparedStatement.setString(17, cliente.getCircuito_carta());
+			preparedStatement.setString(18,	cliente.getUsername());
 			
-			preparedStatement.executeQuery();
+			
+			preparedStatement.executeUpdate();
+
 		
 			connection.close();
 		} catch (SQLException e) {
-			System.out.println("Errore inserimento data");
+			System.out.println(e);
 
 		}
 

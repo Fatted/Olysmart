@@ -25,15 +25,15 @@
                         <p>Codice Fiscale</p>
                         <input type ="text" name="CF"  placeholder="Enter CF">
                         <p>Email</p>
-                        <input type ="text" name="email"  placeholder="Enter Email">
+                        <input type ="email" name="email"  placeholder="Enter Email">
                         <p>Password*</p>
                         <input type ="text" name="password"  placeholder="Enter Password" required>
                         <p>Username*</p>
                         <input type ="text" name="username"  placeholder="Enter Username" required>
                         <p>Telefono</p>
-                        <input type ="text" name="telefono"  placeholder="Enter Telefono">
+                        <input type ="tel" name="telefono" maxlength="10"  placeholder="Enter Telefono">
                         <p>CAP*</p>
-                        <input type ="text" name="cap"  placeholder="Enter CAP" required>
+                        <input type ="number" name="cap" maxlength="5"  placeholder="Enter CAP" required>
                         <p>Via*</p>
                         <input type ="text" name="via"  placeholder="Enter Via" required>
                         <p>Città*</p>

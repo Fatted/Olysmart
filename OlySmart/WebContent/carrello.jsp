@@ -95,9 +95,12 @@
         </table> 
    </div>
    
-    <form action="#procediOrdine" method="post">
-   <button name="#procediAll'ordine" type="submit">Procedi all'ordine</button>
-	</form>
+	
+	<%if(totale==0){ %>
+   	<p>Nessun prodotto inserito</p>
+<%}else{%>
+	<a href="ordine.jsp">Procedi all'ordine</a>	
+<%}%>
 
 </body>
 </html>

@@ -43,15 +43,80 @@ public class ProfiloUtenteServlet extends HttpServlet {
 		
 		if(operazione.equals("addData")) {
 			String data=request.getParameter("data");
-			System.out.println(data);
 			HttpSession httpsession=request.getSession();
 			Cliente cliente=(Cliente) httpsession.getAttribute("cliente-corrente");
 			cliente.setDatadinascita(data);
 			
 			ClienteDAO clienteAggiornato=new ClienteDAO();
-			clienteAggiornato.UpdateData(cliente);
+			clienteAggiornato.UpdateCliente(cliente);
 			response.sendRedirect("MyAccount.jsp");
-	
+		}
+		
+		else if(operazione.equals("addCF")) {
+			String CF=request.getParameter("CF");
+			HttpSession httpsession=request.getSession();
+			Cliente cliente=(Cliente) httpsession.getAttribute("cliente-corrente");
+			cliente.setCodicefiscale(CF);
+			
+			ClienteDAO clienteAggiornato=new ClienteDAO();
+			clienteAggiornato.UpdateCliente(cliente);
+			response.sendRedirect("MyAccount.jsp");
+		}
+		
+		else if(operazione.equals("addEmail")) {
+			String email=request.getParameter("email");
+			HttpSession httpsession=request.getSession();
+			Cliente cliente=(Cliente) httpsession.getAttribute("cliente-corrente");
+			cliente.setEmail(email);
+			
+			ClienteDAO clienteAggiornato=new ClienteDAO();
+			clienteAggiornato.UpdateCliente(cliente);
+			response.sendRedirect("MyAccount.jsp");
+		}
+		
+		else if(operazione.equals("addTelefono")) {
+			String telefono=request.getParameter("telefono");
+			HttpSession httpsession=request.getSession();
+			Cliente cliente=(Cliente) httpsession.getAttribute("cliente-corrente");
+			cliente.setTelefono(telefono);
+			
+			ClienteDAO clienteAggiornato=new ClienteDAO();
+			clienteAggiornato.UpdateCliente(cliente);
+			response.sendRedirect("MyAccount.jsp");
+		}
+		
+		else if(operazione.equals("addIndirizzo")) {
+			String cap=request.getParameter("cap");
+			String via=request.getParameter("via");
+			String citta=request.getParameter("citta");
+			HttpSession httpsession=request.getSession();
+			Cliente cliente=(Cliente) httpsession.getAttribute("cliente-corrente");
+			cliente.setVia(via);
+			cliente.setCap(cap);
+			cliente.setCitta(citta);
+			
+			ClienteDAO clienteAggiornato=new ClienteDAO();
+			clienteAggiornato.UpdateCliente(cliente);
+			response.sendRedirect("MyAccount.jsp");
+		}
+		
+		else if(operazione.equals("addCarta")) {
+			String intestatario=request.getParameter("intestatariocarta");
+			String numerocarta=request.getParameter("numerocarta");
+			String datascadenza=request.getParameter("datascadenza");
+			String CVV=request.getParameter("CVV");
+			String circuito=request.getParameter("circuito");
+			HttpSession httpsession=request.getSession();
+			Cliente cliente=(Cliente) httpsession.getAttribute("cliente-corrente");
+			cliente.setIntestatario_carta(intestatario);
+			cliente.setNumero_carta(numerocarta);
+			cliente.setData_scadenza_carta(datascadenza);
+			cliente.setCVV(CVV);
+			cliente.setCircuito_carta(circuito);
+			
+			ClienteDAO clienteAggiornato=new ClienteDAO();
+			clienteAggiornato.UpdateCliente(cliente);
+			response.sendRedirect("MyAccount.jsp");
 		}
 		
 		doGet(request, response);
