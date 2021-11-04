@@ -72,23 +72,26 @@ public class CheckOutServlet extends HttpServlet {
 			//check out con inserimento nel db
 			if(prodottocarrello!=null && cliente!=null) {
 				
-				for(Carrello pcarrello:prodottocarrello) {
-					for(Prodotto prodotti:prodottocarrello) {
-					Ordine ordine=new Ordine();
+				Ordine ordine=new Ordine();
+				
+				for(Prodotto prodotti:prodottocarrello) {				
+					ordine.setPrezzo_prodotto_singolo(prodotti.getPrezzo_vendita());
+					ordine.setNome_prodotto(prodotti.getNome());
+						
+					for(Carrello pcarrello:prodottocarrello) {					
 					ordine.setCodice(0);
 					ordine.setCosto_totale(totale);
 					ordine.setData(formatter.format(data));
-					ordine.setPrezzo_prodotto_singolo(prodotti.getPrezzo_vendita());
 					ordine.setUsername(cliente.getUsername());
 					ordine.setTipo_spedizione("");
 					ordine.setQuantità_prodotto(pcarrello.getQuantita());
 					ordine.setIndirizzo_consegna(indirizzo);
-					ordine.setNome_prodotto(pcarrello.getNome());
+					}
 					
 					OrdineDAO ordinedao=new OrdineDAO();
 					ordinedao.inserimentoOrdine(ordine);
 					}
-				}
+				
 				listacarrello.clear();
 				response.sendRedirect("Homepage.jsp");
 				
