@@ -7,7 +7,6 @@ public class Ordine{
 	}
 	
 	private int codice;
-	private int numero;
 	private double costo_totale;
 	private String data;
 	private double prezzo_prodotto_singolo;
@@ -15,6 +14,19 @@ public class Ordine{
 	private String tipo_spedizione;
 	private int quantità_prodotto;
 	private String indirizzo_consegna;
+	private String nome_prodotto;
+	/**
+	 * @return the nome_prodotto
+	 */
+	public String getNome_prodotto() {
+		return nome_prodotto;
+	}
+	/**
+	 * @param nome_prodotto the nome_prodotto to set
+	 */
+	public void setNome_prodotto(String nome_prodotto) {
+		this.nome_prodotto = nome_prodotto;
+	}
 	/**
 	 * @return the codice
 	 */
@@ -27,18 +39,8 @@ public class Ordine{
 	public void setCodice(int codice) {
 		this.codice = codice;
 	}
-	/**
-	 * @return the numero
-	 */
-	public int getNumero() {
-		return numero;
-	}
-	/**
-	 * @param numero the numero to set
-	 */
-	public void setNumero(int numero) {
-		this.numero = numero;
-	}
+
+
 	/**
 	 * @return the costo_totale
 	 */

@@ -16,6 +16,12 @@
    
       SpedizioneDAO spedizione=new SpedizioneDAO();
 
+      
+      Spedizione spedizioneprendi= (Spedizione) request.getSession().getAttribute("spedizione");
+      if(spedizioneprendi!=null){
+    	  request.setAttribute("spedizione", spedizione);
+      }
+      
       List<Spedizione> spedizioni=null;
       spedizioni=spedizione.getSpedizioni();
 
@@ -55,7 +61,7 @@
 <p>l'ordine contiene:
 
 <%for(Carrello carrello:prodottocarrello){%>
-	Nome prodotto:<%=carrello.getNome() %>/Quantità:<%=carrello.getQuantità() %>/Prezzo:<%=carrello.getPrezzo_vendita() %>
+	Nome prodotto:<%=carrello.getNome() %>/Quantità:<%=carrello.getQuantita() %>/Prezzo:<%=carrello.getPrezzo_vendita() %>
 <%} %>
 <br>
 </p>
@@ -72,7 +78,7 @@ while(iteratore.hasNext()){
 	costospedizione=5;
 %>
 <br>
-<input type="radio" id="spedizione1" name="spedizione" checked>
+<input type="radio" id ="spedizione1" value="<%=s1.getCosto()%>" name="spedizione" onclick = "clickMe(this.id)">
 <label for="<%=s1.getTipo()%>"><%=s1.getTipo() %>(<%=s1.getCosto() %>EURO/<%=s1.getTempo() %>)</label><br>
 
 
@@ -80,12 +86,12 @@ while(iteratore.hasNext()){
 	s2=iteratore.next();
 	costospedizione=10;
 	%>
-<input type="radio" value="<%=s2.getTipo()%>" name="spedizione">
+<input type="radio" id ="spedizione2" value="<%=s2.getCosto()%>" name="spedizione" onclick = "clickMe(this.id)">
 <label for="<%=s2.getTipo()%>"><%=s2.getTipo() %>(<%=s2.getCosto() %>EURO/<%=s2.getTempo() %>)</label><br>
 
 <% if(iteratore.hasNext()){
 	s3=iteratore.next(); %>
-<input type="radio"  value="<%=s3.getTipo()%>" name="spedizione">
+<input type="radio" id ="spedizione3" value="<%=s3.getCosto()%>" name="spedizione" onclick = "clickMe(this.id)">
 <label for="<%=s3.getTipo()%>"><%=s3.getTipo() %>(<%=s3.getCosto() %>EURO/<%=s3.getTempo() %>)</label><br>
 
 <%		} 
@@ -107,12 +113,38 @@ while(iteratore.hasNext()){
 							<%}%>
 
 
-<br><br><p id="totale">per un totale di:<%=totale+costospedizione %></p>
+<br><br><p>per un totale di:<p id="totale"><%=totale%></p></p>
+
+<script>
+var totale = document.getElementById("totale").textContent;
+var totaleNum = +totale;
+document.getElementById("totale").innerHTML = totaleNum;
+
+var temp = 0;
+
+function clickMe(clicked_id) {
+	  var value = document.getElementById(clicked_id).value;
+	  var totale = document.getElementById("totale").textContent;
+	  
+	  var totaleNum = totale;
+	  totaleNum = totaleNum - temp;
+	  temp = value;
+	  var totaleNum = +totaleNum + +value;
+	  document.getElementById("totale").innerHTML = totaleNum;
+	}
+</script>
 
 
 <%if(cliente.getIntestatario_carta()==null){%><a href="MyAccount.jsp">Inserisci metodo di pagamento per continuare</a>
-<%}else{%><a href="#CheckOutServlet">Conferma pagamento</a>	
+<%}else{%>
+<form action="CheckOutServlet" method="post">
+<button type="submit">Conferma ordine</button>
+</form>	
 <%}%>
+
+
+
+
 
 </body>
 </html>

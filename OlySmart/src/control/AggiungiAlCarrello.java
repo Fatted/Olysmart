@@ -42,7 +42,7 @@ public class AggiungiAlCarrello extends HttpServlet {
 			int id=Integer.parseInt(request.getParameter("id"));
 			Carrello cart=new Carrello();
 			cart.setCodice(id);
-			cart.setQuantità(1);
+			cart.setQuantita(1);
 			
 			HttpSession session=request.getSession();
 			ArrayList<Carrello> listacarrello=(ArrayList<Carrello>)session.getAttribute("listacarrello");

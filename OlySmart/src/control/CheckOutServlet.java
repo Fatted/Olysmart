@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.*;
 
@@ -40,26 +41,41 @@ public class CheckOutServlet extends HttpServlet {
 			Date data=new Date(0, 0, 0);
 			
 			//ritorno tutti i prodotti del carrello
-			ArrayList<Carrello> listacarrello=(ArrayList<Carrello>)request.getSession().getAttribute("listacarrello");
+			HttpSession session=request.getSession();
+			ArrayList<Carrello> listacarrello=(ArrayList<Carrello>)session.getAttribute("listacarrello");
+
 			
 			//prendo il cliente corrente
 			Cliente cliente=(Cliente) request.getSession().getAttribute("cliente-corrente");
+			String indirizzo=cliente.getVia()+","+cliente.getCitta()+"("+cliente.getCap()+")";
 			
+			
+			//check out con inserimento nel db
 			if(listacarrello!=null && cliente!=null) {
 				
 				for(Carrello pcarrello:listacarrello) {
+					Ordine ordine=new Ordine();
+					ordine.setCodice(0);
+					ordine.setCosto_totale(10*pcarrello.getQuantita()+0);
+					ordine.setData(formatter.format(data));
+					ordine.setPrezzo_prodotto_singolo(0);
+					ordine.setUsername(cliente.getUsername());
+					ordine.setTipo_spedizione("");
+					ordine.setQuantità_prodotto(pcarrello.getQuantita());
+					ordine.setIndirizzo_consegna(indirizzo);
+					ordine.setNome_prodotto(pcarrello.getNome());
+					
+					OrdineDAO ordinedao=new OrdineDAO();
+					ordinedao.inserimentoOrdine(ordine);
 					
 				}
+				listacarrello.clear();
+				response.sendRedirect("Homepage.jsp");
 				
-			}else {
-				if(cliente==null) {
-					response.sendRedirect("login.jsp");
-				}
 			}
-			
-			
+					
 		}catch(Exception e) {
-			e.printStackTrace();
+			System.out.print(e);
 		}
 	}
 

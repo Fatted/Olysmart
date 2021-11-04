@@ -63,10 +63,10 @@
                 </td>
                 
                 <td>
-                      <%if(carrello.getQuantità()<carrello.getNumero_pezzi_disponibili()){%>
+                      <%if(carrello.getQuantita()<carrello.getNumero_pezzi_disponibili()){%>
                 			  <form action="" method="post">
                 <a href="AumentaDiminuisciQuantitàCarrello?action=diminuisci&id=<%=carrello.getCodice()%>">-</a>
-                <input type="number" value="<%=carrello.getQuantità()%>" readonly>
+                <input type="number" name="quantita" value="<%=carrello.getQuantita()%>" readonly>
                	<a href="AumentaDiminuisciQuantitàCarrello?action=aumenta&id=<%=carrello.getCodice()%>">+</a>   
                   </form> 
                 		<%} else{%>

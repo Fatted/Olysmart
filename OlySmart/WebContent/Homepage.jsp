@@ -274,7 +274,7 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
 		        <%}else{%>
 		        <a href="login.jsp">Accedi per inserire nel carrello</a>
 		        <%}%>
-		        <a href="dettagli.jsp">dettagli</a>
+		        <a href="dettagli.jsp?id=<%=p1.getCodice() %>">dettagli</a>
 		        </td>
 
 		        <td>
@@ -294,7 +294,7 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
 		        <%}else{%>
 		        <a href="login.jsp">Accedi per inserire nel carrello</a>
 		        <%}%>
-		        <a href="dettagli.jsp">dettagli</a>
+		        <a href="dettagli.jsp?id=<%=p2.getCodice() %>">dettagli</a>
 		        </td>
 				
 				<%if(iteratore.hasNext()){
@@ -313,7 +313,7 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
 		        <%}else{%>
 		        <a href="login.jsp">Accedi per inserire nel carrello</a>
 		        <%}%>
-		        <a href="dettagli.jsp">dettagli</a>
+		        <a href="dettagli.jsp?id=<%=p3.getCodice() %>">dettagli</a>
 		        </td>
 		    
 		    <%if(iteratore.hasNext()){
@@ -332,7 +332,7 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
 		        <%}else{%>
 		        <a href="login.jsp">Accedi per inserire nel carrello</a>
 		        <%}%>
-		        <a href="dettagli.jsp">dettagli</a>
+		        <a href="dettagli.jsp?id=<%=p4.getCodice() %>">dettagli</a>
 		        </td>
 		    </tr>
 		<%	

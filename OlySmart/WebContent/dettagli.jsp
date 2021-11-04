@@ -8,6 +8,9 @@ if(cliente!=null){
 	request.setAttribute("cliente-corrente", cliente);
 }
 
+
+int trova
+
 %>
 
 
@@ -26,7 +29,7 @@ if(cliente!=null){
 <body>
 	
 	<%
-		Prodotto prodotto = (Prodotto) request.getAttribute("prodotti");
+		
 		%>
 
 	<h2>Dettagli</h2>

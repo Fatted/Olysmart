@@ -3,7 +3,7 @@ package model;
 
 public class Carrello extends Prodotto{
 
-	private int quantità;
+	private int quantita;
 	
 
 	public Carrello() {
@@ -13,15 +13,15 @@ public class Carrello extends Prodotto{
 	/**
 	 * @return the quantity
 	 */
-	public int getQuantità() {
-		return quantità;
+	public int getQuantita() {
+		return quantita;
 	}
 
 	/**
 	 * @param quantity the quantity to set
 	 */
-	public void setQuantità(int quantità) {
-		this.quantità = quantità;
+	public void setQuantita(int quantita) {
+		this.quantita = quantita;
 	}
 
 

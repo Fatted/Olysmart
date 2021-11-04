@@ -36,19 +36,19 @@ public class OrdineDAO {
 		
 		try {
 			
-			String sql = "INSERT INTO ordine (`codice`, `numero`, `costo_totale`, `data`, `prezzo_singolo_prodotto`, `username`, `tipo_spedizione`, `quantità_prodotto`, `indirizzo_consegna`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?); ";
+			String sql = "INSERT INTO ordine (`codice`, `costo_totale`, `data`, `prezzo_singolo_prodotto`, `username`, `tipo_spedizione`, `quantità_prodotto`, `indirizzo_consegna`,`nome_prodotto`) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?); ";
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(sql);
 			
 			preparedStatement.setInt(1, ordine.getCodice());
-			preparedStatement.setInt(2, ordine.getNumero());
-			preparedStatement.setDouble(3, ordine.getCosto_totale());
-			preparedStatement.setString(4, ordine.getData());
-			preparedStatement.setDouble(5, ordine.getPrezzo_prodotto_singolo());
-			preparedStatement.setString(6, ordine.getUsername());
-			preparedStatement.setString(7, ordine.getTipo_spedizione());
-			preparedStatement.setInt(8, ordine.getQuantità_prodotto());
-			preparedStatement.setString(9, ordine.getIndirizzo_consegna());
+			preparedStatement.setDouble(2, ordine.getCosto_totale());
+			preparedStatement.setString(3, ordine.getData());
+			preparedStatement.setDouble(4, ordine.getPrezzo_prodotto_singolo());
+			preparedStatement.setString(5, ordine.getUsername());
+			preparedStatement.setString(6, ordine.getTipo_spedizione());
+			preparedStatement.setInt(7, ordine.getQuantità_prodotto());
+			preparedStatement.setString(8, ordine.getIndirizzo_consegna());
+			preparedStatement.setString(9, ordine.getNome_prodotto());
 			
 			
 			preparedStatement.executeUpdate();
