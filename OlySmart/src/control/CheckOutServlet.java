@@ -38,11 +38,30 @@ public class CheckOutServlet extends HttpServlet {
 		try(PrintWriter out=response.getWriter()){
 			
 			SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd");
-			Date data=new Date(0, 0, 0);
+			Date data=new Date(0);
 			
-			//ritorno tutti i prodotti del carrello
 			HttpSession session=request.getSession();
 			ArrayList<Carrello> listacarrello=(ArrayList<Carrello>)session.getAttribute("listacarrello");
+		      List<Carrello> prodottocarrello=null;
+		      
+		      double totale=0;
+		   
+		      SpedizioneDAO spedizione=new SpedizioneDAO();
+		      
+		      List<Spedizione> spedizioni=null;
+		      spedizioni=spedizione.getSpedizioni();
+
+		      
+		     	
+		      
+		      
+		      if(listacarrello!=null){
+		    	 ProdottoDAO prodotto=new ProdottoDAO();
+		    	 
+		    	 totale=prodotto.getTotaleCarrello(listacarrello);
+		    	 
+		      	 prodottocarrello=prodotto.getProdottiCarrello(listacarrello);
+		      }
 
 			
 			//prendo il cliente corrente
@@ -51,14 +70,15 @@ public class CheckOutServlet extends HttpServlet {
 			
 			
 			//check out con inserimento nel db
-			if(listacarrello!=null && cliente!=null) {
+			if(prodottocarrello!=null && cliente!=null) {
 				
-				for(Carrello pcarrello:listacarrello) {
+				for(Carrello pcarrello:prodottocarrello) {
+					for(Prodotto prodotti:prodottocarrello) {
 					Ordine ordine=new Ordine();
 					ordine.setCodice(0);
-					ordine.setCosto_totale(10*pcarrello.getQuantita()+0);
+					ordine.setCosto_totale(totale);
 					ordine.setData(formatter.format(data));
-					ordine.setPrezzo_prodotto_singolo(0);
+					ordine.setPrezzo_prodotto_singolo(prodotti.getPrezzo_vendita());
 					ordine.setUsername(cliente.getUsername());
 					ordine.setTipo_spedizione("");
 					ordine.setQuantità_prodotto(pcarrello.getQuantita());
@@ -67,7 +87,7 @@ public class CheckOutServlet extends HttpServlet {
 					
 					OrdineDAO ordinedao=new OrdineDAO();
 					ordinedao.inserimentoOrdine(ordine);
-					
+					}
 				}
 				listacarrello.clear();
 				response.sendRedirect("Homepage.jsp");

@@ -15,12 +15,6 @@
       double totale=0;
    
       SpedizioneDAO spedizione=new SpedizioneDAO();
-
-      
-      Spedizione spedizioneprendi= (Spedizione) request.getSession().getAttribute("spedizione");
-      if(spedizioneprendi!=null){
-    	  request.setAttribute("spedizione", spedizione);
-      }
       
       List<Spedizione> spedizioni=null;
       spedizioni=spedizione.getSpedizioni();
@@ -40,10 +34,7 @@
       	 
       	request.setAttribute("totale",totale);
        }
-      
-      double costospedizione=0;
-      
-      
+                
            %>
            
 <!DOCTYPE html>
@@ -75,7 +66,7 @@ Spedizione s3;
 
 while(iteratore.hasNext()){	    	
 	s1=iteratore.next();
-	costospedizione=5;
+
 %>
 <br>
 <input type="radio" id ="spedizione1" value="<%=s1.getCosto()%>" name="spedizione" onclick = "clickMe(this.id)">
@@ -84,7 +75,7 @@ while(iteratore.hasNext()){
 
 <%if(iteratore.hasNext()){
 	s2=iteratore.next();
-	costospedizione=10;
+
 	%>
 <input type="radio" id ="spedizione2" value="<%=s2.getCosto()%>" name="spedizione" onclick = "clickMe(this.id)">
 <label for="<%=s2.getTipo()%>"><%=s2.getTipo() %>(<%=s2.getCosto() %>EURO/<%=s2.getTempo() %>)</label><br>
@@ -130,7 +121,8 @@ function clickMe(clicked_id) {
 	  totaleNum = totaleNum - temp;
 	  temp = value;
 	  var totaleNum = +totaleNum + +value;
-	  document.getElementById("totale").innerHTML = totaleNum;
+	  document.getElementById("totale").innerHTML = totaleNum
+	  document.getElementById("totale").value = totaleNum;
 	}
 </script>
 
@@ -141,9 +133,6 @@ function clickMe(clicked_id) {
 <button type="submit">Conferma ordine</button>
 </form>	
 <%}%>
-
-
-
 
 
 </body>

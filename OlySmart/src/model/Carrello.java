@@ -24,6 +24,6 @@ public class Carrello extends Prodotto{
 		this.quantita = quantita;
 	}
 
-
+	
 	
 }

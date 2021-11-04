@@ -9,7 +9,6 @@ if(cliente!=null){
 }
 
 
-int trova
 
 %>
 
