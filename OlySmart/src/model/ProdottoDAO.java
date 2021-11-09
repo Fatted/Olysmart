@@ -28,22 +28,24 @@ public class ProdottoDAO {
 		}
 	}
 	
+	
+	//metodo che restituisce tutti i prodotti
 	public List<Prodotto> getAllProducts(){
-		List<Prodotto> prodotti=new ArrayList<Prodotto>();
+		List<Prodotto> prodotti=new ArrayList<Prodotto>(); //creo una lista di prodotti
 		
 		try {
 			Connection connection = null;
 			PreparedStatement preparedStatement = null;
-			String sql = "SELECT * FROM `prodotto` WHERE disponibilità='si' ";
+			String sql = "SELECT * FROM `prodotto` WHERE numero_pezzi_disponibili>0 "; //seleziono i prodotti nel db con disponibilità maggiore di 0
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(sql);
 			ResultSet rs = preparedStatement.executeQuery();
 
 			while(rs.next()) {
-				Prodotto prodotto=new Prodotto();
-				prodotto.setCodice(rs.getInt("codice"));
-				prodotto.setNome(rs.getString("nome"));
-				prodotto.setDescrizione(rs.getString("descrizione"));
+				Prodotto prodotto=new Prodotto(); //creo un nuovo prodotto dove setterò i valori che prenderò dal db
+				prodotto.setCodice(rs.getInt("codice")); //setto il codice del prodotto prendendolo dal db,dalla colonna codice
+				prodotto.setNome(rs.getString("nome"));	//setto il nome del prodotto prendendolo dal db,dalla colonna nome
+				prodotto.setDescrizione(rs.getString("descrizione"));//così vai per tutti i valori 
 				prodotto.setPrezzo_acquisto(rs.getDouble("prezzo_acquisto"));
 				prodotto.setDisponibilità(rs.getString("disponibilità"));
 				prodotto.setIva(rs.getInt("iva"));
@@ -68,6 +70,7 @@ public class ProdottoDAO {
 	}
 	
 	
+	//metodo che restituisce un numero corrispondente alla quantità di prodotti presenti nel database
 	public int getAllProductsNumber(){
 		List<Prodotto> prodotti=new ArrayList<Prodotto>();
 		int numero=0;
@@ -75,7 +78,7 @@ public class ProdottoDAO {
 		try {
 			Connection connection = null;
 			PreparedStatement preparedStatement = null;
-			String sql = "SELECT * FROM `prodotto` WHERE disponibilità='si' ";
+			String sql = "SELECT * FROM `prodotto` WHERE numero_pezzi_disponibili>0 ";
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(sql);
 			ResultSet rs = preparedStatement.executeQuery();
@@ -113,7 +116,7 @@ public class ProdottoDAO {
 	
 	
 	
-	
+	//metodo che ritorna una lista contenente i prodotti inseriti nel carrello
 	public List<Carrello> getProdottiCarrello(ArrayList<Carrello> listacarrello){
 		List<Carrello> prodotticarrello= new ArrayList<Carrello>();
 		
@@ -124,7 +127,7 @@ public class ProdottoDAO {
 				for(Carrello prodotto:listacarrello) {
 					Connection connection = null;
 					PreparedStatement preparedStatement = null;
-					String sql = "SELECT * FROM prodotto WHERE codice=? and disponibilità='si'";
+					String sql = "SELECT * FROM prodotto WHERE codice=?";
 					connection = ds.getConnection();
 					preparedStatement = connection.prepareStatement(sql);
 					preparedStatement.setInt(1, prodotto.getCodice());
@@ -166,14 +169,14 @@ public class ProdottoDAO {
 	
 	
 	
-	
+	//metodo che ritorna una lista di prodotti selezionati per categorie all'interno del db,ovviamente gli viene passata la categoria come parametro,che poi useremo nella query
 	public List<Prodotto> getAllProductsForCategory(String categoria){
 		List<Prodotto> prodotti=new ArrayList<Prodotto>();
 		
 		try {
 			Connection connection = null;
 			PreparedStatement preparedStatement = null;
-			String sql = "SELECT * FROM prodotto WHERE tipo='"+categoria+"' AND disponibilità='si'";	
+			String sql = "SELECT * FROM prodotto WHERE tipo='"+categoria+"' AND numero_pezzi_disponibili>0";	
 			
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(sql);
@@ -206,12 +209,14 @@ public class ProdottoDAO {
 		return prodotti;
 	}
 	
+	
+	//metodo che ritorna una lista di prodotti selezionati per categorie e marca all'interno del db,ovviamente gli viene passata la categoria e la marca come parametro,che poi useremo nella query	
 	public List<Prodotto> getAllProductsForCategoryAndMarca(String categoria,String marca){
 		List<Prodotto> prodotti=new ArrayList<Prodotto>();	
 		try {
 			Connection connection = null;
 			PreparedStatement preparedStatement = null;
-			String sql = "SELECT * FROM prodotto WHERE tipo='"+categoria+"'"+"AND marca='"+marca+"' AND disponibilità='si'";	
+			String sql = "SELECT * FROM prodotto WHERE tipo='"+categoria+"'"+"AND marca='"+marca+"' AND numero_pezzi_disponibili>0";	
 			
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(sql);
@@ -244,13 +249,14 @@ public class ProdottoDAO {
 	}
 	
 	
+	//metodo che ritorna una lista di prodotti selezionati per nome all'interno del db,ovviamente gli viene passato il nome come parametro,che poi useremo nella query	
 	public List<Prodotto> getAllProductsForNome(String nome){
 		List<Prodotto> prodotti=new ArrayList<Prodotto>();
 		
 		try {
 			Connection connection = null;
 			PreparedStatement preparedStatement = null;
-			String sql = "SELECT * FROM prodotto WHERE nome LIKE '%"+nome+"%' OR marca LIKE"+"'%"+nome+"%' AND disponibilità='si'";	
+			String sql = "SELECT * FROM prodotto WHERE nome LIKE '%"+nome+"%' OR marca LIKE"+"'%"+nome+"%' AND numero_pezzi_disponibili>0";	
 			
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(sql);
@@ -283,13 +289,15 @@ public class ProdottoDAO {
 	}
 	
 	
+	
+	//metodo che ritorna una lista di prodotti selezionati per seconti="si" all'interno del db,viene usato nella homepage per vedere i prodotti in offerta	
 	public List<Prodotto> getAllProductsForSconto(){
 		List<Prodotto> prodotti=new ArrayList<Prodotto>();
 		
 		try {
 			Connection connection = null;
 			PreparedStatement preparedStatement = null;
-			String sql = "SELECT * FROM prodotto WHERE offerta='si' AND disponibilità='si'";	
+			String sql = "SELECT * FROM prodotto WHERE offerta='si' AND numero_pezzi_disponibili>0";	
 			
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(sql);
@@ -322,7 +330,7 @@ public class ProdottoDAO {
 	}
 	
 	
-	
+//metodo che prendendo un arraylist di oggetti carrello,effettua la somma di tutti i prezzi_vendita*quantità dei singoli prodotti per ottenre il totale del carrello	
 	public double getTotaleCarrello(ArrayList<Carrello> listacarrello) {
 		double totale=0;
 		
@@ -350,14 +358,14 @@ try {
 return totale;
 }
 	
-	
-	public List<Prodotto> getProductsForCodiced(int codice){
+//metodo che ritorna il prodotto avente il codice passato
+	public List<Prodotto> getProductsForCodice(int codice){
 		List<Prodotto> prodotti=new ArrayList<Prodotto>();
 		
 		try {
 			Connection connection = null;
 			PreparedStatement preparedStatement = null;
-			String sql = "SELECT * FROM prodotto WHERE codice='"+codice+"' AND disponibilità='si'";	
+			String sql = "SELECT * FROM prodotto WHERE codice='"+codice+"' AND numero_pezzi_disponibili>0";	
 			
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(sql);
@@ -390,5 +398,49 @@ return totale;
 		return prodotti;
 	}
 
+	
+//metodo usato per diminuire la quantià del prodotto all'interno del db dopo che è stato effettuato l'ordine,prendo sia la quantità da rimuovere sia il codice del prodotto al quale sottrarre la quantità
+	public void rimuoviquantitaprodotto(int codice,int darimuovere) {
+	
+		try {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		String sql="UPDATE prodotto SET numero_pezzi_disponibili=? WHERE codice='"+codice+"'";
+		connection = ds.getConnection();
+		preparedStatement = connection.prepareStatement(sql);
+		preparedStatement.setInt(1,darimuovere);
+		
+		preparedStatement.executeUpdate();
 
+		connection.close();
+		} catch (SQLException e) {
+			System.out.println(e);
+
+		}
+	}
+	
+	
+	
+//metodo che viene usato dall'admin per modificare i valori dei prodotti
+	public void UpdateProdottoDescrizione(int codice,String descrizione){
+
+		try {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		String sql = "UPDATE prodotto SET descrizione=? WHERE codice="+codice;
+		connection = ds.getConnection();
+		preparedStatement = connection.prepareStatement(sql);
+		preparedStatement.setString(1,descrizione);
+
+		preparedStatement.executeUpdate();
+
+		connection.close();
+		
+	}catch (SQLException e) {
+		System.out.println(e);
+
+	}
+}
+
+	
 }

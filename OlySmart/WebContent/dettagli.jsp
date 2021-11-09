@@ -8,6 +8,11 @@ if(cliente!=null){
 	request.setAttribute("cliente-corrente", cliente);
 }
 
+int id=Integer.parseInt(request.getParameter("id"));
+ProdottoDAO prodottoDAO=new ProdottoDAO();
+
+List<Prodotto> prodottolista=prodottoDAO.getProductsForCodice(id);
+
 
 
 %>
@@ -32,16 +37,17 @@ if(cliente!=null){
 		%>
 
 	<h2>Dettagli</h2>
-	<%
-		if (prodotto != null) {
-	%>
+
 	<table border="1">
+	<%for(Prodotto prodotto:prodottolista){ %>
 		<tr>
 			<th>Codice</th>
 			<th>Nome</th>
 			<th>Descrizione</th>
 			<th>Prezzo</th>
 			<th>Quantità</th>
+			<th>compra</th>
+			<th>immagine</th>
 		</tr>
 		<tr>
 			<td><%=prodotto.getCodice()%></td>
@@ -49,11 +55,11 @@ if(cliente!=null){
 			<td><%=prodotto.getDescrizione()%></td>
 			<td><%=prodotto.getPrezzo_vendita()%></td>
 			<td><%=prodotto.getNumero_pezzi_disponibili()%></td>
+			<td><a href="AggiungiAlCarrello?id=<%=prodotto.getCodice() %>">add cart</a></td>
+			<td><img src="Immagini/Prodotti/<%=prodotto.getImmagine() %>" height="250px" width="250px" class="image"></td>
 		</tr>
 	</table>
-	<%
-		}
-	%>
+<%}%>
 
 </body>
 </html>

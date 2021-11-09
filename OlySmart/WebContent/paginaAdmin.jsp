@@ -5,12 +5,13 @@
 
 <!-- Piccolo controllo se si sta cercando di accedere come admin se non si è admin o non loggati -->
 <%
+	//controlliamo la sessione attuale del cliente
 	Cliente cliente=(Cliente)session.getAttribute("cliente-corrente");
-	if(cliente==null){
+	if(cliente==null){//se il cliente non è loggato lo portiamo nella pagina di login
 	response.sendRedirect("login.jsp");
 	return;
 		}else{
-	if(cliente.getTipo().equals("utente")){
+	if(cliente.getTipo().equals("utente")){//se l'utente sta cercando di accedere alla pagina di admin ma è un utente ritorna alla homepage
 		response.sendRedirect("Homepage.jsp");
 		return;
 	}
@@ -61,12 +62,12 @@
             <h1>Admin:<%=cliente.getUsername() %></h1>
             <ul>
                 <li><a href="Homepage.jsp">Home</a></li>
-                <li class="right"><a href="ServletLogout">Logout</a></li>
+                <li class="right"><a href="ServletLogout">Logout</a></li> <!-- il logout viene gestito dalla servlet di logout -->
             </ul>
         </div>
     </nav>
     </header>
-    
+<!-- tutti i bottoni qui presenti vengono gestiti dai modal sottostanti che nei loro form di nome operation hanno diversi valori,i quali, indicheranno nella servlet ProdottiOperazione servlet cosa fare -->
 <section id="menu">
     <table class="primo">
     <%@include file="CSS/messaggioRegistrazione.jsp" %>
@@ -85,7 +86,7 @@
             
             <td class="prodotti"><img src="Immagini/Admin/prodotti.jpeg">
               
-  					<a href="PaginaAdminProdotti.jsp" class="btn btn-primary">Prodotti presenti</a>
+  					<a href="PaginaAdminProdotti.jsp" class="btn btn-primary">Prodotti presenti</a><!-- viene gestita direttamente dalla pagina PaginaAdminProdotti.jsp -->
 			
             </td>
         </tr>
@@ -108,10 +109,10 @@
 </section>
 
 
-<!-- Gestione della finestra popup della pagina admin -->
+<!------------------------------------------------ Gestione della finestra popup della pagina admin --------------------------------------------------------------------------------->
 
-<!-- Modal gestione addcategorie -->
-<div class="modal fade" id="modalcategoria" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!------------------------------------------------------ Modal gestione addcategorie ---------------------------------------------------------------------------------------------------->
+<div class="modal fade" id="modalcategoria" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"><!-- id corrisponde al data-target del button -->
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -121,12 +122,13 @@
         </button>
       </div>
       <div class="modal-body">
-      <!-- inserisco il form che servirà per gestire le varie scelte da parte dell'admin -->
+<!-------------------- inserisco il form che servirà per gestire le varie scelte da parte dell'admin alla servlet di prodottioperazioneservlet------------------------------------- -->
         <form action="ProdottiOperazioneServlet" method="post" enctype='multipart/form-data'>
         
-        <input type="hidden" name="operation" value="addCategory">
+        <input type="hidden" name="operation" value="addCategory"><!-- in questo caso l'operazione sarà l'aggiunta di una categoria -->
         
       		<div class="form-group">
+									<!-- inserimento dei valori che passeremo alla servlet -->      		
       			<input type="number" class="form-control" name="numeroCategoria" placeholder="inserisci il numero della categoria" required><br>
       			<input type="text" class="form-control" name="TitoloCategoria" placeholder="inserisci il tipo della categoria" required><br>
       			Immagine:<input type="file" name="immagineCategoria" required>
@@ -143,7 +145,7 @@
   </div>
 </div>
 
-<!-- Modal gestione addprodotto -->
+<!------------------------------------------------------------ Modal gestione addprodotto---------------------------------------------------------------------------------------------- -->
 <div class="modal fade" id="modalprodotto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -154,12 +156,11 @@
         </button>
       </div>
       <div class="modal-body">
-      <!-- inserisco il form che servirà per gestire le varie scelte da parte dell'admin -->
+<!-------------------- inserisco il form che servirà per gestire le varie scelte da parte dell'admin alla servlet di prodottioperazioneservlet------------------------------------- -->
         <form action="ProdottiOperazioneServlet" method="post" enctype='multipart/form-data' >
         
         <input type="hidden" name="operation" value="addProdotto">
-        
-        <!-- Inseriemto -->
+<!------------------------------------------------------------------------------------- Inseriemto dei valori---------------------------------------------------------------------- -->
       		<div class="form-group">
       		<input type="text" class="form-control" name="nomeProdotto" placeholder="inserisci il nome del prodotto" required><br>
       		<textarea name="descrizioneProdotto" placeholder="inserisci una descrizione (visibile nei dettagli del prodotto)" rows="10" cols="100" required></textarea><br>
@@ -173,7 +174,7 @@
       		<textarea name="specificheProdotto" placeholder="inserisci le specifiche (visibile passando sui prodotti)" rows="10" cols="100" required></textarea><br>
       		
       		<select name="tipoProdotto" class="form-control" id="">
-      		
+ <!--------------------------------------------andiamo ad indicare solo le categorie presenti che l'admin può scegliere per collocare il suo prodotto  --------------------------------------->     		
       		<%	for(Categoria categoria:categorialista){%>
       		
       		<option value="<%=categoria.getNome() %>"><%=categoria.getNome() %></option>
@@ -197,7 +198,7 @@
 </div>
 
 
-<!-- Modal gestione categorie -->
+<!-------------------------------------------------------------------- Modal visualizzazione categorie --------------------------------------------------------------------------------------->
 <div class="modal fade" id="modalcategorie" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -208,7 +209,7 @@
         </button>
       </div>
       <div class="modal-body">
-      <!-- inserisco il form che servirà per gestire le varie scelte da parte dell'admin -->
+<!-------------------- inserisco il form che servirà per gestire le varie scelte da parte dell'admin alla servlet di prodottioperazioneservlet------------------------------------- -->
         <form action="ProdottiOperazioneServlet" method="post">
   
       		<div class="form-group">
@@ -243,7 +244,7 @@
 </div>
 
 
-<!-- Modal visualizzazione clienti -->
+<!------------------------------------------------------- Modal visualizzazione clienti ----------------------------------------------------------------------------------------------->
 <div class="modal fade" id="modalutenti" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -254,7 +255,7 @@
         </button>
       </div>
       <div class="modal-body">
-      <!-- inserisco il form che servirà per gestire le varie scelte da parte dell'admin -->
+<!-------------------- inserisco il form che servirà per gestire le varie scelte da parte dell'admin alla servlet di prodottioperazioneservlet------------------------------------- -->
         <form action="ProdottiOperazioneServlet" method="post">
   
       		<div class="form-group">
@@ -270,15 +271,16 @@
 				<th style="border:1px solid">Telefono</th>
 				<th style="border:1px solid">Indirizzo</th>
 			</tr>
-			<%	 
+			<%	
+			//for each che fa vedere tutti i clienti registrati nel database con i relativi valori
 			for(Cliente clienti:listaclienti){%>
 				<tr style="border:1px solid">
-				<td style="border:1px solid"><%=clienti.getNome() %></td>
-				<td style="border:1px solid"><%=clienti.getCognome() %></td>
-				<td style="border:1px solid"><%=clienti.getUsername() %></td>
-				<td style="border:1px solid"><%=clienti.getEmail() %></td>
-				<td style="border:1px solid"><%=clienti.getTelefono() %></td>
-				<td style="border:1px solid">Via:<%=clienti.getVia() %>, CAP:<%=clienti.getCap() %>, Città:<%=clienti.getCitta() %></td>
+				<td style="border:1px solid"><%=clienti.getNome() %></td> <!-- stampa del nome -->
+				<td style="border:1px solid"><%=clienti.getCognome() %></td><!-- stampa del cognome -->
+				<td style="border:1px solid"><%=clienti.getUsername() %></td><!-- stampa del username -->
+				<td style="border:1px solid"><%=clienti.getEmail() %></td><!-- stampa dell' email -->
+				<td style="border:1px solid"><%=clienti.getTelefono() %></td><!-- stampa del telefono -->
+				<td style="border:1px solid">Via:<%=clienti.getVia() %>, CAP:<%=clienti.getCap() %>, Città:<%=clienti.getCitta() %></td><!-- stampa dell'indirizzo -->
 				</tr>
 
 			<%
@@ -296,14 +298,5 @@
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
 </body>
 </html>

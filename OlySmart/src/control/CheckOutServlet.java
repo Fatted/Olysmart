@@ -41,43 +41,32 @@ public class CheckOutServlet extends HttpServlet {
 			Date data=new Date(0);
 			
 			HttpSession session=request.getSession();
-			ArrayList<Carrello> listacarrello=(ArrayList<Carrello>)session.getAttribute("listacarrello");
-		      List<Carrello> prodottocarrello=null;
+		    ArrayList<Carrello> prodotti_carrello=(ArrayList<Carrello>)session.getAttribute("listacarrello");
+		    List<Carrello> prodottocarrello=null;
 		      
 		      double totale=0;
-		   
-		      SpedizioneDAO spedizione=new SpedizioneDAO();
-		      
-		      List<Spedizione> spedizioni=null;
-		      spedizioni=spedizione.getSpedizioni();
+		      		     					      
 
-		      
-		     	
-		      
-		      
-		      if(listacarrello!=null){
 		    	 ProdottoDAO prodotto=new ProdottoDAO();
 		    	 
-		    	 totale=prodotto.getTotaleCarrello(listacarrello);
+		    	 totale=prodotto.getTotaleCarrello(prodotti_carrello);//il totale è dato grazie al getTotaleCarrello
 		    	 
-		      	 prodottocarrello=prodotto.getProdottiCarrello(listacarrello);
-		      }
-
-			
+		      	 prodottocarrello=prodotto.getProdottiCarrello(prodotti_carrello);//prodottocarrello conterrà tutti i prodotti presenti nella sessione del carrello
+		      	 
+		      	 request.getAttribute("prodotti_carrello"); 	
+		      			   			
 			//prendo il cliente corrente
 			Cliente cliente=(Cliente) request.getSession().getAttribute("cliente-corrente");
 			String indirizzo=cliente.getVia()+","+cliente.getCitta()+"("+cliente.getCap()+")";
 			
 			
 			//check out con inserimento nel db
+			//faccio un controllo per vedere che il cliente e i prodotti nel carrello non sono nulli
 			if(prodottocarrello!=null && cliente!=null) {
-				
 				Ordine ordine=new Ordine();
+				OrdineDAO ordinedao=new OrdineDAO();
 				
-				for(Prodotto prodotti:prodottocarrello) {				
-					ordine.setPrezzo_prodotto_singolo(prodotti.getPrezzo_vendita());
-					ordine.setNome_prodotto(prodotti.getNome());
-						
+					//effettuo un for each per settare all'ordine tutti i valori che mi prendo dai prodotti presenti nel carrello								
 					for(Carrello pcarrello:prodottocarrello) {					
 					ordine.setCodice(0);
 					ordine.setCosto_totale(totale);
@@ -86,17 +75,20 @@ public class CheckOutServlet extends HttpServlet {
 					ordine.setTipo_spedizione("");
 					ordine.setQuantità_prodotto(pcarrello.getQuantita());
 					ordine.setIndirizzo_consegna(indirizzo);
-					}
+					ordine.setNome_prodotto(pcarrello.getNome());
+					ordine.setPrezzo_prodotto_singolo(pcarrello.getPrezzo_vendita());
+					int darimuovere=pcarrello.getNumero_pezzi_disponibili()-pcarrello.getQuantita();//mi calcolo la quantità del prodotto da rimuovere nel db
+	
+					ordinedao.inserimentoOrdine(ordine);//inserisco l'ordine nel database con i valori settati sopra
+					prodotto.rimuoviquantitaprodotto(pcarrello.getCodice(), darimuovere);//rimuovo la quantità di quel prodotto dalla table prodotti,in base alla quantità ordinata dal cliente
+				
+				}	
 					
-					OrdineDAO ordinedao=new OrdineDAO();
-					ordinedao.inserimentoOrdine(ordine);
-					}
-				
-				listacarrello.clear();
-				response.sendRedirect("Homepage.jsp");
-				
 			}
-					
+												
+				prodotti_carrello.clear();
+				response.sendRedirect("Homepage.jsp");
+									
 		}catch(Exception e) {
 			System.out.print(e);
 		}

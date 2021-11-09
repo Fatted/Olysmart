@@ -1,12 +1,13 @@
 <%@page import="model.*" %>
 <%@page import="control.*" %>
  	
+ 	
  	<%
- 	 	
+ 	//controllo del cliente se è loggato o meno
  	 	Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente");
  	 	     if(cliente!=null){
  	 	     	request.setAttribute("cliente-corrente", cliente);
- 	 	     	response.sendRedirect("Homepage.jsp");
+ 	 	     	response.sendRedirect("Homepage.jsp");//se è loggato setto la sua sessione e lo riporto alla home
  	 	     }
  	 	%>
 
@@ -20,36 +21,30 @@
     <script src="https://kit.fontawesome.com/12aebee45b.js"></script>
     
     <link rel="stylesheet" href="CSS/login.css">
-<title>Prova Login</title>
+<title>Pagina Login</title>
 </head>
-
-        <title>Prova Login</title>
-        <link rel="stylesheet" type="text/css" href="login.css">
-            <body>
+   
+    <body>
                 <div class="loginbox">
-                    <h1>Login Here</h1>
+                    <h1>Accedi</h1>
                     
+ <!----------------------------------  tutti i dati inseriti dall'utente per accedere vengono passati alla servlet ServletLogin----------------------------------------- -->
                     <form action="ServletLogin" method="post">
                         <p>Username</p>
-                        <input type ="text" name="username" placeholder="Enter Username">
+                        <input type ="text" name="username" placeholder="Inserisci Username">
                         <p>Password</p>
-                        <input type ="password" name="password" placeholder="Enter Password">
+                        <input type ="password" name="password" placeholder="Inserisci Password">
                         
-                        <input type ="submit" value="Login"> <br>
+                        <input type ="submit" value="Login"><br>
                         
-                        <a href="#">Lost your password?</a> <br>
-                        <a href="register.jsp">Don't have an account?</a> <br>
+                        
+                        <a href="register.jsp">Non hai un Account? Registrati!</a> <br>
                         <a href="Homepage.jsp">Ritorna alla Home</a>
                     </form>
 
                 </div>
-                    <footer id="footer">
-                        <p>Olysmart &copy; 2021, All rights reserved<p>
-                        <p>Via napoli 310 81058 Vairano Patenora, Campania</p>
-                        <p>0823 988020</p>
-                        <p>olysmartvairano@gmail.com</p>
-                        <p>Powered by D'Amato Antonio, D'Amato Ludovica, Dello Buono Piero</p>
-                        </footer>
-            </body>
-    
+<!-- -------------------------------------------------inclusione footer------------------------------------------------------------------------------------------------ -->
+	<%@include file="include/footer.jsp" %>
+<!-- -------------------------------------------------fine inclusione------------------------------------------------------------------------------------------------ -->                  
+   </body>
 </html>

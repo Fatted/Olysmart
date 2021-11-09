@@ -43,9 +43,9 @@ public class AumentaDiminuisciQuantitàCarrello extends HttpServlet {
 				if(attività.equals("aumenta")) {
 					for(Carrello carrello:listacarrello) {
 						if(carrello.getCodice()==id) {
-							int quantità=carrello.getQuantita();
-							quantità++;
-							carrello.setQuantita(quantità);
+							int quantita=carrello.getQuantita();
+							quantita++;
+							carrello.setQuantita(quantita);
 							response.sendRedirect("carrello.jsp");
 						}
 					}
@@ -54,9 +54,9 @@ public class AumentaDiminuisciQuantitàCarrello extends HttpServlet {
 				if(attività.equals("diminuisci")) {
 					for(Carrello carrello:listacarrello) {
 						if(carrello.getCodice()==id && carrello.getQuantita()>1) {
-							int quantità=carrello.getQuantita();
-							quantità--;
-							carrello.setQuantita(quantità);
+							int quantita=carrello.getQuantita();
+							quantita--;
+							carrello.setQuantita(quantita);
 							break;
 							
 						}

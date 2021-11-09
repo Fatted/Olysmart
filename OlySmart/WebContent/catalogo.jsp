@@ -13,7 +13,7 @@ String trova;
 String trovamarca;
 String trovabarra;
 
-List<Prodotto> prodottiBarraLaterale=prod.getAllProducts();	//lista usata per tenere sempre la barra attiva
+List<Prodotto> prodottiBarraLaterale=prod.getAllProducts();	//lista usata per tenere sempre la barra attiva contenente tutti i prodotti disponibili nel db con il metodo getallproduct del prodotto DAO
 
 List<Prodotto> prodotti=null;
 
@@ -26,7 +26,7 @@ if(trovaBarra!=null && trovacategoria==null && trovaMarca==null){
 }else if(!trovacategoria.equals("all") && trovaMarca==null){ //se e stata selezionata la barra laterale ma ha scelto la categoria
 	trova=trovacategoria;
 	prodotti=prod.getAllProductsForCategory(trova);	//la lista dei prodotti sarà formata dai prodotti con la categoria selezionata
-}else if(!trovacategoria.equals("all") && trovaMarca!=null){ //se
+}else if(!trovacategoria.equals("all") && trovaMarca!=null){ //se trovacategoria è diversa da all e trovamarca non è nulla
 	trova=trovacategoria;
 	trovamarca=trovaMarca;
 	prodotti=prod.getAllProductsForCategoryAndMarca(trova,trovamarca);	
@@ -34,7 +34,7 @@ if(trovaBarra!=null && trovacategoria==null && trovaMarca==null){
 
 
 CategoriaDAO cat=new CategoriaDAO();
-List<Categoria> categorialista=cat.getCategorie();
+List<Categoria> categorialista=cat.getCategorie();//categorielista contiene tutte le categorie tramite il metodo getCategorie in categoriaDAO
 
 //controllo del cliente se è loggato o meno
 Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente");
@@ -56,7 +56,7 @@ if(cliente!=null){
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="stylesheet" media="screen and (max-width:4096px) (min-width:1024px)" href="CSS/large.css">
     <link rel="stylesheet" media="screen and (max-width:500px)" href="CSS/mobile.css">
-<title>OlySmartWeb</title>
+<title>OlySmartWeb Catalogo</title>
 </head>
 
 
@@ -96,9 +96,10 @@ if(cliente!=null){
         <div class="testo"><h1>OlySmart</h1>
             <script src="https://use.fontawesome.com/d8805b6d62.js"></script>
             <script src="https://use.fontawesome.com/relases/v5.0.6/js/all.js"></script>
-            <form action="Ricerca" method="post">
-            
-            <!-- barra di ricerca -->
+
+
+<!------------------------------------------- barra di ricerca usata per cercare i prodotti per nome/categoria ----------------------------------------->
+            <form action="Ricerca" method="post"><!-- usiamo la servlet ricerva per il nome passato nel input text con nome seatch -->
             <div class="bottone-ricerca">                           
               <div class="search-box-avanzato">        
                   <input type="text" class="search-txt" name="search" placeholder="Cerca prodotto">
@@ -108,30 +109,33 @@ if(cliente!=null){
                   </div>
            		 </div>           		
                </form>
+<!------------------------------------------- fine barra -----------------------------------------------------------------------------------------------> 
                
         </div>
     <div class="ultimo">
-     <div class="accesso">
-
-     
-         <%if(cliente == null){%>
+    <div class="accesso">
+ <!-------------------------------------------controlliamo se il cliente ha fatto l'accesso ------------------------------------------------------------->    
+ <!-- Se il cliente non ha fatto l'accesso uscirà solo (accedi e registrati) mentre se ha fatto l'accesso uscirà (logout,ordini,carrello e il suo account  -->
+        <%if(cliente == null){%>
         	<div class="registra"> <a href="register.jsp">Registrati</a> </div>
             <div class="accedi"> <a href="login.jsp">Accedi</a> </div>
+            <div class="image"><a href="carrello.jsp"><img src="carella.png"></a></div><br>
         <%}else{%>
         	<p>Utente:<%=cliente.getUsername() %></p>      
         	 <div class="logout"> <a href="ServletLogout">Logout</a></div><br>
-        	 <div class="My order"> <a href="#mieiordini">Miei ordini</a></div><br>
+        	 <div class="My order"> <a href="MyOrder.jsp">Miei ordini</a></div><br>
+        	 <div class="My account"> <a href="MyAccount.jsp">il mio account</a></div><br>
         	 <div class="image"><a href="carrello.jsp"><img src="carella.png"></a></div><br>
-        	 <div class="My account"> <a href="#mioaccount">il mio account</a></div><br>
-
+<!------------------------------------------- se è un admin andrà nella sua pagina dedicata --------------------------------------------------------------->
         	 <%if(cliente.getTipo().equals("admin")){%>
         		<br><div> <a href="paginaAdmin.jsp">Pagina Gestione</a></div>
         <%}%>	 
         	              
       <%}%>
-
      </div>
-     <div class="loghi">
+     
+     
+<div class="loghi">
             
                 <a href=><img src="insta.png"></a>
                 <a href=><img src="FBlogo.png"></a>    
@@ -140,73 +144,27 @@ if(cliente!=null){
     </div>
 </section>
 
-<section id="menu">
-         <div class="sidebar close">
-             <ul class="nav-links">
-             <li> <a href="Homepage.jsp">
-                <i class="fas fa-home"></i>
-            <span class="link_name">Home</span>
-        </a>
-        </li>
-        <li> <a href="catalogo.jsp?Categoria=all">
-            <i class="fas fa-list"></i>
-         <span class="link_name">Catalogo</span>
-          </a>
-        </li>
-        
-     <%	//la barra laterale è stampata in base alle categorie presenti
-		for(Categoria categoria:categorialista){
-		%>
-         <li>
-            <div class="icon-link">
-             <a class="link_name" href="catalogo.jsp?Categoria=<%=categoria.getNome() %>">
-             <i><img src="Immagini/Categorie/<%=categoria.getNome() %>.svg" width="20" height="21"></i>
-              <span class="link_name"><%=categoria.getNome() %></span>
-              </a>
-              <i class="fas fa-chevron-right arrow"></i>
-           </div>
-            <ul class="sub-menu">
-           <% 
-           //creo un controllo per eliminare i nomi delle marche duplicate all'interno delle varie categorie
-           List<String> listanonduplicata=new ArrayList<>();
-           List<String> lista=new ArrayList<>();
-           
-           for(Prodotto p:prodottiBarraLaterale){
-        	   if(p.getTipo().equalsIgnoreCase(categoria.getNome())){
-        		   lista.add(p.getMarca());
-        	   }
-           }
-           
-        		   for(String parola:lista){
-        			   if(!listanonduplicata.contains(parola)){listanonduplicata.add(parola); }    
-        		   }
-        		   
-        		   for(String stampa:listanonduplicata){
-			%>
-					
-            <li><a href="catalogo.jsp?Categoria=<%=categoria.getNome()%>&ProdottoMarca=<%=stampa %>"><%=stampa %></a></li>
-            <% 		   
-        		  } %>
-           </ul>
-       <%}%>
-        </li>
-        </div>
+<!---------------------------- Includo ala barra laterale che è nel file dedicaro barralaterale.jsp in include --------------------------------------- -->
+<%@include file="include/barralaterale.jsp" %>
 </section>
+<!-- ------------------------------------------------------------------------------------------------------------------------------------------------ -->
+
    
 <section id="piuvenduti">
 <%
+//se la quantità dei prodotti è zero stampa nessun prodotto disponibile al momento
 if(prodotti.size()==0){%>
 	<p>Nessun prodotto disponibile al momento...</p>
 <%}%>
 
 	<%if(!prodotti.isEmpty()){%>
-		<table>
-	    <div class="prodpiuvend">
-		
-		<!-- Stampa dei prodotti messi in 3 colonne per ogni riga -->
-			   
-	   <%		
-	    Iterator<Prodotto> iteratore=prodotti.iterator();
+
+<div class="prodpiuvend">		
+		<table>	    
+		<!-- Stampa dei prodotti messi in 3 colonne per ogni riga -->		   
+	   <%
+	   //uso 3 iteratori in modo tale da poter andare a capo ogni 3 prodotti messi di fianco
+	    Iterator<Prodotto> iteratore=prodotti.iterator(); //in questo caso i prodotti sono tutti quelli presenti nel db nella tabella prodotti
 	    Prodotto p1;
 	    Prodotto p2;
 	    Prodotto p3;
@@ -223,13 +181,9 @@ if(prodotti.size()==0){%>
 		           </div>
 		        </div>
 		        <h1><%=p1.getNome() %></h1>
-		        <h2>Prezzo:<%=p1.getPrezzo_vendita()%>&#8364</h2>
-		        <%if(cliente!=null){%>
-		        <a href="AggiungiAlCarrello?id=<%=p1.getCodice() %>">add cart</a>
-		        <%}else{%>
-		        <a href="login.jsp">Accedi per inserire nel carrello</a>
-		        <%}%>
-		        <a href="dettagli.jsp">dettagli</a>
+		        <h2>Prezzo:<%=p1.getPrezzo_vendita()%>&#8364</h2>		        
+		        <a href="AggiungiAlCarrello?id=<%=p1.getCodice() %>">add cart</a>		  
+		        <a href="dettagli.jsp?id=<%=p1.getCodice() %>">dettagli</a>
 		        </td>
 
 		        <td>
@@ -244,12 +198,8 @@ if(prodotti.size()==0){%>
 		        </div>
 		        <h1><%=p2.getNome() %></h1>
 		        <h2>Prezzo:<%=p2.getPrezzo_vendita()%>&#8364</h2>
-		        <%if(cliente!=null){%>
-		        <a href="AggiungiAlCarrello?id=<%=p2.getCodice() %>">add cart</a>
-		        <%}else{%>
-		        <a href="login.jsp">Accedi per inserire nel carrello</a>
-		        <%}%>
-		        <a href="dettagli.jsp">dettagli</a>
+		      	<a href="AggiungiAlCarrello?id=<%=p2.getCodice() %>">add cart</a>		        
+		        <a href="dettagli.jsp?id=<%=p2.getCodice() %>">dettagli</a>
 		        </td>
 				
 				<%if(iteratore.hasNext()){
@@ -262,30 +212,23 @@ if(prodotti.size()==0){%>
 		           </div>
 		        </div>
 		        <h1><%=p3.getNome() %></h1>
-		        <h2>Prezzo:<%=p3.getPrezzo_vendita()%>&#8364</h2>
-		        <%if(cliente!=null){%>
-		        <a href="AggiungiAlCarrello?id=<%=p3.getCodice() %>">add cart</a>
-		        <%}else{%>
-		        <a href="login.jsp">Accedi per inserire nel carrello</a>
-		        <%}%>
-		        <a href="dettagli.jsp">dettagli</a>
+		        <h2>Prezzo:<%=p3.getPrezzo_vendita()%>&#8364</h2>	       
+		        <a href="AggiungiAlCarrello?id=<%=p3.getCodice() %>">add cart</a>		        
+		        <a href="dettagli.jsp?id=<%=p3.getCodice() %>">dettagli</a>
 		        </td>
 		    </tr>
-		<%		}
-			}		    	
+		<%	}	
+		   }
 	    }
-	}		
-%>		</div>
+	}				    				
+%>		
 	</table>
+</div>
 </section>
 
 
-<footer id="footer">
-    <p>Olysmart &copy; 2021, All rights reserved<p>
-    <p>Via napoli 310 81058 Vairano Patenora, Campania</p>
-    <p>0823 988020</p>
-    <p>olysmartvairano@gmail.com</p>
-    <p>Powered by D'Amato Antonio, D'Amato Ludovica, Dello Buono Piero</p>
-    </footer>
+<!-- -------------------------------------------------inclusione footer------------------------------------------------------------------------------------------------ -->
+<%@include file="include/footer.jsp" %>
+<!-- -------------------------------------------------fine inclusione------------------------------------------------------------------------------------------------ -->
 </body>
 </html>

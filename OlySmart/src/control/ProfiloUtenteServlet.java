@@ -38,31 +38,34 @@ public class ProfiloUtenteServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//alla stringa operazione assegnamo i vari value selezionati in MyAccount che sono nei form dei vari modal di gestione
 		String operazione=request.getParameter("operation");
 		
-		
+		//se l'operazione è addData allora aggiorno/inserisco solo la data
 		if(operazione.equals("addData")) {
-			String data=request.getParameter("data");
+			String data=request.getParameter("data");//prendo il valore dal input con il nome data 
 			HttpSession httpsession=request.getSession();
-			Cliente cliente=(Cliente) httpsession.getAttribute("cliente-corrente");
-			cliente.setDatadinascita(data);
+			Cliente cliente=(Cliente) httpsession.getAttribute("cliente-corrente");//prendo il cliente corrente
+			cliente.setDatadinascita(data);//setto la nuova data al cliente
 			
 			ClienteDAO clienteAggiornato=new ClienteDAO();
-			clienteAggiornato.UpdateCliente(cliente);
-			response.sendRedirect("MyAccount.jsp");
+			clienteAggiornato.UpdateCliente(cliente);//aggiorno la data grazie alla query presente nel ClienteDAO nel metodo UpdateCliente
+			response.sendRedirect("MyAccount.jsp");//ritorno alla pagina di account con le informazioni aggiornate
 		}
 		
+		//se l'operazione è addCF allora aggiorno/inserisco solo il codice fiscale
 		else if(operazione.equals("addCF")) {
-			String CF=request.getParameter("CF");
+			String CF=request.getParameter("CF");//prendo il valore dal input con il nome CF
 			HttpSession httpsession=request.getSession();
 			Cliente cliente=(Cliente) httpsession.getAttribute("cliente-corrente");
-			cliente.setCodicefiscale(CF);
+			cliente.setCodicefiscale(CF);//setto il nuovo codice fiscale al cliente
 			
 			ClienteDAO clienteAggiornato=new ClienteDAO();
-			clienteAggiornato.UpdateCliente(cliente);
-			response.sendRedirect("MyAccount.jsp");
+			clienteAggiornato.UpdateCliente(cliente);//aggiorno il cf grazie alla query presente nel ClienteDAO nel metodo UpdateCliente
+			response.sendRedirect("MyAccount.jsp");//ritorno alla pagina di account con le informazioni aggiornate
 		}
-		
+		//faccio lo stesso per tutte le altre operazioni scelte dall'utente
 		else if(operazione.equals("addEmail")) {
 			String email=request.getParameter("email");
 			HttpSession httpsession=request.getSession();

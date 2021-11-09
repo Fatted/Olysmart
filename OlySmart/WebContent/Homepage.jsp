@@ -5,28 +5,31 @@
 <% 
 
 ProdottoDAO prod= new ProdottoDAO();
-List<Prodotto> prodotti=prod.getAllProducts();
+List<Prodotto> prodotti=prod.getAllProducts(); //la lista prodotti contiene tutti i prodotti presenti nel database presi con il metodo getAllProduct nel prodottoDAO
 
-List<Prodotto> prodottiSaldo=prod.getAllProductsForSconto();
+List<Prodotto> prodottiSaldo=prod.getAllProductsForSconto();//la lista prodottiSaldo contiene tutti i prodotti che nel db hanno il 'si' in sconto,usando il metodo getAllProductForSconto che è in prodottoDAO
+
+List<Prodotto> prodottiBarraLaterale=prod.getAllProducts();	//lista usata per tenere sempre la barra attiva contenente tutti i prodotti disponibili nel db con il metodo getallproduct del prodotto DAO
 
 CategoriaDAO cat=new CategoriaDAO();
-List<Categoria> categorialista=cat.getCategorie();
+List<Categoria> categorialista=cat.getCategorie(); //la lista delle categorie comprende tutte le categorie presenti nel db che prendiamo con il metodo getCategorie in CategorieDAO
 
 
 
-
+//controlliamo la sessione attuale del cliente
 Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente");
-     if(cliente!=null){
-     	request.setAttribute("cliente-corrente", cliente);
+     if(cliente!=null){ //se la sessione non è vuota settiamo il cliente
+     	request.setAttribute("cliente-corrente", cliente);//settiamo il nuovo cliente
      }
 
      
+     //la lista carrello contiene il carrello della sessione corrente del determinato cliente
      ArrayList<Carrello> prodotti_carrello=(ArrayList<Carrello>)session.getAttribute("listacarrello");
-     List<Carrello> prodottocarrello=null;
-     if(prodotti_carrello!=null){
-   	 ProdottoDAO prodotto=new ProdottoDAO();
-     	 prodottocarrello=prodotto.getProdottiCarrello(prodotti_carrello);
-     	 request.setAttribute("prodotti_carrello",prodotti_carrello);
+     List<Carrello> prodottocarrello=null; //creiamo una lista di elementi carrello contenente successivamente i prodotti nel carrello
+     if(prodotti_carrello!=null){//se vengono inseriti i prodotti nel carrello
+   	 ProdottoDAO prodotto=new ProdottoDAO();//creiamo un nuovo ProdottoDAO che ci servirà per prendere i prodotti inseriti nel carrello
+     	 prodottocarrello=prodotto.getProdottiCarrello(prodotti_carrello);//la lista prodottocarrello conterrà i prodotti inseriti nel carrello dati tramite la getProdottiCarrello passandogli prodotti_carrello contenetnte gli attributi di listacarrello
+     	 request.setAttribute("prodotti_carrello",prodotti_carrello);//settiamo i prodotti nel carrello
       }
 
 %>
@@ -42,7 +45,7 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="stylesheet" media="screen and (max-width:4096px) (min-width:1024px)" href="CSS/large.css">
     <link rel="stylesheet" media="screen and (max-width:500px)" href="CSS/mobile.css">
-<title>OlySmartWeb</title>
+<title>OlySmartWeb Homepage</title>
 </head>
 
 
@@ -73,18 +76,19 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
             }
             </script>
             
-     <div class="container">
+
+<div class="container">
          <div class="image">
             <a href="Homepage.jsp"> 
-                <img src="logonero.png" class="logo">
+                <img src="logonero.png" class="logo"><!-- cliccando sul logo andiamo sulla homepage -->
             </a> 
          </div>
         <div class="testo"><h1>OlySmart</h1>
             <script src="https://use.fontawesome.com/d8805b6d62.js"></script>
             <script src="https://use.fontawesome.com/relases/v5.0.6/js/all.js"></script>
             
-            <!-- barra di ricerca -->
-            <form action="Ricerca" method="post">
+<!------------------------------------------- barra di ricerca usata per cercare i prodotti per nome/categoria ----------------------------------------->
+            <form action="Ricerca" method="post"><!-- usiamo la servlet ricerva per il nome passato nel input text con nome seatch -->
             <div class="bottone-ricerca">                           
               <div class="search-box-avanzato">        
                   <input type="text" class="search-txt" name="search" placeholder="Cerca prodotto">
@@ -94,29 +98,30 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
                   </div>
            		 </div>           		
                </form>
+<!------------------------------------------- fine barra ----------------------------------------------------------------------------------------------->               
 </div>
-
     <div class="ultimo">
-     <div class="accesso">
-     
+     <div class="accesso"> 
+ <!-------------------------------------------controlliamo se il cliente ha fatto l'accesso ------------------------------------------------------------->    
+ <!-- Se il cliente non ha fatto l'accesso uscirà solo (accedi e registrati) mentre se ha fatto l'accesso uscirà (logout,ordini,carrello e il suo account  -->
         <%if(cliente == null){%>
         	<div class="registra"> <a href="register.jsp">Registrati</a> </div>
             <div class="accedi"> <a href="login.jsp">Accedi</a> </div>
+            <div class="image"><a href="carrello.jsp"><img src="carella.png"></a></div><br>
         <%}else{%>
         	<p>Utente:<%=cliente.getUsername() %></p>      
         	 <div class="logout"> <a href="ServletLogout">Logout</a></div><br>
-        	 <div class="My order"> <a href="#mieiordini">Miei ordini</a></div><br>
+        	 <div class="My order"> <a href="MyOrder.jsp">Miei ordini</a></div><br>
         	 <div class="image"><a href="carrello.jsp"><img src="carella.png"></a></div><br>
         	 <div class="My account"> <a href="MyAccount.jsp">il mio account</a></div><br>
-
+<!------------------------------------------- se è un admin andrà nella sua pagina dedicata --------------------------------------------------------------->
         	 <%if(cliente.getTipo().equals("admin")){%>
         		<br><div> <a href="paginaAdmin.jsp">Pagina Gestione</a></div>
         <%}%>	 
         	              
       <%}%>
-        
-
      </div>
+<!-- --------------------------------------------------fine cliente---------------------------------------------------------------------------------------------- -->
      <div class="loghi">
             
                 <a href=><img src="insta.png"></a>
@@ -126,57 +131,13 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
     </div>
 </section>
      
-<section id="menu">
-         <div class="sidebar close">
-             <ul class="nav-links">
-             <li> <a href="Homepage.jsp">
-                <i class="fas fa-home"></i>
-            <span class="link_name">Home</span>
-        </a>
-        </li>
-        <li> <a href="catalogo.jsp?Categoria=all">
-            <i class="fas fa-list"></i>
-         <span class="link_name">Catalogo</span>
-          </a>
-        </li>
-        
-     <%
-		for(Categoria categoria:categorialista){
-		%>
-         <li>
-            <div class="icon-link">
-             <a class="link_name" href="catalogo.jsp?Categoria=<%=categoria.getNome() %>">
-             <i><img src="Immagini/Categorie/<%=categoria.getNome() %>.svg" width="20" height="21"></i>
-              <span class="link_name"><%=categoria.getNome() %></span>
-              </a>
-              <i class="fas fa-chevron-right arrow"></i>
-           </div>
-            <ul class="sub-menu">
-           <% 
-           List<String> listanonduplicata=new ArrayList<>();
-           List<String> lista=new ArrayList<>();
-           
-           for(Prodotto p:prodotti){
-        	   if(p.getTipo().equalsIgnoreCase(categoria.getNome())){
-        		   lista.add(p.getMarca());
-        	   }
-           }
-           
-        		   for(String parola:lista){
-        			   if(!listanonduplicata.contains(parola)){listanonduplicata.add(parola); }    
-        		   }
-        		   
-        		   for(String stampa:listanonduplicata){
-			%>
-					
-            <li><a href="catalogo.jsp?Categoria=<%=categoria.getNome()%>&ProdottoMarca=<%=stampa %>"><%=stampa %></a></li>
-            <% 		   
-        		  } %>
-           </ul>
-       <%}%>
-        </li>
-        </div>
 
+<!---------------------------- Includo ala barra laterale che è nel file dedicaro barralaterale.jsp in include --------------------------------------- -->
+<%@include file="include/barralaterale.jsp" %>
+<!-- ------------------------------------------------------------------------------------------------------------------------------------------------ -->
+
+
+<!-- -------------------------------------------------Slider immagini homepage------------------------------------------------------------------------------------------------ -->
         <div class="slider">
                 <div class="content">
                 <div class="images">
@@ -242,15 +203,18 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
          </div>
      </div>
 </section>
-
+<!-- -------------------------------------------------fine slider------------------------------------------------------------------------------------------------ -->
      
-
+<!-- -------------------------------------------------prodotto più venduti con iteratore------------------------------------------------------------------------------------------------ -->
 <section id="piuvenduti">
     <p>Prodotti in offerta</p>
-<table>
     <div class="prodpiuvend">
+<table>
+    
  <%		
-	    Iterator<Prodotto> iteratore=prodottiSaldo.iterator();
+ //uso un iteratore per selezionare i prodotti messi di lato uno dopo l'altro andando a capo ogni 4 prodotti
+ //i prodotti selezionati sono i prodotti che hanno il valore "si" nella colonna saldo del db
+	    Iterator<Prodotto> iteratore=prodottiSaldo.iterator();//prodottiSaldo è già stato dichiarato anche sopra proprio per selezionare quei prodotti nel db
 	    Prodotto p1;
 	    Prodotto p2;
 	    Prodotto p3;
@@ -268,12 +232,8 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
 		           </div>
 		        </div>
 		        <h1><%=p1.getNome() %></h1>
-		        <h2>Prezzo:<%=p1.getPrezzo_vendita()%>&#8364</h2>
-		        <%if(cliente!=null){%>
-		        <a href="AggiungiAlCarrello?id=<%=p1.getCodice() %>">add cart</a>
-		        <%}else{%>
-		        <a href="login.jsp">Accedi per inserire nel carrello</a>
-		        <%}%>
+		        <h2>Prezzo:<%=p1.getPrezzo_vendita()%>&#8364</h2>		        
+		        <a href="AggiungiAlCarrello?id=<%=p1.getCodice() %>">add cart</a>		       
 		        <a href="dettagli.jsp?id=<%=p1.getCodice() %>">dettagli</a>
 		        </td>
 
@@ -288,12 +248,8 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
 		           </div>
 		        </div>
 		        <h1><%=p2.getNome() %></h1>
-		        <h2>Prezzo:<%=p2.getPrezzo_vendita()%>&#8364</h2>
-		        <%if(cliente!=null){%>
+		        <h2>Prezzo:<%=p2.getPrezzo_vendita()%>&#8364</h2>		       
 		        <a href="AggiungiAlCarrello?id=<%=p2.getCodice() %>">add cart</a>
-		        <%}else{%>
-		        <a href="login.jsp">Accedi per inserire nel carrello</a>
-		        <%}%>
 		        <a href="dettagli.jsp?id=<%=p2.getCodice() %>">dettagli</a>
 		        </td>
 				
@@ -307,12 +263,8 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
 		           </div>
 		        </div>
 		        <h1><%=p3.getNome() %></h1>
-		        <h2>Prezzo:<%=p3.getPrezzo_vendita()%>&#8364</h2>
-		        <%if(cliente!=null){%>
-		        <a href="AggiungiAlCarrello?id=<%=p3.getCodice() %>">add cart</a>
-		        <%}else{%>
-		        <a href="login.jsp">Accedi per inserire nel carrello</a>
-		        <%}%>
+		        <h2>Prezzo:<%=p3.getPrezzo_vendita()%>&#8364</h2>		       
+		        <a href="AggiungiAlCarrello?id=<%=p3.getCodice() %>">add cart</a>		       
 		        <a href="dettagli.jsp?id=<%=p3.getCodice() %>">dettagli</a>
 		        </td>
 		    
@@ -327,77 +279,23 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
 		        </div>
 		        <h1><%=p4.getNome() %></h1>
 		        <h2>Prezzo:<%=p4.getPrezzo_vendita()%>&#8364</h2>
-		        <%if(cliente!=null){%>
-		        <a href="AggiungiAlCarrello?id=<%=p4.getCodice() %>">add cart</a>
-		        <%}else{%>
-		        <a href="login.jsp">Accedi per inserire nel carrello</a>
-		        <%}%>
+		        <a href="AggiungiAlCarrello?id=<%=p4.getCodice() %>">add cart</a>		       
 		        <a href="dettagli.jsp?id=<%=p4.getCodice() %>">dettagli</a>
 		        </td>
 		    </tr>
 		<%	
 		    		}
 		    	}
-			}		    	
-	    }			
+		      }
+	    }
 %>
-</div>
 </table>
+</div>
 </section>
+<!-- -------------------------------------------------fine prodotti più venduti------------------------------------------------------------------------------------------------ -->
 
-<section id="nuoviarrivi">
-    <p> Nuovi arrivi</p>
-    <table>
-        <div class="nuoviarr">
-        <tr>
-            <td>
-                 <div class="container">
-               <img src="pv1.jpeg" height="250px" width="250px" class="image">
-               <div class="overlay">
-                <div class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus vero ea ad iure, perferendis blanditiis?</div> 
-               </div>
-            </div>
-            <h1>Nome Prodotto</h1>
-            </td>
-            <td>
-             <div class="container">
-                <img src="pv1.jpeg" height="250px" width="250px" class="image">
-                <div class="overlay">
-                    <div class="text"> Descrizione del Prodotto</div>
-                </div>
-             </div>
-             <h1>Nome Prodotto</h1>
-            </td>
-            <td>
-                <div class="container">
-               <img src="pv1.jpeg" height="250px" width="250px" class="image">
-               <div class="overlay">
-            <div class="text"> Descrizione del Prodotto</div>
-                </div>  
-              </div>
-              <h1>Nome Prodotto</h1>
-            </td>
-            <td>
-                <div class="container">
-                <img src="pv1.jpeg" height="250px" width="250px" class="image">
-                <div class="overlay">
-                    <div class="text">Descrizione del Prodotto</div>
-                   </div>
-            </div>
-            <h1>Nome Prodotto</h1>
-            </td>
-        </tr>
-    </div>
-    </table>   
-
-</section>
-
-<footer id="footer">
-    <p>Olysmart &copy; 2021, All rights reserved<p>
-    <p>Via napoli 310 81058 Vairano Patenora, Campania</p>
-    <p>0823 988020</p>
-    <p>olysmartvairano@gmail.com</p>
-    <p>Powered by D'Amato Antonio, D'Amato Ludovica, Dello Buono Piero</p>
-    </footer>
+<!-- -------------------------------------------------inclusione footer------------------------------------------------------------------------------------------------ -->
+<%@include file="include/footer.jsp" %>
+<!-- -------------------------------------------------fine inclusione------------------------------------------------------------------------------------------------ -->
 </body>
 </html>

@@ -37,35 +37,34 @@ public class AggiungiAlCarrello extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		
 		try(PrintWriter out=response.getWriter()){
-			ArrayList<Carrello> carrello=new ArrayList<>();
+			ArrayList<Carrello> carrello=new ArrayList<>(); //creo una lista di oggetti carrello che userò per prendere i prodotti nel carrello
 			
-			int id=Integer.parseInt(request.getParameter("id"));
+			int id=Integer.parseInt(request.getParameter("id")); //prendo id del prodotto da inserire nel carrello	
 			Carrello cart=new Carrello();
-			cart.setCodice(id);
-			cart.setQuantita(1);
+			cart.setCodice(id);//setto il codice
+			cart.setQuantita(1);//setto la quantià del prodotto
 			
 			HttpSession session=request.getSession();
-			ArrayList<Carrello> listacarrello=(ArrayList<Carrello>)session.getAttribute("listacarrello");
+			ArrayList<Carrello> listacarrello=(ArrayList<Carrello>)session.getAttribute("listacarrello");//creo una lista di oggetti Carrello i cui valori vengono presi dalla sessione listacarrello
 			
-			if(listacarrello==null) {
-				carrello.add(cart);
-				session.setAttribute("listacarrello",carrello);
+			if(listacarrello==null) {//se il carrello è vuoto allora inserisco il prodotto nel carrelo
+				carrello.add(cart);//aggiungo il prodotto al carrello
+				session.setAttribute("listacarrello",carrello);//setto ora la sessione del carrello al nuovo carrello contenente il prodotto
 				response.sendRedirect("carrello.jsp");
 			}
 			else {
-				carrello=listacarrello;
-				boolean esiste=false;
-
-							
-				for(Carrello c:listacarrello) {
-					if(c.getCodice()==id) {
-						esiste=true;
-						session.setAttribute("messaggio-errore", "Prodotto già presente,aumenta la quantità!");
+				carrello=listacarrello;//altrimento,se il prodotto è già nel carrello il carrello diventa listacarrello
+				boolean esiste=false;//inizialmente esiste è falso
+				
+				for(Carrello c:listacarrello) {//pre ogni prodotto nella lista carrello
+					if(c.getCodice()==id) {//controllo se il prodotto inserito nel carrello è già presente
+						esiste=true;//se è presente allora esiste diventa true
+						session.setAttribute("messaggio-errore", "Prodotto già presente,aumenta la quantità!");//stampo l'errore dicendo che il prodotto c'è e di aumentare la quantità
 						response.sendRedirect("carrello.jsp");					
 						}
 			}	
 				
-				if(!esiste) {
+				if(!esiste) {//se il prodotto inserito è un nuovo prodotto allora esiste è false e quindi lo inserisco nel carrello
 						listacarrello.add(cart);
 						response.sendRedirect("carrello.jsp");
 					}

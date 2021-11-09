@@ -3,39 +3,34 @@
 <%@page import="java.util.*" %>
      
       <%
-           
+    //controlliamo la sessione attuale del cliente     
       Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente");
-      if(cliente!=null){
+      if(cliente!=null){//se la sessione non è vuota settiamo il cliente
       	request.setAttribute("cliente-corrente", cliente);
       }
-                           
+       
+    //la lista carrello contiene il carrello della sessione corrente del determinato cliente
       ArrayList<Carrello> prodotti_carrello=(ArrayList<Carrello>)session.getAttribute("listacarrello");
       List<Carrello> prodottocarrello=null;
       
       double totale=0;
    
       SpedizioneDAO spedizione=new SpedizioneDAO();
-      
-      List<Spedizione> spedizioni=null;
-      spedizioni=spedizione.getSpedizioni();
 
-      
-     	
-      
-      
+      List<Spedizione> spedizioni=null;
+      spedizioni=spedizione.getSpedizioni();//spedizioni contiene tutte le spedizioni presenti nel db
+
+
       if(prodotti_carrello!=null){
     	 ProdottoDAO prodotto=new ProdottoDAO();
     	 
-    	 totale=prodotto.getTotaleCarrello(prodotti_carrello);
+    	 totale=prodotto.getTotaleCarrello(prodotti_carrello);//il totale è dato da tutti i prodotti presenti nel carrello,usando il metodo getTotaleCarrello
     	 
-      	 prodottocarrello=prodotto.getProdottiCarrello(prodotti_carrello);
+      	 prodottocarrello=prodotto.getProdottiCarrello(prodotti_carrello);//prodotto carrello contiene tutti i prodotti nel carrello
       	 
-      	 request.setAttribute("prodotti_carrello",prodotti_carrello);
-      	 
-      	request.setAttribute("totale",totale);
+      	 request.setAttribute("prodotti_carrello",prodotti_carrello); 	
        }
-                
-           %>
+%>
            
 <!DOCTYPE html>
 <html>
@@ -66,7 +61,7 @@ Spedizione s3;
 
 while(iteratore.hasNext()){	    	
 	s1=iteratore.next();
-
+	
 %>
 <br>
 <input type="radio" id ="spedizione1" value="<%=s1.getCosto()%>" name="spedizione" onclick = "clickMe(this.id)">
@@ -75,7 +70,7 @@ while(iteratore.hasNext()){
 
 <%if(iteratore.hasNext()){
 	s2=iteratore.next();
-
+	
 	%>
 <input type="radio" id ="spedizione2" value="<%=s2.getCosto()%>" name="spedizione" onclick = "clickMe(this.id)">
 <label for="<%=s2.getTipo()%>"><%=s2.getTipo() %>(<%=s2.getCosto() %>EURO/<%=s2.getTempo() %>)</label><br>
@@ -104,7 +99,13 @@ while(iteratore.hasNext()){
 							<%}%>
 
 
-<br><br><p>per un totale di:<p id="totale"><%=totale%></p></p>
+<br><br><p id="totale"><%=totale %><%session.setAttribute("totale",totale); %></p>
+
+
+<%if(cliente.getIntestatario_carta()==null){%><a href="MyAccount.jsp">Inserisci metodo di pagamento per continuare</a>
+<%}else{%><a href="CheckOutServlet">Conferma pagamento</a>	
+<%}%>
+
 
 <script>
 var totale = document.getElementById("totale").textContent;
@@ -121,19 +122,9 @@ function clickMe(clicked_id) {
 	  totaleNum = totaleNum - temp;
 	  temp = value;
 	  var totaleNum = +totaleNum + +value;
-	  document.getElementById("totale").innerHTML = totaleNum
-	  document.getElementById("totale").value = totaleNum;
+	  document.getElementById("totale").innerHTML = totaleNum;
+
 	}
 </script>
-
-
-<%if(cliente.getIntestatario_carta()==null){%><a href="MyAccount.jsp">Inserisci metodo di pagamento per continuare</a>
-<%}else{%>
-<form action="CheckOutServlet" method="post">
-<button type="submit">Conferma ordine</button>
-</form>	
-<%}%>
-
-
 </body>
 </html>

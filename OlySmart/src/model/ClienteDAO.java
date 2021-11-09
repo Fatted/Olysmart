@@ -37,13 +37,13 @@ public class ClienteDAO {
 	
 
 
+	//ritorno true se il cliente è presente nel database,altrimenti ritorno false
 	public boolean getUsernameAndPassword(Cliente cliente) {
-
 		try {
 			Connection connection = null;
 			PreparedStatement preparedStatement = null;
-			username = cliente.getUsername();
-			password = cliente.getPassword();
+			username = cliente.getUsername();//l'username lo prendo con il getcliente
+			password = cliente.getPassword();//stesso per la password
 			String sql = "SELECT * FROM cliente WHERE username='"+username+"'"+"And password='"+password+"'";
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(sql);
@@ -67,27 +67,27 @@ public class ClienteDAO {
 	}
 	
 	
+	//ritorno una lista visibile dall'admin contenente tutti gli utenti che hanno un account
 	public List<Cliente> getUtentiRegistrati() {
 		List<Cliente> lista=new ArrayList<Cliente>();
-
 		try {
 			Connection connection = null;
 			PreparedStatement preparedStatement = null;
-			String sql = "SELECT * FROM cliente";
+			String sql = "SELECT * FROM cliente";//seleziono tutto della tabella cliente nel db
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(sql);
 			ResultSet rs = preparedStatement.executeQuery();
 			
 			while(rs.next()) {
 				Cliente clientelista=new Cliente();
-				clientelista.setNome(rs.getString("nome"));
-				clientelista.setCognome(rs.getString("cognome"));
-				clientelista.setUsername(rs.getString("username"));
-				clientelista.setEmail(rs.getString("email"));
-				clientelista.setCap(rs.getString("cap"));
-				clientelista.setVia(rs.getString("via"));
-				clientelista.setCitta(rs.getString("città"));
-				clientelista.setTelefono(rs.getString("telefono"));
+				clientelista.setNome(rs.getString("nome"));//setto il nome del cliente il cui valore è preso dal db dove la colonna ha nome "nome"
+				clientelista.setCognome(rs.getString("cognome"));//setto il cognome del cliente il cui valore è preso dal db dove la colonna ha nome "cognome"
+				clientelista.setUsername(rs.getString("username"));//setto il nome del cliente il cui valore è preso dal db dove la colonna ha nome "nome"
+				clientelista.setEmail(rs.getString("email"));//setto l'email del cliente il cui valore è preso dal db dove la colonna ha nome "email"
+				clientelista.setCap(rs.getString("cap"));//setto il cap del cliente il cui valore è preso dal db dove la colonna ha nome "cap"
+				clientelista.setVia(rs.getString("via"));//setto il via del cliente il cui valore è preso dal db dove la colonna ha nome "via"
+				clientelista.setCitta(rs.getString("città"));//setto la città del cliente il cui valore è preso dal db dove la colonna ha nome "città"
+				clientelista.setTelefono(rs.getString("telefono"));//setto il telefono del cliente il cui valore è preso dal db dove la colonna ha nome "telefono"
 				
 				lista.add(clientelista);
 			}
@@ -97,19 +97,18 @@ public class ClienteDAO {
 
 		}
 		return lista;
-
 	}
 	
 	
-	public void UpdateCliente(Cliente cliente) {
-
-		
+	//è un metodo che serve all'utente per cambiare le sue informazioni relative al suo account,ovviamente gli passo un oggetto di tipo cliente in modo tale da poter prendere dal db i suoi valori e poi cambiarli
+	public void UpdateCliente(Cliente cliente) {	
 		try {
 			Connection connection = null;
 			PreparedStatement preparedStatement = null;
 			String sql = "UPDATE cliente SET nome=?,cognome=?,data_di_nascita=?,codice_fiscale=?,email=?,password=?,username=?,telefono=?,cap=?,via=?,città=?,tipo=?,numero_carta=?,data_scadenza_carta=?,CVV=?,Intestatario_carta=?,circuito_carta=? WHERE username=?";
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(sql);
+			//prendo tutti i valori nel db del cliente che  verranno inseriti al posto dei ? nella query
 			preparedStatement.setString(1, cliente.getNome());
 			preparedStatement.setString(2, cliente.getCognome());
 			preparedStatement.setString(3, cliente.getDatadinascita());
@@ -127,12 +126,10 @@ public class ClienteDAO {
 			preparedStatement.setString(15, cliente.getCVV());
 			preparedStatement.setString(16, cliente.getIntestatario_carta());
 			preparedStatement.setString(17, cliente.getCircuito_carta());
-			preparedStatement.setString(18,	cliente.getUsername());
-			
-			
+			preparedStatement.setString(18,	cliente.getUsername());//ripeto l'username perchè nella query vado a indicare i valori da cambiare solo per il relativo username
+						
 			preparedStatement.executeUpdate();
 
-		
 			connection.close();
 		} catch (SQLException e) {
 			System.out.println(e);
@@ -140,9 +137,6 @@ public class ClienteDAO {
 		}
 
 	}
-
-
-	
 
 	private String username;
 	private String password;

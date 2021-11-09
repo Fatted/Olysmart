@@ -11,45 +11,41 @@
 <title>Registrazione</title>
 </head>
 
-            <body>
+<body>
                 <div class="loginbox">
-                    <h1>Register Here</h1>
+                    <h1>Registrazione</h1>
                      <%@include file="CSS/messaggioRegistrazione.jsp" %>
+ <!----------------------------------  tutti i dati inseriti dall'utente per accedere vengono passati alla servlet ServletRegister----------------------------------------- -->
+ 								<!-- alcuni dei valori sono required perchè serviranno per poter procedere a fare ordini -->                    
                     <form action="ServletRegister" method="post">
                         <p>Nome*</p>
-                        <input type ="text" name="nome"  placeholder="Enter Nome" required>
+                        <input type ="text" name="nome"  placeholder="Inserisci Nome" required>
                         <p>Cognome*</p>
-                        <input type ="text" name="cognome"  placeholder="Enter Cognome" required>
+                        <input type ="text" name="cognome"  placeholder="Inserisci Cognome" required>
                         <p>Data Di Nascita</p>
-                        <input type ="date" name="data" placeholder="Enter Data">
+                        <input type ="date" name="data" placeholder="Inserisci Data">
                         <p>Codice Fiscale</p>
-                        <input type ="text" name="CF"  placeholder="Enter CF">
+                        <input type ="text" name="CF"  placeholder="Inserisci CF">
                         <p>Email</p>
-                        <input type ="email" name="email"  placeholder="Enter Email">
+                        <input type ="email" name="email"  placeholder="Inserisci Email">
                         <p>Password*</p>
-                        <input type ="text" name="password"  placeholder="Enter Password" required>
+                        <input type ="text" name="password"  placeholder="Inserisci Password" required>
                         <p>Username*</p>
-                        <input type ="text" name="username"  placeholder="Enter Username" required>
+                        <input type ="text" name="username"  placeholder="Inserisci Username" required>
                         <p>Telefono</p>
-                        <input type ="tel" name="telefono" maxlength="10"  placeholder="Enter Telefono">
+                        <input type ="tel" name="telefono" maxlength="10"  placeholder="Inserisci Telefono">
                         <p>CAP*</p>
-                        <input type ="number" name="cap" maxlength="5"  placeholder="Enter CAP" required>
+                        <input type ="number" name="cap" maxlength="5"  placeholder="Inserisci CAP" required>
                         <p>Via*</p>
-                        <input type ="text" name="via"  placeholder="Enter Via" required>
+                        <input type ="text" name="via"  placeholder="Inserisci Via" required>
                         <p>Città*</p>
-                        <input type ="text" name="citta"  placeholder="Enter Città" required>
+                        <input type ="text" name="citta"  placeholder="Inserisci Città" required>
                         
-                        <input type ="submit" value="Registrati" placeholder="Login"> <br>
+                        <input type ="submit" value="Registrati" value="Login"> <br>
                     </form>
-
                 </div>
-                    <footer id="footer">
-                        <p>Olysmart &copy; 2021, All rights reserved<p>
-                        <p>Via napoli 310 81058 Vairano Patenora, Campania</p>
-                        <p>0823 988020</p>
-                        <p>olysmartvairano@gmail.com</p>
-                        <p>Powered by D'Amato Antonio, D'Amato Ludovica, Dello Buono Piero</p>
-                        </footer>
-            </body>
-    
+<!-- -------------------------------------------------inclusione footer------------------------------------------------------------------------------------------------ -->
+	<%@include file="include/footer.jsp" %>
+<!-- -------------------------------------------------fine inclusione------------------------------------------------------------------------------------------------ --> 
+</body>
 </html>

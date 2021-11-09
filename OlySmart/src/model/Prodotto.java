@@ -30,10 +30,10 @@ public class Prodotto {
 	private int codice;
 	private String nome;
 	private String descrizione;
-	private Double prezzo_acquisto;
+	private double prezzo_acquisto;
 	private String disponibilità;
 	private int iva;
-	private Double prezzo_vendita;
+	private double prezzo_vendita;
 	private String marca;
 	private int numero_pezzi_disponibili;
 	private int sconto;
@@ -124,17 +124,17 @@ public class Prodotto {
 	/**
 	 * @return the prezzo_acquisto
 	 */
-	public Double getPrezzo_acquisto() {
+	public double getPrezzo_acquisto() {
 		return prezzo_acquisto;
 	}
 
 
 
 	/**
-	 * @param prezzo_acquisto the prezzo_acquisto to set
+	 * @param i the prezzo_acquisto to set
 	 */
-	public void setPrezzo_acquisto(Double prezzo_acquisto) {
-		this.prezzo_acquisto = prezzo_acquisto;
+	public void setPrezzo_acquisto(double i) {
+		this.prezzo_acquisto = i;
 	}
 
 

@@ -36,14 +36,15 @@ public class RimozioneProdottiCarrello extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		
 		try(PrintWriter out=response.getWriter()){			
+			//prendiamo l'id del prodotto passato dal carrello.jsp
 			String id=request.getParameter("id");
 			
 			if(id!=null) {
-				ArrayList<Carrello> listacarrello=(ArrayList<Carrello>)request.getSession().getAttribute("listacarrello");
-				if(listacarrello!=null) {
-					for(Carrello carrello:listacarrello) {
-						if(carrello.getCodice()==Integer.parseInt(id)) {
-							listacarrello.remove(listacarrello.indexOf(carrello));
+				ArrayList<Carrello> listacarrello=(ArrayList<Carrello>)request.getSession().getAttribute("listacarrello");//prendiamo gli elementi che ci sono nel carrello della sessione dell'utente
+				if(listacarrello!=null) {//se il carrello dell'utente non è vuoto
+					for(Carrello carrello:listacarrello) {//per ogni prodotto nel carrello lo assegnamo all'oggetto carrello
+						if(carrello.getCodice()==Integer.parseInt(id)) {//se gli id del nuovo oggetto carrello e id passato da carrello.jsp corrispondono
+							listacarrello.remove(listacarrello.indexOf(carrello));//rimuovo l'oggetto dalla listacarrello
 							break;
 						}
 					}

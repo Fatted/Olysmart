@@ -3,12 +3,11 @@
 <%@page import="java.util.*" %>
 
 <%
-
+//controlliamo la sessione attuale del cliente
 Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente");
-     if(cliente!=null){
-     	request.setAttribute("cliente-corrente", cliente);
-     	
-     	
+     if(cliente!=null){//se la sessione è nuovala creiamo
+     	request.setAttribute("cliente-corrente", cliente);//settiamo il nuovo cliente
+      	
      }%>
      
      
@@ -37,9 +36,14 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
 <%@include file="CSS/messaggioRegistrazione.jsp" %>
 <div style="float: left; margin-right:4px">
 <img src="#" width="700px" height="800px"></div> 
+
+<!-- indichiamo il nome e cognome del cliente che entra nella pagina -->
 <h1><%=cliente.getNome() %> <%=cliente.getCognome() %></h1><br>
 <p>
 
+<!-- facciamo dei vari controlli,nel caso in cui la data di nascita,il codice fiscale o qualsiasi altro valore personale del cliente è vuoto stampa mancante,altrimenti lo mostriamo -->
+<!-- nel caso in cui è mancante c'è un bottone "inserisci" che attraverso il metodo updatecliente in clientedao permette di inserire il valore mancante,lo stesso vale nel caso in cui il valore è presente e si vuole modificare -->
+<!-- tutti gli inserimenti/modifiche vengono gestiti da ProfiloUtenteServlet e i valori gli vengono passati grazie ai popup presenti in questa pagina -->
 Data:<%if(cliente.getDatadinascita().equals("")){%>Mancante<br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentodata">Inserisci Data</button>
 	<%}else{%><%=cliente.getDatadinascita() %><br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentodata">Modifica Data</button><%}%><br><br>
 
@@ -86,6 +90,7 @@ Metodo di pagamento:<%if(cliente.getIntestatario_carta()==null){%>Mancante<br><b
       <!-- inserisco il form che servirà per gestire le varie scelte da parte del utente -->
         <form action="ProfiloUtenteServlet" method="post">
         
+        <!-- indichiamo il nome del form con operation,che sarà uguale per tutti i form,quello che cambia è il valore,in base a quello in ProfiloutenteServlet facciamo diverse operazioni di inserimento/modifica -->
         <input type="hidden" name="operation" value="addData">
         
       		<div class="form-group">
@@ -115,7 +120,7 @@ Metodo di pagamento:<%if(cliente.getIntestatario_carta()==null){%>Mancante<br><b
       <div class="modal-body">
       <!-- inserisco il form che servirà per gestire le varie scelte da parte del utente -->
         <form action="ProfiloUtenteServlet" method="post">
-        
+<!-- indichiamo il nome del form con operation,che sarà uguale per tutti i form,quello che cambia è il valore,in base a quello in ProfiloutenteServlet facciamo diverse operazioni di inserimento/modifica -->
         <input type="hidden" name="operation" value="addCF">
         
       		<div class="form-group">
@@ -145,7 +150,7 @@ Metodo di pagamento:<%if(cliente.getIntestatario_carta()==null){%>Mancante<br><b
       <div class="modal-body">
       <!-- inserisco il form che servirà per gestire le varie scelte da parte del utente -->
         <form action="ProfiloUtenteServlet" method="post">
-        
+         <!-- indichiamo il nome del form con operation,che sarà uguale per tutti i form,quello che cambia è il valore,in base a quello in ProfiloutenteServlet facciamo diverse operazioni di inserimento/modifica -->       
         <input type="hidden" name="operation" value="addEmail">
         
       		<div class="form-group">
@@ -175,7 +180,7 @@ Metodo di pagamento:<%if(cliente.getIntestatario_carta()==null){%>Mancante<br><b
       <div class="modal-body">
       <!-- inserisco il form che servirà per gestire le varie scelte da parte del utente -->
         <form action="ProfiloUtenteServlet" method="post">
-        
+        <!-- indichiamo il nome del form con operation,che sarà uguale per tutti i form,quello che cambia è il valore,in base a quello in ProfiloutenteServlet facciamo diverse operazioni di inserimento/modifica -->        
         <input type="hidden" name="operation" value="addTelefono">
         
       		<div class="form-group">
@@ -205,7 +210,7 @@ Metodo di pagamento:<%if(cliente.getIntestatario_carta()==null){%>Mancante<br><b
       <div class="modal-body">
       <!-- inserisco il form che servirà per gestire le varie scelte da parte del utente -->
         <form action="ProfiloUtenteServlet" method="post">
-        
+        <!-- indichiamo il nome del form con operation,che sarà uguale per tutti i form,quello che cambia è il valore,in base a quello in ProfiloutenteServlet facciamo diverse operazioni di inserimento/modifica -->        
         <input type="hidden" name="operation" value="addIndirizzo">
         
       		<div class="form-group">
@@ -237,7 +242,7 @@ Metodo di pagamento:<%if(cliente.getIntestatario_carta()==null){%>Mancante<br><b
       <div class="modal-body">
       <!-- inserisco il form che servirà per gestire le varie scelte da parte del utente -->
         <form action="ProfiloUtenteServlet" method="post">
-        
+        <!-- indichiamo il nome del form con operation,che sarà uguale per tutti i form,quello che cambia è il valore,in base a quello in ProfiloutenteServlet facciamo diverse operazioni di inserimento/modifica -->        
         <input type="hidden" name="operation" value="addCarta">
         
       		<div class="form-group">
@@ -254,7 +259,7 @@ Metodo di pagamento:<%if(cliente.getIntestatario_carta()==null){%>Mancante<br><b
       			<input type="date"  class="form-control" name="datascadenza" required><br>
 
       			CVV:
-      			<input type="number"  class="form-control" 	placeholder="Enter CVV" name="CVV" min="000" max="999" required><br>
+      			<input type="number"  class="form-control" 	placeholder="Inserisci CVV" name="CVV" min="000" max="999" required><br>
       			
       			Circuito:
       			<select name="circuito">

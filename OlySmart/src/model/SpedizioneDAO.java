@@ -29,6 +29,7 @@ public class SpedizioneDAO {
 	}
 	
 	
+	//metodo che ritorna le categorie disponibili nel database all'interno di una lista
 	public List<Spedizione> getSpedizioni() {
 		List<Spedizione> listaSpedizioni=new ArrayList<Spedizione>();
 
@@ -36,18 +37,18 @@ public class SpedizioneDAO {
 			Connection connection = null;
 			PreparedStatement preparedStatement = null;
 			
-			String sql = "SELECT * FROM spedizione";
+			String sql = "SELECT * FROM spedizione";//seleziono tutto dalla tabella spedizione del db
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(sql);
 			ResultSet rs = preparedStatement.executeQuery();
 			
 			while(rs.next()) {
 				Spedizione spedizione=new Spedizione();
-				spedizione.setTipo(rs.getString("Tipo"));
-				spedizione.setCosto(rs.getInt("Costo"));
-				spedizione.setTempo(rs.getString("Tempo"));
+				spedizione.setTipo(rs.getString("Tipo"));//setto il tipo di spedizione il cui valore lo prendo dal db dove la colonna ha nome "tipo"
+				spedizione.setCosto(rs.getInt("Costo"));//setto il costo di spedizione il cui valore lo prendo dal db dove la colonna ha nome "costo"
+				spedizione.setTempo(rs.getString("Tempo"));//setto il tempo di spedizione il cui valore lo prendo dal db dove la colonna ha nome "tempo"
 				
-				listaSpedizioni.add(spedizione);
+				listaSpedizioni.add(spedizione);//metto tutto nella lista delle spedizioni che poi ritornerò
 			}
 			
 			connection.close();
