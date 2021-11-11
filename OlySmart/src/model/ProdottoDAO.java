@@ -70,6 +70,50 @@ public class ProdottoDAO {
 	}
 	
 	
+	
+	
+	
+	
+	public List<Prodotto> getAllProductsAdmin(){
+		List<Prodotto> prodotti=new ArrayList<Prodotto>(); //creo una lista di prodotti
+		
+		try {
+			Connection connection = null;
+			PreparedStatement preparedStatement = null;
+			String sql = "SELECT * FROM `prodotto`"; //seleziono i prodotti nel db con disponibilità maggiore di 0
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(sql);
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while(rs.next()) {
+				Prodotto prodotto=new Prodotto(); //creo un nuovo prodotto dove setterò i valori che prenderò dal db
+				prodotto.setCodice(rs.getInt("codice")); //setto il codice del prodotto prendendolo dal db,dalla colonna codice
+				prodotto.setNome(rs.getString("nome"));	//setto il nome del prodotto prendendolo dal db,dalla colonna nome
+				prodotto.setDescrizione(rs.getString("descrizione"));//così vai per tutti i valori 
+				prodotto.setPrezzo_acquisto(rs.getDouble("prezzo_acquisto"));
+				prodotto.setDisponibilità(rs.getString("disponibilità"));
+				prodotto.setIva(rs.getInt("iva"));
+				prodotto.setPrezzo_vendita(rs.getDouble("prezzo_vendita"));
+				prodotto.setMarca(rs.getString("marca"));
+				prodotto.setNumero_pezzi_disponibili(rs.getInt("numero_pezzi_disponibili"));
+				prodotto.setSconto(rs.getInt("sconto"));
+				prodotto.setSpecifiche(rs.getString("specifiche"));
+				prodotto.setTipo(rs.getString("tipo"));
+				prodotto.setOfferta(rs.getString("offerta"));
+				prodotto.setImmagine(rs.getString("immagine"));
+				
+				prodotti.add(prodotto);
+				
+			}
+		connection.close();
+		} catch (SQLException e) {
+			System.out.println("Errore");
+
+		}
+		return prodotti;
+	}
+	
+	
 	//metodo che restituisce un numero corrispondente alla quantità di prodotti presenti nel database
 	public int getAllProductsNumber(){
 		List<Prodotto> prodotti=new ArrayList<Prodotto>();
@@ -365,7 +409,7 @@ return totale;
 		try {
 			Connection connection = null;
 			PreparedStatement preparedStatement = null;
-			String sql = "SELECT * FROM prodotto WHERE codice='"+codice+"' AND numero_pezzi_disponibili>0";	
+			String sql = "SELECT * FROM prodotto WHERE codice='"+codice+"'";	
 			
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(sql);
@@ -441,6 +485,250 @@ return totale;
 
 	}
 }
+	
+	
+	//metodo che viene usato dall'admin per modificare i valori dei prodotti
+		public void UpdateProdottoNome(int codice,String nome){
+
+			try {
+			Connection connection = null;
+			PreparedStatement preparedStatement = null;
+			String sql = "UPDATE prodotto SET nome=? WHERE codice="+codice;
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1,nome);
+
+			preparedStatement.executeUpdate();
+
+			connection.close();
+			
+		}catch (SQLException e) {
+			System.out.println(e);
+
+		}
+	}
+		
+		public void UpdateProdottoPrezzoAcquisto(int codice,double prezzo){
+
+			try {
+			Connection connection = null;
+			PreparedStatement preparedStatement = null;
+			String sql = "UPDATE prodotto SET prezzo_acquisto=? WHERE codice="+codice;
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setDouble(1,prezzo);
+
+			preparedStatement.executeUpdate();
+
+			connection.close();
+			
+		}catch (SQLException e) {
+			System.out.println(e);
+
+		}
+	}
+		
+	
+		public void UpdateProdottoDisponibilita(int codice,String disponibilita){
+
+			try {
+			Connection connection = null;
+			PreparedStatement preparedStatement = null;
+			String sql = "UPDATE prodotto SET disponibilità=? WHERE codice="+codice;
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1,disponibilita);
+
+			preparedStatement.executeUpdate();
+
+			connection.close();
+			
+		}catch (SQLException e) {
+			System.out.println(e);
+
+		}
+	}
+		
+		public void UpdateProdottoIva(int codice,int iva){
+
+			try {
+			Connection connection = null;
+			PreparedStatement preparedStatement = null;
+			String sql = "UPDATE prodotto SET iva=? WHERE codice="+codice;
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1,iva);
+
+			preparedStatement.executeUpdate();
+
+			connection.close();
+			
+		}catch (SQLException e) {
+			System.out.println(e);
+
+		}
+	}
+		
+		public void UpdateProdottoPrezzoVendita(int codice,double prezzo){
+
+			try {
+			Connection connection = null;
+			PreparedStatement preparedStatement = null;
+			String sql = "UPDATE prodotto SET prezzo_vendita=? WHERE codice="+codice;
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setDouble(1,prezzo);
+
+			preparedStatement.executeUpdate();
+
+			connection.close();
+			
+		}catch (SQLException e) {
+			System.out.println(e);
+
+		}
+	}
+		
+		public void UpdateProdottoMarca(int codice,String marca){
+
+			try {
+			Connection connection = null;
+			PreparedStatement preparedStatement = null;
+			String sql = "UPDATE prodotto SET marca=? WHERE codice="+codice;
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1,marca);
+
+			preparedStatement.executeUpdate();
+
+			connection.close();
+			
+		}catch (SQLException e) {
+			System.out.println(e);
+
+		}
+	}
+		
+		public void UpdateProdottoPezziDisponibili(int codice,int numero_pezzi){
+
+			try {
+			Connection connection = null;
+			PreparedStatement preparedStatement = null;
+			String sql = "UPDATE prodotto SET numero_pezzi_disponibili=? WHERE codice="+codice;
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1,numero_pezzi);
+
+			preparedStatement.executeUpdate();
+
+			connection.close();
+			
+		}catch (SQLException e) {
+			System.out.println(e);
+
+		}
+	}
+
+		
+		public void UpdateProdottoSconto(int codice,int sconto){
+
+			try {
+			Connection connection = null;
+			PreparedStatement preparedStatement = null;
+			String sql = "UPDATE prodotto SET sconto=? WHERE codice="+codice;
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1,sconto);
+
+			preparedStatement.executeUpdate();
+
+			connection.close();
+			
+		}catch (SQLException e) {
+			System.out.println(e);
+
+		}
+	}
+
+		
+		public void UpdateProdottoSpecifiche(int codice,String specifiche){
+
+			try {
+			Connection connection = null;
+			PreparedStatement preparedStatement = null;
+			String sql = "UPDATE prodotto SET specifiche=? WHERE codice="+codice;
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1,specifiche);
+
+			preparedStatement.executeUpdate();
+
+			connection.close();
+			
+		}catch (SQLException e) {
+			System.out.println(e);
+
+		}
+	}
+		
+		public void UpdateProdottoCategoria(int codice,String categoria){
+
+			try {
+			Connection connection = null;
+			PreparedStatement preparedStatement = null;
+			String sql = "UPDATE prodotto SET tipo=? WHERE codice="+codice;
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1,categoria);
+
+			preparedStatement.executeUpdate();
+
+			connection.close();
+			
+		}catch (SQLException e) {
+			System.out.println(e);
+
+		}
+	}
+		
+		public void UpdateProdottoOfferta(int codice,String offerta){
+
+			try {
+			Connection connection = null;
+			PreparedStatement preparedStatement = null;
+			String sql = "UPDATE prodotto SET offerta=? WHERE codice="+codice;
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1,offerta);
+
+			preparedStatement.executeUpdate();
+
+			connection.close();
+			
+		}catch (SQLException e) {
+			System.out.println(e);
+
+		}
+	}
+		
+		public void UpdateProdottoEliminazione(int codice){
+
+			try {
+			Connection connection = null;
+			PreparedStatement preparedStatement = null;
+			String sql = "DELETE FROM prodotto WHERE codice="+codice;
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(sql);
+		
+			preparedStatement.executeUpdate();
+
+			connection.close();
+			
+		}catch (SQLException e) {
+			System.out.println(e);
+
+		}
+	}
 
 	
 }

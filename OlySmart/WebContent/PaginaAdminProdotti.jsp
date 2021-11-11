@@ -6,10 +6,8 @@
 <% 
 
 ProdottoDAO prod= new ProdottoDAO();
-List<Prodotto> prodotti=prod.getAllProducts();//la lista dei prodotti conterrà tutti i prodotti che ci sono nel db dato che li prendiamo con la getAllProducts
+List<Prodotto> prodotti=prod.getAllProductsAdmin();//la lista dei prodotti conterrà tutti i prodotti che ci sono nel db dato che li prendiamo con la getAllProducts
 
-
-ProdottoDAO prodottoDAO=new ProdottoDAO();
 %>
 
 <!-- Piccolo controllo se si sta cercando di accedere come admin se non si è admin o non loggati -->
@@ -64,6 +62,7 @@ ProdottoDAO prodottoDAO=new ProdottoDAO();
 		<th style="border:1px solid">Categoria</th>
 		<th style="border:1px solid">Offerta</th>
 		<th style="border:1px solid">Immagine</th>
+		<th style="border:1px solid">Modifica Prodotto</th>
 
 		
 		</tr >
@@ -73,11 +72,8 @@ ProdottoDAO prodottoDAO=new ProdottoDAO();
 		for(Prodotto p:prodotti){			
 		%>
 		<tr style="border:1px solid">
-		<td style="border:1px solid"><%=p.getCodice() %>,<%=p.getNome() %></td>
-		<td style="border:1px solid"><%=p.getDescrizione() %>
-		
-		<a href="ModificaProdottiAdmin?codice=<%=p.getCodice() %>" data-target="#modalmodificadescrizione" data-toggle="modal">Modifica</a>
-				
+		<td style="border:1px solid"><%=p.getCodice() %>)<%=p.getNome() %></td>
+		<td style="border:1px solid"><%=p.getDescrizione() %>		
 		<td style="border:1px solid"><%=p.getPrezzo_acquisto() %></td>
 		<td style="border:1px solid"><%=p.getDisponibilità() %></td>
 		<td style="border:1px solid"><%=p.getIva() %></td>
@@ -88,7 +84,9 @@ ProdottoDAO prodottoDAO=new ProdottoDAO();
 		<td style="border:1px solid"><%=p.getSpecifiche() %></td>
 		<td style="border:1px solid"><%=p.getTipo() %></td>
 		<td style="border:1px solid"><%=p.getOfferta() %></td>
-		<td style="border:1px solid"><%=p.getImmagine() %></td>		
+		<td style="border:1px solid"><%=p.getImmagine() %></td>
+		<td style="border:1px solid"><a href="ModificaProdottiAdmin.jsp?id=<%=p.getCodice()%>">vai alla pagina di modifica</a></td>
+		
 		</tr>				
 	<% }%>
 		</table>
@@ -96,43 +94,5 @@ ProdottoDAO prodottoDAO=new ProdottoDAO();
 		}	
 %>
 
-
-<!-- ------------------------------------------------------Modal gestione add/update data----------------------------------------------------------------- -->
-<div class="modal fade" id="modalmodificadescrizione" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modifica la descrizione</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <!-- inserisco il form che servirà per gestire le varie scelte da parte del utente -->
-        <form action="ModificaProdottiAdmin" method="post">
-        
-        <!-- indichiamo il nome del form con operation,che sarà uguale per tutti i form,quello che cambia è il valore,in base a quello in ProfiloutenteServlet facciamo diverse operazioni di inserimento/modifica -->
-        <input type="hidden" name="operation" value="addDescrizione">
-        
-      		<div class="form-group">
-      			<textarea name="descrizioneProdotto" placeholder="inserisci una descrizione (visibile nei dettagli del prodotto)" rows="10" cols="100" required></textarea><br> 	     		
-      		</div>
-      	      	
-      		<div class="container text-center">
-      			<button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
-        		<button type="submit" class="btn btn-primary" value="addData">Aggiungi</button>
-      		</div>     	
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
-
-
-
-
-
-	
 </body>
 </html>

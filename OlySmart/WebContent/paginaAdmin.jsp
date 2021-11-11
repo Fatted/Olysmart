@@ -16,17 +16,18 @@
 		return;
 	}
 		}
-%>
 
-      		<%
-      		CategoriaDAO cat=new CategoriaDAO();
+     		CategoriaDAO cat=new CategoriaDAO();
       		List<Categoria> categorialista=cat.getCategorie();     		
       		
       		ProdottoDAO prod= new ProdottoDAO();
-      		List<Prodotto> prodotti=prod.getAllProducts();
+      		List<Prodotto> prodotti=prod.getAllProductsAdmin();
       		
       		ClienteDAO clientelista=new ClienteDAO();
       		List<Cliente> listaclienti=clientelista.getUtentiRegistrati();
+      		
+      		OrdineDAO ordine=new OrdineDAO();
+      		List<Ordine> ordini=ordine.ordini();
       		
       		%>
 
@@ -84,10 +85,14 @@
 				</button>	
             </td>
             
-            <td class="prodotti"><img src="Immagini/Admin/prodotti.jpeg">
-              
-  					<a href="PaginaAdminProdotti.jsp" class="btn btn-primary">Prodotti presenti</a><!-- viene gestita direttamente dalla pagina PaginaAdminProdotti.jsp -->
-			
+            <td class="prodotti"><img src="Immagini/Admin/prodotti.jpeg">            
+  			<a href="PaginaAdminProdotti.jsp" class="btn btn-primary">Prodotti presenti</a><!-- viene gestita direttamente dalla pagina PaginaAdminProdotti.jsp -->
+            </td>
+            
+            <td class="categorie"><img src="Immagini/Admin/ordini.png">
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalordini">
+  					Visualizza Ordini
+				</button>	
             </td>
         </tr>
         </table>
@@ -104,6 +109,7 @@
   					Inserisci Prodotto
 				</button>
             </td>
+            
         </tr>
     </table>
 </section>
@@ -298,5 +304,67 @@
     </div>
   </div>
 </div>
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!------------------------------------------------------- Modal visualizzazione clienti ----------------------------------------------------------------------------------------------->
+<div class="modal fade" id="modalordini" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Utenti Presenti</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+<!-------------------- inserisco il form che servirà per gestire le varie scelte da parte dell'admin alla servlet di prodottioperazioneservlet------------------------------------- -->
+        <form action="ProdottiOperazioneServlet" method="post">
+  
+      		<div class="form-group">
+      		
+      		<h1 style="text-align:center">Oridni Presenti</h1>
+      		<table>
+      		
+      		<tr>
+				<th style="border:1px solid">codice</th>
+				<th style="border:1px solid">costo totale</th>
+				<th style="border:1px solid">data</th>
+				<th style="border:1px solid">prezzo singolo prodotto</th>
+				<th style="border:1px solid">nome prodotto</th>
+				<th style="border:1px solid">quantità prodotto</th>
+				<th style="border:1px solid">tipo spedizione</th>
+				<th style="border:1px solid">indirizzo consegna</th>
+				<th style="border:1px solid">username</th>
+			</tr>
+			<%	
+			//for each che fa vedere tutti i clienti registrati nel database con i relativi valori
+			for(Ordine ordinestampa:ordini){%>
+				<tr style="border:1px solid">
+				<td style="border:1px solid"><%=ordinestampa.getCodice() %></td> 
+				<td style="border:1px solid"><%=ordinestampa.getCosto_totale() %></td>
+				<td style="border:1px solid"><%=ordinestampa.getData() %></td>
+				<td style="border:1px solid"><%=ordinestampa.getPrezzo_prodotto_singolo() %></td>
+				<td style="border:1px solid"><%=ordinestampa.getNome_prodotto() %></td>
+				<td style="border:1px solid"><%=ordinestampa.getQuantità_prodotto() %></td>
+				<td style="border:1px solid"><%=ordinestampa.getTipo_spedizione() %>
+				<td style="border:1px solid"><%=ordinestampa.getIndirizzo_consegna() %>
+				<td style="border:1px solid"><%=ordinestampa.getUsername() %>			
+				</tr>
+			<%
+			}
+			%>
+			</table>
+      			
+      		</div>
+      	
+      		<div class="container text-center">
+      			<button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+      		</div>     	
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 </body>
 </html>

@@ -42,17 +42,89 @@ public class ModificaProdottiAdmin extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String operazione=request.getParameter("operation");
-		int codice=Integer.parseInt(request.getParameter("codice"));
+		int id=Integer.parseInt(request.getParameter("id"));
 		
+		
+		if(operazione.equals("addNome")) {
+			String nome=request.getParameter("nome");
+			ProdottoDAO prodottoDAO=new ProdottoDAO();		
+			prodottoDAO.UpdateProdottoNome(id,nome);
+			response.sendRedirect("ModificaProdottiAdmin.jsp?id="+id);						
+		}
 		if(operazione.equals("addDescrizione")) {
 			String descrizione=request.getParameter("descrizioneProdotto");
-			System.out.print(descrizione);
-
-			
-			ProdottoDAO prodottoDAO=new ProdottoDAO();
-			prodottoDAO.UpdateProdottoDescrizione(codice,descrizione);
-			response.sendRedirect("PaginaAdminProdotti.jsp");						
+			ProdottoDAO prodottoDAO=new ProdottoDAO();		
+			prodottoDAO.UpdateProdottoDescrizione(id,descrizione);
+			response.sendRedirect("ModificaProdottiAdmin.jsp?id="+id);						
 		}
+		if(operazione.equals("addPrezzoAcquisto")) {
+			double prezzo=Double.valueOf(request.getParameter("prezzoacquisto"));
+			ProdottoDAO prodottoDAO=new ProdottoDAO();		
+			prodottoDAO.UpdateProdottoPrezzoAcquisto(id,prezzo);
+			response.sendRedirect("ModificaProdottiAdmin.jsp?id="+id);						
+		}
+		if(operazione.equals("addDisponibilita")) {
+			String disponibilita=request.getParameter("disponibilita");
+			ProdottoDAO prodottoDAO=new ProdottoDAO();		
+			prodottoDAO.UpdateProdottoDisponibilita(id,disponibilita);
+			response.sendRedirect("ModificaProdottiAdmin.jsp?id="+id);						
+		}
+		if(operazione.equals("addIva")) {
+			int iva=Integer.parseInt(request.getParameter("iva"));
+			ProdottoDAO prodottoDAO=new ProdottoDAO();		
+			prodottoDAO.UpdateProdottoIva(id,iva);
+			response.sendRedirect("ModificaProdottiAdmin.jsp?id="+id);						
+		}
+		if(operazione.equals("addPrezzoVendita")) {
+			double prezzo=Double.valueOf(request.getParameter("prezzovendita"));
+			ProdottoDAO prodottoDAO=new ProdottoDAO();		
+			prodottoDAO.UpdateProdottoPrezzoVendita(id,prezzo);
+			response.sendRedirect("ModificaProdottiAdmin.jsp?id="+id);						
+		}
+		if(operazione.equals("addMarca")) {
+			String marca=request.getParameter("marca");
+			ProdottoDAO prodottoDAO=new ProdottoDAO();		
+			prodottoDAO.UpdateProdottoMarca(id,marca);
+			response.sendRedirect("ModificaProdottiAdmin.jsp?id="+id);						
+		}
+		if(operazione.equals("addPezziDisponibili")) {
+			int pezzi=Integer.parseInt(request.getParameter("pezzidisponibili"));
+			ProdottoDAO prodottoDAO=new ProdottoDAO();		
+			prodottoDAO.UpdateProdottoPezziDisponibili(id,pezzi);
+			response.sendRedirect("ModificaProdottiAdmin.jsp?id="+id);						
+		}
+		if(operazione.equals("addSconto")) {
+			int sconto=Integer.parseInt(request.getParameter("sconto"));
+			ProdottoDAO prodottoDAO=new ProdottoDAO();		
+			prodottoDAO.UpdateProdottoSconto(id,sconto);
+			response.sendRedirect("ModificaProdottiAdmin.jsp?id="+id);						
+		}
+		if(operazione.equals("addSpecifiche")) {
+			String specifiche=request.getParameter("specifiche");
+			ProdottoDAO prodottoDAO=new ProdottoDAO();		
+			prodottoDAO.UpdateProdottoSpecifiche(id,specifiche);
+			response.sendRedirect("ModificaProdottiAdmin.jsp?id="+id);						
+		}
+		if(operazione.equals("addCategoria")) {
+			String categoria=request.getParameter("categoria");
+			ProdottoDAO prodottoDAO=new ProdottoDAO();		
+			prodottoDAO.UpdateProdottoCategoria(id,categoria);
+			response.sendRedirect("ModificaProdottiAdmin.jsp?id="+id);						
+		}
+		if(operazione.equals("addOfferta")) {
+			String offerta=request.getParameter("offerta");
+			ProdottoDAO prodottoDAO=new ProdottoDAO();		
+			prodottoDAO.UpdateProdottoOfferta(id,offerta);
+			response.sendRedirect("ModificaProdottiAdmin.jsp?id="+id);						
+		}
+		if(operazione.equals("EliminaProdotto")) {
+			ProdottoDAO prodottoDAO=new ProdottoDAO();		
+			prodottoDAO.UpdateProdottoEliminazione(id);
+			response.sendRedirect("PaginaAdminProdotto.jsp");						
+		}
+		
+		
+		
 		doGet(request, response);
 	}
 
