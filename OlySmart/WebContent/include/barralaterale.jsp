@@ -1,3 +1,7 @@
+<%@page import="model.*" %>
+<%@page import="control.*" %>
+<%@page import="java.util.*" %>
+
 <section id="menu">
          <div class="sidebar close">
              <ul class="nav-links">

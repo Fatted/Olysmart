@@ -58,9 +58,41 @@ public class SpedizioneDAO {
 			System.out.println("Errore");
 
 		}
-		return listaSpedizioni;
+		return listaSpedizioni;		
+	}
+	
+	
+	
+	
+	
+	//metodo usato per stampare tutti gli ordini effetuati dal cliente con un determinato username,ritorniamo una lista di ordini,visibile in MyOrder.jsp
+	public String getSpedizioneTipo(int costo){
+		String tipo=null;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
 		
-
+try {
+			
+			String sql = "SELECT Tipo FROM spedizione where costo="+costo;
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(sql);		
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			while(rs.next()) {
+			tipo=rs.getString("Tipo");
+			}
+								
+		} catch (SQLException e) {			
+			System.out.println(e);		
+				if (connection != null)
+					try {
+						connection.close();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+			}
+return tipo;		
 	}
 	
 }

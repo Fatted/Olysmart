@@ -43,6 +43,8 @@ public class CheckOutServlet extends HttpServlet {
 			HttpSession session=request.getSession();
 		    ArrayList<Carrello> prodotti_carrello=(ArrayList<Carrello>)session.getAttribute("listacarrello");
 		    List<Carrello> prodottocarrello=null;
+		    
+		    SpedizioneDAO tipo=new SpedizioneDAO();
 		      
 		      double totale=0;
 		      		     					      
@@ -53,7 +55,9 @@ public class CheckOutServlet extends HttpServlet {
 		    	 
 		      	 prodottocarrello=prodotto.getProdottiCarrello(prodotti_carrello);//prodottocarrello conterrà tutti i prodotti presenti nella sessione del carrello
 		      	 
-		      	 request.getAttribute("prodotti_carrello"); 	
+		      	int spedizionecosto=Integer.parseInt(request.getParameter("spedizione"));
+		      	String tipospedizione=tipo.getSpedizioneTipo(spedizionecosto);
+		      	
 		      			   			
 			//prendo il cliente corrente
 			Cliente cliente=(Cliente) request.getSession().getAttribute("cliente-corrente");
@@ -69,10 +73,10 @@ public class CheckOutServlet extends HttpServlet {
 					//effettuo un for each per settare all'ordine tutti i valori che mi prendo dai prodotti presenti nel carrello								
 					for(Carrello pcarrello:prodottocarrello) {					
 					ordine.setCodice(0);
-					ordine.setCosto_totale(totale);
+					ordine.setCosto_totale(totale+spedizionecosto);
 					ordine.setData(formatter.format(data));
 					ordine.setUsername(cliente.getUsername());
-					ordine.setTipo_spedizione("");
+					ordine.setTipo_spedizione(tipospedizione);
 					ordine.setQuantità_prodotto(pcarrello.getQuantita());
 					ordine.setIndirizzo_consegna(indirizzo);
 					ordine.setNome_prodotto(pcarrello.getNome());

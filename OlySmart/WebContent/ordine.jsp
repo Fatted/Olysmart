@@ -52,6 +52,7 @@
 <br>
 </p>
 
+<form action="CheckOutServlet">
 Seleziona tipo di spedizione:
 <%
 Iterator<Spedizione> iteratore=spedizioni.iterator();
@@ -103,9 +104,9 @@ while(iteratore.hasNext()){
 
 
 <%if(cliente.getIntestatario_carta()==null){%><a href="MyAccount.jsp">Inserisci metodo di pagamento per continuare</a>
-<%}else{%><a href="CheckOutServlet">Conferma pagamento</a>	
+<%}else{%><input type="submit" value="conferma pagamento">
 <%}%>
-
+</form>
 
 <script>
 var totale = document.getElementById("totale").textContent;
