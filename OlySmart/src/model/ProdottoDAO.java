@@ -107,7 +107,7 @@ public class ProdottoDAO {
 			}
 		connection.close();
 		} catch (SQLException e) {
-			System.out.println("Errore");
+			System.out.println(e);
 
 		}
 		return prodotti;

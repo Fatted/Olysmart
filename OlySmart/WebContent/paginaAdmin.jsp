@@ -336,6 +336,8 @@
 				<th style="border:1px solid">tipo spedizione</th>
 				<th style="border:1px solid">indirizzo consegna</th>
 				<th style="border:1px solid">username</th>
+				<th style="border:1px solid">stato ordine</th>
+				
 			</tr>
 			<%	
 			//for each che fa vedere tutti i clienti registrati nel database con i relativi valori
@@ -349,7 +351,8 @@
 				<td style="border:1px solid"><%=ordinestampa.getQuantità_prodotto() %></td>
 				<td style="border:1px solid"><%=ordinestampa.getTipo_spedizione() %>
 				<td style="border:1px solid"><%=ordinestampa.getIndirizzo_consegna() %>
-				<td style="border:1px solid"><%=ordinestampa.getUsername() %>			
+				<td style="border:1px solid"><%=ordinestampa.getUsername() %>
+				<td style="border:1px solid"><%=ordinestampa.getStato() %><br><a href="ModificaStatoOrdini.jsp?idordine=<%=ordinestampa.getCodice()%>">Modifica</a>			
 				</tr>
 			<%
 			}

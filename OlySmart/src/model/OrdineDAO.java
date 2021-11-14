@@ -37,7 +37,7 @@ public class OrdineDAO {
 		
 		try {
 			
-			String sql = "INSERT INTO ordine (`codice`, `costo_totale`, `data`, `prezzo_singolo_prodotto`, `username`, `tipo_spedizione`, `quantità_prodotto`, `indirizzo_consegna`,`nome_prodotto`) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?); ";
+			String sql = "INSERT INTO ordine (`codice`, `costo_totale`, `data`, `prezzo_singolo_prodotto`, `username`, `tipo_spedizione`, `quantità_prodotto`, `indirizzo_consegna`,`stato`,) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?); ";
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(sql);
 			
@@ -50,6 +50,7 @@ public class OrdineDAO {
 			preparedStatement.setInt(7, ordine.getQuantità_prodotto());
 			preparedStatement.setString(8, ordine.getIndirizzo_consegna());
 			preparedStatement.setString(9, ordine.getNome_prodotto());
+			preparedStatement.setString(10, ordine.getStato());
 			
 			
 			preparedStatement.executeUpdate();
@@ -93,6 +94,7 @@ try {
 				ordine.setQuantità_prodotto(rs.getInt("quantità_prodotto"));
 				ordine.setIndirizzo_consegna(rs.getString("indirizzo_consegna"));
 				ordine.setNome_prodotto(rs.getString("nome_prodotto"));
+				ordine.setStato(rs.getString("stato"));
 				
 				listaordini.add(ordine);		
 			}
@@ -137,6 +139,7 @@ try {
 				ordine.setQuantità_prodotto(rs.getInt("quantità_prodotto"));
 				ordine.setIndirizzo_consegna(rs.getString("indirizzo_consegna"));
 				ordine.setNome_prodotto(rs.getString("nome_prodotto"));
+				ordine.setStato(rs.getString("stato"));
 				
 				listaordini.add(ordine);		
 			}
@@ -156,6 +159,73 @@ try {
 		
 	}
 	
+	
+	
+	public void UpdateOrdineStato(int codice,String stato){
+
+		try {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		String sql = "UPDATE ordine SET stato=? WHERE codice="+codice;
+		connection = ds.getConnection();
+		preparedStatement = connection.prepareStatement(sql);
+		preparedStatement.setString(1,stato);
+
+		preparedStatement.executeUpdate();
+
+		connection.close();
+		
+	}catch (SQLException e) {
+		System.out.println(e);
+
+	}
+}
+
+
+	
+	public List<Ordine> ordineCambiamento(int codice){
+		List<Ordine> listaordini=new ArrayList<>();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+try {
+			
+			String sql = "SELECT * FROM ordine WHERE codice=? ";
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, codice);		
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			while(rs.next()) {
+				Ordine ordine=new Ordine();
+				ordine.setCodice(rs.getInt("codice"));
+				ordine.setCosto_totale(rs.getDouble("costo_totale"));
+				ordine.setData(rs.getString("data"));
+				ordine.setPrezzo_prodotto_singolo(rs.getDouble("prezzo_singolo_prodotto"));
+				ordine.setUsername(rs.getString("username"));
+				ordine.setTipo_spedizione(rs.getString("tipo_spedizione"));
+				ordine.setQuantità_prodotto(rs.getInt("quantità_prodotto"));
+				ordine.setIndirizzo_consegna(rs.getString("indirizzo_consegna"));
+				ordine.setNome_prodotto(rs.getString("nome_prodotto"));
+				ordine.setStato(rs.getString("stato"));
+				
+				listaordini.add(ordine);		
+			}
+								
+		} catch (SQLException e) {			
+			System.out.println(e);		
+				if (connection != null)
+					try {
+						connection.close();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+			}
+		
+		return listaordini;
+		
+	}
 	
 	
 

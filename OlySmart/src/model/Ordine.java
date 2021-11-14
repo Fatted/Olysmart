@@ -15,6 +15,19 @@ public class Ordine{
 	private int quantità_prodotto;
 	private String indirizzo_consegna;
 	private String nome_prodotto;
+	private String stato;
+	/**
+	 * @return the stato
+	 */
+	public String getStato() {
+		return stato;
+	}
+	/**
+	 * @param stato the stato to set
+	 */
+	public void setStato(String stato) {
+		this.stato = stato;
+	}
 	/**
 	 * @return the nome_prodotto
 	 */

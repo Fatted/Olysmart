@@ -32,7 +32,7 @@
 <%
 if(ordini.size()>0){
 	for(Ordine ordine:ordini){%>
-		<p>Nome:<%=ordine.getNome_prodotto() %>/Quantità:<%=ordine.getQuantità_prodotto() %>/Prezzo singolo:<%=ordine.getPrezzo_prodotto_singolo() %>/Prezzo totale:<%=ordine.getCosto_totale() %></p>
+		<p>Nome:<%=ordine.getNome_prodotto() %>/Quantità:<%=ordine.getQuantità_prodotto() %>/Prezzo singolo:<%=ordine.getPrezzo_prodotto_singolo() %>/Prezzo totale:<%=ordine.getCosto_totale() %>,Stato:<%=ordine.getStato() %></p>
 
 	<%}
 }else{%>
