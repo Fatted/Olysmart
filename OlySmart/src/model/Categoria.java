@@ -82,31 +82,14 @@ public Categoria(int numero,String nome) {
 			preparedStatement.setInt(1, numero);
 			preparedStatement.setString(2, nome);
 			preparedStatement.executeUpdate();
-			System.out.println("categoria inserita");
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			try {
-				if (preparedStatement != null)
-					try {
-						preparedStatement.close();
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-			} finally {
-
-				if (connection != null)
-					try {
-						connection.close();
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-			}
+			connection.close();
+					
+		} catch (SQLException e) {						
+		e.printStackTrace();
 		}
+			
 	}
+		
+	
 	
 }

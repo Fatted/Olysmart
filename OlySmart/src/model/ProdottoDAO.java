@@ -402,6 +402,7 @@ try {
 return totale;
 }
 	
+	
 //metodo che ritorna il prodotto avente il codice passato
 	public List<Prodotto> getProductsForCodice(int codice){
 		List<Prodotto> prodotti=new ArrayList<Prodotto>();

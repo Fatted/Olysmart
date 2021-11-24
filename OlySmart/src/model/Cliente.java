@@ -162,35 +162,13 @@ public class Cliente {
 					this.setIntestatario_carta(rs.getString(16));
 					this.setCircuito_carta(rs.getString(17));
 					
-					
 				}
-				
-				
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} finally {
-				try {
-					if (preparedStatement != null)
-						try {
-							preparedStatement.close();
-						} catch (SQLException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-				} finally {
-
-					if (connection != null)
-						try {
-							connection.close();
-						} catch (SQLException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-				}
-			}
-			
+				connection.close();
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+	}
 	
 
 	public static DataSource getDs() {

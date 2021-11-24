@@ -81,18 +81,19 @@ try {
 			while(rs.next()) {
 			tipo=rs.getString("Tipo");
 			}
+			
+			connection.close();
 								
 		} catch (SQLException e) {			
 			System.out.println(e);		
-				if (connection != null)
-					try {
-						connection.close();
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-			}
-return tipo;		
+					
 	}
-	
+
+return tipo;
+	}
+
+
+
 }
+	
+

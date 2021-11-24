@@ -37,7 +37,7 @@ public class OrdineDAO {
 		
 		try {
 			
-			String sql = "INSERT INTO ordine (`codice`, `costo_totale`, `data`, `prezzo_singolo_prodotto`, `username`, `tipo_spedizione`, `quantità_prodotto`, `indirizzo_consegna`,`stato`,) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?); ";
+			String sql = "INSERT INTO ordine (`codice`, `costo_totale`, `data`, `prezzo_singolo_prodotto`, `username`, `tipo_spedizione`, `quantità_prodotto`, `indirizzo_consegna`,`nome_prodotto`,`stato`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?); ";
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(sql);
 			
@@ -50,20 +50,15 @@ public class OrdineDAO {
 			preparedStatement.setInt(7, ordine.getQuantità_prodotto());
 			preparedStatement.setString(8, ordine.getIndirizzo_consegna());
 			preparedStatement.setString(9, ordine.getNome_prodotto());
-			preparedStatement.setString(10, ordine.getStato());
+			preparedStatement.setString(10, "preso in carico");
 			
 			
 			preparedStatement.executeUpdate();
+			connection.close();
 			
 		} catch (SQLException e) {			
 			System.out.println(e);		
-				if (connection != null)
-					try {
-						connection.close();
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+				
 			}
 	}
 	
@@ -97,18 +92,12 @@ try {
 				ordine.setStato(rs.getString("stato"));
 				
 				listaordini.add(ordine);		
+				connection.close();
 			}
 								
 		} catch (SQLException e) {			
 			System.out.println(e);		
-				if (connection != null)
-					try {
-						connection.close();
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-			}
+		}
 		
 		return listaordini;
 		
@@ -142,18 +131,13 @@ try {
 				ordine.setStato(rs.getString("stato"));
 				
 				listaordini.add(ordine);		
+				connection.close();
 			}
 								
 		} catch (SQLException e) {			
 			System.out.println(e);		
-				if (connection != null)
-					try {
-						connection.close();
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-			}
+		}
+			
 		
 		return listaordini;
 		
@@ -209,20 +193,14 @@ try {
 				ordine.setNome_prodotto(rs.getString("nome_prodotto"));
 				ordine.setStato(rs.getString("stato"));
 				
-				listaordini.add(ordine);		
+				listaordini.add(ordine);
+				connection.close();
 			}
 								
 		} catch (SQLException e) {			
 			System.out.println(e);		
-				if (connection != null)
-					try {
-						connection.close();
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-			}
-		
+		}
+
 		return listaordini;
 		
 	}
