@@ -29,6 +29,9 @@
       		OrdineDAO ordine=new OrdineDAO();
       		List<Ordine> ordini=ordine.ordini();
       		
+      		RecensioneDAO Recensione=new RecensioneDAO();
+      		List<Recensione> recensioni=Recensione.recensioni();
+      		
       		%>
 
 
@@ -97,8 +100,9 @@
         </tr>
         </table>
         <table class="secondo">
-        <tr >
+        <tr>
             <td class="addcate"><img src="Immagini/Admin/addCategoria.jpeg">
+            <br>
                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalcategoria">
   					Inserisci categoria
 				</button>
@@ -107,6 +111,12 @@
                 <br>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalprodotto">
   					Inserisci Prodotto
+				</button>
+            </td>
+             <td class="addcate"><img src="Immagini/Admin/Recensioni.jpeg">
+            <br>
+               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalrecensioni">
+  					Visualizza recensioni
 				</button>
             </td>
             
@@ -312,7 +322,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Utenti Presenti</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Ordini Presenti</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -332,11 +342,13 @@
 				<th style="border:1px solid">data</th>
 				<th style="border:1px solid">prezzo singolo prodotto</th>
 				<th style="border:1px solid">nome prodotto</th>
+				<th style="border:1px solid">Codice prodotto</th>
 				<th style="border:1px solid">quantità prodotto</th>
 				<th style="border:1px solid">tipo spedizione</th>
 				<th style="border:1px solid">indirizzo consegna</th>
 				<th style="border:1px solid">username</th>
 				<th style="border:1px solid">stato ordine</th>
+				
 				
 			</tr>
 			<%	
@@ -348,6 +360,7 @@
 				<td style="border:1px solid"><%=ordinestampa.getData() %></td>
 				<td style="border:1px solid"><%=ordinestampa.getPrezzo_prodotto_singolo() %></td>
 				<td style="border:1px solid"><%=ordinestampa.getNome_prodotto() %></td>
+				<td style="border:1px solid"><%=ordinestampa.getProdotto_codice() %></td>
 				<td style="border:1px solid"><%=ordinestampa.getQuantità_prodotto() %></td>
 				<td style="border:1px solid"><%=ordinestampa.getTipo_spedizione() %>
 				<td style="border:1px solid"><%=ordinestampa.getIndirizzo_consegna() %>
@@ -369,7 +382,53 @@
     </div>
   </div>
 </div>
-
-
+<!------------------------------------------------------- Modal visualizzazione recensioni ----------------------------------------------------------------------------------------------->
+<div class="modal fade" id="modalrecensioni" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Recensioni presenti</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+<!-------------------- inserisco il form che servirà per gestire le varie scelte da parte dell'admin alla servlet di prodottioperazioneservlet------------------------------------- -->
+        	
+        	<div class="form-group">
+      		<h1 style="text-align:center">Recensioni clienti</h1>
+      		<table>     		
+      		<tr>
+				<th style="border:1px solid">Username</th>
+				<th style="border:1px solid">Codice prodotto</th>
+				<th style="border:1px solid">Titolo</th>
+				<th style="border:1px solid">Commento</th>
+				<th style="border:1px solid">voto</th>		
+			</tr>
+			<%	
+			//for each che fa vedere tutti i clienti registrati nel database con i relativi valori
+			for(Recensione recensione:recensioni){%>
+				<tr style="border:1px solid">
+				<td style="border:1px solid"><%=recensione.getUsernameCliente() %></td> 
+				<td style="border:1px solid"><%=recensione.getCodiceProdotto() %></td> 
+				<td style="border:1px solid"><%=recensione.getTitolo() %></td> 
+				<td style="border:1px solid"><%=recensione.getCommento()%></td> 
+				<td style="border:1px solid"><%=recensione.getVoto() %></td> 
+		
+				</tr>
+			<%
+			}
+			%>
+			</table>
+      			
+      		</div>
+      	
+      		<div class="container text-center">
+      			<button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+      		</div>     	
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>

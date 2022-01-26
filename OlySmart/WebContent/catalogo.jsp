@@ -49,13 +49,11 @@ if(cliente!=null){
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <script src="https://kit.fontawesome.com/12aebee45b.js"></script>
-    <link rel="stylesheet" href="CSS/style.css">
-    <link rel="stylesheet" media="screen and (max-width:4096px) (min-width:1024px)" href="CSS/large.css">
-    <link rel="stylesheet" media="screen and (max-width:500px)" href="CSS/mobile.css">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="CSS/stile-responsive.css">
+	<link rel="stylesheet" href="CSS/stylecata.css">
+
+    
 <title>OlySmartWeb Catalogo</title>
 </head>
 
@@ -112,6 +110,7 @@ if(cliente!=null){
 <!------------------------------------------- fine barra -----------------------------------------------------------------------------------------------> 
                
         </div>
+       
     <div class="ultimo">
     <div class="accesso">
  <!-------------------------------------------controlliamo se il cliente ha fatto l'accesso ------------------------------------------------------------->    
@@ -150,7 +149,7 @@ if(cliente!=null){
 <!-- ------------------------------------------------------------------------------------------------------------------------------------------------ -->
 
    
-<section id="piuvenduti">
+
 <%
 //se la quantità dei prodotti è zero stampa nessun prodotto disponibile al momento
 if(prodotti.size()==0){%>
@@ -159,8 +158,8 @@ if(prodotti.size()==0){%>
 
 	<%if(!prodotti.isEmpty()){%>
 
-<div class="prodpiuvend">		
-		<table>	    
+		<table id="catalogo">
+			<tbody>    
 		<!-- Stampa dei prodotti messi in 3 colonne per ogni riga -->		   
 	   <%
 	   //uso 3 iteratori in modo tale da poter andare a capo ogni 3 prodotti messi di fianco
@@ -172,9 +171,10 @@ if(prodotti.size()==0){%>
 	    while(iteratore.hasNext()){	    	
 	    	p1=iteratore.next();	    		    		    
 	    %>
+	    
 		    <tr>
 		        <td>
-		             <div class="container">
+		           <div class="container">
 		           <img src="Immagini/Prodotti/<%=p1.getImmagine() %>" height="250px" width="250px" class="image">
 		           <div class="overlay">
 		            <div class="text"><%=p1.getSpecifiche() %></div> 
@@ -186,10 +186,10 @@ if(prodotti.size()==0){%>
 		        <a href="dettagli.jsp?id=<%=p1.getCodice() %>">dettagli</a>
 		        </td>
 
-		        <td>
-		        
+		        		        
 		        <% if(iteratore.hasNext()){
 		    		p2=iteratore.next(); %>
+		    	<td>
 		             <div class="container">
 		           <img src="Immagini/Prodotti/<%=p2.getImmagine() %>" height="250px" width="250px" class="image">
 		           <div class="overlay">
@@ -202,9 +202,10 @@ if(prodotti.size()==0){%>
 		        <a href="dettagli.jsp?id=<%=p2.getCodice() %>">dettagli</a>
 		        </td>
 				
+				
 				<%if(iteratore.hasNext()){
 		    		p3=iteratore.next(); %>
-		        <td>
+		    	<td>
 		             <div class="container">
 		           <img src="Immagini/Prodotti/<%=p3.getImmagine() %>" height="250px" width="250px" class="image">
 		           <div class="overlay">
@@ -217,14 +218,14 @@ if(prodotti.size()==0){%>
 		        <a href="dettagli.jsp?id=<%=p3.getCodice() %>">dettagli</a>
 		        </td>
 		    </tr>
+		    
+		    
 		<%	}	
 		   }
 	    }
 	}				    				
-%>		
+%>		</tbody>
 	</table>
-</div>
-</section>
 
 
 <!-- -------------------------------------------------inclusione footer------------------------------------------------------------------------------------------------ -->

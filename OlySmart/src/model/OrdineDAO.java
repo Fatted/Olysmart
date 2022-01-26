@@ -37,7 +37,7 @@ public class OrdineDAO {
 		
 		try {
 			
-			String sql = "INSERT INTO ordine (`codice`, `costo_totale`, `data`, `prezzo_singolo_prodotto`, `username`, `tipo_spedizione`, `quantità_prodotto`, `indirizzo_consegna`,`nome_prodotto`,`stato`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?); ";
+			String sql = "INSERT INTO ordine (`codice`, `costo_totale`, `data`, `prezzo_singolo_prodotto`, `username`, `tipo_spedizione`, `quantità_prodotto`, `indirizzo_consegna`,`nome_prodotto`,`stato`,`prodotto_codice`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?); ";
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(sql);
 			
@@ -51,6 +51,7 @@ public class OrdineDAO {
 			preparedStatement.setString(8, ordine.getIndirizzo_consegna());
 			preparedStatement.setString(9, ordine.getNome_prodotto());
 			preparedStatement.setString(10, "preso in carico");
+			preparedStatement.setInt(11, ordine.getProdotto_codice());
 			
 			
 			preparedStatement.executeUpdate();
@@ -90,11 +91,13 @@ try {
 				ordine.setIndirizzo_consegna(rs.getString("indirizzo_consegna"));
 				ordine.setNome_prodotto(rs.getString("nome_prodotto"));
 				ordine.setStato(rs.getString("stato"));
+				ordine.setProdotto_codice(rs.getInt("prodotto_codice"));
+				
 				
 				listaordini.add(ordine);		
-				connection.close();
+				
 			}
-								
+			connection.close();					
 		} catch (SQLException e) {			
 			System.out.println(e);		
 		}
@@ -107,11 +110,11 @@ try {
 	//metodo usato per stampare tutti gli ordini effetuati dal cliente con un determinato username,ritorniamo una lista di ordini,visibile in MyOrder.jsp
 	public List<Ordine> ordini(){
 		List<Ordine> listaordini=new ArrayList<>();
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
+		
 		
 try {
-			
+			Connection connection = null;
+			PreparedStatement preparedStatement = null;
 			String sql = "SELECT * FROM ordine";
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(sql);		
@@ -129,11 +132,12 @@ try {
 				ordine.setIndirizzo_consegna(rs.getString("indirizzo_consegna"));
 				ordine.setNome_prodotto(rs.getString("nome_prodotto"));
 				ordine.setStato(rs.getString("stato"));
+				ordine.setProdotto_codice(rs.getInt("prodotto_codice"));
 				
 				listaordini.add(ordine);		
-				connection.close();
+				
 			}
-								
+			connection.close();					
 		} catch (SQLException e) {			
 			System.out.println(e);		
 		}
@@ -169,11 +173,9 @@ try {
 	
 	public List<Ordine> ordineCambiamento(int codice){
 		List<Ordine> listaordini=new ArrayList<>();
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		
 try {
-			
+			Connection connection = null;
+			PreparedStatement preparedStatement = null;
 			String sql = "SELECT * FROM ordine WHERE codice=? ";
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(sql);
@@ -192,11 +194,11 @@ try {
 				ordine.setIndirizzo_consegna(rs.getString("indirizzo_consegna"));
 				ordine.setNome_prodotto(rs.getString("nome_prodotto"));
 				ordine.setStato(rs.getString("stato"));
+				ordine.setProdotto_codice(rs.getInt("prodotto_codice"));
 				
 				listaordini.add(ordine);
-				connection.close();
 			}
-								
+			connection.close();					
 		} catch (SQLException e) {			
 			System.out.println(e);		
 		}

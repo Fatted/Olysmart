@@ -1,48 +1,50 @@
 *{
     margin: 0;
     padding: 0;
-  
   }
 
 
 body{
+	width:100%;
+	height:100%;
     margin: 0;
     padding: 0;
     background: #ffffff;
     font-family: sans seriff;
 }
 
+#section{
+	width:100%;
+	height:100%;
+	justify-content:center;
+}
+#section .intestazione {
+	width:100%;
+}
+#section .intestazione .image{
+	margin:0;
+	padding:0;
+  width:15%;
+  
+}
+#section .intestazione .image .logo{
+  width: 100%;
+  height: 100%;
+   
+}
 .loginbox{
-    width: 320px;
-    height: 420px;
+	text-align:center;
+    width: 100%;
+    height: 50%;
     background: #ffffff;
-    top: 35%;
-    left: 50%;
-    position: absolute;
-    transform: translate(-50%, -50%);
     box-sizing: border-box;
-    padding: 70px 30px;
-
-}
-
-h1{
-    margin: 0;
-    padding: 0 0 20px;
-    text-align: center;
-    font-size: 22px;
-}
-
-.loginbox p{
-    margin: 0;
-    padding: 0;
-    font-weight: bold;
+    
 }
 
 .loginbox input{
-    width: 100%;
+    width: 20%;
     margin-bottom: 20px;
 }
-
 .loginbox input[type="text"], input[type="password"]{
     border: none;
     border-bottom: 1px solid;
@@ -51,46 +53,28 @@ h1{
     height: 40px;
     color: #000000;
     font-size: 16px;
-}
+} 
 
 .loginbox input[type="submit"]{
     border: none;
     outline: none;
     height: 40px;
-    background: #fb2525;
+    background: #ffde49;
     color: #ffffff;
-    font-size: 18px;
-    border-radius: 20px;
+    font-size: 20px;
+    border-radius: 30px;
 }
 
 .loginbox input[type="submit"]:hover{
     cursor:pointer;
-    background: #ffc107;
+    background: #ffde49;
     color:#000;
 }
 
-.loginbox a{
-    text-decoration: none;
-    font-size: 12px;
-    line-height: 20px;
-    color: darkgray;
-}
-
-.loginbox a:hover{
-    color: #ffc107;
-}
-
-.testo h1 {
-    color: black;
-    font-size: 8rem;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
-
-
-
 /*Footer*/
 #footer{
-    margin-top: 80rem;
+	width:100%;
+    margin-top: 10rem;
     background: #4d4d4d;
     color: #fff;
     padding: 30px;

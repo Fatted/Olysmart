@@ -58,6 +58,7 @@
 				<th style="border:1px solid">data</th>
 				<th style="border:1px solid">prezzo singolo prodotto</th>
 				<th style="border:1px solid">nome prodotto</th>
+				<th style="border:1px solid">Codice prodotto</th>
 				<th style="border:1px solid">quantità prodotto</th>
 				<th style="border:1px solid">tipo spedizione</th>
 				<th style="border:1px solid">indirizzo consegna</th>
@@ -74,6 +75,7 @@
 				<td style="border:1px solid"><%=ordinestampa.getData() %></td>
 				<td style="border:1px solid"><%=ordinestampa.getPrezzo_prodotto_singolo() %></td>
 				<td style="border:1px solid"><%=ordinestampa.getNome_prodotto() %></td>
+				<td style="border:1px solid"><%=ordinestampa.getProdotto_codice() %></td>
 				<td style="border:1px solid"><%=ordinestampa.getQuantità_prodotto() %></td>
 				<td style="border:1px solid"><%=ordinestampa.getTipo_spedizione() %>
 				<td style="border:1px solid"><%=ordinestampa.getIndirizzo_consegna() %>

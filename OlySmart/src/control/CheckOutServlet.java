@@ -81,6 +81,7 @@ public class CheckOutServlet extends HttpServlet {
 					ordine.setIndirizzo_consegna(indirizzo);
 					ordine.setNome_prodotto(pcarrello.getNome());
 					ordine.setPrezzo_prodotto_singolo(pcarrello.getPrezzo_vendita());
+					ordine.setProdotto_codice(pcarrello.getCodice());
 					int darimuovere=pcarrello.getNumero_pezzi_disponibili()-pcarrello.getQuantita();//mi calcolo la quantità del prodotto da rimuovere nel db
 	
 					ordinedao.inserimentoOrdine(ordine);//inserisco l'ordine nel database con i valori settati sopra

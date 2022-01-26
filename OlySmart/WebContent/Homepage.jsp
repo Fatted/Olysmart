@@ -43,8 +43,6 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="https://kit.fontawesome.com/12aebee45b.js"></script>
     <link rel="stylesheet" href="CSS/style.css">
-    <link rel="stylesheet" media="screen and (max-width:4096px) (min-width:1024px)" href="CSS/large.css">
-    <link rel="stylesheet" media="screen and (max-width:500px)" href="CSS/mobile.css">
 <title>OlySmartWeb Homepage</title>
 </head>
 

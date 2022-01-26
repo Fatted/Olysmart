@@ -16,6 +16,19 @@ public class Ordine{
 	private String indirizzo_consegna;
 	private String nome_prodotto;
 	private String stato;
+	private int prodotto_codice;
+	/**
+	 * @return the prodotto_codice
+	 */
+	public int getProdotto_codice() {
+		return prodotto_codice;
+	}
+	/**
+	 * @param prodotto_codice the prodotto_codice to set
+	 */
+	public void setProdotto_codice(int prodotto_codice) {
+		this.prodotto_codice = prodotto_codice;
+	}
 	/**
 	 * @return the stato
 	 */
