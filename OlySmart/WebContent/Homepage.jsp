@@ -42,43 +42,21 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="https://kit.fontawesome.com/12aebee45b.js"></script>
-    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/Homepage.css">
+    <link rel="stylesheet" href="CSS/Footer.css">
+    <link rel="stylesheet" href="CSS/NavbarTOP.css">
+    <link rel="stylesheet" href="CSS/BottoneDiRicerca.css">
+    <link rel="stylesheet" href="CSS/CatalogoResponsiveTable.css">
 <title>OlySmartWeb Homepage</title>
 </head>
 
 
 <body>
-    <section id="intestazione">
-        <div class="mobile-container">
-            <div class="topnav">
-              <a href="#home" class="active">Logo</a>
-              <div id="myLinks">
-                <a href="#news">News</a>
-                <a href="#contact">Contact</a>
-                <a href="#about">About</a>
-              </div>
-              <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-                <i class="fa fa-bars"></i>
-              </a>
-            </div>
-            </div>
-            
-            <script>
-            function myFunction() {
-              var x = document.getElementById("myLinks");
-              if (x.style.display === "block") {
-                x.style.display = "none";
-              } else {
-                x.style.display = "block";
-              }
-            }
-            </script>
-            
-
+ <section id="intestazione">    
 <div class="container">
          <div class="image">
             <a href="Homepage.jsp"> 
-                <img src="logonero.png" class="logo"><!-- cliccando sul logo andiamo sulla homepage -->
+                <img src="Immagini/logonero.png" class="logo"> <!-- cliccando sul logo andiamo sulla homepage -->
             </a> 
          </div>
         <div class="testo"><h1>OlySmart</h1>
@@ -86,16 +64,7 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
             <script src="https://use.fontawesome.com/relases/v5.0.6/js/all.js"></script>
             
 <!------------------------------------------- barra di ricerca usata per cercare i prodotti per nome/categoria ----------------------------------------->
-            <form action="Ricerca" method="post"><!-- usiamo la servlet ricerva per il nome passato nel input text con nome seatch -->
-            <div class="bottone-ricerca">                           
-              <div class="search-box-avanzato">        
-                  <input type="text" class="search-txt" name="search" placeholder="Cerca prodotto">
-                  <button class="search-btn"  type="submit">
-                    <i class="fa fa-search" aria-hidden="true"></i>
-                  </button>
-                  </div>
-           		 </div>           		
-               </form>
+<%@include file="include/BottoneDiRicerca.jsp" %>
 <!------------------------------------------- fine barra ----------------------------------------------------------------------------------------------->               
 </div>
     <div class="ultimo">
@@ -109,9 +78,10 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
         <%}else{%>
         	<p>Utente:<%=cliente.getUsername() %></p>      
         	 <div class="logout"> <a href="ServletLogout">Logout</a></div><br>
-        	 <div class="My order"> <a href="MyOrder.jsp">Miei ordini</a></div><br>
-        	 <div class="image"><a href="carrello.jsp"><img src="carella.png"></a></div><br>
-        	 <div class="My account"> <a href="MyAccount.jsp">il mio account</a></div><br>
+        	 <div class="Myorder"> <a href="MyOrder.jsp">Miei ordini</a></div><br>
+        	 <div class="cartimage"><a href="carrello.jsp"><img src="carella.png"></a></div><br>
+        	 <div class="Myaccount"> <a href="MyAccount.jsp">il mio account</a></div><br>
+        	 <div class="###"> <a href="MyRecensioni.jsp">le mie recensioni</a></div><br>
 <!------------------------------------------- se è un admin andrà nella sua pagina dedicata --------------------------------------------------------------->
         	 <%if(cliente.getTipo().equals("admin")){%>
         		<br><div> <a href="paginaAdmin.jsp">Pagina Gestione</a></div>
@@ -121,28 +91,35 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
      </div>
 <!-- --------------------------------------------------fine cliente---------------------------------------------------------------------------------------------- -->
      <div class="loghi">
-            
-                <a href=><img src="insta.png"></a>
-                <a href=><img src="FBlogo.png"></a>    
-                <a href=https://tinyurl.com/IndirizzoNegozio><img src="geo.png"></a>     
+           <div class ="imgl1"> 
+                <a href=><img src="Immagini/ig.png" ></a>
+           </div>
+              <div class ="imgl2">
+              <a href=><img src="Immagini/fb.png"></a> 
+              </div>
+               <div class ="imgl3">    
+                <a href=https://tinyurl.com/IndirizzoNegozio><img src="Immagini/placeholder.png"></a>
+                </div>     
      </div>
+    </div>
     </div>
 </section>
      
 
 <!---------------------------- Includo ala barra laterale che è nel file dedicaro barralaterale.jsp in include --------------------------------------- -->
-<%@include file="include/barralaterale.jsp" %>
+<%@include file="include/NavbarTOP.jsp" %>
 <!-- ------------------------------------------------------------------------------------------------------------------------------------------------ -->
 
 
 <!-- -------------------------------------------------Slider immagini homepage------------------------------------------------------------------------------------------------ -->
+<section id="menu">
         <div class="slider">
                 <div class="content">
                 <div class="images">
-                   <img src="Img1.jpg">
-                    <img src="Img2.jpg">
-                    <img src="Img3.jpg">
-                    <img src="Img 4.jpg">
+                   <img src="Immagini/img1.jpg">
+                    <img src="Immagini/img2.jpg">
+                    <img src="Immagini/img3.jpg">
+                    <img src="Immagini/img4.jpg">
                     <img src="img5.jpg">
         
                 </div>
@@ -189,14 +166,14 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
      <div class="foto">
          <div class="img1">
              <a href="#">
-                 <figure><img src="immg1.jpeg"></figure>
+                 <figure> <img src="Immagini/imgg1.jpg"></figure>
                  
              </a>
          </div>
         
          <div class="img2">
             <a href="#">
-               <figure> <img src="s1.png"> </figure>
+               <figure> <img src="Immagini/imgg2.jpg"> </figure>
             </a>   
          </div>
      </div>

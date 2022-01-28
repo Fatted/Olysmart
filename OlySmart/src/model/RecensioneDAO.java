@@ -95,4 +95,37 @@ try {
 		
 	}
 	
+	
+	public List<Recensione> recensioneProdottoCliente(String username){
+		List<Recensione> listarecensioni=new ArrayList<>();
+		
+		
+try {
+			Connection connection = null;
+			PreparedStatement preparedStatement = null;
+			String sql = "SELECT * FROM recensione where username_cliente="+"'"+username+"'";
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(sql);		
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			while(rs.next()) {
+				Recensione recensione=new Recensione();
+				recensione.setUsernameCliente(rs.getString("username_cliente"));
+				recensione.setCodiceProdotto(rs.getInt("codice_prodotto"));
+				recensione.setTitolo(rs.getString("titolo"));
+				recensione.setCommento(rs.getString("commento"));
+				recensione.setVoto(rs.getInt("voto"));
+				
+				listarecensioni.add(recensione);
+			}
+			connection.close();					
+		} catch (SQLException e) {			
+			System.out.println(e);		
+		}
+			
+		
+		return listarecensioni;
+		
+	}
+	
 }

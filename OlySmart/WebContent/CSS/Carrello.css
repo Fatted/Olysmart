@@ -1,3 +1,4 @@
+@charset "ISO-8859-2";
 .cart-page{
     margin: 80px auto;
 }
@@ -54,7 +55,10 @@ th:last-child{
 }
 
 
-
+.ordine{
+	text-align:right;
+	justify-content:right;
+}
 
 #footer{
     margin-top: 50rem;

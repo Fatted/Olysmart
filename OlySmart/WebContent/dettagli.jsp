@@ -25,26 +25,24 @@ List<Recensione> recensioni=Recensione.recensioneProdotto(id);
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link rel="stylesheet" href="CSS/styledet.css">
-    
+	<link rel="stylesheet" href="CSS/Dettagli.css">
+	<link rel="stylesheet" href="CSS/Footer.css">   
 	<title>Dettagli</title>
 </head>
 
 <body>
+<!-- ---------------------------------------------------------------------------------------------------------------------------------------------- -->
 <section id="intestazione">
- 
  <div class="home">
   <a href="Homepage.jsp"><img src="Immagini/logonero.png"></a>
  </div>
- 
  <div class="title">
  <h1>Dettagli Prodotto</h1>
  </div>
- 
-
 </section>
-	
-	<section id="details">
+<!-- ---------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- ---------------------------------------------------------------------------------------------------------------------------------------------- -->
+<section id="details">
 	<% for(Prodotto prodotto:prodottolista){ %>
 		<div class="left">
 		    <div class="foto">
@@ -95,7 +93,7 @@ List<Recensione> recensioni=Recensione.recensioneProdotto(id);
 	  </div>			
 	</section>
 	<%}%>
-	
+<!-- ---------------------------------------------------------------------------------------------------------------------------------------------- -->	
 
 <!-- -------------------------------------------------inclusione footer------------------------------------------------------------------------------------------------ -->
 <%@include file="include/footer.jsp" %>

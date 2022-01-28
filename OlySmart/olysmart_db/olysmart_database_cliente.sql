@@ -39,6 +39,7 @@ CREATE TABLE `cliente` (
   `data_scadenza_carta` char(45) DEFAULT NULL,
   `CVV` char(45) DEFAULT NULL,
   `Intestatario_carta` char(45) DEFAULT NULL,
+  `circuito_carta` char(45) DEFAULT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='L''utente può essere admin,e quindi accedere al sito anche in modalità sviluppatore per inserire prodotti,cancellarli,modificarli e fare tutte le operazioni di gestione,inoltre può modificare qualsiasi dato nel database.\nNel caso in cui l''utente sia un user potrà navigare sul sito come un semplice compratore.';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -49,7 +50,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES ('Olindo','Acciardo',NULL,NULL,'olindo@gmail.com','olismart','olindo','3290200344','81055','via del monte','vairano','admin',NULL,NULL,NULL,NULL),('UtenteProva','prova','','','prova@gmail.com','prova','prova','32987744566','11233','via dlle luna','vairano','utente',NULL,NULL,NULL,NULL);
+INSERT INTO `cliente` VALUES ('Antonio','D\'amato','','','fattedcube74@gmail.com','antonio','antonio','3290477588','00001','via dei monti sperduti alti','Dune','utente','4012-1233-1233-1234','2021-11-17','551','Antonio D\'Amato','VISA'),('Olindo','Acciardo',NULL,NULL,'olindo@gmail.com','olismart','olindo','3290200344','81055','via del monte','vairano','admin',NULL,NULL,NULL,NULL,NULL),('UtenteProva','prova','2021-11-03','','prova2@gmail.com','prova','prova','3290477588','81041','via dei monti alpi','MonteDune','utente','4012-1233-1233-1234','2021-11-24','444','UtenteProva prova','VISA');
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -62,4 +63,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-02  0:05:26
+-- Dump completed on 2022-01-28 22:49:21

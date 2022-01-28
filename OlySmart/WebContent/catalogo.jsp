@@ -49,70 +49,37 @@ if(cliente!=null){
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="CSS/stile-responsive.css">
-	<link rel="stylesheet" href="CSS/stylecata.css">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!------------------------------------------------------------- STILE CSS IMPORTATI ----------------------------------------------------------------------->
+	<link rel="stylesheet" href="CSS/CatalogoResponsiveTable.css">
+	<link rel="stylesheet" href="CSS/Catalogo.css">
+	<link rel="stylesheet" href="CSS/Footer.css">
+    <link rel="stylesheet" href="CSS/NavbarTOP.css">
+    <link rel="stylesheet" href="CSS/BottoneDiRicerca.css">
+<!------------------------------------------------------------- FINE STILE CSS IMPORTATI ----------------------------------------------------------------->
     
 <title>OlySmartWeb Catalogo</title>
 </head>
 
 
 <body>
-    <section id="intestazione">
-        <div class="mobile-container">
-            <div class="topnav">
-              <a href="#home" class="active">Logo</a>
-              <div id="myLinks">
-                <a href="#news">News</a>
-                <a href="#contact">Contact</a>
-                <a href="#about">About</a>
-              </div>
-              <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-                <i class="fa fa-bars"></i>
-              </a>
-            </div>
-            </div>
-            
-            <script>
-            function myFunction() {
-              var x = document.getElementById("myLinks");
-              if (x.style.display === "block") {
-                x.style.display = "none";
-              } else {
-                x.style.display = "block";
-              }
-            }
-            </script>
-            
-     <div class="container">
+ <section id="intestazione">    
+<div class="container">
          <div class="image">
             <a href="Homepage.jsp"> 
-                <img src="logonero.png" class="logo">
+                <img src="Immagini/logonero.png" class="logo"> <!-- cliccando sul logo andiamo sulla homepage -->
             </a> 
          </div>
         <div class="testo"><h1>OlySmart</h1>
             <script src="https://use.fontawesome.com/d8805b6d62.js"></script>
             <script src="https://use.fontawesome.com/relases/v5.0.6/js/all.js"></script>
-
-
+            
 <!------------------------------------------- barra di ricerca usata per cercare i prodotti per nome/categoria ----------------------------------------->
-            <form action="Ricerca" method="post"><!-- usiamo la servlet ricerva per il nome passato nel input text con nome seatch -->
-            <div class="bottone-ricerca">                           
-              <div class="search-box-avanzato">        
-                  <input type="text" class="search-txt" name="search" placeholder="Cerca prodotto">
-                  <button class="search-btn"  type="submit">
-                    <i class="fa fa-search" aria-hidden="true"></i>
-                  </button>
-                  </div>
-           		 </div>           		
-               </form>
-<!------------------------------------------- fine barra -----------------------------------------------------------------------------------------------> 
-               
-        </div>
-       
+<%@include file="include/BottoneDiRicerca.jsp" %>
+<!------------------------------------------- fine barra ----------------------------------------------------------------------------------------------->                 
+</div>
     <div class="ultimo">
-    <div class="accesso">
+     <div class="accesso"> 
  <!-------------------------------------------controlliamo se il cliente ha fatto l'accesso ------------------------------------------------------------->    
  <!-- Se il cliente non ha fatto l'accesso uscirà solo (accedi e registrati) mentre se ha fatto l'accesso uscirà (logout,ordini,carrello e il suo account  -->
         <%if(cliente == null){%>
@@ -122,9 +89,10 @@ if(cliente!=null){
         <%}else{%>
         	<p>Utente:<%=cliente.getUsername() %></p>      
         	 <div class="logout"> <a href="ServletLogout">Logout</a></div><br>
-        	 <div class="My order"> <a href="MyOrder.jsp">Miei ordini</a></div><br>
-        	 <div class="My account"> <a href="MyAccount.jsp">il mio account</a></div><br>
-        	 <div class="image"><a href="carrello.jsp"><img src="carella.png"></a></div><br>
+        	 <div class="Myorder"> <a href="MyOrder.jsp">Miei ordini</a></div><br>
+        	 <div class="cartimage"><a href="carrello.jsp"><img src="carella.png"></a></div><br>
+        	 <div class="Myaccount"> <a href="MyAccount.jsp">il mio account</a></div><br>
+        	 <div class="###"> <a href="MyRecensioni.jsp">le mie recensioni</a></div><br>
 <!------------------------------------------- se è un admin andrà nella sua pagina dedicata --------------------------------------------------------------->
         	 <%if(cliente.getTipo().equals("admin")){%>
         		<br><div> <a href="paginaAdmin.jsp">Pagina Gestione</a></div>
@@ -132,24 +100,30 @@ if(cliente!=null){
         	              
       <%}%>
      </div>
-     
-     
-<div class="loghi">
-            
-                <a href=><img src="insta.png"></a>
-                <a href=><img src="FBlogo.png"></a>    
-                <a href=https://tinyurl.com/IndirizzoNegozio><img src="geo.png"></a>     
+<!-- --------------------------------------------------fine cliente---------------------------------------------------------------------------------------------- -->
+     <div class="loghi">
+           <div class ="imgl1"> 
+                <a href=><img src="Immagini/ig.png" ></a>
+           </div>
+              <div class ="imgl2">
+              <a href=><img src="Immagini/fb.png"></a> 
+              </div>
+               <div class ="imgl3">    
+                <a href=https://tinyurl.com/IndirizzoNegozio><img src="Immagini/placeholder.png"></a>
+                </div>     
      </div>
     </div>
+    </div>
 </section>
+     
 
 <!---------------------------- Includo ala barra laterale che è nel file dedicaro barralaterale.jsp in include --------------------------------------- -->
-<%@include file="include/barralaterale.jsp" %>
-</section>
+<%@include file="include/NavbarTOP.jsp" %>
 <!-- ------------------------------------------------------------------------------------------------------------------------------------------------ -->
 
    
-
+<section id="center">             
+<div class="prodotti">
 <%
 //se la quantità dei prodotti è zero stampa nessun prodotto disponibile al momento
 if(prodotti.size()==0){%>
@@ -226,8 +200,8 @@ if(prodotti.size()==0){%>
 	}				    				
 %>		</tbody>
 	</table>
-
-
+        </div>
+</section>
 <!-- -------------------------------------------------inclusione footer------------------------------------------------------------------------------------------------ -->
 <%@include file="include/footer.jsp" %>
 <!-- -------------------------------------------------fine inclusione------------------------------------------------------------------------------------------------ -->

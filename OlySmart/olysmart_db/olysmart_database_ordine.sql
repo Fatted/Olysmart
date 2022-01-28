@@ -23,21 +23,24 @@ DROP TABLE IF EXISTS `ordine`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ordine` (
-  `codice` int NOT NULL COMMENT 'il codice dell''ordine che verrà preso in carico dal corriere che effettuerà la spedizione',
-  `numero` int DEFAULT NULL COMMENT 'numero dell''ordine',
-  `costo_totale` int DEFAULT NULL COMMENT 'costo totale dell''ordine che il compratore dovrà pagare(deve essere uguale a quello del carrello dove poi sommeremo la spedizione)',
+  `codice` int NOT NULL AUTO_INCREMENT COMMENT 'il codice dell''ordine che verrà preso in carico dal corriere che effettuerà la spedizione',
+  `costo_totale` double DEFAULT NULL COMMENT 'costo totale dell''ordine che il compratore dovrà pagare(deve essere uguale a quello del carrello dove poi sommeremo la spedizione)',
   `data` char(45) DEFAULT NULL COMMENT 'data di effetuazione dell''ordine',
-  `prezzo_singolo_prodotto` char(45) DEFAULT NULL COMMENT 'Reso,Confermato,Spedito,Annullato,Consegnato',
+  `prezzo_singolo_prodotto` double DEFAULT NULL COMMENT 'Reso,Confermato,Spedito,Annullato,Consegnato',
   `username` char(45) DEFAULT NULL,
-  `tipo_spedizione` varchar(45) DEFAULT NULL,
+  `tipo_spedizione` char(45) DEFAULT NULL,
   `quantità_prodotto` int DEFAULT NULL,
+  `indirizzo_consegna` char(45) DEFAULT NULL,
+  `nome_prodotto` char(45) DEFAULT NULL,
+  `stato` varchar(45) NOT NULL DEFAULT 'preso in carico',
+  `prodotto_codice` int DEFAULT NULL,
   PRIMARY KEY (`codice`),
   UNIQUE KEY `codice.ordine_UNIQUE` (`codice`),
   KEY `Chiavepagamentocarrello.ordine_idx` (`costo_totale`),
   KEY `chiave_esterna.ordine->cliente_idx` (`username`),
   KEY `chiave_esterna.ordine->spedizione_idx` (`tipo_spedizione`),
   CONSTRAINT `chiave_esterna.ordine->cliente` FOREIGN KEY (`username`) REFERENCES `cliente` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='l''ordine non è il carrello ma e ciò che l''utente ha effettivamente comprato che poi verrà spedito.';
+) ENGINE=InnoDB AUTO_INCREMENT=245 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='l''ordine non è il carrello ma e ciò che l''utente ha effettivamente comprato che poi verrà spedito.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,6 +49,7 @@ CREATE TABLE `ordine` (
 
 LOCK TABLES `ordine` WRITE;
 /*!40000 ALTER TABLE `ordine` DISABLE KEYS */;
+INSERT INTO `ordine` VALUES (242,114,'1970-01-01',109,'prova','Basic',1,'via dei monti alpi,MonteDune(81041)','Alcatel 1se','preso in carico',10),(243,114,'1970-01-01',109,'antonio','Basic',1,'via dei monti sperduti alti,Dune(00001)','Alcatel 1se','preso in carico',10),(244,164,'1970-01-01',159,'prova','Basic',1,'via dei monti alpi,MonteDune(81041)','Oppo a53s','preso in carico',1);
 /*!40000 ALTER TABLE `ordine` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -58,4 +62,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-02  0:05:26
+-- Dump completed on 2022-01-28 22:49:21

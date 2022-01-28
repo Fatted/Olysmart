@@ -88,7 +88,7 @@
 			</table>
 
 
-<!-- ------------------------------------------------------Modal gestione update prezzo acquisto prodotto----------------------------------------------------------------- -->
+<!-- ------------------------------------------------------Modal gestione update stato ordine----------------------------------------------------------------- -->
 <div class="modal fade" id="modalmodificastato" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -99,10 +99,9 @@
         </button>
       </div>
       <div class="modal-body">
-      <!-- inserisco il form che servirà per gestire le varie scelte da parte del utente -->
+      <!-- inserisco il form che servirà per gestire lo stato delgli ordini  -->
         <form action="ModificaStatoOrdiniAdmin" method="post">
         
-        <!-- indichiamo il nome del form con operation,che sarà uguale per tutti i form,quello che cambia è il valore,in base a quello in ProfiloutenteServlet facciamo diverse operazioni di inserimento/modifica -->
         <input type="hidden" name="operation" value="UpdateStato">
         
       		<div class="form-group">
@@ -124,10 +123,5 @@
     </div>
   </div>
 </div>
-
-<!-- ------------------------------------------------------Modal gestione add/update CF----------------------------------------------------------------- -->
-
-
-
 </body>
 </html>

@@ -25,12 +25,9 @@ DROP TABLE IF EXISTS `recensione`;
 CREATE TABLE `recensione` (
   `username_cliente` varchar(100) NOT NULL,
   `codice_prodotto` int NOT NULL,
-  `commento` varchar(100) DEFAULT NULL,
-  `voto` int DEFAULT NULL,
-  KEY `chiave_esterna.recensione->cliente_idx` (`username_cliente`),
-  KEY `chiave_esterna.recensione->prodotto_idx` (`codice_prodotto`),
-  CONSTRAINT `chiave_esterna.recensione->cliente` FOREIGN KEY (`username_cliente`) REFERENCES `cliente` (`username`),
-  CONSTRAINT `chiave_esterna.recensione->prodotto` FOREIGN KEY (`codice_prodotto`) REFERENCES `prodotto` (`codice`)
+  `titolo` varchar(45) DEFAULT NULL,
+  `commento` longtext,
+  `voto` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -40,6 +37,7 @@ CREATE TABLE `recensione` (
 
 LOCK TABLES `recensione` WRITE;
 /*!40000 ALTER TABLE `recensione` DISABLE KEYS */;
+INSERT INTO `recensione` VALUES ('prova',10,'Recensione prodotto 1se','Tutto perfetto spedizione e prodotto.',1),('antonio',10,'Tutto sommato ottimo','Ottima qualitÃ  prezzo del prodotto.Davvero soddisfatto!',9);
 /*!40000 ALTER TABLE `recensione` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-02  0:05:26
+-- Dump completed on 2022-01-28 22:49:21

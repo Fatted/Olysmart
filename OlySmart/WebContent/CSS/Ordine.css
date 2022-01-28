@@ -1,0 +1,41 @@
+@charset "ISO-8859-1";
+
+
+#intestazione {
+	width:100%;
+text-align:center;
+}
+
+#intestazione h1{
+	
+	font-size:200%;
+}
+
+#intestazione p{
+	font-weight: bold;
+	font-size: 120%;
+}
+
+#center{
+	width:100%;
+	display:flex;
+	
+}
+
+#center .left{
+	width:50%;
+	margin: 10px auto;	
+}
+
+#center .left .lefta{
+	 margin:10px auto;
+
+    text-align: center;
+
+    line-height: 30px;
+}
+
+#center .right{
+	width:50%;
+	
+}

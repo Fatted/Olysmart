@@ -116,6 +116,5 @@
 <%}else{%>
 		<a href="login.jsp">Accedi per poter procedere all'ordine</a>
 <%}%>
-
 </body>
 </html>

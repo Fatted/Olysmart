@@ -37,7 +37,7 @@ CREATE TABLE `spedizione` (
 
 LOCK TABLES `spedizione` WRITE;
 /*!40000 ALTER TABLE `spedizione` DISABLE KEYS */;
-INSERT INTO `spedizione` VALUES (1,'Basic',5,'5-7 giorni'),(2,'Express',10,'2-3 giorni'),(3,'Contrassegno',NULL,NULL);
+INSERT INTO `spedizione` VALUES (1,'Basic',5,'5-7 giorni'),(2,'Express',10,'2-3 giorni'),(3,'Ritiro a mano',0,'0 giorni');
 /*!40000 ALTER TABLE `spedizione` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-02  0:05:25
+-- Dump completed on 2022-01-28 22:49:20
