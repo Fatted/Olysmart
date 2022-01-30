@@ -1,5 +1,4 @@
 <!-- da aggiungere css -->
-<!--  Nuovo commento prova -->
 <%@page import="model.*" %>
 <%@page import="control.*" %>
 <%@page import="java.util.*" %>
