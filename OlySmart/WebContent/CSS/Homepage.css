@@ -73,16 +73,13 @@
   text-align:center;
 
 }
-#intestazione .container .ultimo .accesso .Myaccount{
+#intestazione .container .ultimo .accesso .Myaccount {
 	width:30%;
 	height:50%;
 	align-items:center;
   justify-content:center;
   text-align:center;
-
-	
 }
-
 #intestazioe .container .ultimo .accesso .logout{
 	width:20%;
     height:50%;

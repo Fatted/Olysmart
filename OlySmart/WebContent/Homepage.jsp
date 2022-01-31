@@ -52,7 +52,7 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
 
 
 <body>
- <section id="intestazione">    
+<section id="intestazione">    
 <div class="container">
          <div class="image">
             <a href="Homepage.jsp"> 
@@ -74,22 +74,21 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
         <%if(cliente == null){%>
         	<div class="registra"> <a href="register.jsp">Registrati</a> </div>
             <div class="accedi"> <a href="login.jsp">Accedi</a> </div>
-            <div class="image"><a href="carrello.jsp"><img src="carella.png"></a></div><br>
+            <div class="cartimage"><a href="carrello.jsp"><img src="Immagini/carello.png"></a></div><br>
         <%}else{%>
         	<p>Utente:<%=cliente.getUsername() %></p>      
         	 <div class="logout"> <a href="ServletLogout">Logout</a></div><br>
         	 <div class="Myorder"> <a href="MyOrder.jsp">Miei ordini</a></div><br>
-        	 <div class="cartimage"><a href="carrello.jsp"><img src="carella.png"></a></div><br>
-        	 <div class="Myaccount"> <a href="MyAccount.jsp">il mio account</a></div><br>
-        	 <div class="###"> <a href="MyRecensioni.jsp">le mie recensioni</a></div><br>
+        	 <div class="cartimage"><a href="carrello.jsp"><img src="Immagini/carello.png"></a></div><br>
+        	 <div class="Myaccount"> <a href="MyAccount.jsp">Il mio account</a></div><br>
+        	 <div class="Myaccount"> <a href="MyRecensioni.jsp">Le mie recensioni</a></div><br>
 <!------------------------------------------- se è un admin andrà nella sua pagina dedicata --------------------------------------------------------------->
         	 <%if(cliente.getTipo().equals("admin")){%>
         		<br><div> <a href="paginaAdmin.jsp">Pagina Gestione</a></div>
-        <%}%>	 
-        	              
+        <%}%>	       	              
       <%}%>
      </div>
-<!-- --------------------------------------------------fine cliente---------------------------------------------------------------------------------------------- -->
+<!-- --------------------------------------------------fine cliente-------------------------------------------------------------------------------------- -->
      <div class="loghi">
            <div class ="imgl1"> 
                 <a href=><img src="Immagini/ig.png" ></a>
@@ -104,14 +103,10 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
     </div>
     </div>
 </section>
-     
-
 <!---------------------------- Includo ala barra laterale che è nel file dedicaro barralaterale.jsp in include --------------------------------------- -->
 <%@include file="include/NavbarTOP.jsp" %>
-<!-- ------------------------------------------------------------------------------------------------------------------------------------------------ -->
-
-
-<!-- -------------------------------------------------Slider immagini homepage------------------------------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------Slider immagini homepage------------------------------------------------------------------------ -->
 <section id="menu">
         <div class="slider">
                 <div class="content">
@@ -200,7 +195,7 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
 	    %>
 		    <tr>
 		        <td>
-		             <div class="container">
+		           <div class="container">
 		           <img src="Immagini/Prodotti/<%=p1.getImmagine() %>" height="250px" width="250px" class="image">
 		           <div class="overlay">
 		            <div class="text"><%=p1.getSpecifiche() %></div> 

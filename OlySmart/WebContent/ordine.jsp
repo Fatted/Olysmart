@@ -5,7 +5,7 @@
       <%
     //controlliamo la sessione attuale del cliente     
       Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente");
-      if(cliente!=null){//se la sessione non è vuota settiamo il cliente
+      if(cliente!=null){//se la sessione non Ã¨ vuota settiamo il cliente
       	request.setAttribute("cliente-corrente", cliente);
       }
        
@@ -24,7 +24,7 @@
       if(prodotti_carrello!=null){
     	 ProdottoDAO prodotto=new ProdottoDAO();
     	 
-    	 totale=prodotto.getTotaleCarrello(prodotti_carrello);//il totale è dato da tutti i prodotti presenti nel carrello,usando il metodo getTotaleCarrello
+    	 totale=prodotto.getTotaleCarrello(prodotti_carrello);//il totale Ã¨ dato da tutti i prodotti presenti nel carrello,usando il metodo getTotaleCarrello
     	 
       	 prodottocarrello=prodotto.getProdottiCarrello(prodotti_carrello);//prodotto carrello contiene tutti i prodotti nel carrello
       	 
@@ -36,21 +36,29 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet" href="CSS/Ordine.css">
 <title>ordine</title>
 </head>
 <body>
-
+<!-- -------------------------------------------------------- Intestazione -------------------------------------------------------- -->
+<section id="intestazione">
 <h1>Conferma ordine</h1>
-
-<p>Ordine di <%=cliente.getNome() %></p><br>
-
-<p>l'ordine contiene:
-
+<p>Ordine di <%=cliente.getNome() %></p>
+</section>
+<!-- -------------------------------------------------------- Fine Intestazione -------------------------------------------------------- -->
+<section id="center">
+<div class="left">
+<div class="lefta">
+<p>L'ordine contiene:</p>
 <%for(Carrello carrello:prodottocarrello){%>
-	Nome prodotto:<%=carrello.getNome() %>/Quantità:<%=carrello.getQuantita() %>/Prezzo:<%=carrello.getPrezzo_vendita() %>
-<%} %>
+	<ul>
+         <li><%=carrello.getNome() %>
+         <br>Quantita:<%=carrello.getQuantita() %>
+         <br>Prezzo:<%=carrello.getPrezzo_vendita() %>
+       </li>
+      </ul>
+<%}%>
 <br>
-</p>
 
 <form action="CheckOutServlet">
 Seleziona tipo di spedizione:
@@ -85,16 +93,27 @@ while(iteratore.hasNext()){
 	} 
 } %>
 
+</div>
+</div>
+<div class="right">
+<div class="righttop">
+<p> Dati di spedizione:<br>
+ Nome: <%=cliente.getNome() %> <br>
+Indirizzo: <%=cliente.getVia() %>,<%=cliente.getCitta() %>(<%=cliente.getCap() %> <br>
+ email: <%=cliente.getEmail()%> <br>
+ Numero di telefono: <%=cliente.getTelefono()%><br>
+<a href="MyAccount.jsp">Modifica</a>
+</p>
+</div>
 
-<br>indirizzo spedizione:<%=cliente.getVia() %>,<%=cliente.getCitta() %>(<%=cliente.getCap() %>)<br>
-
-<br><br><br>Metodo di pagamento:<%if(cliente.getIntestatario_carta()==null){%><a href="MyAccount.jsp">Inserisci</a>
+<div class="rightbottom">
+Metodo di pagamento:<%if(cliente.getIntestatario_carta()==null){%><a href="MyAccount.jsp">Inserisci</a>
 <%}else{%><br>	
-								
+								Intestatario:<%=cliente.getIntestatario_carta() %><br>
 								Numero carta:<%=cliente.getNumero_carta() %><br> 
 								Data Scadenza:<%=cliente.getData_scadenza_carta() %><br>
 								CVV:<%=cliente.getCVV() %><br>
-								Intestatario:<%=cliente.getIntestatario_carta() %><br>
+								
 								<a href="MyAccount.jsp">Modifica</a>
 																								
 							<%}%>
@@ -104,9 +123,13 @@ while(iteratore.hasNext()){
 
 
 <%if(cliente.getIntestatario_carta()==null){%><a href="MyAccount.jsp">Inserisci metodo di pagamento per continuare</a>
-<%}else{%><input type="submit" value="conferma pagamento">
+<%}else{%><br><br><input type="submit" value="conferma pagamento">
 <%}%>
+</div>
+</div>
 </form>
+</section>
+
 
 <script>
 var totale = document.getElementById("totale").textContent;

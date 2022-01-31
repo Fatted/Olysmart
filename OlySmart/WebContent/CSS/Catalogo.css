@@ -5,6 +5,7 @@
   padding: 0;
 
 }
+
 /*INTESTAZIONE*/
 #intestazione{
 	width:100%;
@@ -13,6 +14,7 @@
 }
 
 #intestazione .container{
+
   display: flex;
   align-items: center;
   justify-content:space-between;
@@ -44,14 +46,17 @@
 }
 #intestazione .container .ultimo{
   width: 33%;
+  
+  
 }
 #intestazione .container .ultimo .accesso{
-width:100%;
+  width:100%;
   display:flex;
 	align-items:center;
 	text-align:center;
 	justify-content:center;
-	margin-bottom:1rem;
+ margin-bottom:1rem;
+
 }
 
 #intestazione .container .ultimo .accesso .registra {
@@ -59,12 +64,14 @@ width:100%;
 	align-items:center;
   justify-content:center;
   text-align:center;
+  
 }
 #intestazione .container .ultimo .accesso .accedi {
 	width:25%;
 	align-items:center;
   justify-content:center;
   text-align:center;
+
 }
 #intestazione .container .ultimo .accesso .Myaccount{
 	width:30%;
@@ -110,6 +117,7 @@ width:100%;
 	
 	justify-content:center;
 	
+	
 }
 
 #intestazione .container .ultimo .loghi .imgl1{
@@ -134,6 +142,7 @@ width:100%;
 	width:100%;
 }
 
+
 /*CENTER*/
 #center {
 width:100%;
@@ -147,10 +156,6 @@ width:100%;
 text-align:center;
 align-items:center;
 
-}
-.prodotti p{
-  margin-bottom: 2rem;
-  font-size: 3rem;
 }
 
 .prodotti table{

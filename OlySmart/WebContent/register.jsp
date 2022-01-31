@@ -8,7 +8,7 @@
     <script src="https://kit.fontawesome.com/12aebee45b.js" ></script>
     
     <link rel="stylesheet" href="CSS/Registrazione.css">
-    
+    <link rel="stylesheet" href="CSS/Footer.css">
   
     
 <title>Registrazione</title>
@@ -23,7 +23,6 @@
                     <form id="login" class="form" action="ServletRegister" method="post">
                         
                  <div class="form-group">
-                 
 	          	<label for="username">Username*</label><br> 
         		<input name="username" type="text" id="user" placeholder="Inserisci l'Username" required oninput="checkusername()"><br>
                 <span id="usererr" class="errormx"></span><br><br>
@@ -66,13 +65,13 @@
                   <span id="addresserr" class="errormx"></span><br><br>
                         
                         <input type ="submit" value="Registrati" value="Login"> <br>
+                        </div> 
                     </form>
-                </div>   
+                </div>  
+             
                 
     <script type="text/javascript">
-    
-    function checkusername(){
-        
+    function checkusername(){     
         var username=/^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/; //caratteri alfanumerici, massimo un underscore
         var us=document.getElementById("user");
         if(us.value.match(username)){

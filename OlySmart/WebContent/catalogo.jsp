@@ -85,15 +85,15 @@ if(cliente!=null){
         <%if(cliente == null){%>
         	<div class="registra"> <a href="register.jsp">Registrati</a> </div>
             <div class="accedi"> <a href="login.jsp">Accedi</a> </div>
-            <div class="image"><a href="carrello.jsp"><img src="carella.png"></a></div><br>
+            <div class="cartimage"><a href="carrello.jsp"><img src="Immagini/carello.png"></a></div><br>
         <%}else{%>
         	<p>Utente:<%=cliente.getUsername() %></p>      
         	 <div class="logout"> <a href="ServletLogout">Logout</a></div><br>
         	 <div class="Myorder"> <a href="MyOrder.jsp">Miei ordini</a></div><br>
-        	 <div class="cartimage"><a href="carrello.jsp"><img src="carella.png"></a></div><br>
+        	 <div class="cartimage"><a href="carrello.jsp"><img src="Immagini/carello.png"></a></div><br>
         	 <div class="Myaccount"> <a href="MyAccount.jsp">il mio account</a></div><br>
-        	 <div class="###"> <a href="MyRecensioni.jsp">le mie recensioni</a></div><br>
-<!------------------------------------------- se Ã¨ un admin andrÃ  nella sua pagina dedicata --------------------------------------------------------------->
+        	 <div class="MyRecensioni"> <a href="MyRecensioni.jsp">Le mie recensioni</a></div><br>
+<!------------------------------------------- se è un admin andrà  nella sua pagina dedicata --------------------------------------------------------------->
         	 <%if(cliente.getTipo().equals("admin")){%>
         		<br><div> <a href="paginaAdmin.jsp">Pagina Gestione</a></div>
         <%}%>	 
@@ -117,27 +117,24 @@ if(cliente!=null){
 </section>
      
 
-<!---------------------------- Includo ala barra laterale che Ã¨ nel file dedicaro barralaterale.jsp in include --------------------------------------- -->
+<!---------------------------- Includo la barra laterale che è nel file dedicato NavbarTop.jsp in include --------------------------------------- -->
 <%@include file="include/NavbarTOP.jsp" %>
 <!-- ------------------------------------------------------------------------------------------------------------------------------------------------ -->
 
    
 <section id="center">             
-<div class="prodotti">
-<%
-//se la quantitÃ  dei prodotti Ã¨ zero stampa nessun prodotto disponibile al momento
+<div class="prodotti">    
+        <%
 if(prodotti.size()==0){%>
 	<p>Nessun prodotto disponibile al momento...</p>
 <%}%>
 
 	<%if(!prodotti.isEmpty()){%>
-
-		<table id="catalogo">
-			<tbody>    
-		<!-- Stampa dei prodotti messi in 3 colonne per ogni riga -->		   
-	   <%
-	   //uso 3 iteratori in modo tale da poter andare a capo ogni 3 prodotti messi di fianco
-	    Iterator<Prodotto> iteratore=prodotti.iterator(); //in questo caso i prodotti sono tutti quelli presenti nel db nella tabella prodotti
+		<table>	
+		<!-- Stampa dei prodotti messi in 3 colonne per ogni riga -->
+			   
+	   <%		
+	    Iterator<Prodotto> iteratore=prodotti.iterator();
 	    Prodotto p1;
 	    Prodotto p2;
 	    Prodotto p3;
@@ -145,62 +142,64 @@ if(prodotti.size()==0){%>
 	    while(iteratore.hasNext()){	    	
 	    	p1=iteratore.next();	    		    		    
 	    %>
-	    
 		    <tr>
 		        <td>
-		           <div class="container">
-		           <img src="Immagini/Prodotti/<%=p1.getImmagine() %>" height="250px" width="250px" class="image">
-		           <div class="overlay">
-		            <div class="text"><%=p1.getSpecifiche() %></div> 
-		           </div>
-		        </div>
+		        <div class="sfondo" style="border-style: outset; margin-top:10px">
+		         <div class="containers">
+		         	<img src="Immagini/Prodotti/<%=p1.getImmagine() %>" height="250px" width="250px" class="image">
+		         	<div class="overlay">
+		         	<div class="text"><%=p1.getSpecifiche() %></div> 
+		         	</div>
+		        </div>	        
 		        <h1><%=p1.getNome() %></h1>
-		        <h2>Prezzo:<%=p1.getPrezzo_vendita()%>&#8364</h2>		        
-		        <a href="AggiungiAlCarrello?id=<%=p1.getCodice() %>">add cart</a>		  
-		        <a href="dettagli.jsp?id=<%=p1.getCodice() %>">dettagli</a>
+		        <h2>Prezzo:<%=p1.getPrezzo_vendita()%>&#8364</h2>
+		        <a href="AggiungiAlCarrello?id=<%=p1.getCodice() %>" style="background-color:#47a1ff ;color: white;padding: 10px 15px 10px;text-align: center;text-decoration: none;display: inline-block; margin-bottom:20px">Aggiungi al carrello</a>		  
+		        <a href="dettagli.jsp?id=<%=p1.getCodice() %>" style="background-color:#47a1ff ;color: white;padding: 10px 15px 10px;text-align: center;text-decoration: none;display: inline-block; margin-bottom:20px">Visualizza i dettagli</a>
+		        </div>
 		        </td>
-
-		        		        
+       
 		        <% if(iteratore.hasNext()){
 		    		p2=iteratore.next(); %>
 		    	<td>
-		             <div class="container">
-		           <img src="Immagini/Prodotti/<%=p2.getImmagine() %>" height="250px" width="250px" class="image">
-		           <div class="overlay">
-		            <div class="text"><%=p2.getSpecifiche() %></div> 
-		           </div>
-		        </div>
+		         <div class="sfondo" style="border-style: outset; margin-top:10px">
+		         <div class="containers">
+		         	<img src="Immagini/Prodotti/<%=p2.getImmagine() %>" height="250px" width="250px" class="image">
+		         	<div class="overlay">
+		         	<div class="text"><%=p2.getSpecifiche() %></div> 
+		         	</div>
+		        </div>	        
 		        <h1><%=p2.getNome() %></h1>
 		        <h2>Prezzo:<%=p2.getPrezzo_vendita()%>&#8364</h2>
-		      	<a href="AggiungiAlCarrello?id=<%=p2.getCodice() %>">add cart</a>		        
-		        <a href="dettagli.jsp?id=<%=p2.getCodice() %>">dettagli</a>
+		        <a href="AggiungiAlCarrello?id=<%=p2.getCodice() %>" style="background-color:#47a1ff ;color: white;padding: 10px 15px 10px;text-align: center;text-decoration: none;display: inline-block; margin-bottom:20px">Aggiungi al carrello</a>		  
+		        <a href="dettagli.jsp?id=<%=p2.getCodice() %>" style="background-color:#47a1ff ;color: white;padding: 10px 15px 10px;text-align: center;text-decoration: none;display: inline-block; margin-bottom:20px">Visualizza i dettagli</a>
+		        </div>
 		        </td>
-				
 				
 				<%if(iteratore.hasNext()){
 		    		p3=iteratore.next(); %>
-		    	<td>
-		             <div class="container">
-		           <img src="Immagini/Prodotti/<%=p3.getImmagine() %>" height="250px" width="250px" class="image">
-		           <div class="overlay">
-		            <div class="text"><%=p3.getSpecifiche() %></div> 
-		           </div>
-		        </div>
+		        <td>
+		        <div class="sfondo" style="border-style: outset; margin-top:10px">
+		         <div class="containers">
+		         	<img src="Immagini/Prodotti/<%=p3.getImmagine() %>" height="250px" width="250px" class="image">
+		         	<div class="overlay">
+		         	<div class="text"><%=p3.getSpecifiche() %></div> 
+		         	</div>
+		        </div>	        
 		        <h1><%=p3.getNome() %></h1>
-		        <h2>Prezzo:<%=p3.getPrezzo_vendita()%>&#8364</h2>	       
-		        <a href="AggiungiAlCarrello?id=<%=p3.getCodice() %>">add cart</a>		        
-		        <a href="dettagli.jsp?id=<%=p3.getCodice() %>">dettagli</a>
+		        <h2>Prezzo:<%=p3.getPrezzo_vendita()%>&#8364</h2>
+		        <a href="AggiungiAlCarrello?id=<%=p3.getCodice() %>" style="background-color:#47a1ff ;color: white;padding: 10px 15px 10px;text-align: center;text-decoration: none;display: inline-block; margin-bottom:20px">Aggiungi al carrello</a>		  
+		        <a href="dettagli.jsp?id=<%=p3.getCodice() %>" style="background-color:#47a1ff ;color: white;padding: 10px 15px 10px;text-align: center;text-decoration: none;display: inline-block; margin-bottom:20px">Visualizza i dettagli</a>
+		        </div>
 		        </td>
 		    </tr>
-		    
-		    
-		<%	}	
-		   }
+		<%
+			}		    	
 	    }
-	}				    				
-%>		</tbody>
-	</table>
-        </div>
+	}
+}
+%>		
+</table>
+</div>
 </section>
 <!-- -------------------------------------------------inclusione footer------------------------------------------------------------------------------------------------ -->
 <%@include file="include/footer.jsp" %>

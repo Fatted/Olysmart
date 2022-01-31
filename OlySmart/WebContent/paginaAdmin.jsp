@@ -46,7 +46,7 @@
 <title>Pagina di gestione admin</title>
 
 <!-- Pagina CSS -->
-<link rel="stylesheet" href="CSS/styleadmin.css">
+<link rel="stylesheet" href="CSS/Admin.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <!-- JQuery -->
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -66,29 +66,30 @@
             <h1>Admin:<%=cliente.getUsername() %></h1>
             <ul>
                 <li><a href="Homepage.jsp">Home</a></li>
-                <li class="right"><a href="ServletLogout">Logout</a></li> <!-- il logout viene gestito dalla servlet di logout -->
+                <li><a href="ServletLogout">Logout</a></li> <!-- il logout viene gestito dalla servlet di logout -->
             </ul>
         </div>
     </nav>
     </header>
 <!-- tutti i bottoni qui presenti vengono gestiti dai modal sottostanti che nei loro form di nome operation hanno diversi valori,i quali, indicheranno nella servlet ProdottiOperazione servlet cosa fare -->
+<!-- ------------------------------------------PRIMO--------------------------------------- -->
 <section id="menu">
     <table class="primo">
     <%@include file="CSS/messaggioRegistrazione.jsp" %>
         <tr>
-            <td class="utenti"><img src="Immagini/Admin/user.png">
+            <td><img src="Immagini/Admin/user.png">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalutenti">
   					Visualizza Utenti
 				</button>
             </td>
             
-            <td class="categorie"><img src="Immagini/Admin/categorie.jpeg">
+            <td><img src="Immagini/Admin/categorie.jpeg">
 				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalcategorie">
   					Visualizza Categorie
 				</button>	
             </td>
             
-            <td class="prodotti"><img src="Immagini/Admin/prodotti.jpeg">            
+            <td><img src="Immagini/Admin/prodotti.jpeg">            
   			<a href="PaginaAdminProdotti.jsp" class="btn btn-primary">Prodotti presenti</a><!-- viene gestita direttamente dalla pagina PaginaAdminProdotti.jsp -->
             </td>
             
@@ -99,21 +100,22 @@
             </td>
         </tr>
         </table>
+<!-- ------------------------------------------SECONDO--------------------------------------- -->        
         <table class="secondo">
         <tr>
-            <td class="addcate"><img src="Immagini/Admin/addCategoria.jpeg">
+            <td><img src="Immagini/Admin/addCategoria.jpeg">
             <br>
                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalcategoria">
   					Inserisci categoria
 				</button>
             </td>
-            <td class="addprod"><img src="Immagini/Admin/addProdotti.jpeg">
+            <td><img src="Immagini/Admin/addProdotti.jpeg">
                 <br>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalprodotto">
   					Inserisci Prodotto
 				</button>
             </td>
-             <td class="addcate"><img src="Immagini/Admin/Recensioni.jpeg">
+             <td><img src="Immagini/Admin/Recensioni.jpeg">
             <br>
                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalrecensioni">
   					Visualizza recensioni
