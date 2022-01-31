@@ -35,6 +35,7 @@ List<Categoria> categorialista=cat.getCategorie();
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link rel="stylesheet" href="CSS/style.css">
+	<link rel="stylesheet" href="CSS/modificaProdotti.css">
     <link rel="stylesheet" media="screen and (max-width:4096px) (min-width:1024px)" href="CSS/large.css">
     <link rel="stylesheet" media="screen and (max-width:500px)" href="CSS/mobile.css">
 	<title>Modifica Prodotto</title>
@@ -59,7 +60,7 @@ List<Categoria> categorialista=cat.getCategorie();
 
 	<h2>Modifica Dettagli Prodotto</h2>
 
-	<table border="1">
+	<table class="table" id="tavula" border="1">
 	<%for(Prodotto p:prodottolista){ %>
 		<tr>
 		<th style="border:1px solid">Nome</th>
@@ -94,7 +95,7 @@ List<Categoria> categorialista=cat.getCategorie();
 		<td style="border:1px solid"><%=p.getTipo() %><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalmodificatipo">Modifica tipo</button></td>
 		<td style="border:1px solid"><%=p.getOfferta() %><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalmodificaofferta">Modifica offerta</button></td>
 		<td style="border:1px solid"><%=p.getImmagine() %></td>
-		<td><img src="Immagini/Prodotti/<%=p.getImmagine() %>" height="250px" width="250px" class="image"></td>
+		<td><img src="Immagini/Prodotti/<%=p.getImmagine() %>" height="250px" width="250px" class="responsive"></td>
 		<td style="border:1px solid"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modaleliminaprodotto">ELIMINA</button></td>
 		
 		</tr>
