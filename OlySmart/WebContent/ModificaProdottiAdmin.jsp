@@ -36,8 +36,7 @@ List<Categoria> categorialista=cat.getCategorie();
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link rel="stylesheet" href="CSS/style.css">
 	<link rel="stylesheet" href="CSS/modificaProdotti.css">
-    <link rel="stylesheet" media="screen and (max-width:4096px) (min-width:1024px)" href="CSS/large.css">
-    <link rel="stylesheet" media="screen and (max-width:500px)" href="CSS/mobile.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 	<title>Modifica Prodotto</title>
 	
 	<!-- Pagina CSS -->
@@ -62,45 +61,48 @@ List<Categoria> categorialista=cat.getCategorie();
 
 	<table class="table" id="tavula" border="1">
 	<%for(Prodotto p:prodottolista){ %>
+	<thead>
 		<tr>
-		<th style="border:1px solid">Nome</th>
-		<th style="border:1px solid">Descrizione</th>
-		<th style="border:1px solid">Prezzo Acquisto</th>
-		<th style="border:1px solid">Disponibilità</th>
-		<th style="border:1px solid">Iva</th>
-		<th style="border:1px solid">Prezzo Vendita</th>
-		<th style="border:1px solid">Marca</th>
-		<th style="border:1px solid">Numero pezzi disponibili</th>
-		<th style="border:1px solid">Sconto</th>
-		<th style="border:1px solid">Specifiche</th>
-		<th style="border:1px solid">Categoria</th>
-		<th style="border:1px solid">Offerta</th>
-		<th style="border:1px solid">Immagine Nome</th>
-		<th style="border:1px solid">Immagine</th>
-		<th style="border:1px solid">Elimina</th>
+		<th scope="col">Nome</th>
+		<th scope="col">Descrizione</th>
+		<th scope="col">Prezzo Acquisto</th>
+		<th scope="col">Disponibilità</th>
+		<th scope="col">Iva</th>
+		<th scope="col">Prezzo Vendita</th>
+		<th scope="col">Marca</th>
+		<th scope="col">Numero pezzi disponibili</th>
+		<th scope="col">Sconto</th>
+		<th scope="col">Specifiche</th>
+		<th scope="col">Categoria</th>
+		<th scope="col">Offerta</th>
+		<th scope="col">Immagine Nome</th>
+		<th scope="col">Immagine</th>
+		<th scope="col">Elimina</th>
 		</tr>
-		<tr>
+		</thead>
 		
-		<tr style="border:1px solid">
-		<td style="border:1px solid"><%=p.getNome() %><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalmodificanome">Modifica nome</button></td>
-		<td style="border:1px solid"><%=p.getDescrizione() %><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalmodificadescrizione">Modifica descrizione</button>		
-		<td style="border:1px solid"><%=p.getPrezzo_acquisto() %><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalmodificaprezzoacquisto">Modifica Prezzo Acquisto</button></td>
-		<td style="border:1px solid"><%=p.getDisponibilità() %><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalmodificadisponibilita">Modifica Disponibilità</button></td>
-		<td style="border:1px solid"><%=p.getIva() %><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalmodificiva">Modifica Iva</button></td>
-		<td style="border:1px solid"><%=p.getPrezzo_vendita() %><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalmodificaprezzovendita">Modifica Prezzo vendita</button></td>
-		<td style="border:1px solid"><%=p.getMarca() %><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalmodificamarca">Modifica Marca</button></td>
-		<td style="border:1px solid"><%=p.getNumero_pezzi_disponibili()%><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalmodificapezzidisponibili">Modifica pezzi disponibili</button></td>
-		<td style="border:1px solid"><%=p.getSconto() %><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalmodificasconto">Modifica Sconto</button></td>
-		<td style="border:1px solid"><%=p.getSpecifiche() %><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalmodificaspecifiche">Modifica specifiche</button></td>
-		<td style="border:1px solid"><%=p.getTipo() %><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalmodificatipo">Modifica tipo</button></td>
-		<td style="border:1px solid"><%=p.getOfferta() %><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalmodificaofferta">Modifica offerta</button></td>
-		<td style="border:1px solid"><%=p.getImmagine() %></td>
+		<tbody>
+		<tr>
+		<td scope="row" style="border:1px solid" data-label="Nome"><%=p.getNome() %><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalmodificanome">Modifica nome</button></td>
+		<td style="border:1px solid" data-label="Descrizione"><%=p.getDescrizione() %><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalmodificadescrizione">Modifica descrizione</button>		
+		<td style="border:1px solid" data-label="Prezzo Acquisto"><%=p.getPrezzo_acquisto() %><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalmodificaprezzoacquisto">Modifica Prezzo Acquisto</button></td>
+		<td style="border:1px solid" data-label="Disponibilità"><%=p.getDisponibilità() %><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalmodificadisponibilita">Modifica Disponibilità</button></td>
+		<td style="border:1px solid" data-label="IVA"><%=p.getIva() %><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalmodificiva">Modifica Iva</button></td>
+		<td style="border:1px solid" data-label="Prezzo Vendita"><%=p.getPrezzo_vendita() %><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalmodificaprezzovendita">Modifica Prezzo vendita</button></td>
+		<td style="border:1px solid" data-label="Marca"><%=p.getMarca() %><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalmodificamarca">Modifica Marca</button></td>
+		<td style="border:1px solid" data-label="Numero"><%=p.getNumero_pezzi_disponibili()%><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalmodificapezzidisponibili">Modifica pezzi disponibili</button></td>
+		<td style="border:1px solid" data-label="Sconto"><%=p.getSconto() %><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalmodificasconto">Modifica Sconto</button></td>
+		<td style="border:1px solid" data-label="Specifiche"><%=p.getSpecifiche() %><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalmodificaspecifiche">Modifica specifiche</button></td>
+		<td style="border:1px solid" data-label="Tipo"><%=p.getTipo() %><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalmodificatipo">Modifica tipo</button></td>
+		<td style="border:1px solid" data-label="Offerta"><%=p.getOfferta() %><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalmodificaofferta">Modifica offerta</button></td>
+		<td style="border:1px solid" data-label="Img"><%=p.getImmagine() %></td>
 		<td><img src="Immagini/Prodotti/<%=p.getImmagine() %>" height="250px" width="250px" class="responsive"></td>
 		<td style="border:1px solid"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modaleliminaprodotto">ELIMINA</button></td>
-		
 		</tr>
+		</tbody>
 	</table>
 <%}%>
+
 
 
 

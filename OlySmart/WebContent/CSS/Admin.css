@@ -96,3 +96,84 @@ a{
         overflow: auto;
         padding-top: 60px;
 }
+
+table { 
+width: 100%; 
+border-collapse: collapse; 
+text-align: center; 	
+}
+th { 
+font-weight: bold; 
+}
+td, th { 
+padding-right: 15px; 
+padding-left: 15px; 
+}
+
+a{
+text-decoration:none;
+color:#36F;
+line-height:50px;
+}
+
+@media only screen and (min-width: 481px) and (max-width: 900px){
+		
+#menu table, thead, tbody, th, td, tr { 			/* Forza la tabella a non essere più una tabella */
+display: block; 
+}
+		
+#menu thead tr { 						/* Nascondiamo l'intestazione della tabella thead */
+position: absolute;
+top: -9999px;
+left: -9999px;
+}
+
+
+		
+#menu td { 
+position: relative;		/* Creiamo lo spazio per l'intestazione  */
+padding-left: 50%; 
+border:0;
+}
+		
+#menu td:before { 	
+position: absolute;			/* Creiamo le altre celle per la descrizione */
+top: 8px;
+left: 20px;
+width: 100%;  
+font-weight:bold;
+}			
+}	
+
+@media only screen and (min-width: 320px) and (max-width: 480px){	
+
+#menu table, thead, tbody, th, td, tr { 			/* Forza la tabella a non essere più una tabella */
+display: block; 
+}
+		
+#menu thead tr { 						/* Nascondiamo l'intestazione della tabella thead */
+position: absolute;
+top: -9999px;
+left: -9999px;
+}
+
+#menu tr {  
+padding-top:20px;}
+		
+#menu td { 
+position: relative;		/* Creiamo lo spazio per l'intestazione  */ 
+line-height:50px;
+border:0;
+}
+		
+#menu td:before { 	
+position: absolute;			/* Creiamo le altre celle per la descrizione */
+top: 0px;
+left: 0px;
+width: 100%;  
+font-weight:bold;
+line-height:0px;
+top:5px;
+
+}	
+}

@@ -2,11 +2,11 @@
 
 .table {
   border: 1px solid #ccc;
-  border-collapse: collapse;
+  border-collapse: separate;
   margin: 0;
   padding: 0;
-  width: 100%;
-  table-layout: fixed;
+  width: auto;
+  table-layout: auto;
 }
 
 .table caption {
@@ -41,7 +41,7 @@
     font-size: 1.3em;
   }
   
-  .table thead {
+ .table thead {
     border: none;
     clip: rect(0 0 0 0);
     height: 1px;
@@ -82,7 +82,8 @@
   
   #tavula .responsive img{
     width: 60%;
-    height: 60%;
+    height: 100%;
+    height: auto;
 	}
 	
 }

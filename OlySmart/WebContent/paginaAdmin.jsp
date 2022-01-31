@@ -78,7 +78,9 @@
     <table class="primo">
     <%@include file="CSS/messaggioRegistrazione.jsp" %>
         <tr>
-            <td><img src="Immagini/Admin/user.png">
+            <td>
+            <div class="containers">
+            <img src="Immagini/Admin/user.png">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalutenti">
   					Visualizza Utenti
 				</button>
@@ -91,9 +93,7 @@
             </td>
             
             <td><img src="Immagini/Admin/prodotti.jpeg">            
-  				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalListaProdotti">
-  					Prodotti presenti
-  				</button>
+  				<a href="PaginaAdminProdotti.jsp" class="btn btn-primary">Prodotti presenti</a><!-- viene gestita direttamente dalla pagina PaginaAdminProdotti.jsp -->
             </td>
             
             <td class="categorie"><img src="Immagini/Admin/ordini.png">
@@ -234,7 +234,8 @@
         	
         	<div class="form-group">
       		<h1 style="text-align:center">Prodotti nel DataBase</h1>
-      		<table>     		
+      		<table> 
+      		<thead>    		
       		<tr>
 				<th style="border:1px solid">Nome</th>
 				<th style="border:1px solid">Descrizione</th>
@@ -251,6 +252,9 @@
 				<th style="border:1px solid">Immagine</th>
 				<th style="border:1px solid">Modifica Prodotto</th>			
 			</tr>
+			</thead>
+			
+			<tbody>
 			<%	
 			//for each che fa vedere tutti i clienti registrati nel database con i relativi valori
 			for(Prodotto prodotto:prodotti){%>
@@ -274,6 +278,7 @@
 			<%
 			}
 			%>
+			</tbody>
 			</table>
       			
       		</div>

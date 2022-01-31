@@ -32,8 +32,8 @@ List<Prodotto> prodotti=prod.getAllProductsAdmin();//la lista dei prodotti conte
 <meta charset="ISO-8859-1">
 <title>Gestione prodotti</title>
 <!-- Pagina CSS -->
-<link rel="stylesheet" href="CSS/styleadmin.css">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="stylesheet" href="CSS/modificaProdotti.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <!-- JQuery -->
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <!-- Popper.js -->
@@ -46,49 +46,51 @@ List<Prodotto> prodotti=prod.getAllProductsAdmin();//la lista dei prodotti conte
 			
 <%
 	if(!prodotti.isEmpty()){%>
-		<table style="border: 1px solid" bgcolor="white">
+		<table style="border: 1px solid" bgcolor="white" class="table" id="tavula">
 		<tr style="border:1px solid">
-		
-		<th style="border:1px solid">Nome</th>
-		<th style="border:1px solid">Descrizione</th>
-		<th style="border:1px solid">Prezzo Acquisto</th>
-		<th style="border:1px solid">Disponibilità</th>
-		<th style="border:1px solid">Iva</th>
-		<th style="border:1px solid">Prezzo Vendita</th>
-		<th style="border:1px solid">Marca</th>
-		<th style="border:1px solid">Numero pezzi disponibili</th>
-		<th style="border:1px solid">Sconto</th>
-		<th style="border:1px solid">Specifiche</th>
-		<th style="border:1px solid">Categoria</th>
-		<th style="border:1px solid">Offerta</th>
-		<th style="border:1px solid">Immagine</th>
-		<th style="border:1px solid">Modifica Prodotto</th>
-
+		<thead>
+		<th scope="col">Nome</th>
+		<th scope="col">Descrizione</th>
+		<th scope="col">Prezzo Acquisto</th>
+		<th scope="col">Disponibilità</th>
+		<th scope="col">Iva</th>
+		<th scope="col">Prezzo Vendita</th>
+		<th scope="col">Marca</th>
+		<th scope="col">Numero pezzi disponibili</th>
+		<th scope="col">Sconto</th>
+		<th scope="col">Specifiche</th>
+		<th scope="col">Categoria</th>
+		<th scope="col">Offerta</th>
+		<th scope="col">Immagine</th>
+		<th scope="col">Modifica Prodotto</th>
+		</thead>
 		
 		</tr >
 		
+		<tbody>
 		<% 
 		//facciamo un for each per stampare tutti i prodotti presenti nel database
 		for(Prodotto p:prodotti){			
 		%>
 		<tr style="border:1px solid">
-		<td style="border:1px solid"><%=p.getCodice() %>)<%=p.getNome() %></td>
-		<td style="border:1px solid"><%=p.getDescrizione() %>		
-		<td style="border:1px solid"><%=p.getPrezzo_acquisto() %></td>
-		<td style="border:1px solid"><%=p.getDisponibilità() %></td>
-		<td style="border:1px solid"><%=p.getIva() %></td>
-		<td style="border:1px solid"><%=p.getPrezzo_vendita() %></td>
-		<td style="border:1px solid"><%=p.getMarca() %></td>
-		<td style="border:1px solid"><%=p.getNumero_pezzi_disponibili()%></td>
-		<td style="border:1px solid"><%=p.getSconto() %></td>
-		<td style="border:1px solid"><%=p.getSpecifiche() %></td>
-		<td style="border:1px solid"><%=p.getTipo() %></td>
-		<td style="border:1px solid"><%=p.getOfferta() %></td>
-		<td style="border:1px solid"><%=p.getImmagine() %></td>
+		<td style="border:1px solid" data-label="Codice"><%=p.getCodice() %>)<%=p.getNome() %></td>
+		<td style="border:1px solid" data-label="Descrizione"><%=p.getDescrizione() %>		
+		<td style="border:1px solid" data-label="Prezzo Acquisto"><%=p.getPrezzo_acquisto() %></td>
+		<td style="border:1px solid" data-label="Disponibilità"><%=p.getDisponibilità() %></td>
+		<td style="border:1px solid" data-label="IVA"><%=p.getIva() %></td>
+		<td style="border:1px solid" data-label="Prezzo Vendita"><%=p.getPrezzo_vendita() %></td>
+		<td style="border:1px solid" data-label="Marca"><%=p.getMarca() %></td>
+		<td style="border:1px solid" data-label="Numero Pezzi Disponibili"><%=p.getNumero_pezzi_disponibili()%></td>
+		<td style="border:1px solid" data-label="Sconto"><%=p.getSconto() %></td>
+		<td style="border:1px solid" data-label="Specifiche"><%=p.getSpecifiche() %></td>
+		<td style="border:1px solid" data-label="Tipo"><%=p.getTipo() %></td>
+		<td style="border:1px solid" data-label="Offerta"><%=p.getOfferta() %></td>
+		<td style="border:1px solid" data-label="Immagine"><%=p.getImmagine() %></td>
 		<td style="border:1px solid"><a href="ModificaProdottiAdmin.jsp?id=<%=p.getCodice()%>">vai alla pagina di modifica</a></td>
 		
 		</tr>				
 	<% }%>
+	</tbody>
 		</table>
 		<%
 		}	
