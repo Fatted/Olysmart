@@ -43,6 +43,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=devide-width, initial-scale=1">
+
 <title>Pagina di gestione admin</title>
 
 <!-- Pagina CSS -->
@@ -90,7 +91,9 @@
             </td>
             
             <td><img src="Immagini/Admin/prodotti.jpeg">            
-  			<a href="PaginaAdminProdotti.jsp" class="btn btn-primary">Prodotti presenti</a><!-- viene gestita direttamente dalla pagina PaginaAdminProdotti.jsp -->
+  				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalListaProdotti">
+  					Prodotti presenti
+  				</button>
             </td>
             
             <td class="categorie"><img src="Immagini/Admin/ordini.png">
@@ -115,7 +118,7 @@
   					Inserisci Prodotto
 				</button>
             </td>
-             <td><img src="Immagini/Admin/Recensioni.jpeg">
+             <td><img src="Immagini/Admin/Recensioni.png">
             <br>
                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalrecensioni">
   					Visualizza recensioni
@@ -215,6 +218,74 @@
   </div>
 </div>
 
+
+<!------------------------------------------------------- Modal visualizzazione prodotti ----------------------------------------------------------------------------------------------->
+<div class="modal fade" id="modalListaProdotti" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Prodotti presenti</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+<!-------------------- inserisco il form che servirà per gestire le varie scelte da parte dell'admin alla servlet di prodottioperazioneservlet------------------------------------- -->
+        	
+        	<div class="form-group">
+      		<h1 style="text-align:center">Prodotti nel DataBase</h1>
+      		<table>     		
+      		<tr>
+				<th style="border:1px solid">Nome</th>
+				<th style="border:1px solid">Descrizione</th>
+				<th style="border:1px solid">Prezzo Acquisto</th>
+				<th style="border:1px solid">Disponibilità</th>
+				<th style="border:1px solid">Iva</th>
+				<th style="border:1px solid">Prezzo Vendita</th>
+				<th style="border:1px solid">Marca</th>
+				<th style="border:1px solid">Numero pezzi disponibili</th>
+				<th style="border:1px solid">Sconto</th>
+				<th style="border:1px solid">Specifiche</th>
+				<th style="border:1px solid">Categoria</th>
+				<th style="border:1px solid">Offerta</th>
+				<th style="border:1px solid">Immagine</th>
+				<th style="border:1px solid">Modifica Prodotto</th>			
+			</tr>
+			<%	
+			//for each che fa vedere tutti i clienti registrati nel database con i relativi valori
+			for(Prodotto prodotto:prodotti){%>
+				<tr style="border:1px solid">
+				<td style="border:1px solid"><%=prodotto.getNome() %></td>
+				<td style="border:1px solid"><%=prodotto.getDescrizione() %>		
+				<td style="border:1px solid"><%=prodotto.getPrezzo_acquisto() %></td>
+				<td style="border:1px solid"><%=prodotto.getDisponibilità() %></td>
+				<td style="border:1px solid"><%=prodotto.getIva() %></td>
+				<td style="border:1px solid"><%=prodotto.getPrezzo_vendita() %></td>
+				<td style="border:1px solid"><%=prodotto.getMarca() %></td>
+				<td style="border:1px solid"><%=prodotto.getNumero_pezzi_disponibili()%></td>
+				<td style="border:1px solid"><%=prodotto.getSconto() %></td>
+				<td style="border:1px solid"><%=prodotto.getSpecifiche() %></td>
+				<td style="border:1px solid"><%=prodotto.getTipo() %></td>
+				<td style="border:1px solid"><%=prodotto.getOfferta() %></td>
+				<td style="border:1px solid"><%=prodotto.getImmagine() %></td>
+				<td style="border:1px solid"><a href="ModificaProdottiAdmin.jsp?id=<%=prodotto.getCodice()%>">vai alla pagina di modifica</a> </td>  
+		
+				</tr>
+			<%
+			}
+			%>
+			</table>
+      			
+      		</div>
+      	
+      		<div class="container text-center">
+      			<button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+      		</div>     	
+      </div>
+    </div>
+  </div>
+</div>
+<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
 
 <!-------------------------------------------------------------------- Modal visualizzazione categorie --------------------------------------------------------------------------------------->
 <div class="modal fade" id="modalcategorie" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

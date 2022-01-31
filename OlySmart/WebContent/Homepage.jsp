@@ -76,12 +76,12 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
             <div class="accedi"> <a href="login.jsp">Accedi</a> </div>
             <div class="cartimage"><a href="carrello.jsp"><img src="Immagini/carello.png"></a></div><br>
         <%}else{%>
-        	<p>Utente:<%=cliente.getUsername() %></p>      
-        	 <div class="logout"> <a href="ServletLogout">Logout</a></div><br>
-        	 <div class="Myorder"> <a href="MyOrder.jsp">Miei ordini</a></div><br>
+        	<p>Benvenuto, <%=cliente.getUsername() %></p>      
+        	 <div class="logout"><a href="ServletLogout">Logout</a></div><br>
+        	 <div class="Myorder"><a href="MyOrder.jsp">Miei ordini</a></div><br>
         	 <div class="cartimage"><a href="carrello.jsp"><img src="Immagini/carello.png"></a></div><br>
-        	 <div class="Myaccount"> <a href="MyAccount.jsp">Il mio account</a></div><br>
-        	 <div class="Myaccount"> <a href="MyRecensioni.jsp">Le mie recensioni</a></div><br>
+        	 <div class="Myaccount"><a href="MyAccount.jsp">Il mio account</a></div><br>
+        	 <div class="Myaccount"><a href="MyRecensioni.jsp">Le mie recensioni</a></div><br>
 <!------------------------------------------- se è un admin andrà nella sua pagina dedicata --------------------------------------------------------------->
         	 <%if(cliente.getTipo().equals("admin")){%>
         		<br><div> <a href="paginaAdmin.jsp">Pagina Gestione</a></div>
@@ -91,10 +91,10 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
 <!-- --------------------------------------------------fine cliente-------------------------------------------------------------------------------------- -->
      <div class="loghi">
            <div class ="imgl1"> 
-                <a href=><img src="Immagini/ig.png" ></a>
+                <a href=https://www.instagram.com/_olysmart_/><img src="Immagini/ig.png" ></a>
            </div>
               <div class ="imgl2">
-              <a href=><img src="Immagini/fb.png"></a> 
+              <a href=https://www.facebook.com/olyacciardo><img src="Immagini/fb.png"></a> 
               </div>
                <div class ="imgl3">    
                 <a href=https://tinyurl.com/IndirizzoNegozio><img src="Immagini/placeholder.png"></a>
