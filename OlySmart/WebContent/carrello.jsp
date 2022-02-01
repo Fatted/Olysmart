@@ -37,6 +37,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="CSS/NavbarTOP.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
@@ -46,6 +47,10 @@
 </head>
 
 <body>
+
+<%@include file="include/navbarCliente.jsp" %>
+
+
 <!-- se il cliente non ha fatto il login può inserire i prodotti nel carrello però dovrà accedere per fare il pagamento e la conferma dell'ordine -->
 	<%if(cliente==null){ %>
 	<p>Accedi per poter procedere al pagamento del tuo carrello</p>

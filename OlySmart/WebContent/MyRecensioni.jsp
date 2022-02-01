@@ -21,9 +21,14 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet" href="CSS/NavbarTOP.css">
 <title>Le Mie Recensioni</title>
 </head>
 <body>
+
+<%@include file="include/navbarCliente.jsp" %>
+
+
 <h1>Recensioni effettuate</h1>
 
 <%

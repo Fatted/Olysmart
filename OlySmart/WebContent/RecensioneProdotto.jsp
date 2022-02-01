@@ -35,6 +35,9 @@ List<Categoria> categorialista=cat.getCategorie();
 </head>
 
 <body>
+
+<%@include file="include/navbarCliente.jsp" %>
+
 <section id="intestazione">
  
  <div class="home">

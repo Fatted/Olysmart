@@ -19,8 +19,9 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
 <title>Il mio account</title>
 
 <!-- Pagina CSS -->
-<link rel="stylesheet" href="CSS/styleadmin.css">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="stylesheet" href="CSS/account.css">
+<link rel="stylesheet" href="CSS/NavbarTOP.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
 <!-- JQuery -->
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <!-- Popper.js -->
@@ -33,17 +34,78 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
 </head>
 
 <body>
-<%@include file="CSS/messaggioRegistrazione.jsp" %>
-<div style="float: left; margin-right:4px">
-<img src="#" width="700px" height="800px"></div> 
+
+<!-------------------------------------------------------- Navbar Cliente --------------------------------------------------------------------- -->
+<%@include file="include/navbarCliente.jsp" %>
+<!----------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+<div class="container rounded bg-white mt-5 mb-5">
 
 <!-- indichiamo il nome e cognome del cliente che entra nella pagina -->
-<h1><%=cliente.getNome() %> <%=cliente.getCognome() %></h1><br>
-<p>
+
+<div class="row">
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+            <img class="rounded-circle mt-5" width="150px" src="Immagini/icon.png">
+            <span class="font-weight-bold"><%=cliente.getNome() %> <%=cliente.getCognome() %></span><span class="text-black-50"><%=cliente.getEmail() %></span><span> </span></div>
+        </div>
+
 
 <!-- facciamo dei vari controlli,nel caso in cui la data di nascita,il codice fiscale o qualsiasi altro valore personale del cliente è vuoto stampa mancante,altrimenti lo mostriamo -->
 <!-- nel caso in cui è mancante c'è un bottone "inserisci" che attraverso il metodo updatecliente in clientedao permette di inserire il valore mancante,lo stesso vale nel caso in cui il valore Ã¨ presente e si vuole modificare -->
 <!-- tutti gli inserimenti/modifiche vengono gestiti da ProfiloUtenteServlet e i valori gli vengono passati grazie ai popup presenti in questa pagina -->
+
+<div class="col-md-8 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Informazioni profilo</h4>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-6"><label class="labels">Username: <%=cliente.getUsername()%></label></div>
+                 	</div>
+                    
+                <div class="row mt-3">
+                    <div class="col-md-12"><label class="labels">Data di nascita: </label><%if(cliente.getDatadinascita().equals("")){%><label class="labels">Mancante</label>
+                    <br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentodata">Inserisci Data</button><%}
+                    else{%><label class="labels"><%=cliente.getDatadinascita()%></label><br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentodata">Modifica Data</button><%}%>
+                    </div>
+                    
+                    <div class="col-md-12"><label class="labels">Codice Fiscale: </label><%if(cliente.getCodicefiscale().equals("")){%><label class="labels">Mancante</label>
+                    <br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentodata">Inserisci codice fiscale</button><%}
+                    else{%><label class="labels"><%=cliente.getCodicefiscale()%></label><br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentodata">Modifica codice fiscale</button><%}%>
+                    </div>
+                    
+                    <div class="col-md-12"><label class="labels">Email: </label><%if(cliente.getEmail().equals("")){%><label class="labels">Mancante</label>
+                    <br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentodata">Inserisci email</button><%}
+                    else{%><label class="labels"><%=cliente.getEmail()%></label><br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentodata">Modifica email</button><%}%>
+                    </div>
+                    
+                    <div class="col-md-12"><label class="labels">Numero telefono: </label><%if(cliente.getTelefono().equals("")){%><label class="labels">Mancante</label>
+                    <br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentodata">Inserisci numero telefono</button><%}
+                    else{%><label class="labels"><%=cliente.getTelefono()%></label><br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentodata">Modifica numero telefono</button><%}%>
+                    </div>
+                    
+                    <div class="col-md-12"><label class="labels">Indirizzo: <%=cliente.getVia() %>,<%=cliente.getCitta() %>(<%=cliente.getCap()%></label>
+                    <br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentoindirizzo">Modifica indirizzo</button>
+                    </div>                    
+ 
+                <div class="col-md-12"><label class="labels">Metodo di pagamento:</label><br>
+                <%if(cliente.getIntestatario_carta()==null){%><label class="labels">Mancante</label><br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentocarta">Inserisci Carta</button></div> <%}
+                else{%>		
+				<div class="col-md-12"><label class="labels">Numero carta: <%=cliente.getNumero_carta() %> </label></div> <br>
+                <div class="col-md-12"><label class="labels">Data scadenza: <%=cliente.getData_scadenza_carta() %></label></div> <br>
+                <div class="col-md-12"><label class="labels">CVV: <%=cliente.getCVV() %> </label></div> <br>
+                <div class="col-md-12"><label class="labels">Intestatario: <%=cliente.getIntestatario_carta() %></label></div> <br>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentocarta">Modifica</button>																
+				<%}%>
+				
+				</div>
+        </div>
+	</div>
+</div>
+        
+
+<!-- 
 Data:<%if(cliente.getDatadinascita().equals("")){%>Mancante<br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentodata">Inserisci Data</button>
 	<%}else{%><%=cliente.getDatadinascita() %><br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentodata">Modifica Data</button><%}%><br><br>
 
@@ -71,8 +133,7 @@ Metodo di pagamento:<%if(cliente.getIntestatario_carta()==null){%>Mancante<br><b
 								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentocarta">Modifica</button>																
 							<%}%>
 </p>
-
-
+ -->
 
 
 
