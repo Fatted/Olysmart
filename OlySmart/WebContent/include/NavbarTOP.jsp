@@ -8,9 +8,9 @@
   <a href="catalogo.jsp?Categoria=all" class="active">Catalogo</a>
 <%for(Categoria categoria:categorialista){ %>
 <div class="dropdown">
-    <button class="dropbtn"><%=categoria.getNome() %> 
+    <a href="catalogo.jsp?Categoria=<%=categoria.getNome() %>"><button class="dropbtn"><%=categoria.getNome()%>
       <i class="fa fa-caret-down"></i>
-    </button>
+    </button></a> 
 
 
 <div class="dropdown-content">

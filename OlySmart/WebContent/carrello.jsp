@@ -38,6 +38,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="CSS/NavbarTOP.css">
+    <link rel="stylesheet" href="CSS/carrelloCSS.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
@@ -55,72 +56,81 @@
 	<%if(cliente==null){ %>
 	<p>Accedi per poter procedere al pagamento del tuo carrello</p>
 	<%}else{ %>
-    <p>Carrello di:<%=cliente.getUsername() %></p>
+	
+	<div class="Cart-Container">
+	<div class="Header">
+ 		<h3 class="Heading">Carrello di:<%=cliente.getUsername() %></h3>
+ 	</div>
     <%} %>
     <%@include file="CSS/messaggioRegistrazione.jsp" %>
-    <div class="small-container cart-page">
-        <table>
-             <tr>
-                <th>Prodotto</th>
-                <th>Quantità</th>
-                <th>Prezzo</th>
-            </tr>
-        <%
+    
+    
+    <%
         if(prodotti_carrello!=null){
         	//for each dei prodotti presenti nel carrello per stampare i loro valori
                 	for(Carrello carrello:prodottocarrello){
         %>
-                <tr>
-                <td>
-                    <p>Nome:<%=carrello.getNome()%></p>
-                    <a href="RimozioneProdottiCarrello?id=<%=carrello.getCodice() %>">Rimuovi</a><!-- la rimozione viene gestita dalla servlet RimozioneProdottiCarrello passandogli l'id -->
-                </td>
-                
-                <td>
+    
+    <div class="Cart-Items">
+ 		<div class="about">
+ 			<h1 class="title"><%=carrello.getNome()%></h1>
+ 				<img src="Immagini/Prodotti/<%=carrello.getImmagine()%>" style={{ height="250px" }}/>
+ 		</div>
+ 		<div class="counter"></div>
+ 		<div class="prices"></div>
+ 	</div>
+    	
+   
                       <%//controlliamo se la quantità selezionata non è maggiore della quantità disponibile del prodotto
                       if(carrello.getQuantita()<carrello.getNumero_pezzi_disponibili()){%>
-                <form action="" method="post">
-<!------------------------- L'aumento ed il decremento viene gestito dalla servlet AumentaDiminuisciQuantitàCarrello passandogli id del prodotto-----------------------------------------  -->
-                <a href="AumentaDiminuisciQuantitàCarrello?action=diminuisci&id=<%=carrello.getCodice()%>">-</a>
-                <input type="number" name="quantita" value="<%=carrello.getQuantita()%>" readonly>
-               	<a href="AumentaDiminuisciQuantitàCarrello?action=aumenta&id=<%=carrello.getCodice()%>">+</a>   
-                   
-                		<%//se siamo arrivati alal quantità massima disponibile esce la scritta MAX e può solo decrementare la quantità
-                		} else{%>
-                <a href="AumentaDiminuisciQuantitàCarrello?action=diminuisci&id=<%=carrello.getCodice()%>">-</a>
-                <input type="text" value="MAX" readonly>   
-                		<%} %>
- 				</form>
-                </td>  
                 
-                <td>
-                    <small><%=carrello.getPrezzo_vendita()%></small><br> 
-                                                                     
-                </td>            
-            </tr>                                 
-        	<%}        	
-        }      
-        %>         
-        </table>
-    </div>
-    <div class="total-price">
-        <table>
-            <tr>
-                <td>Totale:<%=totale %></td><!-- il totale è dato da tutti i prodotti inseriti nel carrello -->
-                <td>$$</td>
-            </tr>
-        </table> 
-   </div>
-   
+       
+                <form action="" method="post" style="align: center">
+                
+                <div class="counter">
+                <div class="button"><a href="AumentaDiminuisciQuantitàCarrello?action=diminuisci&id=<%=carrello.getCodice()%>">-</a></div>
+                <div class="count"><%=carrello.getQuantita()%></div>
+               	<div class="button"><a href="AumentaDiminuisciQuantitàCarrello?action=aumenta&id=<%=carrello.getCodice()%>">+</a></div> 
+               	 
+                 <%//se siamo arrivati alal quantità massima disponibile esce la scritta MAX e può solo decrementare la quantità
+                		} else{%>
+                		<div class="counter">
+                <div class="button"><a href="AumentaDiminuisciQuantitàCarrello?action=diminuisci&id=<%=carrello.getCodice()%>">-</a></div>
+                <div class="count">MAX</div>
+                		<%} %>
+                		</div>
+                  </form> 
+                		
+ 	
+ 				
+               
+    
+   	 <div class="prices">
+ 		<div class="amount"><%=carrello.getPrezzo_vendita() %></div>
+ 		<div class="remove"><a href="RimozioneProdottiCarrello?id=<%=carrello.getCodice() %>"><u>Remove</u></a></div>
+ 	</div>
+ 	<%}
+        	}
+        	%>
+ 	
+ 	<hr> 
+ 		<div class="checkout">
+ 		<div class="total">
+ 		<div class="total-amount">Totale:<%=totale %></div>
+
+ 		
+ 		
+ 			<%if(totale==0){ %>
+   		<p>Nessun prodotto inserito</p><!-- stampiamo in caso non ci sono prodotti nel carrello -->
+			<%}%>
 	
-	<%if(totale==0){ %>
-   	<p>Nessun prodotto inserito</p><!-- stampiamo in caso non ci sono prodotti nel carrello -->
-<%}%>
-	
-	<%if(cliente!=null && totale>0){%>
-		<a href="ordine.jsp">Procedi all'ordine</a>			
-<%}else if(cliente==null){%>
-		<a href="login.jsp">Accedi per poter procedere all'ordine</a>
-<%}%>
+		<%if(cliente!=null && totale > 0){ %>
+		<a href="ordine.jsp"><button>Procedi all'ordine</button></a>	
+		<%}else if(cliente == null){%>
+		<a href="login.jsp"><button>Accedi per poter procedere all'ordine</button></a>
+		<%} %>
+    
+
+</div>
 </body>
 </html>
