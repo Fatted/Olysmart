@@ -26,11 +26,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<head>
+
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link rel="stylesheet" href="CSS/style.css">
-    <link rel="stylesheet" media="screen and (max-width:4096px) (min-width:1024px)" href="CSS/large.css">
-    <link rel="stylesheet" media="screen and (max-width:500px)" href="CSS/mobile.css">
 	<title>Modifica Prodotto</title>
 	
 	<!-- Pagina CSS -->
@@ -43,7 +40,7 @@
 <!-- JavaScript -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	
-</head>
+
 <title>Gestione ordini</title>
 </head>
 <body>

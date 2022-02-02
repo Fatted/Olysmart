@@ -84,13 +84,13 @@
                 <a href="AumentaDiminuisciQuantitàCarrello?action=diminuisci&id=<%=carrello.getCodice()%>">-</a>
                 <input type="number" name="quantita" value="<%=carrello.getQuantita()%>" readonly>
                	<a href="AumentaDiminuisciQuantitàCarrello?action=aumenta&id=<%=carrello.getCodice()%>">+</a>   
-                  </form> 
+                   
                 		<%//se siamo arrivati alal quantità massima disponibile esce la scritta MAX e può solo decrementare la quantità
                 		} else{%>
                 <a href="AumentaDiminuisciQuantitàCarrello?action=diminuisci&id=<%=carrello.getCodice()%>">-</a>
                 <input type="text" value="MAX" readonly>   
                 		<%} %>
- 
+ 				</form>
                 </td>  
                 
                 <td>
@@ -117,9 +117,9 @@
    	<p>Nessun prodotto inserito</p><!-- stampiamo in caso non ci sono prodotti nel carrello -->
 <%}%>
 	
-	<%if(cliente!=null){%>
+	<%if(cliente!=null && totale>0){%>
 		<a href="ordine.jsp">Procedi all'ordine</a>			
-<%}else{%>
+<%}else if(cliente==null){%>
 		<a href="login.jsp">Accedi per poter procedere all'ordine</a>
 <%}%>
 </body>

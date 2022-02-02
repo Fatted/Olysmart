@@ -26,16 +26,17 @@ List<Recensione> recensioni=Recensione.recensioneProdotto(id);
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link rel="stylesheet" href="CSS/Dettagli.css">
-	<link rel="stylesheet" href="CSS/Footer.css">   
-	<title>Dettagli</title>
+	<link rel="stylesheet" href="CSS/Footer.css">  
+		<link rel="stylesheet" href="CSS/NavbarTOP.css">  
+	<title>Dettagli Prodotto</title>
 </head>
 
 <body>
+<!-------------------------------------------  ----------------------------------------->
+<%@include file="include/navbarCliente.jsp" %>
+<!------------------------------------------- fine barra -----------------------------------------------------------------------------------------------> 
 <!-- ---------------------------------------------------------------------------------------------------------------------------------------------- -->
 <section id="intestazione">
- <div class="home">
-  <a href="Homepage.jsp"><img src="Immagini/logonero.png"></a>
- </div>
  <div class="title">
  <h1>Dettagli Prodotto</h1>
  </div>

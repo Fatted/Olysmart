@@ -2,15 +2,18 @@
 <%@page import="control.*" %>
 <%@page import="java.util.*" %> 
 
-
 <div class="topnav" id="myTopnav">
+<%if(cliente!=null){ %>
   <a href="Homepage.jsp" class="active">Home</a>
   <a href="MyOrder.jsp" class="active">I miei ordini</a>
   <a href="MyRecensioni.jsp" class="active">Le mie recensioni</a>
   <a href="MyAccount.jsp" class="active">Il mio profilo</a>
   <a href="carrello.jsp" class="active">Carrello</a>
-
-    
+<%}else{ %>
+    <a href="login.jsp" class="active">Login</a>
+    <a href="register.jsp" class="active">Register</a>
+    <a href="Homepage.jsp" class="active">Home</a>
+<%} %>
   <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
 </div>
 
