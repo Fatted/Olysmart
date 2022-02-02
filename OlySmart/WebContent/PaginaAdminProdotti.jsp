@@ -65,7 +65,7 @@ List<Prodotto> prodotti=prod.getAllProductsAdmin();//la lista dei prodotti conte
 		<th scope="col">Modifica Prodotto</th>
 		</thead>
 		
-		</tr >
+		</tr>
 		
 		<tbody>
 		<% 

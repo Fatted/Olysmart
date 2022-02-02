@@ -48,6 +48,7 @@
 
 <!-- Pagina CSS -->
 <link rel="stylesheet" href="CSS/Admin.css">
+<link rel="stylesheet" href="CSS/GestioneTableWindowsAdmin.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <!-- JQuery -->
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -79,7 +80,6 @@
     <%@include file="CSS/messaggioRegistrazione.jsp" %>
         <tr>
             <td>
-            <div class="containers">
             <img src="Immagini/Admin/user.png">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalutenti">
   					Visualizza Utenti
@@ -124,7 +124,6 @@
   					Visualizza recensioni
 				</button>
             </td>
-            
         </tr>
     </table>
 </section>
@@ -309,22 +308,25 @@
       		<div class="form-group">
       		
       		<h1 style="text-align:center">Categorie Presenti</h1>
-      		<table>
+      		<table style="border: 1px solid" bgcolor="white" class="table" id="tavula">
+      		<thead>
       		<tr>
-				<th style="border:1px solid">Nome</th>
-				<th style="border:1px solid">Numero</th>
+				<th scope="col">Nome</th>
+				<th scope="col">Numero</th>
 			</tr>
-      		
+			</thead>
+      		<tbody>
 			<%	 
 			for(Categoria categoria:categorialista){%>
 			<tr style="border:1px solid">
-				<td style="border:1px solid"><%=categoria.getNome() %></td>
-				<td style="border:1px solid"><%=categoria.getNumero() %></td>
+				<td style="border:1px solid"  data-label="Nome"><%=categoria.getNome() %></td>
+				<td style="border:1px solid"  data-label="Numero"><%=categoria.getNumero() %></td>
 			</tr>
 
 			<%
 			}
 			%>
+			</tbody>
       		</table>
       		</div>
       	
@@ -351,38 +353,39 @@
       <div class="modal-body">
 <!-------------------- inserisco il form che servirà per gestire le varie scelte da parte dell'admin alla servlet di prodottioperazioneservlet------------------------------------- -->
         <form action="ProdottiOperazioneServlet" method="post">
-  
-      		<div class="form-group">
-      		
+  			<div class="form-group">
+   		
       		<h1 style="text-align:center">Utenti Presenti</h1>
-      		<table>
-      		
-      		<tr>
-				<th style="border:1px solid">Nome</th>
-				<th style="border:1px solid">Cognome</th>
-				<th style="border:1px solid">Username</th>
-				<th style="border:1px solid">email</th>
-				<th style="border:1px solid">Telefono</th>
-				<th style="border:1px solid">Indirizzo</th>
+      		<table style="border: 1px solid" bgcolor="white" class="table" id="tavula">
+			<tr style="border:1px solid">
+			<thead>
+				<th scope="col">Nome</th>
+				<th scope="col">Cognome</th>
+				<th scope="col">Username</th>
+				<th scope="col">email</th>
+				<th scope="col">Telefono</th>
+				<th scope="col">Indirizzo</th>
+			</thead>
 			</tr>
+			<tbody>
 			<%	
 			//for each che fa vedere tutti i clienti registrati nel database con i relativi valori
 			for(Cliente clienti:listaclienti){%>
 				<tr style="border:1px solid">
-				<td style="border:1px solid"><%=clienti.getNome() %></td> <!-- stampa del nome -->
-				<td style="border:1px solid"><%=clienti.getCognome() %></td><!-- stampa del cognome -->
-				<td style="border:1px solid"><%=clienti.getUsername() %></td><!-- stampa del username -->
-				<td style="border:1px solid"><%=clienti.getEmail() %></td><!-- stampa dell' email -->
-				<td style="border:1px solid"><%=clienti.getTelefono() %></td><!-- stampa del telefono -->
-				<td style="border:1px solid">Via:<%=clienti.getVia() %>, CAP:<%=clienti.getCap() %>, Città:<%=clienti.getCitta() %></td><!-- stampa dell'indirizzo -->
+				<td style="border:1px solid" data-label="Nome"><%=clienti.getNome() %></td> <!-- stampa del nome -->
+				<td style="border:1px solid" data-label="Cognome"><%=clienti.getCognome() %></td><!-- stampa del cognome -->
+				<td style="border:1px solid" data-label="Username"><%=clienti.getUsername() %></td><!-- stampa del username -->
+				<td style="border:1px solid" data-label="Email"><%=clienti.getEmail() %></td><!-- stampa dell' email -->
+				<td style="border:1px solid" data-label="Telefono"><%=clienti.getTelefono() %></td><!-- stampa del telefono -->
+				<td style="border:1px solid" data-label="Via">Via:<%=clienti.getVia() %>, CAP:<%=clienti.getCap() %>, Città:<%=clienti.getCitta() %></td><!-- stampa dell'indirizzo -->
 				</tr>
 
 			<%
 			}
 			%>
-			</table>
-      			
-      		</div>
+			</tbody>
+			</table>    			
+			</div>
       	
       		<div class="container text-center">
       			<button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
@@ -411,47 +414,48 @@
   
       		<div class="form-group">
       		
-      		<h1 style="text-align:center">Oridni Presenti</h1>
-      		<table>
-      		
+      		<h1 style="text-align:center">Oridini Presenti</h1>
+      		<table style="border: 1px solid" bgcolor="white" class="table" id="tavula">
+      		<thead>
       		<tr>
-				<th style="border:1px solid">codice</th>
-				<th style="border:1px solid">costo totale</th>
-				<th style="border:1px solid">data</th>
-				<th style="border:1px solid">prezzo singolo prodotto</th>
-				<th style="border:1px solid">nome prodotto</th>
-				<th style="border:1px solid">Codice prodotto</th>
-				<th style="border:1px solid">quantità prodotto</th>
-				<th style="border:1px solid">tipo spedizione</th>
-				<th style="border:1px solid">indirizzo consegna</th>
-				<th style="border:1px solid">username</th>
-				<th style="border:1px solid">stato ordine</th>
-				
-				
+				<th scope="col">codice</th>
+				<th scope="col">costo totale</th>
+				<th scope="col">data</th>
+				<th scope="col">prezzo singolo prodotto</th>
+				<th scope="col">nome prodotto</th>
+				<th scope="col">Codice prodotto</th>
+				<th scope="col">quantità prodotto</th>
+				<th scope="col">tipo spedizione</th>
+				<th scope="col">indirizzo consegna</th>
+				<th scope="col">username</th>
+				<th scope="col">stato ordine</th>
 			</tr>
+		</thead>
+		
+				
+	<tbody>
 			<%	
 			//for each che fa vedere tutti i clienti registrati nel database con i relativi valori
 			for(Ordine ordinestampa:ordini){%>
 				<tr style="border:1px solid">
-				<td style="border:1px solid"><%=ordinestampa.getCodice() %></td> 
-				<td style="border:1px solid"><%=ordinestampa.getCosto_totale() %></td>
-				<td style="border:1px solid"><%=ordinestampa.getData() %></td>
-				<td style="border:1px solid"><%=ordinestampa.getPrezzo_prodotto_singolo() %></td>
-				<td style="border:1px solid"><%=ordinestampa.getNome_prodotto() %></td>
-				<td style="border:1px solid"><%=ordinestampa.getProdotto_codice() %></td>
-				<td style="border:1px solid"><%=ordinestampa.getQuantità_prodotto() %></td>
-				<td style="border:1px solid"><%=ordinestampa.getTipo_spedizione() %>
-				<td style="border:1px solid"><%=ordinestampa.getIndirizzo_consegna() %>
-				<td style="border:1px solid"><%=ordinestampa.getUsername() %>
-				<td style="border:1px solid"><%=ordinestampa.getStato() %><br><a href="ModificaStatoOrdini.jsp?idordine=<%=ordinestampa.getCodice()%>">Modifica</a>			
+				<td style="border:1px solid" data-label="Codice"><%=ordinestampa.getCodice() %></td> 
+				<td style="border:1px solid" data-label="Costo totale" ><%=ordinestampa.getCosto_totale() %></td>
+				<td style="border:1px solid" data-label="Data"><%=ordinestampa.getData() %></td>
+				<td style="border:1px solid" data-label="Prezzo singolo prodotto"><%=ordinestampa.getPrezzo_prodotto_singolo() %></td>
+				<td style="border:1px solid" data-label="Nome Prodotto"><%=ordinestampa.getNome_prodotto() %></td>
+				<td style="border:1px solid" data-label="Codice Prodotto"><%=ordinestampa.getProdotto_codice() %></td>
+				<td style="border:1px solid" data-label="Quantità prodotto"><%=ordinestampa.getQuantità_prodotto() %></td>
+				<td style="border:1px solid" data-label="Spedizione"><%=ordinestampa.getTipo_spedizione() %>
+				<td style="border:1px solid" data-label="Indirizzo"><%=ordinestampa.getIndirizzo_consegna() %>
+				<td style="border:1px solid" data-label="Username"><%=ordinestampa.getUsername() %>
+				<td style="border:1px solid" data-label="Stato spedizione"><%=ordinestampa.getStato() %><br><a href="ModificaStatoOrdini.jsp?idordine=<%=ordinestampa.getCodice()%>">Modifica</a>			
 				</tr>
 			<%
 			}
 			%>
-			</table>
-      			
-      		</div>
-      	
+			</tbody>
+			</table>      			
+      		</div>     	
       		<div class="container text-center">
       			<button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
       		</div>     	
@@ -475,28 +479,31 @@
         	
         	<div class="form-group">
       		<h1 style="text-align:center">Recensioni clienti</h1>
-      		<table>     		
+      		<table style="border: 1px solid" bgcolor="white" class="table" id="tavula"> 
+      		<thead>    		
       		<tr>
-				<th style="border:1px solid">Username</th>
-				<th style="border:1px solid">Codice prodotto</th>
-				<th style="border:1px solid">Titolo</th>
-				<th style="border:1px solid">Commento</th>
-				<th style="border:1px solid">voto</th>		
+				<th scope="col">Username</th>
+				<th scope="col">Codice prodotto</th>
+				<th scope="col">Titolo</th>
+				<th scope="col">Commento</th>
+				<th scope="col">voto</th>		
 			</tr>
+			</thead>
+			<tbody>
 			<%	
 			//for each che fa vedere tutti i clienti registrati nel database con i relativi valori
 			for(Recensione recensione:recensioni){%>
 				<tr style="border:1px solid">
-				<td style="border:1px solid"><%=recensione.getUsernameCliente() %></td> 
-				<td style="border:1px solid"><%=recensione.getCodiceProdotto() %></td> 
-				<td style="border:1px solid"><%=recensione.getTitolo() %></td> 
-				<td style="border:1px solid"><%=recensione.getCommento()%></td> 
-				<td style="border:1px solid"><%=recensione.getVoto() %></td> 
-		
+				<td style="border:1px solid" data-label="Username"><%=recensione.getUsernameCliente() %></td> 
+				<td style="border:1px solid" data-label="Codice Prodotto"><%=recensione.getCodiceProdotto() %></td> 
+				<td style="border:1px solid" data-label="Titolo"><%=recensione.getTitolo() %></td> 
+				<td style="border:1px solid" data-label="Commento"><%=recensione.getCommento()%></td> 
+				<td style="border:1px solid" data-label="Voto"><%=recensione.getVoto() %></td> 
 				</tr>
 			<%
 			}
 			%>
+			</tbody>
 			</table>
       			
       		</div>
