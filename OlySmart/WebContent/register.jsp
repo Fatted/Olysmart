@@ -19,7 +19,7 @@
                     <h1>Registrazione</h1>
                      <%@include file="CSS/messaggioRegistrazione.jsp" %>
  <!----------------------------------  tutti i dati inseriti dall'utente per accedere vengono passati alla servlet ServletRegister----------------------------------------- -->
- 								<!-- alcuni dei valori sono required perchï¿½ serviranno per poter procedere a fare ordini -->                    
+ 								<!-- alcuni dei valori sono required perchè serviranno per poter procedere a fare ordini -->                    
                     <form id="login" class="form" action="ServletRegister" method="post">
                         
                  <div class="form-group">
@@ -167,7 +167,6 @@
             
         }
 	
-
 	function checkcity(){
         
         var city=/^([a-zA-Z\xE0\xE8\xE9\xF9\xF2\xEC\x27]\s?)+$/;//No numeri e solo uno spazio tra le parole
@@ -203,8 +202,12 @@
 	
 	
     </script>
-<!-- -------------------------------------------------inclusione footer------------------------------------------------------------------------------------------------ -->
-	<%@include file="include/footer.jsp" %>
-<!-- -------------------------------------------------fine inclusione------------------------------------------------------------------------------------------------ --> 
+<footer id="footer">
+    <p>Olysmart &copy; 2021, All rights reserved</p>
+    <p>Via napoli 310 81058 Vairano Patenora, Campania</p>
+    <p>0823 988020</p>
+    <p>olysmartvairano@gmail.com</p>
+    <p>Powered by D'Amato Antonio, D'Amato Ludovica, Dello Buono Piero</p>
+    </footer>
 </body>
 </html>

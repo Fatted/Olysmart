@@ -46,7 +46,7 @@ public class ProdottiOperazioneServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//controllo del tipo di operazione del form prese dalla pagina di gestione admin
+		//controllo del tipo di operazione del form
 		String operazione=request.getParameter("operation");
 			
 			if(operazione.equals("addCategory")) {//se l'operazione scelta è addcategory

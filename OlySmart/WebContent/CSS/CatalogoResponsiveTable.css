@@ -1,4 +1,3 @@
-
 /*********		STILE GENERICO TABELLA  	**********/
 
 table { 
@@ -14,7 +13,7 @@ padding-right: 15px;
 padding-left: 15px; 
 }
 
-a{
+table a{
 text-decoration:none;
 color:#36F;
 line-height:50px;
@@ -23,7 +22,7 @@ line-height:50px;
 /*********		MEDIA QUERY  	**********/	
 @media only screen and (min-width: 481px) and (max-width: 900px){
 		
-#catalogo table, thead, tbody, th, td, tr { 			/* Forza la tabella a non essere piÃ¹ una tabella */
+#catalogo table, thead, tbody, th, td, tr { 			/* Forza la tabella a non essere più una tabella */
 display: block; 
 }
 		
@@ -52,7 +51,7 @@ font-weight:bold;
 
 @media only screen and (min-width: 320px) and (max-width: 480px){	
 
-#catalogo table, thead, tbody, th, td, tr { 			/* Forza la tabella a non essere piÃ¹ una tabella */
+#catalogo table, thead, tbody, th, td, tr { 			/* Forza la tabella a non essere più una tabella */
 display: block; 
 }
 		
@@ -82,8 +81,3 @@ top:5px;
 
 }	
 }
-	
-	
-	
-	
-	

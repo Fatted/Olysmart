@@ -8,6 +8,12 @@
       	request.setAttribute("cliente-corrente", cliente);
       	
       }
+      CategoriaDAO cat=new CategoriaDAO();
+      List<Categoria> categorialista=cat.getCategorie(); //la lista delle categorie comprende tutte le categorie presenti nel db che prendiamo con il metodo getCategorie in CategorieDAO
+
+      ProdottoDAO prod= new ProdottoDAO();
+      List<Prodotto> prodottiBarraLaterale=prod.getAllProducts();	//lista usata per tenere sempre la barra attiva contenente tutti i prodotti disponibili nel db con il metodo getallproduct del prodotto DAO
+
       
       String utentenome=cliente.getUsername();
       
@@ -23,20 +29,40 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<link rel="stylesheet" href="CSS/NavbarTOP.css">
+<link rel="stylesheet" media="screen and (max-width:2561px)" href="CSS/MyOrder.css">
+    <link rel="stylesheet" media="screen and (max-width:1441px)" href="CSS/MyOrder.css">
+    <link rel="stylesheet" media="screen and (max-width:1025px)" href="CSS/Laptop.css">
+    <link rel="stylesheet" media="screen and (max-width:769px)" href="CSS/Tablet.css">
+<link rel="stylesheet" media="screen and (max-width:426px)" href="CSS/mobile.css">
 <title>I miei oridni</title>
 </head>
 
 <body>
+<!-- -------------------------------------------------inclusione intestazione------------------------------------------------------------------------------------------------ -->
 
-<%@include file="include/navbarCliente.jsp" %>
+ <%@include file="include/Intestazioneb.jsp" %>
+     
+<!-- ------------------------------------------------- fine inclusione intestazione------------------------------------------------------------------------------------------------ -->
 
+<!-- -------------------------------------------------inclusione navbar------------------------------------------------------------------------------------------------ -->
 
+ <%@include file="include/navbar.jsp" %>
+     
+<!-- ------------------------------------------------- fine inclusione navbar------------------------------------------------------------------------------------------------ -->
+
+<h1>I miei ordini </h1>
 <%
-
 if(ordini.size()>0){
 	for(Ordine ordine:ordini){%>
-		Nome:<%=ordine.getNome_prodotto() %> /Quantità:<%=ordine.getQuantità_prodotto() %> /Prezzo singolo:<%=ordine.getPrezzo_prodotto_singolo() %> /Prezzo totale:<%=ordine.getCosto_totale() %> /Stato:<%=ordine.getStato()%> /Spedizione:<%=ordine.getTipo_spedizione()%>
+	    <ul>
+<li>
+		Prodotto: <%=ordine.getNome_prodotto() %><br>
+		Quantità: <%=ordine.getQuantità_prodotto() %><br> 
+		Prezzo prodotto: <%=ordine.getPrezzo_prodotto_singolo() %> <br>
+		Stato: <%=ordine.getStato()%> <br>
+		Spedizione: <%=ordine.getTipo_spedizione()%> <br>
+		Prezzo totale: <%=ordine.getCosto_totale() %> <br>
+		</li></ul>
 
 <div class="addrecensione">		
 	<%
@@ -46,15 +72,22 @@ if(ordini.size()>0){
 	
 	
 	<%}else{%>
-		<a href="MyRecensioni.jsp">Recensione già effettuata</a><br>
+		<a href="MyRecensioni.jsp">Recensione già effettuata</a><br><br>
 	<%}
 			}
 		}%>
+		
 <%}else{%>
 
-NESSUN ORDINE EFFETTUATO
+ <p class="ord"> NESSUN ORDINE EFFETTUATO </p>
 	
 <%}%>
 </div>
+<!-- -------------------------------------------------inclusione footer------------------------------------------------------------------------------------------------ -->
+
+ <%@include file="include/footer.jsp" %>
+     
+<!-- ----------------------------------------------- fine inclusione footer------------------------------------------------------------------------------------------------ -->
+ 
 </body>
 </html>

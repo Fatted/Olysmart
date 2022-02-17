@@ -41,7 +41,6 @@ public class ServletRegister extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//prendiamo tutti i parametri inseriti nel form della register.jsp
 		String nome = request.getParameter("nome");
 		String cognome = request.getParameter("cognome");
 		String data = request.getParameter("data");
@@ -63,17 +62,16 @@ public class ServletRegister extends HttpServlet {
 		Cliente nuovoCliente = new Cliente(nome,cognome,data,cf,email,password,username,telefono,cap,via,citta,tipo,null,null,null,null,null);
 		request.setAttribute("cliente", nuovoCliente);
 		
-		//controllo se il cliente è gia presente nel database,se lo è il valore sarà true e nell'if successivo al cliente verrà detto che l'username è già presente
 		boolean ok = nuovoCliente.controllocliente();
 		HttpSession httpsession=request.getSession();
 
 		if (ok) {
-			httpsession.setAttribute("messaggio-errore", "Username già presente,inserire un altro username");//se l'username è già presente stampa il messaggio con il seguente valore
+			httpsession.setAttribute("messaggio", "Username già presente");
 			response.sendRedirect("register.jsp");
 		} else {
 			nuovoCliente.setCliente();
 			
-			httpsession.setAttribute("messaggio", "Registrazione eseguita con successo!");//se la registrazione viene eseguita con successo
+			httpsession.setAttribute("messaggio", "Registrazione eseguita con successo!");
 			response.sendRedirect("register.jsp");
 		}
 	}

@@ -1,14 +1,12 @@
 @charset "ISO-8859-1";
-
 *{
 	margin:0;
-    padding:0;
+	padding:0;
 }
 
-body{
-	background-color:white;
-}
 
+
+/*INTESTAZIONE*/
 #intestazione {
 	width:100%;
 	padding-top:2rem;
@@ -32,17 +30,17 @@ body{
 
 #intestazione .container .testo h1{
 	width:100%;
-	font-size:200%;
+	font-size:400%;
 }
 
 #intestazione .container .testo .bottone-ricerca{
   
-  margin-left: 4.5rem;
+  margin-left: 8rem;
   position: absolute;
 }
 
 .search-box-avanzato:hover > .search-txt{
-  width: 115px;
+  width: 180px;
   
   
 
@@ -55,15 +53,15 @@ body{
 .search-box-avanzato{
   transform: translate(-50%,-50%);
   background:#2f3640 ;
-  height: 28px;
-  border-radius: 28px;
-  padding: 6px;
+  height: 30px;
+  border-radius: 30px;
+  padding: 8px;
 }
 
 .search-btn{
   float: right;
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   background: #2f3640;
   display: flex;
@@ -104,17 +102,8 @@ body{
 
 }
 
-.ultimo .accesso .registra{
- width:50%;
- margin-right:2.5rem;	
-}
-
-.ultimo .accesso .accedi{
- width:50%;	
-}
-
 #intestazione .container .ultimo .accesso .cartimage{
-	width:18%;
+	width:12%;
 }
 
 #intestazione .container .ultimo .accesso .cartimage img{
@@ -128,7 +117,7 @@ body{
 }
 
 #intestazione .container .ultimo .loghi .imgl1{
-	width:18%;
+	width:12%;
 }
 
 #intestazione .container .ultimo .loghi .imgl1 img{
@@ -136,13 +125,13 @@ body{
 }
 
 #intestazione .container .ultimo .loghi .imgl2{
-	width:18%;
+	width:12%;
 }
 #intestazione .container .ultimo .loghi .imgl2 img{
 	width:100%;
 }
 #intestazione .container .ultimo .loghi .imgl3{
-	width:18%;
+	width:12%;
 	margin-right:2rem;
 }
 #intestazione .container .ultimo .loghi .imgl3 img{
@@ -217,8 +206,7 @@ body{
     width: 100%;
     text-align: left;
   }
-  
-  /*MENU*/
+ /*MENU*/
 
 #menu {
 	
@@ -347,102 +335,54 @@ body{
 	opacity: .5;
 }
 
-
-/*PRODOTTI IN OFFERTA */
+  /*PRODOTTI IN OFFERTA */
 #piuvenduti{
  width:100%;
- margin: 8rem auto auto ;
-  
+ margin: 12rem auto auto ;
+ 
   align-items: center;
   justify-content: center;
   text-align: center;
 }
 
-table{
-	width:348px;
-}
 
- table tr td .container .image{
+.prodpiuvend table tr td .container .image{
 	width:200px;
 	height:200px;
 }
- table tr td {
+.prodpiuvend table tr td {
 	margin-top:2rem;
 }
+/*FOOTER*/
 
-/*CODICE PER DETTAGLI*/
-#details .left .foto img{
-	width:150px;
-	height:200px;
-}
-
-/*CODICE PER ORDINE*/
-.prodottord{
-	display:block;
+#footer{
+	width:100%;
+	padding:30px 0;
 }
 
 
-/*CODICE PER CARRELLO*/
-.checkout{
-	margin-right:5rem;
-}
+/*PER CARRELLO*/
 .total{
  width: 100%;
  display: block;
  
 }
-.total-amount{
- font-size: 26px;
- font-family: 'Open Sans';
- font-weight: 900;
- color: #202020;
+
+/*PER DETTAGLI*/
+
+#details .left .foto img{
+	width:200px;
+	height:200px;
 }
 
-.total button{
-	margin-right:5rem;
-	width:150px;
-	height:40px;
-}
-
-
-
-/*PAGINA ADMIN*/
-header #navbar .container h1{
-	width:60%;
-	font-size:2rem;
-	
-	
-}
-
-header #navbar .container .homelog{
-	width:40%;
-	display:flex;
-	
-	align-items:center;
-	text-align:center;
-	justify-content:center;
-	
-}
-
-header #navbar .container .homelog div{
-	width:50%;
-	list-style: none;
-	
-	
-}
-
-
-
-/*CATALOGO*/
-.prodotti table tr td{
-	margin-top:10rem;
-}
 /*PAGINA MYACCOUNT*/
 #menuacc{
 	display:block;
 }
 
-#menuacc table {
+.tabord, 
+.tabrec,
+.tabinfo {
 	width:294px;
 	height:169px;
 	margin-left:auto;
@@ -451,11 +391,15 @@ header #navbar .container .homelog div{
 	border-collapse: collapse;
 	
 }
-#menuacc table tr{
+.tabord, 
+.tabrec,
+.tabinfo tr{
 	width:291px;
 	height:166px;
 }
-#menuacc table tr td{
+.tabord, 
+.tabrec,
+.tabinfo tr td{
 	width:291px;
 	height:166px;
 }
@@ -466,18 +410,11 @@ header #navbar .container .homelog div{
 	width:131px;
 	height:131px;
 }
-
-/*PAGINA SCRIVI REC*/
-
-#details{
-	display:block;
+/*CATALOGO*/
+.prodotti table tr td{
+	margin-top:10rem;
 }
-/*FOOTER*/
 
-#footer{
-	width:100%;
-	padding:30px 0;
-}
 
 
 /***************************************************/
@@ -485,10 +422,3 @@ header #navbar .container .homelog div{
 display:none;
 }
 /********************************************************/
-
-
-
-
-
-
-

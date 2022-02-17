@@ -41,3 +41,13 @@
     background: #ffde49;
     color:#000;
 }
+
+#footer{
+	width:100%;
+  margin-top: 10rem;
+  background: #4d4d4d;
+  color: #fff;
+  padding-top:30px;
+  padding-bottom:30px;
+  text-align: center;
+}

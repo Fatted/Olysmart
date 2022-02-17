@@ -16,7 +16,6 @@
 		return;
 	}
 		}
-
      		CategoriaDAO cat=new CategoriaDAO();
       		List<Categoria> categorialista=cat.getCategorie();     		
       		
@@ -47,8 +46,9 @@
 <title>Pagina di gestione admin</title>
 
 <!-- Pagina CSS -->
-<link rel="stylesheet" href="CSS/Admin.css">
+<link rel="stylesheet" href="CSS/styleadmin.css">
 <link rel="stylesheet" href="CSS/GestioneTableWindowsAdmin.css">
+
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <!-- JQuery -->
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -65,11 +65,11 @@
 <header>
         <nav id="navbar">
         <div class="container">
-            <h1>Admin:<%=cliente.getUsername() %></h1>
-            <ul>
-                <li><a href="Homepage.jsp">Home</a></li>
-                <li><a href="ServletLogout">Logout</a></li> <!-- il logout viene gestito dalla servlet di logout -->
-            </ul>
+            <h1>Admin: <%=cliente.getUsername() %></h1>
+            <div class="homelog">
+                <div class="home"><a href="Homepage.jsp">Home</a></div>
+                <div class="logout"><a href="ServletLogout">Logout</a></div> <!-- il logout viene gestito dalla servlet di logout -->
+            </div>
         </div>
     </nav>
     </header>
@@ -515,5 +515,13 @@
     </div>
   </div>
 </div>
+<footer id="footer">
+    <h6>Olysmart &copy; 2021, All rights reserved</h6>
+    <h6>Via napoli 310 81058 Vairano Patenora, Campania</h6>
+    <h6>0823 988020</h6>
+    <h6>olysmartvairano@gmail.com</h6>
+    <h6>Powered by D'Amato Antonio, D'Amato Ludovica, Dello Buono Piero</h6>
+    </footer>
+
 </body>
 </html>

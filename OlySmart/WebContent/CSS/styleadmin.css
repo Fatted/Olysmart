@@ -24,22 +24,23 @@ header #navbar .container{
 }
 
 header #navbar .container h1{
-	width:80%;
+	width:70%;
+	font-size:200%;
 	
 	
 }
 
-header #navbar .container ul{
-	width:20%;
+header #navbar .container .homelog{
+	width:30%;
 	display:flex;
-	float:right;
+	
 	align-items:center;
 	text-align:center;
 	justify-content:center;
 	
 }
 
-header #navbar .container ul li{
+header #navbar .container .homelog div{
 	width:50%;
 	list-style: none;
 	margin-right:3rem;
@@ -118,7 +119,7 @@ line-height:50px;
 
 @media only screen and (min-width: 481px) and (max-width: 900px){
 		
-#menu table, thead, tbody, th, td, tr { 			/* Forza la tabella a non essere piÃ¹ una tabella */
+#menu table, thead, tbody, th, td, tr { 			/* Forza la tabella a non essere più una tabella */
 display: block; 
 }
 		
@@ -147,7 +148,7 @@ font-weight:bold;
 
 @media only screen and (min-width: 320px) and (max-width: 480px){	
 
-#menu table, thead, tbody, th, td, tr { 			/* Forza la tabella a non essere piÃ¹ una tabella */
+#menu table, thead, tbody, th, td, tr { 			/* Forza la tabella a non essere più una tabella */
 display: block; 
 }
 		
@@ -176,4 +177,17 @@ line-height:0px;
 top:5px;
 
 }	
+}
+
+
+
+/*FOOTER*/
+#footer{
+	width:100%;
+  margin-top: 10rem;
+  background: #4d4d4d;
+  color: #fff;
+  padding-top:30px;
+  padding-bottom:30px;
+  text-align: center;
 }

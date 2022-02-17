@@ -730,6 +730,4 @@ return totale;
 
 		}
 	}
-
-	
 }

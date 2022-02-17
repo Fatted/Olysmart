@@ -1,4 +1,4 @@
-<!-- da aggiungere css -->
+
 <%@page import="model.*" %>
 <%@page import="control.*" %>
 <%@page import="java.util.*" %>
@@ -11,6 +11,12 @@
       	request.setAttribute("cliente-corrente", cliente);
       }
       
+      CategoriaDAO cat=new CategoriaDAO();
+      List<Categoria> categorialista=cat.getCategorie(); //la lista delle categorie comprende tutte le categorie presenti nel db che prendiamo con il metodo getCategorie in CategorieDAO
+      
+      ProdottoDAO prod= new ProdottoDAO();
+      List<Prodotto> prodottiBarraLaterale=prod.getAllProducts();	//lista usata per tenere sempre la barra attiva contenente tutti i prodotti disponibili nel db con il metodo getallproduct del prodotto DAO
+
       //prendiao gli attributi dei prodotti nel carrello
       ArrayList<Carrello> prodotti_carrello=(ArrayList<Carrello>)session.getAttribute("listacarrello");
       List<Carrello> prodottocarrello=null;
@@ -43,13 +49,29 @@
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
     
-    <link rel="stylesheet" href="CSS/cart.css">
+    <link rel="stylesheet" media="screen and (max-width:2561px)" href="CSS/cart.css">
+    <link rel="stylesheet" media="screen and (max-width:1441px)" href="CSS/cart.css">
+    <link rel="stylesheet" media="screen and (max-width:1025px)" href="CSS/Laptop.css">
+    <link rel="stylesheet" media="screen and (max-width:769px)" href="CSS/Tablet.css">
+    <link rel="stylesheet" media="screen and (max-width:426px)" href="CSS/mobile.css">
 <title>Carrello</title>
 </head>
 
 <body>
 
-<%@include file="include/navbarCliente.jsp" %>
+<!-- -------------------------------------------------inclusione intestazione------------------------------------------------------------------------------------------------ -->
+
+ <%@include file="include/Intestazioneb.jsp" %>
+     
+<!-- ------------------------------------------------- fine inclusione intestazione------------------------------------------------------------------------------------------------ -->
+
+<!-- -------------------------------------------------inclusione navbar------------------------------------------------------------------------------------------------ -->
+
+ <%@include file="include/navbar.jsp" %>
+     
+<!-- ------------------------------------------------- fine inclusione navbar------------------------------------------------------------------------------------------------ -->
+
+
 
 
 <!-- se il cliente non ha fatto il login può inserire i prodotti nel carrello però dovrà accedere per fare il pagamento e la conferma dell'ordine -->
@@ -59,10 +81,10 @@
 	
 	<div class="Cart-Container">
 	<div class="Header">
- 		<h3 class="Heading">Carrello di:<%=cliente.getUsername() %></h3>
+ 		<h3 class="Heading">Carrello di: <%=cliente.getUsername() %></h3>
  	</div>
     <%} %>
-    <%@include file="CSS/messaggioRegistrazione.jsp" %>
+    <%@include file="CSS/messaggioRegistrazione.jsp"%>
     
     
     <%
@@ -74,10 +96,9 @@
     <div class="Cart-Items">
  		<div class="about">
  			<h1 class="title"><%=carrello.getNome()%></h1>
- 				<img src="Immagini/Prodotti/<%=carrello.getImmagine()%>" style={{ height="250px" }}/>
+ 				<img src="Immagini/Prodotti/<%=carrello.getImmagine()%>" class="imgprod">
  		</div>
- 		<div class="counter"></div>
- 		<div class="prices"></div>
+ 		
  	</div>
     	
    
@@ -99,6 +120,7 @@
                 <div class="count">MAX</div>
                 		<%} %>
                 		</div>
+                		</div>
                   </form> 
                 		
  	
@@ -112,11 +134,11 @@
  	<%}
         	}
         	%>
- 	
+ 	<br>
  	<hr> 
  		<div class="checkout">
  		<div class="total">
- 		<div class="total-amount">Totale:<%=totale %></div>
+ 		<div class="total-amount">Totale: <%=totale %>&euro; </div>
 
  		
  		
@@ -132,5 +154,15 @@
     
 
 </div>
+</div>
+</div>
+
+<!-- -------------------------------------------------inclusione footer------------------------------------------------------------------------------------------------ -->
+
+ <%@include file="include/footer.jsp" %>
+     
+<!-- ----------------------------------------------- fine inclusione footer------------------------------------------------------------------------------------------------ -->
+ 
+
 </body>
 </html>

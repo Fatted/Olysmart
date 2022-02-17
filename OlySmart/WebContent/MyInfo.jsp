@@ -8,7 +8,18 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
      if(cliente!=null){//se la sessione Ã¨ nuovala creiamo
      	request.setAttribute("cliente-corrente", cliente);//settiamo il nuovo cliente
       	
-     }%>
+     }
+     ProdottoDAO prod= new ProdottoDAO();
+     List<Prodotto> prodottiBarraLaterale=prod.getAllProducts();	//lista usata per tenere sempre la barra attiva contenente tutti i prodotti disponibili nel db con il metodo getallproduct del prodotto DAO
+
+
+     CategoriaDAO cat=new CategoriaDAO();
+     List<Categoria> categorialista=cat.getCategorie(); //la lista delle categorie comprende tutte le categorie presenti nel db che prendiamo con il metodo getCategorie in CategorieDAO
+
+     
+     
+     
+     %>
      
      
 <!DOCTYPE html>
@@ -19,9 +30,14 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
 <title>Il mio account</title>
 
 <!-- Pagina CSS -->
-<link rel="stylesheet" href="CSS/account.css">
-<link rel="stylesheet" href="CSS/NavbarTOP.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
+<link rel="stylesheet" media="screen and (max-width:2561px)" href="CSS/myinfo.css">
+    <link rel="stylesheet" media="screen and (max-width:1441px)" href="CSS/myinfo.css">
+    <link rel="stylesheet" media="screen and (max-width:1025px)" href="CSS/Laptop.css">
+    <link rel="stylesheet" media="screen and (max-width:769px)" href="CSS/Tablet.css">
+    <link rel="stylesheet" media="screen and (max-width:426px)" href="CSS/mobile.css">
+
+
 <!-- JQuery -->
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <!-- Popper.js -->
@@ -35,9 +51,17 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
 
 <body>
 
-<!-------------------------------------------------------- Navbar Cliente --------------------------------------------------------------------- -->
-<%@include file="include/navbarCliente.jsp" %>
-<!----------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------inclusione intestazione------------------------------------------------------------------------------------------------ -->
+
+ <%@include file="include/Intestazioneb.jsp" %>
+     
+<!-- ------------------------------------------------- fine inclusione intestazione------------------------------------------------------------------------------------------------ -->
+
+<!-- -------------------------------------------------inclusione navbar------------------------------------------------------------------------------------------------ -->
+
+ <%@include file="include/navbar.jsp" %>
+     
+<!-- ------------------------------------------------- fine inclusione navbar------------------------------------------------------------------------------------------------ -->
 
 <div class="container rounded bg-white mt-5 mb-5">
 
@@ -106,30 +130,31 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
         
 
 <!-- 
-Data:<%if(cliente.getDatadinascita().equals("")){%>Mancante<br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentodata">Inserisci Data</button>
+Data: <%if(cliente.getDatadinascita().equals("")){%>Mancante<br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentodata">Inserisci Data</button>
 	<%}else{%><%=cliente.getDatadinascita() %><br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentodata">Modifica Data</button><%}%><br><br>
 
-Codice Fiscale:<%if(cliente.getCodicefiscale().equals("")){%>Mancante<br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentoCF">Inserisci CF</button><%}
+Codice Fiscale: <%if(cliente.getCodicefiscale().equals("")){%>Mancante<br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentoCF">Inserisci CF</button><%}
 	else{%><%=cliente.getCodicefiscale() %><br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentoCF">Modifica</button><%}%><br><br>
 
-Email:<%if(cliente.getEmail().equals("")){%>Mancante<br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentoemail">Inserisci Email</button><%}
+Email: <%if(cliente.getEmail().equals("")){%>Mancante<br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentoemail">Inserisci Email</button><%}
 		else{%><%=cliente.getEmail() %><br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentoemail">Modifica</button><%}%><br><br>
 
-Username:<%=cliente.getUsername()%><br><br>
+Username: <%=cliente.getUsername()%><br><br>
 
-Telefono:<%if(cliente.getTelefono().equals("")){%>Mancante<br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentotelefono">Inserisci Telefono</button><%}
+Telefono: <%if(cliente.getTelefono().equals("")){%>Mancante<br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentotelefono">Inserisci Telefono</button><%}
 		else{%><%=cliente.getTelefono() %><br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentotelefono">Modifica</button><%}%><br><br>
 
 Indirizzo:<%=cliente.getVia() %>,<%=cliente.getCitta() %>(<%=cliente.getCap() %>)<br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentoindirizzo">Modifica</button><br><br>
 
 
 
-Metodo di pagamento:<%if(cliente.getIntestatario_carta()==null){%>Mancante<br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentocarta">Inserisci Carta</button> <%}else{%>							Carta<br>	
+Metodo di pagamento: <%if(cliente.getIntestatario_carta()==null){%>Mancante<br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentocarta">Inserisci Carta</button> <%}else{%>							Carta<br>	
 								
-								Numero carta:<%=cliente.getNumero_carta() %><br> 
-								Data Scadenza:<%=cliente.getData_scadenza_carta() %><br>
-								CVV:<%=cliente.getCVV() %><br>
-								Intestatario:<%=cliente.getIntestatario_carta() %><br>
+								Intestatario: <%=cliente.getIntestatario_carta() %><br>
+								Numero carta: <%=cliente.getNumero_carta() %><br> 
+								Data Scadenza: <%=cliente.getData_scadenza_carta() %><br>
+								CVV: <%=cliente.getCVV() %><br>
+								
 								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentocarta">Modifica</button>																
 							<%}%>
 </p>
@@ -275,9 +300,9 @@ Metodo di pagamento:<%if(cliente.getIntestatario_carta()==null){%>Mancante<br><b
         <input type="hidden" name="operation" value="addIndirizzo">
         
       		<div class="form-group">
-      			via:<input type="text"  class="form-control" name="via" placeholder="Enter Via"  required><br>
-      			cap:<input type="number"  class="form-control" name="cap" max="99999" placeholder="Enter CAP" required><br> 
-      			citt&agrave:<input type="text"  class="form-control" 	placeholder="Enter Citt&agrave" name="citta" required><br>      			     		
+      			via: <input type="text"  class="form-control" name="via" placeholder="Enter Via"  required><br>
+      			cap: <input type="number"  class="form-control" name="cap" max="99999" placeholder="Enter CAP" required><br> 
+      			città: <input type="text"  class="form-control" 	placeholder="Enter Citt&agrave" name="citta" required><br>      			     		
       		</div>
       	      	
       		<div class="container text-center">
@@ -341,9 +366,14 @@ Metodo di pagamento:<%if(cliente.getIntestatario_carta()==null){%>Mancante<br><b
     </div>
   </div>
 </div>
+</div>
+</div>
 
+<!-- -------------------------------------------------inclusione footer------------------------------------------------------------------------------------------------ -->
 
-
-
+ <%@include file="include/footer.jsp" %>
+     
+<!-- ----------------------------------------------- fine inclusione footer------------------------------------------------------------------------------------------------ -->
+ 
 </body>
 </html>

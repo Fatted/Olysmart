@@ -47,10 +47,11 @@
 
 
 <h1 style="text-align:center">Modifica stato ordini</h1>
-      		<table>
+      		<table class="table" id="tavula" border="1">
       		
-      		<tr>
+      		
       		<thead>
+      		<tr>
 				<th scope="col" style="border:1px solid">codice</th>
 				<th scope="col" style="border:1px solid">costo totale</th>
 				<th scope="col" style="border:1px solid">data</th>
@@ -62,8 +63,9 @@
 				<th scope="col" style="border:1px solid">indirizzo consegna</th>
 				<th scope="col" style="border:1px solid">username</th>
 				<th scope="col" style="border:1px solid">stato ordine</th>	
-			</thead>	
 			</tr>
+			</thead>	
+			
 			
 			<tbody>
 			<%	

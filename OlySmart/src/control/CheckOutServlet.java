@@ -2,7 +2,7 @@ package control;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
+import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.servlet.ServletException;
@@ -37,8 +37,11 @@ public class CheckOutServlet extends HttpServlet {
 		
 		try(PrintWriter out=response.getWriter()){
 			
-			SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd");
-			Date data=new Date(0);
+			SimpleDateFormat dtf = new SimpleDateFormat("yyyy/MM/dd");
+	        Calendar calendar = Calendar.getInstance();
+
+	        Date dateObj = calendar.getTime();
+	        String formattedDate = dtf.format(dateObj);
 			
 			HttpSession session=request.getSession();
 		    ArrayList<Carrello> prodotti_carrello=(ArrayList<Carrello>)session.getAttribute("listacarrello");
@@ -74,7 +77,7 @@ public class CheckOutServlet extends HttpServlet {
 					for(Carrello pcarrello:prodottocarrello) {					
 					ordine.setCodice(0);
 					ordine.setCosto_totale(totale+spedizionecosto);
-					ordine.setData(formatter.format(data));
+					ordine.setData(dtf.format(dateObj));
 					ordine.setUsername(cliente.getUsername());
 					ordine.setTipo_spedizione(tipospedizione);
 					ordine.setQuantità_prodotto(pcarrello.getQuantita());

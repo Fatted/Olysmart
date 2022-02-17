@@ -34,34 +34,35 @@ public class AumentaDiminuisciQuantitàCarrello extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		
 		try(PrintWriter out=response.getWriter()){
-			String attività=request.getParameter("action");
-			int id=Integer.parseInt(request.getParameter("id"));
+			String attività=request.getParameter("action"); //prendiamo il parametro con valore action, che può essere rispettivamente aumenta o diminuisci
+			int id=Integer.parseInt(request.getParameter("id")); //prendiamo id del prodtto da aumentare o diminuire
 			
-			ArrayList<Carrello> listacarrello=(ArrayList<Carrello>)request.getSession().getAttribute("listacarrello");
+			ArrayList<Carrello> listacarrello=(ArrayList<Carrello>)request.getSession().getAttribute("listacarrello"); //prendiamo i prodotti presnti nel carrello
 			
+			//controllo se l'attività è diversa da null e id del prodotto è uguale o maggiore di 1
 			if(attività!=null && id>=1) {
-				if(attività.equals("aumenta")) {
-					for(Carrello carrello:listacarrello) {
-						if(carrello.getCodice()==id) {
-							int quantita=carrello.getQuantita();
-							quantita++;
-							carrello.setQuantita(quantita);
-							response.sendRedirect("carrello.jsp");
+				if(attività.equals("aumenta")) {//se l'azione che abbiamo selezionato è aumenta (quindi abbiamo cliccato sul pulsante + della jsp carrello)
+					for(Carrello carrello:listacarrello) { //prendiamo tutti i prodotti del carrello passati con la sessione
+						if(carrello.getCodice()==id) {//vediamo se il codice del prodotto del carrello corrisponde all'id del prodotto
+							int quantita=carrello.getQuantita();//facciamo una variabile quantità che indica la quantità del prodotto
+							quantita++;//aumentiamo la quantità
+							carrello.setQuantita(quantita);//settiamo la nuova quantità al prodotto nel carrello
+							response.sendRedirect("carrello.jsp");//restiamo nella pagina del carrello
 						}
 					}
 				}
 				
-				if(attività.equals("diminuisci")) {
-					for(Carrello carrello:listacarrello) {
-						if(carrello.getCodice()==id && carrello.getQuantita()>1) {
-							int quantita=carrello.getQuantita();
-							quantita--;
-							carrello.setQuantita(quantita);
+				if(attività.equals("diminuisci")) { //se l'azione passata è diminuisci
+					for(Carrello carrello:listacarrello) {// prendiamo tutti i prodotti del carrello tramite la sessione
+						if(carrello.getCodice()==id && carrello.getQuantita()>1) { //se il codice del prodotto corrisponde con id del prodotto e se la quantità del prodotto nel carrello è >1
+							int quantita=carrello.getQuantita();//ci prendiamo la quantità di quel prodotto presente nel carrello
+							quantita--;//diminuisco la sua quantità con un mimimo di 1
+							carrello.setQuantita(quantita); //settiamo la nuova quantità
 							break;
 							
 						}
 					}
-					response.sendRedirect("carrello.jsp");
+					response.sendRedirect("carrello.jsp"); //restiamo nel carrello
 				}
 			}
 		}
