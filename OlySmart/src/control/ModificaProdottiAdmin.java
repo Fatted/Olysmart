@@ -120,7 +120,7 @@ public class ModificaProdottiAdmin extends HttpServlet {
 		if(operazione.equals("EliminaProdotto")) {
 			ProdottoDAO prodottoDAO=new ProdottoDAO();		
 			prodottoDAO.UpdateProdottoEliminazione(id);
-			response.sendRedirect("PaginaAdminProdotto.jsp");						
+			response.sendRedirect("PaginaAdminProdotti.jsp");						
 		}
 		
 		

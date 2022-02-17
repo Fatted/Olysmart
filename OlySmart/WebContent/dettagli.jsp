@@ -5,7 +5,7 @@
 <%
 //controlliamo la sessione attuale del cliente
 Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente");
-   if(cliente!=null){//se la sessione Ã¨ nuovala creiamo
+   if(cliente!=null){//se la sessione è nuova la creiamo
    	request.setAttribute("cliente-corrente", cliente);//settiamo il nuovo cliente
  }
 CategoriaDAO cat=new CategoriaDAO();
@@ -14,23 +14,19 @@ List<Categoria> categorialista=cat.getCategorie(); //la lista delle categorie co
 ProdottoDAO prod= new ProdottoDAO();
 List<Prodotto> prodottiBarraLaterale=prod.getAllProducts();	//lista usata per tenere sempre la barra attiva contenente tutti i prodotti disponibili nel db con il metodo getallproduct del prodotto DAO
 
-int id=Integer.parseInt(request.getParameter("id"));
+int id=Integer.parseInt(request.getParameter("id"));//prendiamo id del prodotto passato 
 ProdottoDAO prodottoDAO=new ProdottoDAO();
 
 
-List<Prodotto> prodottolista=prodottoDAO.getProductsForCodice(id);
+List<Prodotto> prodottolista=prodottoDAO.getProductsForCodice(id); //la lista dei prodotti equivale al singolo prodotto passato tramite id e con il metodo ricaviamo le info dal db
 
 RecensioneDAO Recensione=new RecensioneDAO();
-List<Recensione> recensioni=Recensione.recensioneProdotto(id);
-
-
+List<Recensione> recensioni=Recensione.recensioneProdotto(id); //prendiamo dal db tutte le recensioni del prodotto con quell'id
 %>
-
 
 <!DOCTYPE html>
 <html>
 <%@ page contentType="text/html; charset=UTF-8" import="java.util.*,model.Prodotto"%>
-
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link rel="stylesheet" media="screen and (max-width:2561px)" href="CSS/styledet.css">
@@ -38,9 +34,8 @@ List<Recensione> recensioni=Recensione.recensioneProdotto(id);
     <link rel="stylesheet" media="screen and (max-width:1025px)" href="CSS/Laptop.css">
     <link rel="stylesheet" media="screen and (max-width:769px)" href="CSS/Tablet.css">
     <link rel="stylesheet" media="screen and (max-width:426px)" href="CSS/mobile.css">
-    <!-- -------------------------------------------------------------SCRIPT LENTE E CSS---------------------------------------------------------- -->
+    <!-- -------------------------------------------------------------SCRIPT LENTE  (il css è in styledet)---------------------------------------------------------- -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <script>
 function magnify(imgID, zoom) {
   var img, glass, w, h, bw;
@@ -97,16 +92,12 @@ function magnify(imgID, zoom) {
   }
 }
 </script>
- <!-- -------------------------------------------------------------SCRIPT LENTE E CSS---------------------------------------------------------- -->    	
-    
-	<title>Dettagli</title>
+ <!-- -------------------------------------------------------------SCRIPT LENTE Fine---------------------------------------------------------- -->    	
+	<title>OlySmartWeb|Dettagli Prodotto</title>
 </head>
-
 <body>
 <!-- -------------------------------------------------inclusione intestazione------------------------------------------------------------------------------------------------ -->
-
- <%@include file="include/Intestazionea.jsp" %>
-     
+ <%@include file="include/Intestazionea.jsp" %>     
 <!-- ------------------------------------------------- fine inclusione intestazione------------------------------------------------------------------------------------------------ -->
 
 <!-- -------------------------------------------------inclusione navbar------------------------------------------------------------------------------------------------ -->
@@ -115,79 +106,64 @@ function magnify(imgID, zoom) {
      
 <!-- ------------------------------------------------- fine inclusione navbar------------------------------------------------------------------------------------------------ -->
 
-
-
+<!-- ---------------------------------------------------Sezione dei dettagli---------------------------------------------------------------------------------- -->
  	<section id="details">
-	<% for(Prodotto prodotto:prodottolista){ %>
+	<% for(Prodotto prodotto:prodottolista){ %> <!-- ciclo per ogni prodotto per ricavare le informazioni, il prodotto è nella lista listaprodotto che abbiamo ricavato con il metodo sopra -->
 		<div class="left">
 		    <div class="foto">	   
-		  <img src="Immagini/Prodotti/<%=prodotto.getImmagine() %>" id="myimage">	  
+		  <img src="Immagini/Prodotti/<%=prodotto.getImmagine() %>" id="myimage"> <!-- stampiamo l'immagine -->  
 		  </div>
 			</div>
 		<div class="right">
 		<div class="nome">
-			<h3><%=prodotto.getNome()%></h3>
-			
+			<h1><%=prodotto.getNome()%></h1> <!-- stampiamo il nome --> 
 			</div>
 			<br>
 			<div class="prezzo">
 			<h3>Prezzo</h3>
-			<p><%=prodotto.getPrezzo_vendita()%></p>
+			<p><%=prodotto.getPrezzo_vendita()%></p> <!-- stampiamo il prezzo --> 
 			</div>
 			<br>
 		<div class="dispo">
-		<h4>Disponibilità</h4>
-		<p><%=prodotto.getNumero_pezzi_disponibili()%></p>
+		<h3>Disponibilità</h3>
+		<p><%=prodotto.getNumero_pezzi_disponibili()%></p> <!-- stampiamo le disponibilità --> 
 		</div>
 		<br>
 		<div class="descr">
 		<h3>Descrizione</h3>
-		<p><%=prodotto.getDescrizione()%></p>
+		<p><%=prodotto.getDescrizione()%></p> <!-- stampiamo la descrizione --> 
 		</div>
 		<br>
 		<div class="addcart">
-		  <a href="AggiungiAlCarrello?id=<%=prodotto.getCodice() %>">Aggiungi al carrello</a>
+		<!-- passiamo alla servlet id del prodotto da mettere nel carrello, alla servlet AggiungiAlCarrello -->
+		  <a href="AggiungiAlCarrello?id=<%=prodotto.getCodice() %>" style="background-color:#47a1ff ;color: white;padding: 10px 15px 10px;text-align: center;text-decoration: none;display: inline-block; margin-bottom:20px">Aggiungi al carrello</a>
 		</div>
 		<br>
 	<div class="recens">
-		<h3>Recensioni Prodotto</h3>
+		<h2>Recensioni Prodotto</h2>
 		<%
 		if(!recensioni.isEmpty()){
 		for(Recensione recensione:recensioni){%>
-		Utente:<%=recensione.getUsernameCliente() %>  Voto:<%=recensione.getVoto() %><br>
-		Titolo:<%=recensione.getTitolo() %><br>
-		Commento:<%=recensione.getCommento() %><br><br>
-		
+		<strong>Titolo:<%=recensione.getTitolo() %></strong><br>
+		Commento:<%=recensione.getCommento() %><br>
+		Utente:<strong><%=recensione.getUsernameCliente() %></strong> Voto:<strong><%=recensione.getVoto() %></strong><br><br>
+
 		<%}
 		}else{%>
-		Nessuna recensione disponibile
-		<%}%>
-		
-		</div>
-		
-		  
-		
-		</div>
-		
-	  
-			
-	</section>
-	
-
-	<%
-		}
-	%>
-	
-	<!-- -------------------------------------------------inclusione footer------------------------------------------------------------------------------------------------ -->
-
- <%@include file="include/footer.jsp" %>
-     
+		<br><h4>Nessuna recensione disponibile</h4>
+		<%}%>	
+		</div>				 		
+		</div>			 			
+	</section>	
+	<%}%>	
+<!-- -------------------------------------------------inclusione footer------------------------------------------------------------------------------------------------ -->
+ <%@include file="include/footer.jsp" %>    
 <!-- ----------------------------------------------- fine inclusione footer------------------------------------------------------------------------------------------------ -->
 	
 <script>
 /* Initiate Magnify Function
 with the id of the image, and the strength of the magnifier glass:*/
-magnify("myimage", 1);
+magnify("myimage", 1.5);
 </script>
 
 </body>

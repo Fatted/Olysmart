@@ -51,7 +51,7 @@ public class ProfiloUtenteServlet extends HttpServlet {
 			
 			ClienteDAO clienteAggiornato=new ClienteDAO();
 			clienteAggiornato.UpdateCliente(cliente);//aggiorno la data grazie alla query presente nel ClienteDAO nel metodo UpdateCliente
-			response.sendRedirect("MyAccount.jsp");//ritorno alla pagina di account con le informazioni aggiornate
+			response.sendRedirect("MyInfo.jsp");//ritorno alla pagina di account con le informazioni aggiornate
 		}
 		
 		//se l'operazione è addCF allora aggiorno/inserisco solo il codice fiscale
@@ -63,7 +63,7 @@ public class ProfiloUtenteServlet extends HttpServlet {
 			
 			ClienteDAO clienteAggiornato=new ClienteDAO();
 			clienteAggiornato.UpdateCliente(cliente);//aggiorno il cf grazie alla query presente nel ClienteDAO nel metodo UpdateCliente
-			response.sendRedirect("MyAccount.jsp");//ritorno alla pagina di account con le informazioni aggiornate
+			response.sendRedirect("MyInfo.jsp");//ritorno alla pagina di account con le informazioni aggiornate
 		}
 		//faccio lo stesso per tutte le altre operazioni scelte dall'utente
 		else if(operazione.equals("addEmail")) {
@@ -74,7 +74,7 @@ public class ProfiloUtenteServlet extends HttpServlet {
 			
 			ClienteDAO clienteAggiornato=new ClienteDAO();
 			clienteAggiornato.UpdateCliente(cliente);
-			response.sendRedirect("MyAccount.jsp");
+			response.sendRedirect("MyInfo.jsp");
 		}
 		
 		else if(operazione.equals("addTelefono")) {
@@ -85,7 +85,7 @@ public class ProfiloUtenteServlet extends HttpServlet {
 			
 			ClienteDAO clienteAggiornato=new ClienteDAO();
 			clienteAggiornato.UpdateCliente(cliente);
-			response.sendRedirect("MyAccount.jsp");
+			response.sendRedirect("MyInfo.jsp");
 		}
 		
 		else if(operazione.equals("addIndirizzo")) {
@@ -100,7 +100,7 @@ public class ProfiloUtenteServlet extends HttpServlet {
 			
 			ClienteDAO clienteAggiornato=new ClienteDAO();
 			clienteAggiornato.UpdateCliente(cliente);
-			response.sendRedirect("MyAccount.jsp");
+			response.sendRedirect("MyInfo.jsp");
 		}
 		
 		else if(operazione.equals("addCarta")) {
@@ -119,7 +119,7 @@ public class ProfiloUtenteServlet extends HttpServlet {
 			
 			ClienteDAO clienteAggiornato=new ClienteDAO();
 			clienteAggiornato.UpdateCliente(cliente);
-			response.sendRedirect("MyAccount.jsp");
+			response.sendRedirect("MyInfo.jsp");
 		}
 		
 		doGet(request, response);

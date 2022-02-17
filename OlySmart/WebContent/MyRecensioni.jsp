@@ -46,7 +46,6 @@
  <%@include file="include/navbar.jsp" %>    
 <!-- ------------------------------------------------- fine inclusione navbar------------------------------------------------------------------------------------------------ -->
 
-<h1>Recensioni effettuate</h1>
 <ul>
 <li>
 <%
@@ -57,26 +56,18 @@
 			List<Prodotto> prodotti=prodotto.getProductsForCodice(codiceprodotto);
 				for(Prodotto prodottoVisualizza:prodotti){%>
 				
-		Prodotto: <%=prodottoVisualizza.getNome() %><br>
-		Voto: <%=recensione.getVoto() %><br>
-		Titolo: <%=recensione.getTitolo() %><br>
-		Commento: <%=recensione.getCommento() %><br>
-		<a href="#modificacommento">Modifica</a><br><br>
-		
+		<strong>Prodotto:</strong> <%=prodottoVisualizza.getNome() %><br>
+		<strong>Voto:</strong> <%=recensione.getVoto() %><br>
+		<strong>Titolo:</strong> <%=recensione.getTitolo() %><br>
+		<strong>Commento:</strong> <%=recensione.getCommento() %><br>		
 	<%		}
 		}
 	}else{%>
 	<p class="recensione">
-	Nessuna recensione disponibile
+	<h2 style="text-align:center">Nessuna recensione disponibile</h2>
 	</p>
 	<%}%>
 </li>
 </ul>
-<!-- -------------------------------------------------inclusione footer------------------------------------------------------------------------------------------------ -->
-
- <%@include file="include/footer.jsp" %>
-     
-<!-- ----------------------------------------------- fine inclusione footer------------------------------------------------------------------------------------------------ -->
-
 </body>
 </html>

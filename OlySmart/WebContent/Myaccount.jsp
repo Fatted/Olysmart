@@ -13,7 +13,7 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
      List<Categoria> categorialista=cat.getCategorie(); //la lista delle categorie comprende tutte le categorie presenti nel db che prendiamo con il metodo getCategorie in CategorieDAO
 
      ProdottoDAO prod= new ProdottoDAO();
-     List<Prodotto> prodottiBarraLaterale=prod.getAllProducts();	//lista usata per tenere sempre la barra attiva contenente tutti i prodotti disponibili nel db con il metodo getallproduct del prodotto DAO
+     List<Prodotto> prodottiBarraLaterale=prod.getAllProducts();//lista usata per tenere sempre la barra attiva contenente tutti i prodotti disponibili nel db con il metodo getallproduct del prodotto DAO
      %>
      
 <!DOCTYPE html>
@@ -26,7 +26,7 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
     <link rel="stylesheet" media="screen and (max-width:1025px)" href="CSS/Laptop.css">
     <link rel="stylesheet" media="screen and (max-width:769px)" href="CSS/Tablet.css">
     <link rel="stylesheet" media="screen and (max-width:426px)" href="CSS/mobile.css">
-<title>Il mio Account</title>
+<title>OlySmartWeb|Il mio Account</title>
 </head>
 <body>
 <!-- -------------------------------------------------inclusione intestazione------------------------------------------------------------------------------------------------ -->
@@ -45,7 +45,7 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
 
  <div class="id">
 <!-- indichiamo il nome e cognome del cliente che entra nella pagina -->
-  <h1><%=cliente.getNome() %> <%=cliente.getCognome() %></h1>
+  <h1>Pagina profilo di:<%=cliente.getNome() %> <%=cliente.getCognome() %></h1>
  </div>
  
 </section>

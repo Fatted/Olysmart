@@ -86,7 +86,7 @@ List<Categoria> categorialista=cat.getCategorie();
 		</div>
 		<br>
 		<input type="hidden" name="codiceProdotto" value="<%=prodotto.getCodice() %>">
-		<button type="submit" class="btn btn-primary" value="addRecensione">Aggiungi Recensione</button>		
+		<button type="submit" class="btn btn-primary" value="addRecensione" style="background-color:#47a1ff ;color: white;padding: 10px 15px 10px;text-align: center;text-decoration: none;display: inline-block; margin-bottom:20px">Aggiungi Recensione</button>		
 	</div>
 	</section>
 	<%}%>

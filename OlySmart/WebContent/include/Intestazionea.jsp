@@ -46,7 +46,7 @@
  
         <%}else {%>	 
         	<div class="Myaccount">Utente: <a href="Myaccount.jsp"> <%=cliente.getUsername() %></a></div>      
-        	 <div class="logout"> <a href="ServletLogout">Logout</a></div>
+        	 <div class="logout"> <a href="ServletLogout">Logout</a></div> <!-- avviamo lo script della servlet di logout -->
         
         	 <div class="cartimage"><a href="carrello.jsp"><img src="Immagini/carella.png"></a></div>
         	

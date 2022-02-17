@@ -40,7 +40,7 @@ CREATE TABLE `ordine` (
   KEY `chiave_esterna.ordine->cliente_idx` (`username`),
   KEY `chiave_esterna.ordine->spedizione_idx` (`tipo_spedizione`),
   CONSTRAINT `chiave_esterna.ordine->cliente` FOREIGN KEY (`username`) REFERENCES `cliente` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=245 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='l''ordine non è il carrello ma e ciò che l''utente ha effettivamente comprato che poi verrà spedito.';
+) ENGINE=InnoDB AUTO_INCREMENT=249 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='l''ordine non è il carrello ma e ciò che l''utente ha effettivamente comprato che poi verrà spedito.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -49,7 +49,7 @@ CREATE TABLE `ordine` (
 
 LOCK TABLES `ordine` WRITE;
 /*!40000 ALTER TABLE `ordine` DISABLE KEYS */;
-INSERT INTO `ordine` VALUES (242,114,'1970-01-01',109,'prova','Basic',1,'via dei monti alpi,MonteDune(81041)','Alcatel 1se','preso in carico',10),(243,114,'1970-01-01',109,'antonio','Basic',1,'via dei monti sperduti alti,Dune(00001)','Alcatel 1se','preso in carico',10),(244,164,'1970-01-01',159,'prova','Basic',1,'via dei monti alpi,MonteDune(81041)','Oppo a53s','preso in carico',1);
+INSERT INTO `ordine` VALUES (248,318,'2022/02/17',159,'prova','Ritiro a mano',2,'via dei monti alpi,MonteDune(81041)','Oppo a53s','preso in carico',1);
 /*!40000 ALTER TABLE `ordine` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -62,4 +62,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-01-28 22:49:21
+-- Dump completed on 2022-02-17 17:13:58

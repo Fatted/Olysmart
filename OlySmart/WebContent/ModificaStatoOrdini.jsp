@@ -17,10 +17,10 @@
 	}
 		}
 
-	int idordine=Integer.parseInt(request.getParameter("idordine")); 		
+	int idordine=Integer.parseInt(request.getParameter("idordine"));  //id dell'ordine è quello passato come parametro che vogliamo modificare		
 	
       		OrdineDAO ordine=new OrdineDAO();
-      		List<Ordine> ordini=ordine.ordineCambiamento(idordine);
+      		List<Ordine> ordini=ordine.ordineCambiamento(idordine); //la lista degli ordini conterrà l'ordine da modificare
       		
       		%>
 <!DOCTYPE html>
@@ -28,9 +28,10 @@
 <head>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Modifica Prodotto</title>
+	<title>OlySmartWeb|Modifica stato ordine</title>
 	
 	<!-- Pagina CSS -->
+<link rel="stylesheet" href="CSS/styleadmin.css">
 <link rel="stylesheet" href="CSS/modificaProdotti.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <!-- JQuery -->
@@ -40,12 +41,23 @@
 <!-- JavaScript -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	
-
-<title>Gestione ordini</title>
+<title>OlySmartWeb|Gestione Ordini</title>
 </head>
+
+
 <body>
-
-
+<header>
+        <nav id="navbar">
+        <div class="container">
+            <h1>Admin: <%=cliente.getUsername() %></h1>
+            <div class="homelog">
+                <div class="pdg"> <a href="paginaAdmin.jsp">Gestione</a></div>
+                <div class="home"><a href="Homepage.jsp">Home</a></div>
+                <div class="logout"><a href="ServletLogout">Logout</a></div> <!-- il logout viene gestito dalla servlet di logout -->
+            </div>
+        </div>
+    </nav>
+    </header>
 <h1 style="text-align:center">Modifica stato ordini</h1>
       		<table class="table" id="tavula" border="1">
       		

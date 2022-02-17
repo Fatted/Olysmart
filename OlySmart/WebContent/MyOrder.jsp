@@ -49,45 +49,38 @@
  <%@include file="include/navbar.jsp" %>
      
 <!-- ------------------------------------------------- fine inclusione navbar------------------------------------------------------------------------------------------------ -->
-
-<h1>I miei ordini </h1>
 <%
 if(ordini.size()>0){
 	for(Ordine ordine:ordini){%>
 	    <ul>
 <li>
-		Prodotto: <%=ordine.getNome_prodotto() %><br>
-		Quantità: <%=ordine.getQuantità_prodotto() %><br> 
-		Prezzo prodotto: <%=ordine.getPrezzo_prodotto_singolo() %> <br>
-		Stato: <%=ordine.getStato()%> <br>
-		Spedizione: <%=ordine.getTipo_spedizione()%> <br>
-		Prezzo totale: <%=ordine.getCosto_totale() %> <br>
-		</li></ul>
+		<strong>Prodotto:</strong> <%=ordine.getNome_prodotto() %><br>
+		<strong>Quantità:</strong> <%=ordine.getQuantità_prodotto() %><br> 
+		<strong>Prezzo prodotto:</strong> <%=ordine.getPrezzo_prodotto_singolo() %> <br>
+		<strong>Stato:</strong> <%=ordine.getStato()%> <br>
+		<strong>Spedizione:</strong> <%=ordine.getTipo_spedizione()%> <br>
+		<strong>Prezzo totale:</strong> <%=ordine.getCosto_totale() %><br>
+		</li>
+	</ul>
 
 <div class="addrecensione">		
 	<%
+	if(recensioni.size()==0){%>
+	<a href="RecensioneProdotto.jsp?codiceprodotto=<%=ordine.getProdotto_codice() %>" style="background-color:#47a1ff ;color: white;padding: 10px 15px 10px;text-align: center;text-decoration: none;display: inline-block; margin-bottom:20px">Recensisci prodotto</a><br><br>
+	<%}
 	for(Recensione recensioneutente:recensioni){
 	if(ordine.getProdotto_codice()!=recensioneutente.getCodiceProdotto()){ %>
-	<a href="RecensioneProdotto.jsp?codiceprodotto=<%=ordine.getProdotto_codice() %>">Recensisci prodotto</a> <br><br>
+	<a href="RecensioneProdotto.jsp?codiceprodotto=<%=ordine.getProdotto_codice() %>" style="background-color:#47a1ff ;color: white;padding: 10px 15px 10px;text-align: center;text-decoration: none;display: inline-block; margin-bottom:20px">Recensisci prodotto</a><br><br>
 	
-	
-	<%}else{%>
-		<a href="MyRecensioni.jsp">Recensione già effettuata</a><br><br>
-	<%}
+	<%break;}else{%>
+		<a href="MyRecensioni.jsp" style="background-color:#47a1ff ;color: white;padding: 10px 15px 10px;text-align: center;text-decoration: none;display: inline-block; margin-bottom:20px">Recensione già effettuata</a><br><br>
+	<%break;}
 			}
 		}%>
 		
 <%}else{%>
-
- <p class="ord"> NESSUN ORDINE EFFETTUATO </p>
-	
+ <p class="ord"> NESSUN ORDINE EFFETTUATO </p>	
 <%}%>
 </div>
-<!-- -------------------------------------------------inclusione footer------------------------------------------------------------------------------------------------ -->
-
- <%@include file="include/footer.jsp" %>
-     
-<!-- ----------------------------------------------- fine inclusione footer------------------------------------------------------------------------------------------------ -->
- 
 </body>
 </html>

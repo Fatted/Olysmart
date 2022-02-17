@@ -43,7 +43,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=devide-width, initial-scale=1">
 
-<title>Pagina di gestione admin</title>
+<title>OlySmartWeb|Pagina Admin</title>
 
 <!-- Pagina CSS -->
 <link rel="stylesheet" href="CSS/styleadmin.css">
@@ -67,6 +67,7 @@
         <div class="container">
             <h1>Admin: <%=cliente.getUsername() %></h1>
             <div class="homelog">
+                <div class="pdg"> <a href="paginaAdmin.jsp">Gestione</a></div>
                 <div class="home"><a href="Homepage.jsp">Home</a></div>
                 <div class="logout"><a href="ServletLogout">Logout</a></div> <!-- il logout viene gestito dalla servlet di logout -->
             </div>
@@ -515,13 +516,6 @@
     </div>
   </div>
 </div>
-<footer id="footer">
-    <h6>Olysmart &copy; 2021, All rights reserved</h6>
-    <h6>Via napoli 310 81058 Vairano Patenora, Campania</h6>
-    <h6>0823 988020</h6>
-    <h6>olysmartvairano@gmail.com</h6>
-    <h6>Powered by D'Amato Antonio, D'Amato Ludovica, Dello Buono Piero</h6>
-    </footer>
 
 </body>
 </html>

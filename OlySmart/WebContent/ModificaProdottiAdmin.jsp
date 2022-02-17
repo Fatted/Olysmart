@@ -37,7 +37,7 @@ List<Categoria> categorialista=cat.getCategorie();
 	<link rel="stylesheet" href="CSS/style.css">
 	<link rel="stylesheet" href="CSS/modificaProdotti.css">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-	<title>Modifica Prodotto</title>
+	<title>OlySmartWeb|Modifica prodotto admin</title>
 	
 	<!-- Pagina CSS -->
 <link rel="stylesheet" href="CSS/styleadmin.css">
@@ -52,15 +52,30 @@ List<Categoria> categorialista=cat.getCategorie();
 </head>
 
 <body>
+
+<header>
+        <nav id="navbar">
+        <div class="container">
+            <h1>Admin: <%=cliente.getUsername() %></h1>
+            <div class="homelog">
+                <div class="pdg"> <a href="paginaAdmin.jsp">Gestione</a></div>
+                <div class="home"><a href="Homepage.jsp">Home</a></div>
+                <div class="logout"><a href="ServletLogout">Logout</a></div> <!-- il logout viene gestito dalla servlet di logout -->
+            </div>
+        </div>
+    </nav>
+    </header>
 	
 	<%
 		
 		%>
 
-	<h2>Modifica Dettagli Prodotto</h2>
+	<h2 style="text-align:center">Modifica Dettagli Prodotto</h2>
 
 	<table class="table" id="tavula" border="1">
-	<%for(Prodotto p:prodottolista){ %>
+	<%
+	//facciamo un for each per prenderci tutte le informazioni necessarie
+	for(Prodotto p:prodottolista){ %>
 	<thead>
 		<tr>
 		<th scope="col">Nome</th>
@@ -124,7 +139,7 @@ List<Categoria> categorialista=cat.getCategorie();
         <input type="hidden" name="operation" value="addDescrizione">
         
       		<div class="form-group">
-      			 <input type="hidden" name="id" value="<%=id%>">    			 
+      			 <input type="hidden" name="id" value="<%=id%>"> <!-- uso l'hidden per passare id del prodotto -->    			 
       			<textarea name="descrizioneProdotto" placeholder="inserisci una descrizione (visibile nei dettagli del prodotto)" rows="10" cols="100" required></textarea><br>    			     		
       		</div>
       	      	
@@ -138,7 +153,9 @@ List<Categoria> categorialista=cat.getCategorie();
   </div>
 </div>
 
-<!-- ------------------------------------------------------Modal gestione update nome prodotto----------------------------------------------------------------- -->
+<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+<!-- ------------------------------------------------------Modal modifica nome prodotto----------------------------------------------------------------- -->
 <div class="modal fade" id="modalmodificanome" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -156,8 +173,8 @@ List<Categoria> categorialista=cat.getCategorie();
         <input type="hidden" name="operation" value="addNome">
         
       		<div class="form-group">
-      			 <input type="hidden" name="id" value="<%=id%>">    			 
-      			<input type="text" name="nome" required>    
+      			 <input type="hidden" name="id" value="<%=id%>"><!-- uso l'hidden per passare id del prodotto -->    			 
+      			<input type="text" name="nome" placeholder="inserisci nome del prodotto aggiornato" required>    
       		</div>
       	      	
       		<div class="container text-center">
@@ -170,7 +187,7 @@ List<Categoria> categorialista=cat.getCategorie();
   </div>
 </div>
 
-<!-- ------------------------------------------------------Modal gestione add/update CF----------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
 
 
 <!-- ------------------------------------------------------Modal gestione update prezzo acquisto prodotto----------------------------------------------------------------- -->
@@ -191,8 +208,8 @@ List<Categoria> categorialista=cat.getCategorie();
         <input type="hidden" name="operation" value="addPrezzoAcquisto">
         
       		<div class="form-group">
-      			 <input type="hidden" name="id" value="<%=id%>">    			 
-      			<input type="number" name="prezzoacquisto" required>    
+      			 <input type="hidden" name="id" value="<%=id%>"><!-- uso l'hidden per passare id del prodotto -->    			 
+      			<input type="number" name="prezzoacquisto" placeholder="inserisci prezzo del prodotto aggiornato" min="1" required >    
       		</div>
       	      	
       		<div class="container text-center">
@@ -205,10 +222,10 @@ List<Categoria> categorialista=cat.getCategorie();
   </div>
 </div>
 
-<!-- ------------------------------------------------------Modal gestione add/update CF----------------------------------------------------------------- -->
+<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
 
 
-<!-- ------------------------------------------------------Modal gestione update prezzo acquisto prodotto----------------------------------------------------------------- -->
+<!-- ------------------------------------------------------Modal gestione disponibilità prodotto----------------------------------------------------------------- -->
 <div class="modal fade" id="modalmodificadisponibilita" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -223,10 +240,10 @@ List<Categoria> categorialista=cat.getCategorie();
         <form action="ModificaProdottiAdmin" method="post">
         
         <!-- indichiamo il nome del form con operation,che sarà uguale per tutti i form,quello che cambia è il valore,in base a quello in ProfiloutenteServlet facciamo diverse operazioni di inserimento/modifica -->
-        <input type="hidden" name="operation" value="addDisponibilita">
+        <input type="hidden" name="operation" value="addDisponibilita" >
         
       		<div class="form-group">
-      			 <input type="hidden" name="id" value="<%=id%>">
+      			 <input type="hidden" name="id" value="<%=id%>"><!-- uso l'hidden per passare id del prodotto -->
       			     			 
       			<select name="disponibilita" class="form-control">
       			<option value="si">si</option>
@@ -244,10 +261,10 @@ List<Categoria> categorialista=cat.getCategorie();
   </div>
 </div>
 
-<!-- ------------------------------------------------------Modal gestione add/update CF----------------------------------------------------------------- -->
+<!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
 
 
-<!-- ------------------------------------------------------Modal gestione update prezzo acquisto prodotto----------------------------------------------------------------- -->
+<!-- ------------------------------------------------------Modal gestione iva prodotto----------------------------------------------------------------- -->
 <div class="modal fade" id="modalmodificiva" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -265,8 +282,8 @@ List<Categoria> categorialista=cat.getCategorie();
         <input type="hidden" name="operation" value="addIva">
         
       		<div class="form-group">
-      			 <input type="hidden" name="id" value="<%=id%>">
-      			  <input type="number" name="iva" required>  			 
+      			 <input type="hidden" name="id" value="<%=id%>"><!-- uso l'hidden per passare id del prodotto -->
+      			  <input type="number" name="iva" placeholder="inserisci iva del prodotto aggiornato" required >  			 
       			     			  
       		</div>
       	      	
@@ -280,9 +297,9 @@ List<Categoria> categorialista=cat.getCategorie();
   </div>
 </div>
 
-<!-- ------------------------------------------------------Modal gestione add/update CF----------------------------------------------------------------- -->
+<!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
 
-<!-- ------------------------------------------------------Modal gestione update prezzo acquisto prodotto----------------------------------------------------------------- -->
+<!-- ------------------------------------------------------Modal gestione update prezzo vendita prodotto----------------------------------------------------------------- -->
 <div class="modal fade" id="modalmodificaprezzovendita" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -300,8 +317,8 @@ List<Categoria> categorialista=cat.getCategorie();
         <input type="hidden" name="operation" value="addPrezzoVendita">
         
       		<div class="form-group">
-      			 <input type="hidden" name="id" value="<%=id%>">
-      			  <input type="number" name="prezzovendita" required>  			 
+      			 <input type="hidden" name="id" value="<%=id%>"><!-- uso l'hidden per passare id del prodotto -->
+      			  <input type="number" name="prezzovendita" placeholder="inserisci prezzo vendita del prodotto aggiornato" min="1" required>  			 
       			     			   
       		</div>
       	      	
@@ -315,10 +332,10 @@ List<Categoria> categorialista=cat.getCategorie();
   </div>
 </div>
 
-<!-- ------------------------------------------------------Modal gestione add/update CF----------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
 
 
-<!-- ------------------------------------------------------Modal gestione update prezzo acquisto prodotto----------------------------------------------------------------- -->
+<!-- ------------------------------------------------------Modal gestione update marca prodotto----------------------------------------------------------------- -->
 <div class="modal fade" id="modalmodificamarca" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -336,8 +353,8 @@ List<Categoria> categorialista=cat.getCategorie();
         <input type="hidden" name="operation" value="addMarca">
         
       		<div class="form-group">
-      			 <input type="hidden" name="id" value="<%=id%>">
-      			 <input type="text" name="marca" required>  			 
+      			 <input type="hidden" name="id" value="<%=id%>"><!-- uso l'hidden per passare id del prodotto -->
+      			 <input type="text" name="marca" placeholder="inserisci marca del prodotto aggiornato" required>  			 
       			     			   
       		</div>
       	      	
@@ -351,9 +368,9 @@ List<Categoria> categorialista=cat.getCategorie();
   </div>
 </div>
 
-<!-- ------------------------------------------------------Modal gestione add/update CF----------------------------------------------------------------- -->
+<!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -->
 
-<!-- ------------------------------------------------------Modal gestione update prezzo acquisto prodotto----------------------------------------------------------------- -->
+<!-- ------------------------------------------------------Modal gestione update pezzi disponibili prodotto----------------------------------------------------------------- -->
 <div class="modal fade" id="modalmodificapezzidisponibili" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -371,8 +388,8 @@ List<Categoria> categorialista=cat.getCategorie();
         <input type="hidden" name="operation" value="addPezziDisponibili">
         
       		<div class="form-group">
-      			 <input type="hidden" name="id" value="<%=id%>">
-      			 <input type="number" name="pezzidisponibili" required>  			 
+      			 <input type="hidden" name="id" value="<%=id%>"><!-- uso l'hidden per passare id del prodotto -->
+      			 <input type="number" name="pezzidisponibili" placeholder="inserisci pezzi disponibili del prodotto aggiornato" required>  			 
       			     			   
       		</div>
       	      	
@@ -386,9 +403,9 @@ List<Categoria> categorialista=cat.getCategorie();
   </div>
 </div>
 
-<!-- ------------------------------------------------------Modal gestione add/update CF----------------------------------------------------------------- -->
+<!-- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-<!-- ------------------------------------------------------Modal gestione update prezzo acquisto prodotto----------------------------------------------------------------- -->
+<!-- ------------------------------------------------------Modal gestione update sconto----------------------------- prodotto----------------------------------------------------------------- -->
 <div class="modal fade" id="modalmodificasconto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -406,8 +423,8 @@ List<Categoria> categorialista=cat.getCategorie();
         <input type="hidden" name="operation" value="addSconto">
         
       		<div class="form-group">
-      			 <input type="hidden" name="id" value="<%=id%>">
-      			 <input type="number" name="sconto" required>  			 
+      			 <input type="hidden" name="id" value="<%=id%>"><!-- uso l'hidden per passare id del prodotto -->
+      			 <input type="number" name="sconto" placeholder="inserisci sconto del prodotto aggiornato" required>  			 
       			     			   
       		</div>
       	      	
@@ -421,9 +438,9 @@ List<Categoria> categorialista=cat.getCategorie();
   </div>
 </div>
 
-<!-- ------------------------------------------------------Modal gestione add/update CF----------------------------------------------------------------- -->
+<!-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-<!-- ------------------------------------------------------Modal gestione update descrizione prodotto----------------------------------------------------------------- -->
+<!-- ------------------------------------------------------Modal gestione update specifiche prodotto----------------------------------------------------------------- -->
 <div class="modal fade" id="modalmodificaspecifiche" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -441,13 +458,13 @@ List<Categoria> categorialista=cat.getCategorie();
         <input type="hidden" name="operation" value="addSpecifiche">
         
       		<div class="form-group">
-      			 <input type="hidden" name="id" value="<%=id%>">    			 
+      			 <input type="hidden" name="id" value="<%=id%>"> <!-- uso l'hidden per passare id del prodotto -->   			 
       			<textarea name="specifiche" placeholder="inserisci una descrizione (visibile nei dettagli del prodotto)" rows="10" cols="100" required></textarea><br>    			     		
       		</div>
       	      	
       		<div class="container text-center">
       			<button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
-        		<button type="submit" class="btn btn-primary" value="addSpecifiche">Aggiungi</button>
+        		<button type="submit" class="btn btn-primary" value="addSpecifiche" >Aggiungi</button>
       		</div>     	
         </form>
       </div>
@@ -455,9 +472,9 @@ List<Categoria> categorialista=cat.getCategorie();
   </div>
 </div>
 
-<!-- ------------------------------------------------------Modal gestione update nome prodotto----------------------------------------------------------------- -->
+<!-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-<!-- ------------------------------------------------------Modal gestione update descrizione prodotto----------------------------------------------------------------- -->
+<!-- ------------------------------------------------------Modal gestione update tipo prodotto----------------------------------------------------------------- -->
 <div class="modal fade" id="modalmodificatipo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -475,7 +492,7 @@ List<Categoria> categorialista=cat.getCategorie();
         <input type="hidden" name="operation" value="addCategoria">
         
       		<div class="form-group">
-      			 <input type="hidden" name="id" value="<%=id%>">    			 
+      			 <input type="hidden" name="id" value="<%=id%>"><!-- uso l'hidden per passare id del prodotto -->    			 
       			<select name="categoria" class="form-control" id="">
  <!--------------------------------------------andiamo ad indicare solo le categorie presenti che l'admin può scegliere per collocare il suo prodotto  --------------------------------------->     		
       		<%	for(Categoria categoria:categorialista){%>
@@ -499,12 +516,12 @@ List<Categoria> categorialista=cat.getCategorie();
 
 <!-- ------------------------------------------------------Modal gestione update nome prodotto----------------------------------------------------------------- -->
 
-<!-- ------------------------------------------------------Modal gestione update prezzo acquisto prodotto----------------------------------------------------------------- -->
+<!-- ------------------------------------------------------Modal gestione update offerta prodotto----------------------------------------------------------------- -->
 <div class="modal fade" id="modalmodificaofferta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modifica Prezzo acquisto</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Modifica Offerta</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -517,7 +534,7 @@ List<Categoria> categorialista=cat.getCategorie();
         <input type="hidden" name="operation" value="addOfferta">
         
       		<div class="form-group">
-      			 <input type="hidden" name="id" value="<%=id%>">
+      			 <input type="hidden" name="id" value="<%=id%>"><!-- uso l'hidden per passare id del prodotto -->
       			     			 
       			<select name="offerta" class="form-control">
       			<option value="si">si</option>
@@ -535,9 +552,9 @@ List<Categoria> categorialista=cat.getCategorie();
   </div>
 </div>
 
-<!-- ------------------------------------------------------Modal gestione add/update CF----------------------------------------------------------------- -->
+<!-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-<!-- ------------------------------------------------------Modal gestione update prezzo acquisto prodotto----------------------------------------------------------------- -->
+<!-- ------------------------------------------------------Modal gestione eliminazione prodotto----------------------------------------------------------------- -->
 <div class="modal fade" id="modaleliminaprodotto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -555,7 +572,7 @@ List<Categoria> categorialista=cat.getCategorie();
         <input type="hidden" name="operation" value="EliminaProdotto">
         
       		<div class="form-group">
-      			 <input type="hidden" name="id" value="<%=id%>">
+      			 <input type="hidden" name="id" value="<%=id%>"><!-- uso l'hidden per passare id del prodotto -->
       			 <h1 style="text-align:center">VUOI ELIMINARE IL PRODTTO?</h1>
 
       		</div>
@@ -570,7 +587,7 @@ List<Categoria> categorialista=cat.getCategorie();
   </div>
 </div>
 
-<!-- ------------------------------------------------------Modal gestione add/update CF----------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
 
 
 </body>

@@ -153,23 +153,20 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
 	    %>
 		    <tr>
 		        <td>
-		             <div class="container">
+		            <div class="container">
 		           <img src="Immagini/Prodotti/<%=p1.getImmagine() %>"  class="image">
 		           <div class="overlay">
 		            <div class="text"><%=p1.getSpecifiche() %></div> 
-		           </div>
-		           
+		           </div>	           
 		        </div>
 		        <h1><%=p1.getNome() %></h1>
 		        <h2>Prezzo:<%=p1.getPrezzo_vendita()%>&#8364</h2>
 		       
-		        <a href="AggiungiAlCarrello?id=<%=p1.getCodice() %>">Aggiungi al carrello</a>
-		        
-		        <a href="dettagli.jsp?id=<%=p1.getCodice() %>">Dettagli</a>
+		        <a href="AggiungiAlCarrello?id=<%=p1.getCodice() %>">Aggiungi al carrello</a> <!-- passiamo alla servlet id del prodotto da mettere nel carrello, alla servlet AggiungiAlCarrello -->		        
+		        <a href="dettagli.jsp?id=<%=p1.getCodice() %>">Dettagli</a><!-- Passiamo alla jsp l'id del prodotto da visualizzare i dettagli -->
 		        </td>
 
-		        <td>
-		        
+		        <td>		       
 		        <% if(iteratore.hasNext()){
 		    		p2=iteratore.next(); %>
 		             <div class="container">
@@ -180,9 +177,8 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
 		        </div>
 		        <h1><%=p2.getNome() %></h1>
 		        <h2>Prezzo:<%=p2.getPrezzo_vendita()%>&#8364</h2>
-		        <a href="AggiungiAlCarrello?id=<%=p2.getCodice() %>">Aggiungi al carrello</a>
-		        
-		        <a href="dettagli.jsp?id=<%=p2.getCodice() %>">Dettagli</a>
+		        <a href="AggiungiAlCarrello?id=<%=p2.getCodice() %>">Aggiungi al carrello</a><!-- passiamo alla servlet id del prodotto da mettere nel carrello, alla servlet AggiungiAlCarrello -->		        
+		        <a href="dettagli.jsp?id=<%=p2.getCodice() %>">Dettagli</a><!-- Passiamo alla jsp l'id del prodotto da visualizzare i dettagli -->
 		        </td>
 				
 				<%if(iteratore.hasNext()){
@@ -195,10 +191,9 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
 		           </div>
 		        </div>
 		        <h1><%=p3.getNome() %></h1>
-		        <h2>Prezzo:<%=p3.getPrezzo_vendita()%>&#8364</h2>
-		        
-		        <a href="AggiungiAlCarrello?id=<%=p3.getCodice() %>">Aggiungi al carrello</a>		        
-		        <a href="dettagli.jsp?id=<%=p3.getCodice() %>">Dettagli</a>
+		        <h2>Prezzo:<%=p3.getPrezzo_vendita()%>&#8364</h2>		        
+		        <a href="AggiungiAlCarrello?id=<%=p3.getCodice() %>">Aggiungi al carrello</a><!-- passiamo alla servlet id del prodotto da mettere nel carrello, alla servlet AggiungiAlCarrello -->	        
+		        <a href="dettagli.jsp?id=<%=p3.getCodice() %>">Dettagli</a><!-- Passiamo alla jsp l'id del prodotto da visualizzare i dettagli -->
 		        </td>
 		    
 		    <%if(iteratore.hasNext()){
@@ -212,8 +207,8 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
 		        </div>
 		        <h1><%=p4.getNome() %></h1>
 		        <h2>Prezzo:<%=p4.getPrezzo_vendita()%>&#8364</h2>
-		       <a href="AggiungiAlCarrello?id=<%=p4.getCodice() %>">Aggiungi al carrello</a>		       
-		        <a href="dettagli.jsp?id=<%=p4.getCodice() %>">Dettagli</a>
+		       <a href="AggiungiAlCarrello?id=<%=p4.getCodice() %>">Aggiungi al carrello</a><!-- passiamo alla servlet id del prodotto da mettere nel carrello, alla servlet AggiungiAlCarrello -->		       
+		        <a href="dettagli.jsp?id=<%=p4.getCodice() %>">Dettagli</a><!-- Passiamo alla jsp l'id del prodotto da visualizzare i dettagli -->
 		        </td>
 		    </tr>
 		<%	
@@ -225,14 +220,8 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
 </table>
 </div>
 </section>
-
-
 <!-- -------------------------------------------------inclusione footer------------------------------------------------------------------------------------------------ -->
-
- <%@include file="include/footer.jsp" %>
-     
+ <%@include file="include/footer.jsp" %>   
 <!-- ----------------------------------------------- fine inclusione footer------------------------------------------------------------------------------------------------ -->
-
-
 </body>
 </html>

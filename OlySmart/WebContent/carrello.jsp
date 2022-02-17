@@ -54,7 +54,7 @@
     <link rel="stylesheet" media="screen and (max-width:1025px)" href="CSS/Laptop.css">
     <link rel="stylesheet" media="screen and (max-width:769px)" href="CSS/Tablet.css">
     <link rel="stylesheet" media="screen and (max-width:426px)" href="CSS/mobile.css">
-<title>Carrello</title>
+<title>OlySmartWeb|Carrello</title>
 </head>
 
 <body>
@@ -75,18 +75,8 @@
 
 
 <!-- se il cliente non ha fatto il login può inserire i prodotti nel carrello però dovrà accedere per fare il pagamento e la conferma dell'ordine -->
-	<%if(cliente==null){ %>
-	<p>Accedi per poter procedere al pagamento del tuo carrello</p>
-	<%}else{ %>
-	
-	<div class="Cart-Container">
-	<div class="Header">
- 		<h3 class="Heading">Carrello di: <%=cliente.getUsername() %></h3>
- 	</div>
-    <%} %>
-    <%@include file="CSS/messaggioRegistrazione.jsp"%>
-    
-    
+
+    <%@include file="CSS/messaggioRegistrazione.jsp"%> 
     <%
         if(prodotti_carrello!=null){
         	//for each dei prodotti presenti nel carrello per stampare i loro valori
@@ -102,10 +92,8 @@
  	</div>
     	
    
-                      <%//controlliamo se la quantità selezionata non è maggiore della quantità disponibile del prodotto
-                      if(carrello.getQuantita()<carrello.getNumero_pezzi_disponibili()){%>
-                
-       
+                <%//controlliamo se la quantità selezionata non è maggiore della quantità disponibile del prodotto
+                 if(carrello.getQuantita()<carrello.getNumero_pezzi_disponibili()){%>                      
                 <form action="" method="post" style="align: center">
                 
                 <div class="counter">
@@ -113,7 +101,7 @@
                 <div class="count"><%=carrello.getQuantita()%></div>
                	<div class="button"><a href="AumentaDiminuisciQuantitàCarrello?action=aumenta&id=<%=carrello.getCodice()%>">+</a></div> 
                	 
-                 <%//se siamo arrivati alal quantità massima disponibile esce la scritta MAX e può solo decrementare la quantità
+                 <%//se siamo arrivati alla quantità massima disponibile esce la scritta MAX e può solo decrementare la quantità
                 		} else{%>
                 		<div class="counter">
                 <div class="button"><a href="AumentaDiminuisciQuantitàCarrello?action=diminuisci&id=<%=carrello.getCodice()%>">-</a></div>
@@ -122,13 +110,9 @@
                 		</div>
                 		</div>
                   </form> 
-                		
- 	
- 				
-               
-    
+
    	 <div class="prices">
- 		<div class="amount"><%=carrello.getPrezzo_vendita() %></div>
+ 		<div class="amount">Prezzo singolo:<%=carrello.getPrezzo_vendita() %>&#8364</div>
  		<div class="remove"><a href="RimozioneProdottiCarrello?id=<%=carrello.getCodice() %>"><u>Remove</u></a></div>
  	</div>
  	<%}
@@ -140,29 +124,16 @@
  		<div class="total">
  		<div class="total-amount">Totale: <%=totale %>&euro; </div>
 
- 		
- 		
- 			<%if(totale==0){ %>
-   		<p>Nessun prodotto inserito</p><!-- stampiamo in caso non ci sono prodotti nel carrello -->
-			<%}%>
-	
 		<%if(cliente!=null && totale > 0){ %>
-		<a href="ordine.jsp"><button>Procedi all'ordine</button></a>	
+		<a href="ordine.jsp" style="background-color:#47a1ff ;color: white;padding: 10px 15px 10px;text-align: center;text-decoration: none;display: inline-block; margin-bottom:20px">Procedi all'ordine</a>	
 		<%}else if(cliente == null){%>
-		<a href="login.jsp"><button>Accedi per poter procedere all'ordine</button></a>
+		<a href="login.jsp" style="background-color:#47a1ff ;color: white;padding: 10px 15px 10px;text-align: center;text-decoration: none;display: inline-block; margin-bottom:20px">Accedi per completare l'ordine</a>
 		<%} %>
     
 
 </div>
 </div>
-</div>
 
-<!-- -------------------------------------------------inclusione footer------------------------------------------------------------------------------------------------ -->
-
- <%@include file="include/footer.jsp" %>
-     
-<!-- ----------------------------------------------- fine inclusione footer------------------------------------------------------------------------------------------------ -->
- 
 
 </body>
 </html>

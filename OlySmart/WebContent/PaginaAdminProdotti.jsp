@@ -33,8 +33,9 @@ List<Prodotto> prodotti=prod.getAllProductsAdmin();//la lista dei prodotti conte
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Gestione prodotti</title>
+<title>OlySmartWeb|Gestione Prodotti</title>
 <!-- Pagina CSS -->
+<link rel="stylesheet" href="CSS/styleadmin.css">
 <link rel="stylesheet" href="CSS/modificaProdotti.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <!-- JQuery -->
@@ -44,7 +45,20 @@ List<Prodotto> prodotti=prod.getAllProductsAdmin();//la lista dei prodotti conte
 <!-- JavaScript -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </head>
+
 <body>
+<header>
+        <nav id="navbar">
+        <div class="container">
+            <h1>Admin: <%=cliente.getUsername() %></h1>
+            <div class="homelog">
+                <div class="pdg"> <a href="paginaAdmin.jsp">Gestione</a></div>
+                <div class="home"><a href="Homepage.jsp">Home</a></div>
+                <div class="logout"><a href="ServletLogout">Logout</a></div> <!-- il logout viene gestito dalla servlet di logout -->
+            </div>
+        </div>
+    </nav>
+    </header>
 <h1 style="text-align:center">Prodotti Presenti nel DataBase</h1>
 			
 <%

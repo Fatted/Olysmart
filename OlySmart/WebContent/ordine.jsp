@@ -157,7 +157,7 @@ Metodo di pagamento:<%if(cliente.getIntestatario_carta()==null){%><a href="MyInf
 <p>&euro;</p>
 </div>
 
-<%if(cliente.getIntestatario_carta()==null){%><a href="MyAccount.jsp">Inserisci metodo di pagamento per continuare</a>
+<%if(cliente.getIntestatario_carta()==null){%><a href="MyInfo.jsp">Inserisci metodo di pagamento per continuare</a>
 <%}else{%><br><br><input type="submit" class="btnpag" value="conferma pagamento">
 <%}%>
 </div>
