@@ -31,9 +31,9 @@
 <link rel="stylesheet" media="screen and (max-width:2561px)" href="CSS/MyRecensioni.css">
     <link rel="stylesheet" media="screen and (max-width:1441px)" href="CSS/MyRecensioni.css">
     <link rel="stylesheet" media="screen and (max-width:1025px)" href="CSS/Laptop.css">
-    <link rel="stylesheet" media="screen and (max-width:769px)" href="CSS/tablet.css">
+    <link rel="stylesheet" media="screen and (max-width:769px)" href="CSS/Tablet.css">
     <link rel="stylesheet" media="screen and (max-width:426px)" href="CSS/mobile.css">
-<title>Le Mie Recensioni</title>
+<title>OlySmartWeb|Mie Recensioni</title>
 </head>
 <body>
 <!-- -------------------------------------------------inclusione intestazione------------------------------------------------------------------------------------------------ -->
@@ -69,5 +69,10 @@
 	<%}%>
 </li>
 </ul>
+<!-- -------------------------------------------------inclusione footer------------------------------------------------------------------------------------------------ -->
+
+ <%@include file="include/footer.jsp" %>
+     
+<!-- ----------------------------------------------- fine inclusione footer------------------------------------------------------------------------------------------------ -->
 </body>
 </html>

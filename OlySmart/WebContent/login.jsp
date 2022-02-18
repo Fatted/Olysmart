@@ -20,7 +20,7 @@
     <script src="https://kit.fontawesome.com/12aebee45b.js"></script>
     
     <link rel="stylesheet" href="CSS/login.css">
-<title>POlySmartWeb|Login Page</title>
+<title>OlySmartWeb|Login Page</title>
 </head>
 
             <body>
@@ -42,14 +42,8 @@
                     </form>
 
                 </div>
-<!-- ------------------------------------------------- footer------------------------------------------------------------------------------------------------ -->     
-     <footer id="footer">
-    <p>Olysmart &copy; 2021, All rights reserved</p>
-    <p>Via napoli 310 81058 Vairano Patenora, Campania</p>
-    <p>0823 988020</p>
-    <p>olysmartvairano@gmail.com</p>
-    <p>Powered by D'Amato Antonio, D'Amato Ludovica, Dello Buono Piero</p>
-    </footer>
-<!-- -------------------------------------------------fine footer------------------------------------------------------------------------------------------------ -->
+<!-- -------------------------------------------------inclusione footer------------------------------------------------------------------------------------------------ -->
+ <%@include file="include/footer.jsp" %>    
+<!-- ----------------------------------------------- fine inclusione footer------------------------------------------------------------------------------------------------ -->
    </body>  
 </html>

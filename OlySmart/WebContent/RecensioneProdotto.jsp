@@ -32,7 +32,7 @@ List<Categoria> categorialista=cat.getCategorie();
     <link rel="stylesheet" media="screen and (max-width:1025px)" href="CSS/Laptop.css">
     <link rel="stylesheet" media="screen and (max-width:769px)" href="CSS/Tablet.css">
     <link rel="stylesheet" media="screen and (max-width:426px)" href="CSS/mobile.css">
-	<title>Recensione prodotto</title>
+	<title>OlySmartWeb|Recensione Prodotto</title>
 	
 
 </head>

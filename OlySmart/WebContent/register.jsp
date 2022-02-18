@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="CSS/Footer.css">
   
     
-<title>Registrazione</title>
+<title>OlySmartWeb|Registrazione</title>
 </head>
 
 <body>
@@ -202,5 +202,10 @@
 	
 	
     </script>
+<!-- -------------------------------------------------inclusione footer------------------------------------------------------------------------------------------------ -->
+
+ <%@include file="include/footer.jsp" %>
+     
+<!-- ----------------------------------------------- fine inclusione footer------------------------------------------------------------------------------------------------ -->
 </body>
 </html>

@@ -34,7 +34,7 @@
     <link rel="stylesheet" media="screen and (max-width:1025px)" href="CSS/Laptop.css">
     <link rel="stylesheet" media="screen and (max-width:769px)" href="CSS/Tablet.css">
 <link rel="stylesheet" media="screen and (max-width:426px)" href="CSS/mobile.css">
-<title>I miei oridni</title>
+<title>OlySmartWeb|Miei ordini</title>
 </head>
 
 <body>
@@ -82,5 +82,11 @@ if(ordini.size()>0){
  <p class="ord"> NESSUN ORDINE EFFETTUATO </p>	
 <%}%>
 </div>
+
+<!-- -------------------------------------------------inclusione footer------------------------------------------------------------------------------------------------ -->
+
+ <%@include file="include/footer.jsp" %>
+     
+<!-- ----------------------------------------------- fine inclusione footer------------------------------------------------------------------------------------------------ -->
 </body>
 </html>

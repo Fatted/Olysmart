@@ -48,7 +48,7 @@
     <link rel="stylesheet" media="screen and (max-width:1025px)" href="CSS/Laptop.css">
     <link rel="stylesheet" media="screen and (max-width:769px)" href="CSS/Tablet.css">
     <link rel="stylesheet" media="screen and (max-width:426px)" href="CSS/mobile.css">
-<title>Insert title here</title>
+<title>OlySmartWeb|Ordine</title>
 </head>
 <body>
 <!-- -------------------------------------------------inclusione intestazione------------------------------------------------------------------------------------------------ -->
