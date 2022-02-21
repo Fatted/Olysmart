@@ -57,11 +57,6 @@
      
 <!-- ------------------------------------------------- fine inclusione intestazione------------------------------------------------------------------------------------------------ -->
 
-<!-- -------------------------------------------------inclusione navbar------------------------------------------------------------------------------------------------ -->
-
- <%@include file="include/navbar.jsp" %>
-     
-<!-- ------------------------------------------------- fine inclusione navbar------------------------------------------------------------------------------------------------ -->
 
 
 
@@ -71,7 +66,7 @@
 <p>Ordine di <%=cliente.getNome() %></p>
 </section>
 <!-- -------------------------------------------------------- Fine Header -------------------------------------------------------- -->
-<section id="center">
+<section id="centerord">
 <div class="left">
 <div class="lefta">
 <p>L'ordine contiene:</p>
@@ -89,7 +84,7 @@
 <%}%>
 <br>
 
-<form action="CheckOutServlet">
+<form action="CheckOutServlet" id="pagamento">
 Seleziona tipo di spedizione:
 <%
 Iterator<Spedizione> iteratore=spedizioni.iterator();
@@ -102,7 +97,7 @@ while(iteratore.hasNext()){
 	
 %>
 <br>
-<input type="radio" id ="spedizione1" value="<%=s1.getCosto()%>" name="spedizione" onclick = "clickMe(this.id)">
+<input type="radio" id ="spedizione1" value="<%=s1.getCosto()%>" name="spedizione" onclick = "clickMe(this.id)" >
 <label for="<%=s1.getTipo()%>"><%=s1.getTipo() %>(<%=s1.getCosto() %>&euro;||<%=s1.getTempo() %>)</label><br>
 
 
@@ -110,12 +105,12 @@ while(iteratore.hasNext()){
 	s2=iteratore.next();
 	
 	%>
-<input type="radio" id ="spedizione2" value="<%=s2.getCosto()%>" name="spedizione" onclick = "clickMe(this.id)">
+<input type="radio" id ="spedizione2" value="<%=s2.getCosto()%>" name="spedizione" onclick = "clickMe(this.id)" >
 <label for="<%=s2.getTipo()%>"><%=s2.getTipo() %>(<%=s2.getCosto() %>&euro;||<%=s2.getTempo() %>)</label><br>
 
 <% if(iteratore.hasNext()){
 	s3=iteratore.next(); %>
-<input type="radio" id ="spedizione3" value="<%=s3.getCosto()%>" name="spedizione" onclick = "clickMe(this.id)">
+<input type="radio" id ="spedizione3" value="<%=s3.getCosto()%>" name="spedizione" onclick = "clickMe(this.id)" required checked>
 <label for="<%=s3.getTipo()%>"><%=s3.getTipo() %>(<%=s3.getCosto() %>&euro;||<%=s3.getTempo() %>)</label><br>
 
 <%		} 
@@ -129,7 +124,7 @@ while(iteratore.hasNext()){
 <br>
 <p> Dati di spedizione:<br>
  Nome: <%=cliente.getNome() %> <br>
-Indirizzo: <%=cliente.getVia() %>,<%=cliente.getCitta() %>(<%=cliente.getCap() %> <br>
+Indirizzo: <%=cliente.getVia() %>,<%=cliente.getCitta() %>(<%=cliente.getCap() %>) <br>
  email: <%=cliente.getEmail()%> <br>
  Numero di telefono: <%=cliente.getTelefono()%><br>
 <a href="MyInfo.jsp">Modifica</a>
@@ -137,19 +132,6 @@ Indirizzo: <%=cliente.getVia() %>,<%=cliente.getCitta() %>(<%=cliente.getCap() %
 </div>
 
 <div class="rightbottom">
-Metodo di pagamento:<%if(cliente.getIntestatario_carta()==null){%><a href="MyInfo.jsp">Inserisci</a>
-<%}else{%><br>	
-								Intestatario:<%=cliente.getIntestatario_carta() %><br>
-								Numero carta:<%=cliente.getNumero_carta() %><br> 
-								Data Scadenza:<%=cliente.getData_scadenza_carta() %><br>
-								CVV:<%=cliente.getCVV() %><br>
-								
-								<a href="MyInfo.jsp">Modifica</a>
-																								
-							<%}%>
-
-
-<br><br>
 <div class="tot">
 <p>Totale:</p>
 
@@ -157,14 +139,40 @@ Metodo di pagamento:<%if(cliente.getIntestatario_carta()==null){%><a href="MyInf
 <p>&euro;</p>
 </div>
 
-<%if(cliente.getIntestatario_carta()==null){%><a href="MyInfo.jsp">Inserisci metodo di pagamento per continuare</a>
-<%}else{%><br><br><input type="submit" class="btnpag" value="conferma pagamento">
-<%}%>
+    <script src="https://www.paypal.com/sdk/js?client-id=AS3VEG1mTJHhnEZbXSG-geLTkiXg-nwjGa-qVwEHHdBujPW31BLpjtkZaCwuU5BC1lsgWI4iNEJfmfHq&currency=EUR"></script>
+    <!-- Set up a container element for the button -->
+    <div id="paypal-button-container"></div>
+
+    <script>
+      paypal.Buttons({
+
+        // Sets up the transaction when a payment button is clicked
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{
+              amount: {
+                value: document.getElementById("totale").textContent // Can reference variables or functions. Example: `value: document.getElementById('...').value`
+              }
+            }]
+          });
+        },
+
+        // Finalize the transaction after payer approval
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(orderData) {
+            // Successful capture! For dev/demo purposes:
+                document.forms["pagamento"].submit();
+                              
+          });
+        }
+      }).render('#paypal-button-container');
+
+    </script> 
+
 </div>
 </div>
 </form>
 </section>
-
 
 <script>
 var totale = document.getElementById("totale").textContent;
@@ -186,11 +194,18 @@ function clickMe(clicked_id) {
 	}
 </script>
 
-<!-- -------------------------------------------------inclusione footer------------------------------------------------------------------------------------------------ -->
 
- <%@include file="include/footer.jsp" %>
-     
-<!-- ----------------------------------------------- fine inclusione footer------------------------------------------------------------------------------------------------ -->
- 
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>

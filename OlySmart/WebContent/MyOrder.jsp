@@ -58,6 +58,7 @@ if(ordini.size()>0){
 		<strong>Quantità:</strong> <%=ordine.getQuantità_prodotto() %><br> 
 		<strong>Prezzo prodotto:</strong> <%=ordine.getPrezzo_prodotto_singolo() %> <br>
 		<strong>Stato:</strong> <%=ordine.getStato()%> <br>
+		<strong>Data:</strong> <%=ordine.getData()%> <br>		
 		<strong>Spedizione:</strong> <%=ordine.getTipo_spedizione()%> <br>
 		<strong>Prezzo totale:</strong> <%=ordine.getCosto_totale() %><br>
 		</li>

@@ -111,17 +111,7 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
                     <div class="col-md-12"><label class="labels">Indirizzo: <%=cliente.getVia() %>,<%=cliente.getCitta() %>(<%=cliente.getCap()%></label>
                     <br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentoindirizzo">Modifica indirizzo</button>
                     </div>                    
- 
-                <div class="col-md-12"><label class="labels">Metodo di pagamento:</label><br>
-                <%if(cliente.getIntestatario_carta()==null){%><label class="labels">Mancante</label><br><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentocarta">Inserisci Carta</button></div> <%}
-                else{%>		
-				<div class="col-md-12"><label class="labels">Numero carta: <%=cliente.getNumero_carta() %> </label></div>
-                <div class="col-md-12"><label class="labels">Data scadenza: <%=cliente.getData_scadenza_carta() %></label></div>
-                <div class="col-md-12"><label class="labels">CVV: <%=cliente.getCVV() %> </label></div>
-                <div class="col-md-12"><label class="labels">Intestatario: <%=cliente.getIntestatario_carta() %></label></div>
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalinserimentocarta">Modifica</button>																
-				<%}%>
-				
+ 				
 				</div>
         </div>
 	</div>
@@ -280,65 +270,6 @@ Cliente cliente= (Cliente) request.getSession().getAttribute("cliente-corrente")
   </div>
 </div>
 
-<!-- ------------------------------------------------------Modal gestione add/update carta----------------------------------------------------------------- -->
-<div class="modal fade" id="modalinserimentocarta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Aggiungi Carta di credito</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <!-- inserisco il form che servirà per gestire le varie scelte da parte del utente -->
-        <form action="ProfiloUtenteServlet" method="post">
-        <!-- indichiamo il nome del form con operation,che sarà uguale per tutti i form,quello che cambia è il valore,in base a quello in ProfiloutenteServlet facciamo diverse operazioni di inserimento/modifica -->        
-        <input type="hidden" name="operation" value="addCarta">
-        
-      		<div class="form-group">
-      		
-      			<img src="Immagini/cartadicredito.png" width="300px" height="350px"><br>
-      		
-      			Intestatario Carta:
-      			<input type="text"  class="form-control" name="intestatariocarta" placeholder="Enter numero carta"  required><br>
-      			
-      			Numero Carta:
-      			<input type="text"  class="form-control" name="numerocarta" placeholder="Enter numero carta"  required><br>
-      			
-      			Data Scadenza
-      			<input type="date"  class="form-control" name="datascadenza" required><br>
-
-      			CVV:
-      			<input type="number"  class="form-control" 	placeholder="Inserisci CVV" name="CVV" min="000" max="999" required><br>
-      			
-      			Circuito:
-      			<select name="circuito">
-      			<option value="VISA">VISA</option>
-  				<option value="Maestro">Maestro</option>
-  				<option value="Bancomat">Bancomat</option>
- 			
-      			</select>   
-      			   			     		
-      		</div>
-      	      	
-      		<div class="container text-center">
-      			<button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
-        		<button type="submit" class="btn btn-primary" value="addCarta">Aggiungi</button>
-      		</div>     	
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-</div>
-
-<!-- -------------------------------------------------inclusione footer------------------------------------------------------------------------------------------------ -->
-
- <%@include file="include/footer.jsp" %>
-     
-<!-- ----------------------------------------------- fine inclusione footer------------------------------------------------------------------------------------------------ -->
  
 </body>
 </html>

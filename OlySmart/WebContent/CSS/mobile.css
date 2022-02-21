@@ -377,6 +377,9 @@ table{
 }
 
 /*CODICE PER ORDINE*/
+#centerord{
+	display:block;
+}
 .prodottord{
 	display:block;
 }

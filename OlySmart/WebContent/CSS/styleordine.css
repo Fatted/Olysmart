@@ -247,19 +247,19 @@ text-align:center;
 	font-size: 120%;
 }
 
-#center{
+#centerord{
 	width:100%;
 	display:flex;
 	
 }
 
-#center .left{
+#centerord .left{
 	width:50%;
 	margin: 10px auto;
 		
 }
 
-#center .left .lefta{
+#centerord .left .lefta{
 	 margin:10px auto;
 
     
@@ -267,7 +267,7 @@ text-align:center;
     line-height: 30px;
 }
 
-#center .right{
+#centerord .right{
 	width:50%;
 	
 }
