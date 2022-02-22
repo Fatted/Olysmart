@@ -95,7 +95,7 @@ public class CheckOutServlet extends HttpServlet {
 			}
 												
 				prodotti_carrello.clear();
-				response.sendRedirect("MyOrder.jsp");
+				response.sendRedirect("ordine.jsp");
 									
 		}catch(Exception e) {
 			System.out.print(e);

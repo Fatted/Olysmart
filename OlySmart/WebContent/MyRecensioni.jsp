@@ -27,6 +27,21 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<style type="text/css">
+#rcorners2 {
+  border-radius: 25px;
+  border: 1px solid #808080;
+  padding: 20px; 
+  width: auto;
+  height: auto;  
+  posizion:center;
+  margin-top:5px;
+  margin-left:150px;
+  margin-right:150px;
+}
+</style>
+
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" media="screen and (max-width:2561px)" href="CSS/MyRecensioni.css">
     <link rel="stylesheet" media="screen and (max-width:1441px)" href="CSS/MyRecensioni.css">
@@ -55,11 +70,15 @@
 			ProdottoDAO prodotto=new ProdottoDAO();
 			List<Prodotto> prodotti=prodotto.getProductsForCodice(codiceprodotto);
 				for(Prodotto prodottoVisualizza:prodotti){%>
-				
+		<div id="rcorners2">
+		<div class="prodottord">
+        <div class="leftord"><img src="Immagini/Prodotti/<%=prodottoVisualizza.getImmagine()%>" width="150" height="150"></div>
 		<strong>Prodotto:</strong> <%=prodottoVisualizza.getNome() %><br>
 		<strong>Voto:</strong> <%=recensione.getVoto() %><br>
 		<strong>Titolo:</strong> <%=recensione.getTitolo() %><br>
-		<strong>Commento:</strong> <%=recensione.getCommento() %><br>		
+		<strong>Commento:</strong> <%=recensione.getCommento() %><br>
+		</div>	
+		</div>
 	<%		}
 		}
 	}else{%>
@@ -69,6 +88,7 @@
 	<%}%>
 </li>
 </ul>
+
 <!-- -------------------------------------------------inclusione footer------------------------------------------------------------------------------------------------ -->
 
  <%@include file="include/footer.jsp" %>

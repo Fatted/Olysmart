@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@page import="model.*" %>
 <%@page import="control.*" %>
 <%@page import="java.util.*" %>
@@ -78,7 +77,9 @@
           <%=carrello.getNome() %>
          <br>Quantità: <%=carrello.getQuantita() %>
          <br>Prezzo: <%=carrello.getPrezzo_vendita() %>
-         <br><a href="RimozioneProdottiCarrello?id=<%=carrello.getCodice() %>">Remove</a></div>
+         <br><a href="RimozioneProdottiCarrello?id=<%=carrello.getCodice() %>">Remove</a>
+         </div>
+         </div>
        </li>
       </ul>
 <%}%>
@@ -142,10 +143,9 @@ Indirizzo: <%=cliente.getVia() %>,<%=cliente.getCitta() %>(<%=cliente.getCap() %
     <script src="https://www.paypal.com/sdk/js?client-id=AS3VEG1mTJHhnEZbXSG-geLTkiXg-nwjGa-qVwEHHdBujPW31BLpjtkZaCwuU5BC1lsgWI4iNEJfmfHq&currency=EUR"></script>
     <!-- Set up a container element for the button -->
     <div id="paypal-button-container"></div>
-
+<!--------------------------------------------------------------------------------------- inizio paypal ----------------------------------------------->
     <script>
       paypal.Buttons({
-
         // Sets up the transaction when a payment button is clicked
         createOrder: function(data, actions) {
           return actions.order.create({
@@ -161,14 +161,13 @@ Indirizzo: <%=cliente.getVia() %>,<%=cliente.getCitta() %>(<%=cliente.getCap() %
         onApprove: function(data, actions) {
           return actions.order.capture().then(function(orderData) {
             // Successful capture! For dev/demo purposes:
-                document.forms["pagamento"].submit();
-                              
+                document.forms["pagamento"].submit();                        
           });
         }
       }).render('#paypal-button-container');
 
     </script> 
-
+<!--------------------------------------------------------------------------------------- fine paypal ----------------------------------------------->
 </div>
 </div>
 </form>
@@ -193,19 +192,6 @@ function clickMe(clicked_id) {
 
 	}
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </body>
 </html>

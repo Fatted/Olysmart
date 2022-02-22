@@ -121,7 +121,7 @@ function magnify(imgID, zoom) {
 			<br>
 			<div class="prezzo">
 			<h3>Prezzo</h3>
-			<p><%=prodotto.getPrezzo_vendita()%></p> <!-- stampiamo il prezzo --> 
+			<p><%=prodotto.getPrezzo_vendita()%>&euro;</p> <!-- stampiamo il prezzo --> 
 			</div>
 			<br>
 		<div class="dispo">

@@ -22,7 +22,8 @@
       
       RecensioneDAO Recensione=new RecensioneDAO();
       List<Recensione> recensioni=Recensione.recensioneProdottoCliente(cliente.getUsername());
-    
+      
+      ProdottoDAO prodotti=new ProdottoDAO();    
  %>
  
 <!DOCTYPE html>
@@ -34,6 +35,33 @@
     <link rel="stylesheet" media="screen and (max-width:1025px)" href="CSS/Laptop.css">
     <link rel="stylesheet" media="screen and (max-width:769px)" href="CSS/Tablet.css">
 <link rel="stylesheet" media="screen and (max-width:426px)" href="CSS/mobile.css">
+
+<style type="text/css">
+
+#rcorners2 {
+  border-radius: 25px;
+  border: 1px solid #808080;
+  padding: 20px; 
+  width: auto;
+  height: auto;  
+  posizion:center;
+  margin-top:5px;
+  margin-left:150px;
+  margin-right:150px;
+}
+
+#separatore{
+border-bottom:1px solid;
+}
+
+#info{
+text-align:right
+}
+
+
+</style>
+
+
 <title>OlySmartWeb|Miei ordini</title>
 </head>
 
@@ -51,18 +79,29 @@
 <!-- ------------------------------------------------- fine inclusione navbar------------------------------------------------------------------------------------------------ -->
 <%
 if(ordini.size()>0){
-	for(Ordine ordine:ordini){%>
-	    <ul>
-<li>
+	for(Ordine ordine:ordini){
+	      List<Prodotto> fotoprodotti=prodotti.getProductsForCodice(ordine.getProdotto_codice());%>
+<ul>
+		<li>
+		<div id="rcorners2">
+		<div class="prodottord">		
+		<%for(Prodotto prodotto:fotoprodotti){ %>
+		
+		<div id="separatore">
+		<p id="info">
+		<strong>Data Ordine:</strong> <%=ordine.getData()%> &nbsp <strong>Stato:</strong><%=ordine.getStato()%> &nbsp <strong>Ordine:</strong><%=ordine.getCodice()%>		
+		</p>
+		</div>
+		
+        <div class="leftord"><img src="Immagini/Prodotti/<%=prodotto.getImmagine()%>" width="150" height="150"></div>
+		<%}%>
+
 		<strong>Prodotto:</strong> <%=ordine.getNome_prodotto() %><br>
 		<strong>Quantità:</strong> <%=ordine.getQuantità_prodotto() %><br> 
-		<strong>Prezzo prodotto:</strong> <%=ordine.getPrezzo_prodotto_singolo() %> <br>
-		<strong>Stato:</strong> <%=ordine.getStato()%> <br>
-		<strong>Data:</strong> <%=ordine.getData()%> <br>		
+		<strong>Prezzo prodotto:</strong> <%=ordine.getPrezzo_prodotto_singolo() %>&euro;<br>		
 		<strong>Spedizione:</strong> <%=ordine.getTipo_spedizione()%> <br>
-		<strong>Prezzo totale:</strong> <%=ordine.getCosto_totale() %><br>
-		</li>
-	</ul>
+		<strong>Prezzo totale:</strong> <%=ordine.getCosto_totale() %>&euro;<br>
+		</div>
 
 <div class="addrecensione">		
 	<%
@@ -76,13 +115,16 @@ if(ordini.size()>0){
 	<%break;}else{%>
 		<a href="MyRecensioni.jsp" style="background-color:#47a1ff ;color: white;padding: 10px 15px 10px;text-align: center;text-decoration: none;display: inline-block; margin-bottom:20px">Recensione già effettuata</a><br><br>
 	<%break;}
-			}
-		}%>
-		
+			}%>
+			</div>
+		</div>
+	</li>
+</ul>
+		<%}%>
 <%}else{%>
  <p class="ord"> NESSUN ORDINE EFFETTUATO </p>	
 <%}%>
-</div>
+
 
 <!-- -------------------------------------------------inclusione footer------------------------------------------------------------------------------------------------ -->
 
